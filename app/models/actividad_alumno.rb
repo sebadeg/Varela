@@ -1,0 +1,2 @@
+class ActividadAlumno < ApplicationRecord
+end

@@ -1,0 +1,129 @@
+es:
+  hello: "Bienvenido"  
+
+  log_in: "Ingresar"
+  log_out: "Salir"
+  forgot_your_password: "Olvidé mi contraseña"
+  characters_minimum: "caracteres mínimo"
+  send_me_reset_password_instructions: "Enviarme instrucciones"
+
+  email: "Dirección de correo"
+  password: "Contraseña"
+  remember_me: "Recordarme"
+  current_sign_in_at: "Conectado desde"
+  password_confirmation: "Confirmación de contraseña"
+
+  devise:
+    failure:
+      invalid: "Cédula o contraseña inválidos"
+    passwords:
+      new:
+        forgot_your_password: "Olvidé mi contraseña"
+        send_me_reset_password_instructions: "Enviar instrucciones"
+    registrations:
+      usuario:
+        signed_up: "Bienvenido! Te has registrado correctamente. Recibirás un correo en las próximas 24 horas con instrucciones para acceder a su cuenta."
+      edit:
+        title: "Cambiar datos"
+        back: "Atrás"
+    sessions:
+      new:
+        sign_in: "Ingresar"
+        sign_out: "Salir"
+        remember_me: "Recuérdame"
+    shared:
+      links:
+        forgot_your_password: "Olvidé mi contraseña"
+        sign_up: "Registrarse"
+        sign_in: "Ingresar"
+
+  time:
+    formats:
+      long: "%B %d, %Y %H:%M"
+      short: "%H:%M"
+  date:
+    formats:
+      long: "%B %d, %Y %H:%M"
+      short: "%B %d, %Y"
+    month_names:
+    - ~
+    - Enero
+    - Febrero
+    - Marzo
+    - Abril
+    - Mayo
+    - Junio
+    - Julio
+    - Agosto
+    - Setiembre
+    - Octubre
+    - Noviembre
+    - Diciembre
+
+  activerecord:
+    attributes:
+      usuario:
+        cedula: "Cédula"
+        direccion: "Dirección"
+        telefono: "Teléfono"
+        nombre: "Nombres"
+        apellido: "Apellidos"
+        alumno1: "Alumno 1"
+        alumno2: "Alumno 2"
+        alumno3: "Alumno 3"
+        email: "Mail" 
+        password: "Contraseña"
+        password_confirmation: "Confirmación de contraseña"
+        current_password: "Contraseña actual"
+      grado:
+        anio: "Año"
+        numero: "Número"
+      alumno:
+        direccion: "Dirección"
+        cedula: "Cédula"
+      cuenta:
+        numero: "Número"
+      factura:
+        numero: "Factura N°"
+      linea_factura:
+        descripcion: "Descripción"
+      tipo_movimiento:
+        numero: "Número"
+      grupo_movimiento:
+        nombrearchivo: "Archivo"
+        descripcion: "Descripción"
+
+    models:
+      cuenta_usuario:
+        one: "Usuario de cuenta"
+        other: "Usuarios de cuentas"
+      cuenta_alumno:
+        one: "Cuenta de alumno"
+        other: "Cuentas de alumnos"
+      alumno_usuario:
+        one: "Responsable"
+        other: "Responsables"
+      tipo_movimiento:
+        one: "Tipo de movimiento"
+        other: "Tipos de movimiento"
+
+
+    errors:
+      models:
+        usuario:
+          attributes:
+            cedula:
+              blank: "no puede ser vacía"
+              taken: "ya usada"
+              greater_than: "inválida"
+              less_than: "inválida"
+              not_a_number: "inválida"
+              not_an_integer: "inválida"
+            email:
+              blank: "no puede ser vacío"
+              taken: "ya usado"
+            password:
+              blank: "no puede ser vacía"
+              too_short: "es demasiado pequeña (mínimo 6 caracteres)"
+            password_confirmation:
+              confirmation: "no coincide con Contraseña"

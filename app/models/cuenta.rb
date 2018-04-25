@@ -1,0 +1,2 @@
+class Cuenta < ApplicationRecord
+end

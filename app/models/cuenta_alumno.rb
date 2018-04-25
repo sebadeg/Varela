@@ -1,0 +1,2 @@
+class CuentaAlumno < ApplicationRecord
+end

@@ -1,0 +1,2 @@
+class PadreAlumno < ApplicationRecord
+end
