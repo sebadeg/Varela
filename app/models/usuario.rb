@@ -21,8 +21,7 @@ class Usuario < ApplicationRecord
 
 
   def cedula_digit
-    if ( cedula == nil )
-      errors.add(:cedula, "es obligatoria")
+    if ( cedula == nil )      
       return
     end
     suma = 0
