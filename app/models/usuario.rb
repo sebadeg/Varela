@@ -21,6 +21,10 @@ class Usuario < ApplicationRecord
 
 
   def cedula_digit
+    if ( cedula == nil )
+      errors.add(:cedula, "es obligatoria")
+      return
+    end
     suma = 0
     arr = [4,3,6,7,8,9,2]
     digit = cedula%10 
