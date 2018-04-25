@@ -26,6 +26,17 @@ Rails.application.configure do
     config.cache_store = :null_store
   end
 
+  config.action_mailer.delivery_method = :smtp
+  # SMTP settings for gmail
+  config.action_mailer.smtp_settings = {
+   :address              => "smtp.varela.edu.uy",
+   :port                 => 587,
+   :user_name            => "soporte@varela.edu.uy",
+   :password             => "Ene_2018",
+   :authentication       => "plain",
+   :enable_starttls_auto => true
+  }
+
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
 

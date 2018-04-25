@@ -11,17 +11,16 @@
             <%= f.text_field :cedula, autofocus: true, placeholder: "Cedula", style: "font-size: 24px"  %>
         </div>
         <div class="form-group">
-            <%= f.label "Clave", style: "font-size: 24px", class: "labelFormulario"  %>
-            <%= f.text_field :password, autofocus: true, placeholder: "Clave", style: "font-size: 24px"  %>
-        </div>
-        <div class="form-group">
             <%= f.label "Cuenta", style: "font-size: 24px", class: "labelFormulario"  %>
             <%= f.text_field :alumno1, autofocus: true, placeholder: "Cuenta", style: "font-size: 24px"  %>
+        </div>
+        <div class="form-group">
+            <%= f.label "Titular", style: "font-size: 24px", class: "labelFormulario"  %>
+            <%= f.text_field :alumno2, autofocus: true, placeholder: "Titular", style: "font-size: 24px"  %>
         </div>
         <div id="textoRegistrarse">
         	<%= f.submit "Asociar", style: "font-size: 24px"  %>
         </div>
-
     <% end %>
 
 <% end %>

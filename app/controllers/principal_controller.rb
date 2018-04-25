@@ -39,15 +39,43 @@ class PrincipalController < ApplicationController
     redirect_to root_path
   end
 
+  require 'digest/md5'
+  
+  def digito(cedula)
+    if ( cedula == nil )      
+      return false
+    end
+    suma = 0
+    arr = [4,3,6,7,8,9,2]
+    digit = cedula%10 
+    c = cedula/10
+    (0..6).each do |i|
+       r = c%10
+       c = c/10
+       suma = (suma + r*arr[i]) % 10
+    end
+    return (digit == ((10-(suma%10))%10))
+  end
 
   def asociar
+    if ( !digito(params[:usuario][:cedula].to_i) )
+      p "Error en cedula"
+      return
+    end
+
     @usuario = Usuario.where( ["cedula = ?", params[:usuario][:cedula]]).first rescue nil
     if ( @usuario != nil )
-      @usuario.update( password: params[:usuario][:password], password_confirmation: params[:usuario][:password] );
-      ActiveRecord::Base.connection.execute("UPDATE usuarios SET cedula=" + params[:usuario][:cedula].to_s + " WHERE id=" + @usuario.id.to_s + ";")
-
-      TitularCuenta.create(usuario_id: @usuario.id, cuenta_id: params[:usuario][:alumno1].to_i)
-      #PadreAlumno.create(usuario_id: @usuario.id, alumno_id: params[:usuario][:alumno1].to_i)
+      password =  Digest::MD5.hexdigest(params[:usuario][:cedula] + DateTime.now.strftime('%Y%m%d%H%M%S'))[0..7]
+      p password
+      @usuario.update( password: password, password_confirmation: password );
+      if ( @usuario.alumno2 == "1")
+        TitularCuenta.create(usuario_id: @usuario.id, cuenta_id: params[:usuario][:alumno1].to_i)
+      else
+        CuentaAlumno.where( ["cuenta_id = ?", params[:usuario][:alumno1].to_i ]).each do |e|
+          PadreAlumno.create(usuario_id: @usuario.id, alumno_id: e.alumno_id )
+        end
+      end        
     end
+    
   end
 end

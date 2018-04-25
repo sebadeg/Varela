@@ -7024,3 +7024,166 @@ Processing by Usuarios::RegistrationsController#edit as HTML
 Completed 200 OK in 1157ms (Views: 987.4ms | ActiveRecord: 167.0ms)
 
 
+Started GET "/" for 127.0.0.1 at 2018-04-25 17:40:54 -0300
+Started GET "/" for 127.0.0.1 at 2018-04-25 17:40:59 -0300
+  [1m[36mActiveRecord::SchemaMigration Load (173.0ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (180.0ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+DEPRECATION WARNING: before_filter is deprecated and will be removed in Rails 5.1. Use before_action instead. (called from <class:ApplicationController> at c:/Sites/varela/app/controllers/application_controller.rb:5)
+Processing by PrincipalController#index as HTML
+Processing by PrincipalController#index as HTML
+Completed 401 Unauthorized in 72ms (ActiveRecord: 0.0ms)
+
+
+Completed 401 Unauthorized in 89ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/usuarios/sign_in" for 127.0.0.1 at 2018-04-25 17:41:30 -0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (26.0ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (282.0ms)
+  Rendered devise/_header.html.erb (3.0ms)
+Completed 200 OK in 7677ms (Views: 7072.9ms | ActiveRecord: 528.1ms)
+
+
+Started POST "/usuarios/sign_in?locale=es" for 127.0.0.1 at 2018-04-25 17:42:07 -0300
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"t3N/L1sncRFAYa4u0tk0u2YKLq5B2BfspXmXJYkcfGtp/wIHmHIgj5Dr4PrsQjnRhVWKf1zSzplfOizBejfM2w==", "usuario"=>{"cedula"=>"16", "password"=>"[FILTERED]", "remember_me"=>"1"}, "commit"=>"Ingresar", "locale"=>"es"}
+  [1m[36mUsuario Load (174.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."cedula" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["cedula", 16], ["LIMIT", 1]]
+  [1m[35m (173.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (174.0ms)[0m  [1m[33mUPDATE "usuarios" SET "remember_created_at" = $1, "updated_at" = $2 WHERE "usuarios"."id" = $3[0m  [["remember_created_at", "2018-04-25 20:42:08.568596"], ["updated_at", "2018-04-25 20:42:08.743617"], ["id", 1]]
+  [1m[35m (174.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (173.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (174.0ms)[0m  [1m[33mUPDATE "usuarios" SET "sign_in_count" = $1, "current_sign_in_at" = $2, "last_sign_in_at" = $3, "current_sign_in_ip" = $4, "updated_at" = $5 WHERE "usuarios"."id" = $6[0m  [["sign_in_count", 61], ["current_sign_in_at", "2018-04-25 20:42:09.098660"], ["last_sign_in_at", "2018-04-25 19:47:31.735495"], ["current_sign_in_ip", "127.0.0.1/32"], ["updated_at", "2018-04-25 20:42:09.273682"], ["id", 1]]
+  [1m[35m (174.0ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 1882ms (ActiveRecord: 1216.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-04-25 17:42:09 -0300
+Processing by PrincipalController#index as HTML
+  [1m[36mUsuario Load (181.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering principal/index.html.erb within layouts/application
+  [1m[35m (179.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "usuarios"[0m
+  [1m[35m (179.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "titular_cuentas"[0m
+  [1m[35m (180.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "actividad_alumnos" WHERE (opcion=1 OR opcion=2)[0m
+  [1m[36mAlumno Load (182.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM ( cuentas INNER JOIN titular_cuentas ON cuentas.id=titular_cuentas.cuenta_id ) INNER JOIN cuenta_alumnos ON cuentas.id=cuenta_alumnos.cuenta_id WHERE titular_cuentas.usuario_id=1) OR id IN (SELECT padre_alumnos.alumno_id FROM padre_alumnos WHERE padre_alumnos.usuario_id=1)) ORDER BY "alumnos"."nombre" ASC[0m
+  Rendered principal/index.html.erb within layouts/application (1451.2ms)
+Completed 500 Internal Server Error in 2515ms (ActiveRecord: 1984.2ms)
+
+
+  
+ActionView::Template::Error (undefined method `principal_mail_path' for #<#<Class:0xa7aea78>:0xa7adf68>):
+    25:     <% end %>
+    26: 
+    27: 
+    28:     <%= form_for(@usuario, as: :usuario, url: principal_mail_path(:usuario)) do |f| %>
+    29:         <div id="textoRegistrarse">
+    30:         	<%= f.submit "Mail", style: "font-size: 24px"  %>
+    31:         </div>
+  
+app/views/principal/index.html.erb:28:in `_app_views_principal_index_html_erb___378644177_87914520'
+  Rendering c:/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout
+  Rendering c:/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered c:/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (9.0ms)
+  Rendering c:/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered c:/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (6.0ms)
+  Rendering c:/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered c:/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (2.0ms)
+  Rendered c:/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (1321.2ms)
+Started GET "/" for 127.0.0.1 at 2018-04-25 17:42:40 -0300
+Processing by PrincipalController#index as HTML
+  [1m[36mUsuario Load (170.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering principal/index.html.erb within layouts/application
+  [1m[35m (168.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "usuarios"[0m
+  [1m[35m (168.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "titular_cuentas"[0m
+  [1m[35m (182.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "actividad_alumnos" WHERE (opcion=1 OR opcion=2)[0m
+  [1m[36mAlumno Load (171.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM ( cuentas INNER JOIN titular_cuentas ON cuentas.id=titular_cuentas.cuenta_id ) INNER JOIN cuenta_alumnos ON cuentas.id=cuenta_alumnos.cuenta_id WHERE titular_cuentas.usuario_id=1) OR id IN (SELECT padre_alumnos.alumno_id FROM padre_alumnos WHERE padre_alumnos.usuario_id=1)) ORDER BY "alumnos"."nombre" ASC[0m
+  Rendered principal/index.html.erb within layouts/application (703.1ms)
+  Rendered principal/_header.html.erb (3.0ms)
+Completed 200 OK in 1456ms (Views: 567.2ms | ActiveRecord: 859.1ms)
+
+
+Started POST "/principal/asociar.usuario?locale=es" for 127.0.0.1 at 2018-04-25 17:43:08 -0300
+Processing by PrincipalController#asociar as 
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"g3unqR4SOJOQKZG1XOg0L47c5RR6p2s6z7KR6+3p9+0pjbxBufytW6ImJgbRwRNx8AHHW0eEC9z98mL0Jms6wA==", "usuario"=>{"cedula"=>"18827664", "alumno1"=>"12121", "alumno2"=>"0"}, "commit"=>"Asociar", "locale"=>"es"}
+  [1m[36mUsuario Load (181.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUsuario Load (179.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE (cedula = '18827664') ORDER BY "usuarios"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Completed 500 Internal Server Error in 561ms (ActiveRecord: 360.0ms)
+
+
+  
+NoMethodError (undefined method `strftime' for #<PrincipalController:0x8ef8438>):
+  
+app/controllers/principal_controller.rb:47:in `asociar'
+  Rendering c:/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering c:/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered c:/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (6.0ms)
+  Rendering c:/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered c:/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (4.0ms)
+  Rendering c:/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered c:/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (2.0ms)
+  Rendered c:/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (1450.2ms)
+Started POST "/principal/asociar.usuario?locale=es" for 127.0.0.1 at 2018-04-25 17:44:04 -0300
+DEPRECATION WARNING: before_filter is deprecated and will be removed in Rails 5.1. Use before_action instead. (called from <class:ApplicationController> at c:/Sites/varela/app/controllers/application_controller.rb:5)
+Processing by PrincipalController#asociar as 
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"g3unqR4SOJOQKZG1XOg0L47c5RR6p2s6z7KR6+3p9+0pjbxBufytW6ImJgbRwRNx8AHHW0eEC9z98mL0Jms6wA==", "usuario"=>{"cedula"=>"18827664", "alumno1"=>"12121", "alumno2"=>"0"}, "commit"=>"Asociar", "locale"=>"es"}
+  [1m[36mUsuario Load (174.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUsuario Load (174.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE (cedula = '18827664') ORDER BY "usuarios"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+No template found for PrincipalController#asociar, rendering head :no_content
+Completed 204 No Content in 8011ms (ActiveRecord: 873.1ms)
+
+
+Started POST "/usuarios/sign_in?locale=es" for 127.0.0.1 at 2018-04-25 17:53:05 -0300
+DEPRECATION WARNING: before_filter is deprecated and will be removed in Rails 5.1. Use before_action instead. (called from <class:ApplicationController> at c:/Sites/varela/app/controllers/application_controller.rb:5)
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"t3N/L1sncRFAYa4u0tk0u2YKLq5B2BfspXmXJYkcfGtp/wIHmHIgj5Dr4PrsQjnRhVWKf1zSzplfOizBejfM2w==", "usuario"=>{"cedula"=>"16", "password"=>"[FILTERED]", "remember_me"=>"1"}, "commit"=>"Ingresar", "locale"=>"es"}
+  [1m[36mUsuario Load (174.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Redirected to http://localhost:3000/?locale=es
+Filter chain halted as :require_no_authentication rendered or redirected
+Completed 302 Found in 205ms (ActiveRecord: 174.0ms)
+
+
+Started GET "/?locale=es" for 127.0.0.1 at 2018-04-25 17:53:06 -0300
+Processing by PrincipalController#index as HTML
+  Parameters: {"locale"=>"es"}
+  [1m[36mUsuario Load (179.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering principal/index.html.erb within layouts/application
+  [1m[35m (179.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "usuarios"[0m
+  [1m[35m (179.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "titular_cuentas"[0m
+  [1m[35m (179.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "actividad_alumnos" WHERE (opcion=1 OR opcion=2)[0m
+  [1m[36mAlumno Load (180.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM ( cuentas INNER JOIN titular_cuentas ON cuentas.id=titular_cuentas.cuenta_id ) INNER JOIN cuenta_alumnos ON cuentas.id=cuenta_alumnos.cuenta_id WHERE titular_cuentas.usuario_id=1) OR id IN (SELECT padre_alumnos.alumno_id FROM padre_alumnos WHERE padre_alumnos.usuario_id=1)) ORDER BY "alumnos"."nombre" ASC[0m
+  Rendered principal/index.html.erb within layouts/application (1102.1ms)
+  Rendered principal/_header.html.erb (4.0ms)
+Completed 200 OK in 2460ms (Views: 621.9ms | ActiveRecord: 1800.2ms)
+
+
+Started POST "/principal/asociar.usuario?locale=es" for 127.0.0.1 at 2018-04-25 17:53:26 -0300
+Processing by PrincipalController#asociar as 
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"s9Ueb/FHBWxdxWXeEug0uSZ/mO9DRXcv0xZi+DSFZOwZIwWHVqmQpG/K0m2fwRPnWKK6oH5mF8nhVpHn/wepwQ==", "usuario"=>{"cedula"=>"43457663", "alumno1"=>"12691", "alumno2"=>"0"}, "commit"=>"Asociar", "locale"=>"es"}
+  [1m[36mUsuario Load (168.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Completed 500 Internal Server Error in 173ms (ActiveRecord: 168.0ms)
+
+
+  
+NoMethodError (undefined method `/' for "43457663":String):
+  
+app/controllers/principal_controller.rb:51:in `digito'
+app/controllers/principal_controller.rb:61:in `asociar'
+  Rendering c:/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering c:/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered c:/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (8.0ms)
+  Rendering c:/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered c:/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (6.0ms)
+  Rendering c:/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered c:/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (2.0ms)
+  Rendered c:/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (1322.2ms)
+Started POST "/principal/asociar.usuario?locale=es" for 127.0.0.1 at 2018-04-25 17:53:52 -0300
+DEPRECATION WARNING: before_filter is deprecated and will be removed in Rails 5.1. Use before_action instead. (called from <class:ApplicationController> at c:/Sites/varela/app/controllers/application_controller.rb:5)
+Processing by PrincipalController#asociar as 
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"s9Ueb/FHBWxdxWXeEug0uSZ/mO9DRXcv0xZi+DSFZOwZIwWHVqmQpG/K0m2fwRPnWKK6oH5mF8nhVpHn/wepwQ==", "usuario"=>{"cedula"=>"43457663", "alumno1"=>"12691", "alumno2"=>"0"}, "commit"=>"Asociar", "locale"=>"es"}
+  [1m[36mUsuario Load (175.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+No template found for PrincipalController#asociar, rendering head :no_content
+Completed 204 No Content in 7418ms (ActiveRecord: 175.0ms)
+
+
