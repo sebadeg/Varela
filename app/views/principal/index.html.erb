@@ -3,10 +3,9 @@
 	<%= p "Cantidad usuarios: " + Usuario.all.count.to_s %><br>
 	<%= p "Cantidad cuentas: " + TitularCuenta.all.count.to_s %><br>
 	<%= p "Cantidad autorizados: " + ActividadAlumno.where("opcion=1 OR opcion=2").count.to_s %><br>
-	<%= p "Cantidad no autorizados: " + ActividadAlumno.where("opcion=0").count.to_s %><br>
+	<%= p "Cantidad no autorizados: " + ActividadAlumno.where("opcion=0").count.to_s %><br><br>
 
-
-    <%= form_for(@usuario, as: :usuario, url: principal_asociar_path(:usuario)) do |f| %>
+	<%= form_for(@usuario, as: :usuario, url: principal_asociar_path(:usuario)) do |f| %>
         <div class="form-group">
             <%= f.label "Cedula", style: "font-size: 24px", class: "labelFormulario"  %>
             <%= f.text_field :cedula, autofocus: true, placeholder: "Cedula", style: "font-size: 24px"  %>
@@ -23,6 +22,31 @@
         	<%= f.submit "Asociar", style: "font-size: 24px"  %>
         </div>
     <% end %>
+
+	<%= p "Van" %><br>
+	<% @van.each do |a| %>
+		<%= p a.nombre %><br>
+	<% end %><br><br>
+
+	<%= p "No van" %><br>
+	<% @novan.each do |a| %>
+		<%= p a.nombre %><br>
+	<% end %><br><br>
+
+	<%= p "No eligió" %><br>
+	<% @noeligio.each do |a| %>
+		<%= p a.nombre %><br>
+	<% end %><br><br>
+
+	<%= p "No registrados" %><br>
+	<% @noregistrado.each do |a| %>
+		<%= p a.nombre %><br>
+	<% end %>
+
+
+
+
+    
 
 <% end %>
 

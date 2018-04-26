@@ -10,6 +10,14 @@ class PrincipalController < ApplicationController
         " OR " +
         "id IN (SELECT padre_alumnos.alumno_id FROM padre_alumnos WHERE padre_alumnos.usuario_id=?)",
         current_usuario.id, current_usuario.id]).order(:nombre)
+
+
+        if current_usuario.cedula == 16 
+          @noregistrado = Alumno.where("id NOT IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos)").order(:nombre)
+          @van = Alumno.where("id IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos WHERE opcion=1 OR opcion=2)").order(:nombre)
+          @novan = Alumno.where("id IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos WHERE opcion=0)").order(:nombre)
+          @noeligio = Alumno.where("id IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos WHERE opcion IS NULL)").order(:nombre)
+        end
     else
       @alumnos = nil
     end

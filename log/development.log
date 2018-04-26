@@ -9411,3 +9411,412 @@ Processing by PrincipalController#index as HTML
 Completed 200 OK in 1518ms (Views: 464.0ms | ActiveRecord: 1036.1ms)
 
 
+Started GET "/" for 127.0.0.1 at 2018-04-26 11:02:59 -0300
+Started GET "/" for 127.0.0.1 at 2018-04-26 11:03:03 -0300
+  [1m[36mActiveRecord::SchemaMigration Load (167.0ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (175.0ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+DEPRECATION WARNING: before_filter is deprecated and will be removed in Rails 5.1. Use before_action instead. (called from <class:ApplicationController> at c:/Sites/varela/app/controllers/application_controller.rb:5)
+Processing by PrincipalController#index as HTML
+Processing by PrincipalController#index as HTML
+  [1m[36mUsuario Load (169.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUsuario Load (196.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering principal/index.html.erb within layouts/application
+  Rendering principal/index.html.erb within layouts/application
+  Rendered principal/index.html.erb within layouts/application (30.0ms)
+  Rendered principal/index.html.erb within layouts/application (5.0ms)
+Completed 500 Internal Server Error in 1942ms (ActiveRecord: 547.1ms)
+
+
+Completed 500 Internal Server Error in 1936ms (ActiveRecord: 1016.1ms)
+
+
+  
+SyntaxError (c:/Sites/varela/app/views/principal/index.html.erb:10: syntax error, unexpected '\n', expecting :: or '[' or '.'):
+  
+app/views/principal/index.html.erb:10: syntax error, unexpected '\n', expecting :: or '[' or '.'
+  
+SyntaxError (c:/Sites/varela/app/views/principal/index.html.erb:10: syntax error, unexpected '\n', expecting :: or '[' or '.'):
+  
+app/views/principal/index.html.erb:10: syntax error, unexpected '\n', expecting :: or '[' or '.'
+  Rendering c:/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering c:/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering c:/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendering c:/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered c:/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (11.0ms)
+  Rendered c:/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (10.0ms)
+  Rendering c:/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendering c:/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered c:/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (6.0ms)
+  Rendered c:/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (6.0ms)
+  Rendering c:/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered c:/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (3.0ms)
+  Rendered c:/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (2750.3ms)
+  Rendering c:/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered c:/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (2.0ms)
+  Rendered c:/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (2769.3ms)
+Started GET "/" for 127.0.0.1 at 2018-04-26 11:04:28 -0300
+Processing by PrincipalController#index as HTML
+  [1m[36mUsuario Load (167.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering principal/index.html.erb within layouts/application
+  [1m[35m (167.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "usuarios"[0m
+  [1m[35m (168.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "titular_cuentas"[0m
+  [1m[35m (167.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "actividad_alumnos" WHERE (opcion=1 OR opcion=2)[0m
+  [1m[35m (167.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "actividad_alumnos" WHERE (opcion=0)[0m
+  Rendered principal/index.html.erb within layouts/application (874.1ms)
+Completed 500 Internal Server Error in 1187ms (ActiveRecord: 1005.1ms)
+
+
+  
+ActionView::Template::Error (undefined method `each' for nil:NilClass):
+     5: 	<%= p "Cantidad autorizados: " + ActividadAlumno.where("opcion=1 OR opcion=2").count.to_s %><br>
+     6: 	<%= p "Cantidad no autorizados: " + ActividadAlumno.where("opcion=0").count.to_s %><br>
+     7: 	<%= p "No registrados" %><br>
+     8: 	<% @noregistrado.each do |a| %>
+     9: 		<%= p a.nombre %><vr>
+    10: 	<% end %>
+    11: 
+  
+app/views/principal/index.html.erb:8:in `_app_views_principal_index_html_erb__87830925_41132244'
+  Rendering c:/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout
+  Rendering c:/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered c:/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (9.0ms)
+  Rendering c:/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered c:/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (5.0ms)
+  Rendering c:/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered c:/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered c:/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (1225.1ms)
+Started GET "/" for 127.0.0.1 at 2018-04-26 11:05:06 -0300
+DEPRECATION WARNING: before_filter is deprecated and will be removed in Rails 5.1. Use before_action instead. (called from <class:ApplicationController> at c:/Sites/varela/app/controllers/application_controller.rb:5)
+Processing by PrincipalController#index as HTML
+  [1m[36mUsuario Load (170.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering principal/index.html.erb within layouts/application
+  [1m[35m (168.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "usuarios"[0m
+  [1m[35m (168.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "titular_cuentas"[0m
+  [1m[35m (167.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "actividad_alumnos" WHERE (opcion=1 OR opcion=2)[0m
+  [1m[35m (167.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "actividad_alumnos" WHERE (opcion=0)[0m
+  [1m[36mAlumno Load (170.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id NOT IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos))[0m
+  [1m[36mAlumno Load (169.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM ( cuentas INNER JOIN titular_cuentas ON cuentas.id=titular_cuentas.cuenta_id ) INNER JOIN cuenta_alumnos ON cuentas.id=cuenta_alumnos.cuenta_id WHERE titular_cuentas.usuario_id=1) OR id IN (SELECT padre_alumnos.alumno_id FROM padre_alumnos WHERE padre_alumnos.usuario_id=1)) ORDER BY "alumnos"."nombre" ASC[0m
+  Rendered principal/index.html.erb within layouts/application (1410.2ms)
+  Rendered principal/_header.html.erb (4.0ms)
+Completed 200 OK in 5530ms (Views: 3944.3ms | ActiveRecord: 1516.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-04-26 11:05:43 -0300
+Processing by PrincipalController#index as HTML
+  [1m[36mUsuario Load (168.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering principal/index.html.erb within layouts/application
+  [1m[35m (167.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "usuarios"[0m
+  [1m[35m (167.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "titular_cuentas"[0m
+  [1m[35m (167.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "actividad_alumnos" WHERE (opcion=1 OR opcion=2)[0m
+  [1m[35m (167.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "actividad_alumnos" WHERE (opcion=0)[0m
+  [1m[36mAlumno Load (169.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id NOT IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos))[0m
+  [1m[36mAlumno Load (168.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM ( cuentas INNER JOIN titular_cuentas ON cuentas.id=titular_cuentas.cuenta_id ) INNER JOIN cuenta_alumnos ON cuentas.id=cuenta_alumnos.cuenta_id WHERE titular_cuentas.usuario_id=1) OR id IN (SELECT padre_alumnos.alumno_id FROM padre_alumnos WHERE padre_alumnos.usuario_id=1)) ORDER BY "alumnos"."nombre" ASC[0m
+  Rendered principal/index.html.erb within layouts/application (1035.1ms)
+  Rendered principal/_header.html.erb (4.0ms)
+Completed 200 OK in 1722ms (Views: 528.4ms | ActiveRecord: 1173.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-04-26 11:08:53 -0300
+DEPRECATION WARNING: before_filter is deprecated and will be removed in Rails 5.1. Use before_action instead. (called from <class:ApplicationController> at c:/Sites/varela/app/controllers/application_controller.rb:5)
+Processing by PrincipalController#index as HTML
+  [1m[36mUsuario Load (168.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering principal/index.html.erb within layouts/application
+  [1m[35m (167.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "usuarios"[0m
+  [1m[35m (167.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "titular_cuentas"[0m
+  [1m[35m (167.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "actividad_alumnos" WHERE (opcion=1 OR opcion=2)[0m
+  [1m[35m (167.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "actividad_alumnos" WHERE (opcion=0)[0m
+  [1m[36mAlumno Load (168.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos WHERE opcion!=0 AND opcion!=1 AND opcion!=2))[0m
+  [1m[36mAlumno Load (169.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id NOT IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos))[0m
+  [1m[36mAlumno Load (168.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM ( cuentas INNER JOIN titular_cuentas ON cuentas.id=titular_cuentas.cuenta_id ) INNER JOIN cuenta_alumnos ON cuentas.id=cuenta_alumnos.cuenta_id WHERE titular_cuentas.usuario_id=1) OR id IN (SELECT padre_alumnos.alumno_id FROM padre_alumnos WHERE padre_alumnos.usuario_id=1)) ORDER BY "alumnos"."nombre" ASC[0m
+  Rendered principal/index.html.erb within layouts/application (1721.2ms)
+  Rendered principal/_header.html.erb (4.0ms)
+Completed 200 OK in 3347ms (Views: 590.9ms | ActiveRecord: 2688.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-04-26 11:10:13 -0300
+DEPRECATION WARNING: before_filter is deprecated and will be removed in Rails 5.1. Use before_action instead. (called from <class:ApplicationController> at c:/Sites/varela/app/controllers/application_controller.rb:5)
+Processing by PrincipalController#index as HTML
+  [1m[36mUsuario Load (168.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering principal/index.html.erb within layouts/application
+  [1m[35m (168.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "usuarios"[0m
+  [1m[35m (167.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "titular_cuentas"[0m
+  [1m[35m (167.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "actividad_alumnos" WHERE (opcion=1 OR opcion=2)[0m
+  [1m[35m (167.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "actividad_alumnos" WHERE (opcion=0)[0m
+  [1m[36mAlumno Load (168.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos WHERE opcion IS NIL))[0m
+  Rendered principal/index.html.erb within layouts/application (1041.1ms)
+Completed 500 Internal Server Error in 2262ms (ActiveRecord: 2029.2ms)
+
+
+  
+ActionView::Template::Error (PG::SyntaxError: ERROR:  syntax error at or near "NIL"
+LINE 1: ...ELECT alumno_id FROM actividad_alumnos WHERE opcion IS NIL))
+                                                                  ^
+: SELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos WHERE opcion IS NIL))):
+    24:     <% end %>
+    25: 
+    26: 	<%= p "No eligió" %><br>
+    27: 	<% @noeligio.each do |a| %>
+    28: 		<%= p a.nombre %><br>
+    29: 	<% end %><br><br>
+    30: 
+  
+app/views/principal/index.html.erb:27:in `_app_views_principal_index_html_erb__87830925_88961664'
+  Rendering c:/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout
+  Rendering c:/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered c:/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (10.0ms)
+  Rendering c:/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered c:/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (6.0ms)
+  Rendering c:/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered c:/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered c:/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (1229.1ms)
+Started GET "/" for 127.0.0.1 at 2018-04-26 11:10:35 -0300
+DEPRECATION WARNING: before_filter is deprecated and will be removed in Rails 5.1. Use before_action instead. (called from <class:ApplicationController> at c:/Sites/varela/app/controllers/application_controller.rb:5)
+Processing by PrincipalController#index as HTML
+  [1m[36mUsuario Load (168.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering principal/index.html.erb within layouts/application
+  [1m[35m (167.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "usuarios"[0m
+  [1m[35m (167.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "titular_cuentas"[0m
+  [1m[35m (168.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "actividad_alumnos" WHERE (opcion=1 OR opcion=2)[0m
+  [1m[35m (168.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "actividad_alumnos" WHERE (opcion=0)[0m
+  [1m[36mAlumno Load (169.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos WHERE opcion IS NULL))[0m
+  [1m[36mAlumno Load (169.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id NOT IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos))[0m
+  [1m[36mAlumno Load (168.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM ( cuentas INNER JOIN titular_cuentas ON cuentas.id=titular_cuentas.cuenta_id ) INNER JOIN cuenta_alumnos ON cuentas.id=cuenta_alumnos.cuenta_id WHERE titular_cuentas.usuario_id=1) OR id IN (SELECT padre_alumnos.alumno_id FROM padre_alumnos WHERE padre_alumnos.usuario_id=1)) ORDER BY "alumnos"."nombre" ASC[0m
+  Rendered principal/index.html.erb within layouts/application (1550.2ms)
+  Rendered principal/_header.html.erb (3.0ms)
+Completed 200 OK in 2219ms (Views: 477.8ms | ActiveRecord: 1682.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-04-26 11:25:24 -0300
+Processing by PrincipalController#index as HTML
+  [1m[36mUsuario Load (168.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering principal/index.html.erb within layouts/application
+  [1m[35m (167.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "usuarios"[0m
+  [1m[35m (168.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "titular_cuentas"[0m
+  [1m[35m (168.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "actividad_alumnos" WHERE (opcion=1 OR opcion=2)[0m
+  [1m[35m (167.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "actividad_alumnos" WHERE (opcion=0)[0m
+  [1m[36mAlumno Load (170.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos WHERE opcion IS NULL))[0m
+  [1m[36mAlumno Load (168.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id NOT IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos))[0m
+  [1m[36mAlumno Load (168.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM ( cuentas INNER JOIN titular_cuentas ON cuentas.id=titular_cuentas.cuenta_id ) INNER JOIN cuenta_alumnos ON cuentas.id=cuenta_alumnos.cuenta_id WHERE titular_cuentas.usuario_id=1) OR id IN (SELECT padre_alumnos.alumno_id FROM padre_alumnos WHERE padre_alumnos.usuario_id=1)) ORDER BY "alumnos"."nombre" ASC[0m
+  Rendered principal/index.html.erb within layouts/application (1201.1ms)
+  Rendered principal/_header.html.erb (4.0ms)
+Completed 200 OK in 1870ms (Views: 504.1ms | ActiveRecord: 1344.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-04-26 11:27:12 -0300
+DEPRECATION WARNING: before_filter is deprecated and will be removed in Rails 5.1. Use before_action instead. (called from <class:ApplicationController> at c:/Sites/varela/app/controllers/application_controller.rb:5)
+Processing by PrincipalController#index as HTML
+  [1m[36mUsuario Load (167.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering principal/index.html.erb within layouts/application
+  [1m[35m (167.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "usuarios"[0m
+  [1m[35m (167.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "titular_cuentas"[0m
+  [1m[35m (167.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "actividad_alumnos" WHERE (opcion=1 OR opcion=2)[0m
+  [1m[35m (167.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "actividad_alumnos" WHERE (opcion=0)[0m
+  [1m[36mAlumno Load (169.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos WHERE opcion=1 OR opcion=2))[0m
+  [1m[36mAlumno Load (168.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos WHERE opcion=0))[0m
+  [1m[36mAlumno Load (169.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos WHERE opcion IS NULL))[0m
+  [1m[36mAlumno Load (168.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id NOT IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos))[0m
+  [1m[36mAlumno Load (168.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM ( cuentas INNER JOIN titular_cuentas ON cuentas.id=titular_cuentas.cuenta_id ) INNER JOIN cuenta_alumnos ON cuentas.id=cuenta_alumnos.cuenta_id WHERE titular_cuentas.usuario_id=1) OR id IN (SELECT padre_alumnos.alumno_id FROM padre_alumnos WHERE padre_alumnos.usuario_id=1)) ORDER BY "alumnos"."nombre" ASC[0m
+  Rendered principal/index.html.erb within layouts/application (2066.2ms)
+  Rendered principal/_header.html.erb (3.0ms)
+Completed 200 OK in 3604ms (Views: 508.0ms | ActiveRecord: 3035.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-04-26 11:27:46 -0300
+DEPRECATION WARNING: before_filter is deprecated and will be removed in Rails 5.1. Use before_action instead. (called from <class:ApplicationController> at c:/Sites/varela/app/controllers/application_controller.rb:5)
+Processing by PrincipalController#index as HTML
+  [1m[36mUsuario Load (167.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering principal/index.html.erb within layouts/application
+  [1m[35m (168.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "usuarios"[0m
+  [1m[35m (167.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "titular_cuentas"[0m
+  [1m[35m (167.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "actividad_alumnos" WHERE (opcion=1 OR opcion=2)[0m
+  [1m[35m (167.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "actividad_alumnos" WHERE (opcion=0)[0m
+  [1m[36mAlumno Load (170.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos WHERE opcion=1 OR opcion=2)) ORDER BY "alumnos"."nombre" ASC[0m
+  [1m[36mAlumno Load (175.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos WHERE opcion=0)) ORDER BY "alumnos"."nombre" ASC[0m
+  [1m[36mAlumno Load (170.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos WHERE opcion IS NULL)) ORDER BY "alumnos"."nombre" ASC[0m
+  [1m[36mAlumno Load (171.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id NOT IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos)) ORDER BY "alumnos"."nombre" ASC[0m
+  [1m[36mAlumno Load (168.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM ( cuentas INNER JOIN titular_cuentas ON cuentas.id=titular_cuentas.cuenta_id ) INNER JOIN cuenta_alumnos ON cuentas.id=cuenta_alumnos.cuenta_id WHERE titular_cuentas.usuario_id=1) OR id IN (SELECT padre_alumnos.alumno_id FROM padre_alumnos WHERE padre_alumnos.usuario_id=1)) ORDER BY "alumnos"."nombre" ASC[0m
+  Rendered principal/index.html.erb within layouts/application (2080.2ms)
+  Rendered principal/_header.html.erb (3.0ms)
+Completed 200 OK in 3622ms (Views: 518.3ms | ActiveRecord: 3043.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-04-26 11:35:57 -0300
+Processing by PrincipalController#index as HTML
+  [1m[36mUsuario Load (168.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering principal/index.html.erb within layouts/application
+  [1m[35m (168.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "usuarios"[0m
+  [1m[35m (168.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "titular_cuentas"[0m
+  [1m[35m (167.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "actividad_alumnos" WHERE (opcion=1 OR opcion=2)[0m
+  [1m[35m (168.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "actividad_alumnos" WHERE (opcion=0)[0m
+  [1m[36mAlumno Load (169.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos WHERE opcion=1 OR opcion=2)) ORDER BY "alumnos"."nombre" ASC[0m
+  [1m[36mAlumno Load (168.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos WHERE opcion=0)) ORDER BY "alumnos"."nombre" ASC[0m
+  [1m[36mAlumno Load (169.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos WHERE opcion IS NULL)) ORDER BY "alumnos"."nombre" ASC[0m
+  [1m[36mAlumno Load (169.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id NOT IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos)) ORDER BY "alumnos"."nombre" ASC[0m
+  [1m[36mAlumno Load (168.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM ( cuentas INNER JOIN titular_cuentas ON cuentas.id=titular_cuentas.cuenta_id ) INNER JOIN cuenta_alumnos ON cuentas.id=cuenta_alumnos.cuenta_id WHERE titular_cuentas.usuario_id=1) OR id IN (SELECT padre_alumnos.alumno_id FROM padre_alumnos WHERE padre_alumnos.usuario_id=1)) ORDER BY "alumnos"."nombre" ASC[0m
+  Rendered principal/index.html.erb within layouts/application (1553.2ms)
+  Rendered principal/_header.html.erb (4.0ms)
+Completed 200 OK in 2218ms (Views: 515.8ms | ActiveRecord: 1682.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-04-26 12:07:20 -0300
+Processing by PrincipalController#index as HTML
+  [1m[36mUsuario Load (168.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering principal/index.html.erb within layouts/application
+  [1m[35m (167.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "usuarios"[0m
+  [1m[35m (167.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "titular_cuentas"[0m
+  [1m[35m (167.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "actividad_alumnos" WHERE (opcion=1 OR opcion=2)[0m
+  [1m[35m (167.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "actividad_alumnos" WHERE (opcion=0)[0m
+  [1m[36mAlumno Load (169.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos WHERE opcion=1 OR opcion=2)) ORDER BY "alumnos"."nombre" ASC[0m
+  [1m[36mAlumno Load (168.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos WHERE opcion=0)) ORDER BY "alumnos"."nombre" ASC[0m
+  [1m[36mAlumno Load (169.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos WHERE opcion IS NULL)) ORDER BY "alumnos"."nombre" ASC[0m
+  [1m[36mAlumno Load (169.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id NOT IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos)) ORDER BY "alumnos"."nombre" ASC[0m
+  [1m[36mAlumno Load (168.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM ( cuentas INNER JOIN titular_cuentas ON cuentas.id=titular_cuentas.cuenta_id ) INNER JOIN cuenta_alumnos ON cuentas.id=cuenta_alumnos.cuenta_id WHERE titular_cuentas.usuario_id=1) OR id IN (SELECT padre_alumnos.alumno_id FROM padre_alumnos WHERE padre_alumnos.usuario_id=1)) ORDER BY "alumnos"."nombre" ASC[0m
+  Rendered principal/index.html.erb within layouts/application (1556.2ms)
+  Rendered principal/_header.html.erb (3.0ms)
+Completed 200 OK in 2195ms (Views: 498.1ms | ActiveRecord: 1679.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-04-26 12:09:19 -0300
+Processing by PrincipalController#index as HTML
+  [1m[36mUsuario Load (168.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering principal/index.html.erb within layouts/application
+  [1m[35m (167.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "usuarios"[0m
+  [1m[35m (167.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "titular_cuentas"[0m
+  [1m[35m (167.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "actividad_alumnos" WHERE (opcion=1 OR opcion=2)[0m
+  [1m[35m (167.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "actividad_alumnos" WHERE (opcion=0)[0m
+  [1m[36mAlumno Load (169.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos WHERE opcion=1 OR opcion=2)) ORDER BY "alumnos"."nombre" ASC[0m
+  [1m[36mAlumno Load (168.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos WHERE opcion=0)) ORDER BY "alumnos"."nombre" ASC[0m
+  [1m[36mAlumno Load (169.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos WHERE opcion IS NULL)) ORDER BY "alumnos"."nombre" ASC[0m
+  [1m[36mAlumno Load (169.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id NOT IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos)) ORDER BY "alumnos"."nombre" ASC[0m
+  [1m[36mAlumno Load (168.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM ( cuentas INNER JOIN titular_cuentas ON cuentas.id=titular_cuentas.cuenta_id ) INNER JOIN cuenta_alumnos ON cuentas.id=cuenta_alumnos.cuenta_id WHERE titular_cuentas.usuario_id=1) OR id IN (SELECT padre_alumnos.alumno_id FROM padre_alumnos WHERE padre_alumnos.usuario_id=1)) ORDER BY "alumnos"."nombre" ASC[0m
+  Rendered principal/index.html.erb within layouts/application (1557.2ms)
+  Rendered principal/_header.html.erb (4.0ms)
+Completed 200 OK in 2242ms (Views: 542.2ms | ActiveRecord: 1679.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-04-26 12:27:12 -0300
+Processing by PrincipalController#index as HTML
+  [1m[36mUsuario Load (168.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering principal/index.html.erb within layouts/application
+  [1m[35m (167.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "usuarios"[0m
+  [1m[35m (167.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "titular_cuentas"[0m
+  [1m[35m (168.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "actividad_alumnos" WHERE (opcion=1 OR opcion=2)[0m
+  [1m[35m (167.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "actividad_alumnos" WHERE (opcion=0)[0m
+  [1m[36mAlumno Load (169.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos WHERE opcion=1 OR opcion=2)) ORDER BY "alumnos"."nombre" ASC[0m
+  [1m[36mAlumno Load (168.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos WHERE opcion=0)) ORDER BY "alumnos"."nombre" ASC[0m
+  [1m[36mAlumno Load (169.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos WHERE opcion IS NULL)) ORDER BY "alumnos"."nombre" ASC[0m
+  [1m[36mAlumno Load (169.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id NOT IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos)) ORDER BY "alumnos"."nombre" ASC[0m
+  [1m[36mAlumno Load (168.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM ( cuentas INNER JOIN titular_cuentas ON cuentas.id=titular_cuentas.cuenta_id ) INNER JOIN cuenta_alumnos ON cuentas.id=cuenta_alumnos.cuenta_id WHERE titular_cuentas.usuario_id=1) OR id IN (SELECT padre_alumnos.alumno_id FROM padre_alumnos WHERE padre_alumnos.usuario_id=1)) ORDER BY "alumnos"."nombre" ASC[0m
+  Rendered principal/index.html.erb within layouts/application (1548.2ms)
+  Rendered principal/_header.html.erb (4.0ms)
+Completed 200 OK in 2196ms (Views: 495.5ms | ActiveRecord: 1680.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-04-26 12:30:18 -0300
+Processing by PrincipalController#index as HTML
+  [1m[36mUsuario Load (168.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering principal/index.html.erb within layouts/application
+  [1m[35m (167.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "usuarios"[0m
+  [1m[35m (167.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "titular_cuentas"[0m
+  [1m[35m (167.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "actividad_alumnos" WHERE (opcion=1 OR opcion=2)[0m
+  [1m[35m (167.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "actividad_alumnos" WHERE (opcion=0)[0m
+  [1m[36mAlumno Load (169.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos WHERE opcion=1 OR opcion=2)) ORDER BY "alumnos"."nombre" ASC[0m
+  [1m[36mAlumno Load (168.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos WHERE opcion=0)) ORDER BY "alumnos"."nombre" ASC[0m
+  [1m[36mAlumno Load (169.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos WHERE opcion IS NULL)) ORDER BY "alumnos"."nombre" ASC[0m
+  [1m[36mAlumno Load (170.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id NOT IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos)) ORDER BY "alumnos"."nombre" ASC[0m
+  [1m[36mAlumno Load (168.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM ( cuentas INNER JOIN titular_cuentas ON cuentas.id=titular_cuentas.cuenta_id ) INNER JOIN cuenta_alumnos ON cuentas.id=cuenta_alumnos.cuenta_id WHERE titular_cuentas.usuario_id=1) OR id IN (SELECT padre_alumnos.alumno_id FROM padre_alumnos WHERE padre_alumnos.usuario_id=1)) ORDER BY "alumnos"."nombre" ASC[0m
+  Rendered principal/index.html.erb within layouts/application (1551.2ms)
+  Rendered principal/_header.html.erb (5.0ms)
+Completed 200 OK in 2216ms (Views: 515.5ms | ActiveRecord: 1680.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-04-26 12:43:33 -0300
+Processing by PrincipalController#index as HTML
+  [1m[36mUsuario Load (168.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering principal/index.html.erb within layouts/application
+  [1m[35m (167.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "usuarios"[0m
+  [1m[35m (167.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "titular_cuentas"[0m
+  [1m[35m (167.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "actividad_alumnos" WHERE (opcion=1 OR opcion=2)[0m
+  [1m[35m (167.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "actividad_alumnos" WHERE (opcion=0)[0m
+  [1m[36mAlumno Load (170.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos WHERE opcion=1 OR opcion=2)) ORDER BY "alumnos"."nombre" ASC[0m
+  [1m[36mAlumno Load (168.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos WHERE opcion=0)) ORDER BY "alumnos"."nombre" ASC[0m
+  [1m[36mAlumno Load (169.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos WHERE opcion IS NULL)) ORDER BY "alumnos"."nombre" ASC[0m
+  [1m[36mAlumno Load (169.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id NOT IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos)) ORDER BY "alumnos"."nombre" ASC[0m
+  [1m[36mAlumno Load (168.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM ( cuentas INNER JOIN titular_cuentas ON cuentas.id=titular_cuentas.cuenta_id ) INNER JOIN cuenta_alumnos ON cuentas.id=cuenta_alumnos.cuenta_id WHERE titular_cuentas.usuario_id=1) OR id IN (SELECT padre_alumnos.alumno_id FROM padre_alumnos WHERE padre_alumnos.usuario_id=1)) ORDER BY "alumnos"."nombre" ASC[0m
+  Rendered principal/index.html.erb within layouts/application (1555.2ms)
+  Rendered principal/_header.html.erb (4.0ms)
+Completed 200 OK in 2242ms (Views: 542.4ms | ActiveRecord: 1680.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-04-26 12:46:52 -0300
+Processing by PrincipalController#index as HTML
+  [1m[36mUsuario Load (170.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering principal/index.html.erb within layouts/application
+  [1m[35m (167.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "usuarios"[0m
+  [1m[35m (168.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "titular_cuentas"[0m
+  [1m[35m (169.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "actividad_alumnos" WHERE (opcion=1 OR opcion=2)[0m
+  [1m[35m (167.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "actividad_alumnos" WHERE (opcion=0)[0m
+  [1m[36mAlumno Load (169.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos WHERE opcion=1 OR opcion=2)) ORDER BY "alumnos"."nombre" ASC[0m
+  [1m[36mAlumno Load (168.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos WHERE opcion=0)) ORDER BY "alumnos"."nombre" ASC[0m
+  [1m[36mAlumno Load (170.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos WHERE opcion IS NULL)) ORDER BY "alumnos"."nombre" ASC[0m
+  [1m[36mAlumno Load (170.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id NOT IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos)) ORDER BY "alumnos"."nombre" ASC[0m
+  [1m[36mAlumno Load (168.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM ( cuentas INNER JOIN titular_cuentas ON cuentas.id=titular_cuentas.cuenta_id ) INNER JOIN cuenta_alumnos ON cuentas.id=cuenta_alumnos.cuenta_id WHERE titular_cuentas.usuario_id=1) OR id IN (SELECT padre_alumnos.alumno_id FROM padre_alumnos WHERE padre_alumnos.usuario_id=1)) ORDER BY "alumnos"."nombre" ASC[0m
+  Rendered principal/index.html.erb within layouts/application (1555.2ms)
+  Rendered principal/_header.html.erb (3.0ms)
+Completed 200 OK in 2473ms (Views: 766.1ms | ActiveRecord: 1686.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-04-26 12:49:50 -0300
+Processing by PrincipalController#index as HTML
+  [1m[36mUsuario Load (171.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering principal/index.html.erb within layouts/application
+  [1m[35m (168.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "usuarios"[0m
+  [1m[35m (167.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "titular_cuentas"[0m
+  [1m[35m (167.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "actividad_alumnos" WHERE (opcion=1 OR opcion=2)[0m
+  [1m[35m (168.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "actividad_alumnos" WHERE (opcion=0)[0m
+  [1m[36mAlumno Load (169.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos WHERE opcion=1 OR opcion=2)) ORDER BY "alumnos"."nombre" ASC[0m
+  [1m[36mAlumno Load (168.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos WHERE opcion=0)) ORDER BY "alumnos"."nombre" ASC[0m
+  [1m[36mAlumno Load (169.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos WHERE opcion IS NULL)) ORDER BY "alumnos"."nombre" ASC[0m
+  [1m[36mAlumno Load (169.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id NOT IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos)) ORDER BY "alumnos"."nombre" ASC[0m
+  [1m[36mAlumno Load (169.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM ( cuentas INNER JOIN titular_cuentas ON cuentas.id=titular_cuentas.cuenta_id ) INNER JOIN cuenta_alumnos ON cuentas.id=cuenta_alumnos.cuenta_id WHERE titular_cuentas.usuario_id=1) OR id IN (SELECT padre_alumnos.alumno_id FROM padre_alumnos WHERE padre_alumnos.usuario_id=1)) ORDER BY "alumnos"."nombre" ASC[0m
+  Rendered principal/index.html.erb within layouts/application (1567.2ms)
+  Rendered principal/_header.html.erb (26.0ms)
+Completed 200 OK in 2279ms (Views: 574.5ms | ActiveRecord: 1685.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-04-26 13:17:21 -0300
+Processing by PrincipalController#index as HTML
+  [1m[36mUsuario Load (168.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering principal/index.html.erb within layouts/application
+  [1m[35m (167.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "usuarios"[0m
+  [1m[35m (166.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "titular_cuentas"[0m
+  [1m[35m (167.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "actividad_alumnos" WHERE (opcion=1 OR opcion=2)[0m
+  [1m[35m (167.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "actividad_alumnos" WHERE (opcion=0)[0m
+  [1m[36mAlumno Load (169.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos WHERE opcion=1 OR opcion=2)) ORDER BY "alumnos"."nombre" ASC[0m
+  [1m[36mAlumno Load (168.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos WHERE opcion=0)) ORDER BY "alumnos"."nombre" ASC[0m
+  [1m[36mAlumno Load (169.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos WHERE opcion IS NULL)) ORDER BY "alumnos"."nombre" ASC[0m
+  [1m[36mAlumno Load (169.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id NOT IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos)) ORDER BY "alumnos"."nombre" ASC[0m
+  [1m[36mAlumno Load (168.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM ( cuentas INNER JOIN titular_cuentas ON cuentas.id=titular_cuentas.cuenta_id ) INNER JOIN cuenta_alumnos ON cuentas.id=cuenta_alumnos.cuenta_id WHERE titular_cuentas.usuario_id=1) OR id IN (SELECT padre_alumnos.alumno_id FROM padre_alumnos WHERE padre_alumnos.usuario_id=1)) ORDER BY "alumnos"."nombre" ASC[0m
+  Rendered principal/index.html.erb within layouts/application (1547.2ms)
+  Rendered principal/_header.html.erb (4.0ms)
+Completed 200 OK in 2187ms (Views: 489.8ms | ActiveRecord: 1678.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-04-26 13:19:49 -0300
+Processing by PrincipalController#index as HTML
+  [1m[36mUsuario Load (169.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering principal/index.html.erb within layouts/application
+  [1m[35m (167.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "usuarios"[0m
+  [1m[35m (167.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "titular_cuentas"[0m
+  [1m[35m (167.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "actividad_alumnos" WHERE (opcion=1 OR opcion=2)[0m
+  [1m[35m (167.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "actividad_alumnos" WHERE (opcion=0)[0m
+  [1m[36mAlumno Load (169.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos WHERE opcion=1 OR opcion=2)) ORDER BY "alumnos"."nombre" ASC[0m
+  [1m[36mAlumno Load (168.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos WHERE opcion=0)) ORDER BY "alumnos"."nombre" ASC[0m
+  [1m[36mAlumno Load (169.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos WHERE opcion IS NULL)) ORDER BY "alumnos"."nombre" ASC[0m
+  [1m[36mAlumno Load (169.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id NOT IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos)) ORDER BY "alumnos"."nombre" ASC[0m
+  [1m[36mAlumno Load (168.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM ( cuentas INNER JOIN titular_cuentas ON cuentas.id=titular_cuentas.cuenta_id ) INNER JOIN cuenta_alumnos ON cuentas.id=cuenta_alumnos.cuenta_id WHERE titular_cuentas.usuario_id=1) OR id IN (SELECT padre_alumnos.alumno_id FROM padre_alumnos WHERE padre_alumnos.usuario_id=1)) ORDER BY "alumnos"."nombre" ASC[0m
+  Rendered principal/index.html.erb within layouts/application (1552.2ms)
+  Rendered principal/_header.html.erb (3.0ms)
+Completed 200 OK in 2204ms (Views: 502.8ms | ActiveRecord: 1680.2ms)
+
+
