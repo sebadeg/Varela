@@ -13,7 +13,7 @@
 					<%= button_to "Salir", destroy_usuario_session_path, method: :delete, class: 'btn btn-primary', style:"margin-top:7px;margin-right:7px" %>
 				</div>
 				<div class="pull-right">
-					<%= button_to "Cambiar datos", edit_usuario_registration_path, method: :get, class: 'btn btn-primary', style:"margin-top:7px;margin-right:7px" %>
+					<%= button_to "Datos", edit_usuario_registration_path, method: :get, class: 'btn btn-primary', style:"margin-top:7px;margin-right:7px" %>
 				</div>
 				<div class="pull-right nombre hidden-xs"><%= current_usuario.nombre %> <%= current_usuario.apellido %> - <%= current_usuario.email %>					
 				</div>			
