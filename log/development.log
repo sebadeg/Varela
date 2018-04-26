@@ -8804,3 +8804,19 @@ Processing by PrincipalController#index as HTML
 Completed 200 OK in 1783ms (Views: 456.2ms | ActiveRecord: 1287.1ms)
 
 
+Started GET "/?locale=es" for 127.0.0.1 at 2018-04-26 07:14:14 -0300
+  [1m[36mActiveRecord::SchemaMigration Load (231.0ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+DEPRECATION WARNING: before_filter is deprecated and will be removed in Rails 5.1. Use before_action instead. (called from <class:ApplicationController> at c:/Sites/varela/app/controllers/application_controller.rb:5)
+Processing by PrincipalController#index as HTML
+  Parameters: {"locale"=>"es"}
+  [1m[36mUsuario Load (184.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering principal/index.html.erb within layouts/application
+  [1m[35m (220.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "usuarios"[0m
+  [1m[35m (225.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "titular_cuentas"[0m
+  [1m[35m (248.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "actividad_alumnos" WHERE (opcion=1 OR opcion=2)[0m
+  [1m[36mAlumno Load (243.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM ( cuentas INNER JOIN titular_cuentas ON cuentas.id=titular_cuentas.cuenta_id ) INNER JOIN cuenta_alumnos ON cuentas.id=cuenta_alumnos.cuenta_id WHERE titular_cuentas.usuario_id=1) OR id IN (SELECT padre_alumnos.alumno_id FROM padre_alumnos WHERE padre_alumnos.usuario_id=1)) ORDER BY "alumnos"."nombre" ASC[0m
+  Rendered principal/index.html.erb within layouts/application (1415.1ms)
+  Rendered principal/_header.html.erb (3.0ms)
+Completed 200 OK in 5049ms (Views: 2281.3ms | ActiveRecord: 2508.1ms)
+
+
