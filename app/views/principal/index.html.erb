@@ -3,6 +3,7 @@
 	<%= p "Cantidad usuarios: " + Usuario.all.count.to_s %><br>
 	<%= p "Cantidad cuentas: " + TitularCuenta.all.count.to_s %><br>
 	<%= p "Cantidad autorizados: " + ActividadAlumno.where("opcion=1 OR opcion=2").count.to_s %><br>
+	<%= p "Cantidad no autorizados: " + ActividadAlumno.where("opcion=0").count.to_s %><br>
 
 
     <%= form_for(@usuario, as: :usuario, url: principal_asociar_path(:usuario)) do |f| %>
@@ -70,11 +71,10 @@
 														    	<%= f.label "No está autorizado" %>
 														    <% end %>
 															<br><br>
-												            <%= f.label "Autorizo a debitar "  %>
 												            <%= f.hidden_field :alumno_id, value: t.id %>
 												            <%= f.hidden_field :actividad_id, value: 1 %>
-															<%= f.select :opcion, options_for_select([["contado de $U 5650", 1], ["en 5 cuotas de $U 1200", 2]], @act.opcion)  %><br><br>
-												            <%= f.submit "Autorizo"  %>
+															<%= f.select :opcion, options_for_select([["No autorizo", 0], ["Autorizo a debitar contado de $U 5650", 1], ["Autorizo a debitar en 5 cuotas de $U 1200", 2]], @act.opcion)  %><br><br>
+												            <%= f.submit "Confirmar"  %>
 															</div>
 
 														<% end %>													
