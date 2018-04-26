@@ -7187,3 +7187,915 @@ No template found for PrincipalController#asociar, rendering head :no_content
 Completed 204 No Content in 7418ms (ActiveRecord: 175.0ms)
 
 
+Started GET "/" for 127.0.0.1 at 2018-04-25 19:12:10 -0300
+Started GET "/" for 127.0.0.1 at 2018-04-25 19:12:15 -0300
+  [1m[36mActiveRecord::SchemaMigration Load (180.0ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (176.0ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by PrincipalController#index as HTML
+Processing by PrincipalController#index as HTML
+Completed 401 Unauthorized in 19ms (ActiveRecord: 0.0ms)
+
+
+Completed 401 Unauthorized in 29ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/usuarios/sign_in" for 127.0.0.1 at 2018-04-25 19:12:37 -0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.0ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (43.0ms)
+  Rendered devise/_header.html.erb (3.0ms)
+Completed 200 OK in 2880ms (Views: 2250.5ms | ActiveRecord: 582.0ms)
+
+
+Started POST "/usuarios/sign_in?locale=es" for 127.0.0.1 at 2018-04-25 19:13:08 -0300
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"tlr5U+s8pfFtAbCdfUGHVwRMtKQ5nc3dTw2AsMpq4jGtXLtqEUrxjMLkL8XwkmmZ5msRWZg8tywJ7+PrNJNoFQ==", "usuario"=>{"cedula"=>"16", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Ingresar", "locale"=>"es"}
+  [1m[36mUsuario Load (177.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."cedula" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["cedula", 16], ["LIMIT", 1]]
+  [1m[35m (171.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (197.0ms)[0m  [1m[33mUPDATE "usuarios" SET "current_sign_in_at" = $1, "last_sign_in_at" = $2, "current_sign_in_ip" = $3, "sign_in_count" = $4, "updated_at" = $5 WHERE "usuarios"."id" = $6[0m  [["current_sign_in_at", "2018-04-25 22:13:09.637800"], ["last_sign_in_at", "2018-04-25 21:58:52.960608"], ["current_sign_in_ip", "127.0.0.1/32"], ["sign_in_count", 66], ["updated_at", "2018-04-25 22:13:09.812810"], ["id", 1]]
+  [1m[35m (173.0ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 1341ms (ActiveRecord: 718.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-04-25 19:13:10 -0300
+Processing by PrincipalController#index as HTML
+  [1m[36mUsuario Load (176.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering principal/index.html.erb within layouts/application
+  [1m[35m (174.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "usuarios"[0m
+  [1m[35m (180.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "titular_cuentas"[0m
+  [1m[35m (179.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "actividad_alumnos" WHERE (opcion=1 OR opcion=2)[0m
+  [1m[36mAlumno Load (179.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM ( cuentas INNER JOIN titular_cuentas ON cuentas.id=titular_cuentas.cuenta_id ) INNER JOIN cuenta_alumnos ON cuentas.id=cuenta_alumnos.cuenta_id WHERE titular_cuentas.usuario_id=1) OR id IN (SELECT padre_alumnos.alumno_id FROM padre_alumnos WHERE padre_alumnos.usuario_id=1)) ORDER BY "alumnos"."nombre" ASC[0m
+  Rendered principal/index.html.erb within layouts/application (1143.1ms)
+  Rendered principal/_header.html.erb (3.0ms)
+Completed 200 OK in 2536ms (Views: 485.3ms | ActiveRecord: 2019.1ms)
+
+
+Started POST "/principal/asociar.usuario?locale=es" for 127.0.0.1 at 2018-04-25 19:17:06 -0300
+Processing by PrincipalController#asociar as 
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"wCRBjM+Mygygx29TmwMjljcD+dfJlh5Admnajr9GCWyxhjXGBmgwTk3je2oz9nl6P2JSb0ldABMpwek+JByZbw==", "usuario"=>{"cedula"=>"43457664", "alumno1"=>"12691", "alumno2"=>"0"}, "commit"=>"Asociar", "locale"=>"es"}
+  [1m[36mUsuario Load (178.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUsuario Load (172.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE (cedula = '43457664') ORDER BY "usuarios"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (190.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUsuario Exists (270.0ms)[0m  [1m[34mSELECT  1 AS one FROM "usuarios" WHERE "usuarios"."cedula" = $1 AND ("usuarios"."id" != $2) LIMIT $3[0m  [["cedula", 43457664], ["id", 47], ["LIMIT", 1]]
+  [1m[35mSQL (246.0ms)[0m  [1m[33mUPDATE "usuarios" SET "encrypted_password" = $1, "updated_at" = $2 WHERE "usuarios"."id" = $3[0m  [["encrypted_password", "$2a$11$D8kWZ4sdSNXXg1wIFvCtRO37E6KyuQhF6TF/w5KCmyqk0luTrJVV6"], ["updated_at", "2018-04-25 22:17:07.550784"], ["id", 47]]
+  [1m[35m (252.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCuentaAlumno Load (287.0ms)[0m  [1m[34mSELECT "cuenta_alumnos".* FROM "cuenta_alumnos" WHERE (cuenta_id = 12691)[0m
+  [1m[35m (170.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (180.0ms)[0m  [1m[32mINSERT INTO "padre_alumnos" ("usuario_id", "alumno_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["usuario_id", 47], ["alumno_id", 126911], ["created_at", "2018-04-25 22:17:09.459894"], ["updated_at", "2018-04-25 22:17:09.459894"]]
+  [1m[35m (170.0ms)[0m  [1m[35mCOMMIT[0m
+No template found for PrincipalController#asociar, rendering head :no_content
+Completed 204 No Content in 7056ms (ActiveRecord: 3045.2ms)
+
+
+Started DELETE "/usuarios/sign_out?locale=es" for 127.0.0.1 at 2018-04-25 19:17:43 -0300
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"wCRBjM+Mygygx29TmwMjljcD+dfJlh5Admnajr9GCWyxhjXGBmgwTk3je2oz9nl6P2JSb0ldABMpwek+JByZbw==", "locale"=>"es"}
+  [1m[36mUsuario Load (174.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (219.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (225.0ms)[0m  [1m[33mUPDATE "usuarios" SET "remember_created_at" = $1, "updated_at" = $2 WHERE "usuarios"."id" = $3[0m  [["remember_created_at", nil], ["updated_at", "2018-04-25 22:17:43.756946"], ["id", 1]]
+  [1m[35m (175.0ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/?locale=es
+Completed 302 Found in 809ms (ActiveRecord: 793.0ms)
+
+
+Started GET "/?locale=es" for 127.0.0.1 at 2018-04-25 19:17:44 -0300
+Processing by PrincipalController#index as HTML
+  Parameters: {"locale"=>"es"}
+Completed 401 Unauthorized in 0ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/usuarios/sign_in" for 127.0.0.1 at 2018-04-25 19:17:44 -0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.0ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (15.0ms)
+  Rendered devise/_header.html.erb (3.0ms)
+Completed 200 OK in 519ms (Views: 517.5ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/usuarios/sign_in?locale=es" for 127.0.0.1 at 2018-04-25 19:18:02 -0300
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"TTXgg0Nt6P+19Yg4CpKinQgAooHk+28ecNtsvtBciXlMuTh/ZBhfUoZiJSN8U8Q+b9JKUk2sW4Mrz3j7Ndahjw==", "usuario"=>{"cedula"=>"43457664", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Ingresar", "locale"=>"es"}
+  [1m[36mUsuario Load (175.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."cedula" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["cedula", 43457664], ["LIMIT", 1]]
+  [1m[35m (174.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (183.0ms)[0m  [1m[33mUPDATE "usuarios" SET "current_sign_in_at" = $1, "last_sign_in_at" = $2, "current_sign_in_ip" = $3, "last_sign_in_ip" = $4, "sign_in_count" = $5, "updated_at" = $6 WHERE "usuarios"."id" = $7[0m  [["current_sign_in_at", "2018-04-25 22:18:02.895582"], ["last_sign_in_at", "2018-04-25 22:18:02.895582"], ["current_sign_in_ip", "127.0.0.1/32"], ["last_sign_in_ip", "127.0.0.1/32"], ["sign_in_count", 1], ["updated_at", "2018-04-25 22:18:03.073592"], ["id", 47]]
+  [1m[35m (171.0ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/?locale=es
+Completed 302 Found in 1064ms (ActiveRecord: 703.0ms)
+
+
+Started GET "/?locale=es" for 127.0.0.1 at 2018-04-25 19:18:03 -0300
+Processing by PrincipalController#index as HTML
+  Parameters: {"locale"=>"es"}
+  [1m[36mUsuario Load (176.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 47], ["LIMIT", 1]]
+  Rendering principal/index.html.erb within layouts/application
+  [1m[36mAlumno Load (193.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM ( cuentas INNER JOIN titular_cuentas ON cuentas.id=titular_cuentas.cuenta_id ) INNER JOIN cuenta_alumnos ON cuentas.id=cuenta_alumnos.cuenta_id WHERE titular_cuentas.usuario_id=47) OR id IN (SELECT padre_alumnos.alumno_id FROM padre_alumnos WHERE padre_alumnos.usuario_id=47)) ORDER BY "alumnos"."nombre" ASC[0m
+  [1m[36mActividadAlumno Load (247.0ms)[0m  [1m[34mSELECT  "actividad_alumnos".* FROM "actividad_alumnos" WHERE (alumno_id = 126911 AND actividad_id = 1) ORDER BY "actividad_alumnos"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mCuentaAlumno Load (214.0ms)[0m  [1m[34mSELECT  "cuenta_alumnos".* FROM "cuenta_alumnos" WHERE (alumno_id = 126911) ORDER BY "cuenta_alumnos"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mTitularCuenta Load (176.0ms)[0m  [1m[34mSELECT  "titular_cuentas".* FROM "titular_cuentas" WHERE (usuario_id = 47 AND cuenta_id = 12691) ORDER BY "titular_cuentas"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  Rendered principal/index.html.erb within layouts/application (1207.1ms)
+  Rendered principal/_header.html.erb (5.0ms)
+Completed 200 OK in 1816ms (Views: 421.9ms | ActiveRecord: 1368.1ms)
+
+
+Started DELETE "/usuarios/sign_out?locale=es" for 127.0.0.1 at 2018-04-25 19:20:48 -0300
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"GeTsUNKbJZSKlZdUFGFwFDD38aZARS0kJTsTzyoA4OKQ209Zf+0NCO8tvi8gx0wJdoCsc33GH/Lg8JRZ7ugA5Q==", "locale"=>"es"}
+  [1m[36mUsuario Load (172.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 47], ["LIMIT", 1]]
+  [1m[35m (170.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (171.0ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/?locale=es
+Completed 302 Found in 538ms (ActiveRecord: 513.0ms)
+
+
+Started GET "/?locale=es" for 127.0.0.1 at 2018-04-25 19:20:49 -0300
+Processing by PrincipalController#index as HTML
+  Parameters: {"locale"=>"es"}
+Completed 401 Unauthorized in 2ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/usuarios/sign_in" for 127.0.0.1 at 2018-04-25 19:20:49 -0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.0ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (14.0ms)
+  Rendered devise/_header.html.erb (3.0ms)
+Completed 200 OK in 514ms (Views: 508.6ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/usuarios/sign_in?locale=es" for 127.0.0.1 at 2018-04-25 19:20:57 -0300
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"jjL/eab4/crvxlmxa2Wg7eBQTbdDuxwttyCzsqVHT0HeWc1eUL+X509LkqtUI3xuFGU6xM1P9aPVHgJOlW6ieA==", "usuario"=>{"cedula"=>"16", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Ingresar", "locale"=>"es"}
+  [1m[36mUsuario Load (187.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."cedula" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["cedula", 16], ["LIMIT", 1]]
+  [1m[35m (221.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (197.0ms)[0m  [1m[33mUPDATE "usuarios" SET "current_sign_in_at" = $1, "last_sign_in_at" = $2, "last_sign_in_ip" = $3, "sign_in_count" = $4, "updated_at" = $5 WHERE "usuarios"."id" = $6[0m  [["current_sign_in_at", "2018-04-25 22:20:57.852483"], ["last_sign_in_at", "2018-04-25 22:13:09.637800"], ["last_sign_in_ip", "127.0.0.1/32"], ["sign_in_count", 67], ["updated_at", "2018-04-25 22:20:58.080496"], ["id", 1]]
+  [1m[35m (178.0ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/?locale=es
+Completed 302 Found in 1227ms (ActiveRecord: 783.0ms)
+
+
+Started GET "/?locale=es" for 127.0.0.1 at 2018-04-25 19:20:58 -0300
+Processing by PrincipalController#index as HTML
+  Parameters: {"locale"=>"es"}
+  [1m[36mUsuario Load (172.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering principal/index.html.erb within layouts/application
+  [1m[35m (190.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "usuarios"[0m
+  [1m[35m (177.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "titular_cuentas"[0m
+  [1m[35m (178.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "actividad_alumnos" WHERE (opcion=1 OR opcion=2)[0m
+  [1m[36mAlumno Load (175.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM ( cuentas INNER JOIN titular_cuentas ON cuentas.id=titular_cuentas.cuenta_id ) INNER JOIN cuenta_alumnos ON cuentas.id=cuenta_alumnos.cuenta_id WHERE titular_cuentas.usuario_id=1) OR id IN (SELECT padre_alumnos.alumno_id FROM padre_alumnos WHERE padre_alumnos.usuario_id=1)) ORDER BY "alumnos"."nombre" ASC[0m
+  Rendered principal/index.html.erb within layouts/application (746.0ms)
+  Rendered principal/_header.html.erb (3.0ms)
+Completed 200 OK in 1377ms (Views: 456.3ms | ActiveRecord: 892.1ms)
+
+
+Started GET "/?locale=es" for 127.0.0.1 at 2018-04-25 19:21:02 -0300
+Processing by PrincipalController#index as HTML
+  Parameters: {"locale"=>"es"}
+  [1m[36mUsuario Load (179.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering principal/index.html.erb within layouts/application
+  [1m[35m (174.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "usuarios"[0m
+  [1m[35m (175.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "titular_cuentas"[0m
+  [1m[35m (199.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "actividad_alumnos" WHERE (opcion=1 OR opcion=2)[0m
+  [1m[36mAlumno Load (177.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM ( cuentas INNER JOIN titular_cuentas ON cuentas.id=titular_cuentas.cuenta_id ) INNER JOIN cuenta_alumnos ON cuentas.id=cuenta_alumnos.cuenta_id WHERE titular_cuentas.usuario_id=1) OR id IN (SELECT padre_alumnos.alumno_id FROM padre_alumnos WHERE padre_alumnos.usuario_id=1)) ORDER BY "alumnos"."nombre" ASC[0m
+  Rendered principal/index.html.erb within layouts/application (751.0ms)
+  Rendered principal/_header.html.erb (3.0ms)
+Completed 200 OK in 1381ms (Views: 445.8ms | ActiveRecord: 904.1ms)
+
+
+Started POST "/principal/asociar.usuario?locale=es" for 127.0.0.1 at 2018-04-25 20:34:05 -0300
+Processing by PrincipalController#asociar as 
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"degz4FdfRFELmeQBE3xFIv/lzi0j3ooubZYCAJTMYiWx66D5vqgOXigomhu2suHghZR0CQ0fbbqIYB1F0so79w==", "usuario"=>{"cedula"=>"28155487", "alumno1"=>"12339", "alumno2"=>"1"}, "commit"=>"Asociar", "locale"=>"es"}
+  [1m[36mUsuario Load (282.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUsuario Load (281.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE (cedula = '28155487') ORDER BY "usuarios"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+No template found for PrincipalController#asociar, rendering head :no_content
+Completed 204 No Content in 3793ms (ActiveRecord: 563.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-04-25 20:36:00 -0300
+Started GET "/" for 127.0.0.1 at 2018-04-25 20:36:03 -0300
+Processing by PrincipalController#index as HTML
+Processing by PrincipalController#index as HTML
+  [1m[36mUsuario Load (299.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering principal/index.html.erb within layouts/application
+  [1m[35m (257.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "usuarios"[0m
+  [1m[36mUsuario Load (859.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering principal/index.html.erb within layouts/application
+  [1m[35m (276.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "titular_cuentas"[0m
+  [1m[35m (206.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "usuarios"[0m
+  [1m[35m (297.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "titular_cuentas"[0m
+  [1m[35m (838.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "actividad_alumnos" WHERE (opcion=1 OR opcion=2)[0m
+  [1m[35m (1305.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "actividad_alumnos" WHERE (opcion=1 OR opcion=2)[0m
+  [1m[36mAlumno Load (261.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM ( cuentas INNER JOIN titular_cuentas ON cuentas.id=titular_cuentas.cuenta_id ) INNER JOIN cuenta_alumnos ON cuentas.id=cuenta_alumnos.cuenta_id WHERE titular_cuentas.usuario_id=1) OR id IN (SELECT padre_alumnos.alumno_id FROM padre_alumnos WHERE padre_alumnos.usuario_id=1)) ORDER BY "alumnos"."nombre" ASC[0m
+  Rendered principal/index.html.erb within layouts/application (1625.1ms)
+  [1m[36mAlumno Load (271.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM ( cuentas INNER JOIN titular_cuentas ON cuentas.id=titular_cuentas.cuenta_id ) INNER JOIN cuenta_alumnos ON cuentas.id=cuenta_alumnos.cuenta_id WHERE titular_cuentas.usuario_id=1) OR id IN (SELECT padre_alumnos.alumno_id FROM padre_alumnos WHERE padre_alumnos.usuario_id=1)) ORDER BY "alumnos"."nombre" ASC[0m
+  Rendered principal/index.html.erb within layouts/application (2128.1ms)
+  Rendered principal/_header.html.erb (8.0ms)
+Completed 200 OK in 3201ms (Views: 712.6ms | ActiveRecord: 2461.1ms)
+
+
+  Rendered principal/_header.html.erb (3.0ms)
+Completed 200 OK in 3212ms (Views: 770.7ms | ActiveRecord: 2408.1ms)
+
+
+Started POST "/principal/asociar.usuario?locale=es" for 127.0.0.1 at 2018-04-25 20:36:20 -0300
+Processing by PrincipalController#asociar as 
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"3LUKLVaH/ugHKcyW+0y3Gvkk4PtDZw7/Kt+LkZMvgWAYtpk0v3C05ySYsoxeghPYg1Va322m6WvPKZTU1SnYsg==", "usuario"=>{"cedula"=>"28155487", "alumno1"=>"12339", "alumno2"=>"1"}, "commit"=>"Asociar", "locale"=>"es"}
+  [1m[36mUsuario Load (319.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUsuario Load (235.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE (cedula = '28155487') ORDER BY "usuarios"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+No template found for PrincipalController#asociar, rendering head :no_content
+Completed 204 No Content in 3959ms (ActiveRecord: 554.0ms)
+
+
+Started POST "/principal/asociar.usuario?locale=es" for 127.0.0.1 at 2018-04-25 20:36:59 -0300
+  
+ActionController::RoutingError (undefined local variable or method `root_path' for PrincipalController:Class):
+  
+app/controllers/principal_controller.rb:80:in `<class:PrincipalController>'
+app/controllers/principal_controller.rb:1:in `<top (required)>'
+  Rendering c:/RailsInstaller/Ruby2.3.0/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout
+  Rendering c:/RailsInstaller/Ruby2.3.0/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered c:/RailsInstaller/Ruby2.3.0/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.0ms)
+  Rendered collection of c:/RailsInstaller/Ruby2.3.0/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/routes/_route.html.erb [21 times] (93.0ms)
+  Rendered c:/RailsInstaller/Ruby2.3.0/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/routes/_table.html.erb (4.0ms)
+  Rendering c:/RailsInstaller/Ruby2.3.0/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered c:/RailsInstaller/Ruby2.3.0/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered c:/RailsInstaller/Ruby2.3.0/lib/ruby/gems/2.3.0/gems/actionpack-5.0.7/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (894.1ms)
+Started POST "/principal/asociar.usuario?locale=es" for 127.0.0.1 at 2018-04-25 20:37:21 -0300
+Processing by PrincipalController#asociar as 
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"degz4FdfRFELmeQBE3xFIv/lzi0j3ooubZYCAJTMYiWx66D5vqgOXigomhu2suHghZR0CQ0fbbqIYB1F0so79w==", "usuario"=>{"cedula"=>"28155487", "alumno1"=>"12339", "alumno2"=>"1"}, "commit"=>"Asociar", "locale"=>"es"}
+  [1m[36mUsuario Load (225.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUsuario Load (228.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE (cedula = '28155487') ORDER BY "usuarios"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Redirected to http://localhost:3000/?locale=es
+Completed 302 Found in 1233ms (ActiveRecord: 1199.1ms)
+
+
+Started GET "/?locale=es" for 127.0.0.1 at 2018-04-25 20:37:23 -0300
+Processing by PrincipalController#index as HTML
+  Parameters: {"locale"=>"es"}
+  [1m[36mUsuario Load (214.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering principal/index.html.erb within layouts/application
+  [1m[35m (219.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "usuarios"[0m
+  [1m[35m (221.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "titular_cuentas"[0m
+  [1m[35m (221.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "actividad_alumnos" WHERE (opcion=1 OR opcion=2)[0m
+  [1m[36mAlumno Load (212.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM ( cuentas INNER JOIN titular_cuentas ON cuentas.id=titular_cuentas.cuenta_id ) INNER JOIN cuenta_alumnos ON cuentas.id=cuenta_alumnos.cuenta_id WHERE titular_cuentas.usuario_id=1) OR id IN (SELECT padre_alumnos.alumno_id FROM padre_alumnos WHERE padre_alumnos.usuario_id=1)) ORDER BY "alumnos"."nombre" ASC[0m
+  Rendered principal/index.html.erb within layouts/application (1363.1ms)
+  Rendered principal/_header.html.erb (3.0ms)
+Completed 200 OK in 2715ms (Views: 478.1ms | ActiveRecord: 2184.1ms)
+
+
+Started POST "/principal/asociar.usuario?locale=es" for 127.0.0.1 at 2018-04-25 20:37:50 -0300
+Processing by PrincipalController#asociar as 
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"QJyWFumApSHuZAuWEEqo0dY9Gx8Nc7neaeW4yyEv1QyEnwUPAHfvLs3VdYy1hAwTrEyhOyOyXkqME6eOZymM3g==", "usuario"=>{"cedula"=>"28155487", "alumno1"=>"12339", "alumno2"=>"1"}, "commit"=>"Asociar", "locale"=>"es"}
+  [1m[36mUsuario Load (183.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUsuario Load (209.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE (cedula = '28155487') ORDER BY "usuarios"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (228.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUsuario Exists (193.0ms)[0m  [1m[34mSELECT  1 AS one FROM "usuarios" WHERE "usuarios"."cedula" = $1 AND ("usuarios"."id" != $2) LIMIT $3[0m  [["cedula", 28155487], ["id", 19], ["LIMIT", 1]]
+  [1m[35mSQL (183.0ms)[0m  [1m[33mUPDATE "usuarios" SET "encrypted_password" = $1, "updated_at" = $2 WHERE "usuarios"."id" = $3[0m  [["encrypted_password", "$2a$11$3X/h7bvQ.My5RKXGiEF1auX2Q/Dbwh9ZkNhPmvKscQoHck6vwB8Ma"], ["updated_at", "2018-04-25 23:37:51.396924"], ["id", 19]]
+  [1m[35m (222.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCuentaAlumno Load (184.0ms)[0m  [1m[34mSELECT "cuenta_alumnos".* FROM "cuenta_alumnos" WHERE (cuenta_id = 12339)[0m
+  [1m[35m (180.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (189.0ms)[0m  [1m[32mINSERT INTO "padre_alumnos" ("usuario_id", "alumno_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["usuario_id", 19], ["alumno_id", 123392], ["created_at", "2018-04-25 23:37:52.994015"], ["updated_at", "2018-04-25 23:37:52.994015"]]
+  [1m[35m (178.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (177.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (183.0ms)[0m  [1m[32mINSERT INTO "padre_alumnos" ("usuario_id", "alumno_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["usuario_id", 19], ["alumno_id", 123391], ["created_at", "2018-04-25 23:37:53.551047"], ["updated_at", "2018-04-25 23:37:53.551047"]]
+  [1m[35m (180.0ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/?locale=es
+Completed 302 Found in 3564ms (ActiveRecord: 3254.2ms)
+
+
+Started GET "/?locale=es" for 127.0.0.1 at 2018-04-25 20:37:53 -0300
+Processing by PrincipalController#index as HTML
+  Parameters: {"locale"=>"es"}
+  [1m[36mUsuario Load (175.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering principal/index.html.erb within layouts/application
+  [1m[35m (176.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "usuarios"[0m
+  [1m[35m (180.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "titular_cuentas"[0m
+  [1m[35m (175.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "actividad_alumnos" WHERE (opcion=1 OR opcion=2)[0m
+  [1m[36mAlumno Load (211.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM ( cuentas INNER JOIN titular_cuentas ON cuentas.id=titular_cuentas.cuenta_id ) INNER JOIN cuenta_alumnos ON cuentas.id=cuenta_alumnos.cuenta_id WHERE titular_cuentas.usuario_id=1) OR id IN (SELECT padre_alumnos.alumno_id FROM padre_alumnos WHERE padre_alumnos.usuario_id=1)) ORDER BY "alumnos"."nombre" ASC[0m
+  Rendered principal/index.html.erb within layouts/application (768.0ms)
+  Rendered principal/_header.html.erb (3.0ms)
+Completed 200 OK in 1359ms (Views: 410.1ms | ActiveRecord: 917.1ms)
+
+
+Started DELETE "/usuarios/sign_out?locale=es" for 127.0.0.1 at 2018-04-25 20:38:20 -0300
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"ZmfxNlort9FgsTKRNqh4f4sLEKr+vAE/oSfzl2njO36iZGIvs9z93kMATIuTZty98XqqjtB95qtE0ezSL+VirA==", "locale"=>"es"}
+  [1m[36mUsuario Load (181.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (183.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (178.0ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/?locale=es
+Completed 302 Found in 557ms (ActiveRecord: 542.0ms)
+
+
+Started GET "/?locale=es" for 127.0.0.1 at 2018-04-25 20:38:21 -0300
+Processing by PrincipalController#index as HTML
+  Parameters: {"locale"=>"es"}
+Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/usuarios/sign_in" for 127.0.0.1 at 2018-04-25 20:38:21 -0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.0ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (14.0ms)
+  Rendered devise/_header.html.erb (3.0ms)
+Completed 200 OK in 499ms (Views: 494.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/usuarios/sign_in?locale=es" for 127.0.0.1 at 2018-04-25 20:38:56 -0300
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"PIbU9WK04AiTCOJoYrUVTbG/L5IRa7+zU8CpvbTtDQSRGBavsBgr+B+gCTvEqPtU0wPXVEWmHlY8tZsS52/e6g==", "usuario"=>{"cedula"=>"28155487", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Ingresar", "locale"=>"es"}
+  [1m[36mUsuario Load (180.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."cedula" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["cedula", 28155487], ["LIMIT", 1]]
+  [1m[35m (173.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (195.0ms)[0m  [1m[33mUPDATE "usuarios" SET "current_sign_in_at" = $1, "last_sign_in_at" = $2, "current_sign_in_ip" = $3, "last_sign_in_ip" = $4, "sign_in_count" = $5, "updated_at" = $6 WHERE "usuarios"."id" = $7[0m  [["current_sign_in_at", "2018-04-25 23:38:57.361341"], ["last_sign_in_at", "2018-04-25 23:38:57.361341"], ["current_sign_in_ip", "127.0.0.1/32"], ["last_sign_in_ip", "127.0.0.1/32"], ["sign_in_count", 1], ["updated_at", "2018-04-25 23:38:57.537351"], ["id", 19]]
+  [1m[35m (176.0ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/?locale=es
+Completed 302 Found in 1130ms (ActiveRecord: 724.0ms)
+
+
+Started GET "/?locale=es" for 127.0.0.1 at 2018-04-25 20:38:58 -0300
+Processing by PrincipalController#index as HTML
+  Parameters: {"locale"=>"es"}
+  [1m[36mUsuario Load (239.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 19], ["LIMIT", 1]]
+  Rendering principal/index.html.erb within layouts/application
+  [1m[36mAlumno Load (232.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM ( cuentas INNER JOIN titular_cuentas ON cuentas.id=titular_cuentas.cuenta_id ) INNER JOIN cuenta_alumnos ON cuentas.id=cuenta_alumnos.cuenta_id WHERE titular_cuentas.usuario_id=19) OR id IN (SELECT padre_alumnos.alumno_id FROM padre_alumnos WHERE padre_alumnos.usuario_id=19)) ORDER BY "alumnos"."nombre" ASC[0m
+  [1m[36mActividadAlumno Load (234.0ms)[0m  [1m[34mSELECT  "actividad_alumnos".* FROM "actividad_alumnos" WHERE (alumno_id = 123392 AND actividad_id = 1) ORDER BY "actividad_alumnos"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mCuentaAlumno Load (216.0ms)[0m  [1m[34mSELECT  "cuenta_alumnos".* FROM "cuenta_alumnos" WHERE (alumno_id = 123392) ORDER BY "cuenta_alumnos"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mTitularCuenta Load (240.0ms)[0m  [1m[34mSELECT  "titular_cuentas".* FROM "titular_cuentas" WHERE (usuario_id = 19 AND cuenta_id = 12339) ORDER BY "titular_cuentas"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mActividadAlumno Load (242.0ms)[0m  [1m[34mSELECT  "actividad_alumnos".* FROM "actividad_alumnos" WHERE (alumno_id = 123391 AND actividad_id = 1) ORDER BY "actividad_alumnos"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  Rendered principal/index.html.erb within layouts/application (1668.1ms)
+  Rendered principal/_header.html.erb (4.0ms)
+Completed 200 OK in 2379ms (Views: 477.1ms | ActiveRecord: 1869.1ms)
+
+
+Started POST "/usuarios/sign_in?locale=es" for 127.0.0.1 at 2018-04-25 20:39:54 -0300
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"PIbU9WK04AiTCOJoYrUVTbG/L5IRa7+zU8CpvbTtDQSRGBavsBgr+B+gCTvEqPtU0wPXVEWmHlY8tZsS52/e6g==", "usuario"=>{"cedula"=>"16", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Ingresar", "locale"=>"es"}
+  [1m[36mUsuario Load (217.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 19], ["LIMIT", 1]]
+Redirected to http://localhost:3000/?locale=es
+Filter chain halted as :require_no_authentication rendered or redirected
+Completed 302 Found in 235ms (ActiveRecord: 217.0ms)
+
+
+Started GET "/?locale=es" for 127.0.0.1 at 2018-04-25 20:39:55 -0300
+Processing by PrincipalController#index as HTML
+  Parameters: {"locale"=>"es"}
+  [1m[36mUsuario Load (185.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 19], ["LIMIT", 1]]
+  Rendering principal/index.html.erb within layouts/application
+  [1m[36mAlumno Load (189.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM ( cuentas INNER JOIN titular_cuentas ON cuentas.id=titular_cuentas.cuenta_id ) INNER JOIN cuenta_alumnos ON cuentas.id=cuenta_alumnos.cuenta_id WHERE titular_cuentas.usuario_id=19) OR id IN (SELECT padre_alumnos.alumno_id FROM padre_alumnos WHERE padre_alumnos.usuario_id=19)) ORDER BY "alumnos"."nombre" ASC[0m
+  [1m[36mActividadAlumno Load (182.0ms)[0m  [1m[34mSELECT  "actividad_alumnos".* FROM "actividad_alumnos" WHERE (alumno_id = 123392 AND actividad_id = 1) ORDER BY "actividad_alumnos"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mCuentaAlumno Load (181.0ms)[0m  [1m[34mSELECT  "cuenta_alumnos".* FROM "cuenta_alumnos" WHERE (alumno_id = 123392) ORDER BY "cuenta_alumnos"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mTitularCuenta Load (184.0ms)[0m  [1m[34mSELECT  "titular_cuentas".* FROM "titular_cuentas" WHERE (usuario_id = 19 AND cuenta_id = 12339) ORDER BY "titular_cuentas"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mActividadAlumno Load (187.0ms)[0m  [1m[34mSELECT  "actividad_alumnos".* FROM "actividad_alumnos" WHERE (alumno_id = 123391 AND actividad_id = 1) ORDER BY "actividad_alumnos"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  Rendered principal/index.html.erb within layouts/application (949.1ms)
+  Rendered principal/_header.html.erb (3.0ms)
+Completed 200 OK in 1554ms (Views: 434.0ms | ActiveRecord: 1108.1ms)
+
+
+Started DELETE "/usuarios/sign_out?locale=es" for 127.0.0.1 at 2018-04-25 20:40:00 -0300
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"rCsWhVEpyHBIVyJwq+D2K885TzUMjUwoxyUj2v+lwRYY0gvE1b4CnOH+qiLZxmLw1kl/6QrAhN2wZWBYPOXB0A==", "locale"=>"es"}
+  [1m[36mUsuario Load (178.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 19], ["LIMIT", 1]]
+  [1m[35m (172.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (175.0ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/?locale=es
+Completed 302 Found in 547ms (ActiveRecord: 525.0ms)
+
+
+Started GET "/?locale=es" for 127.0.0.1 at 2018-04-25 20:40:01 -0300
+Processing by PrincipalController#index as HTML
+  Parameters: {"locale"=>"es"}
+Completed 401 Unauthorized in 2ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/usuarios/sign_in" for 127.0.0.1 at 2018-04-25 20:40:01 -0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.0ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (15.0ms)
+  Rendered devise/_header.html.erb (2.0ms)
+Completed 200 OK in 525ms (Views: 521.7ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/usuarios/sign_in?locale=es" for 127.0.0.1 at 2018-04-25 20:40:07 -0300
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"jD8wxKc2M2flD/+sEUaw9VtxDhVGXwf84QEg3S2Ec1+JQs/28O2u8AOLMa/hp3Cz3MMdQnFmtFUpycEhF1Bvew==", "usuario"=>{"cedula"=>"16", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Ingresar", "locale"=>"es"}
+  [1m[36mUsuario Load (181.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."cedula" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["cedula", 16], ["LIMIT", 1]]
+  [1m[35m (178.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (187.0ms)[0m  [1m[33mUPDATE "usuarios" SET "current_sign_in_at" = $1, "last_sign_in_at" = $2, "sign_in_count" = $3, "updated_at" = $4 WHERE "usuarios"."id" = $5[0m  [["current_sign_in_at", "2018-04-25 23:40:08.361592"], ["last_sign_in_at", "2018-04-25 22:20:57.852483"], ["sign_in_count", 68], ["updated_at", "2018-04-25 23:40:08.544603"], ["id", 1]]
+  [1m[35m (180.0ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/?locale=es
+Completed 302 Found in 1106ms (ActiveRecord: 726.0ms)
+
+
+Started GET "/?locale=es" for 127.0.0.1 at 2018-04-25 20:40:09 -0300
+Processing by PrincipalController#index as HTML
+  Parameters: {"locale"=>"es"}
+  [1m[36mUsuario Load (177.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering principal/index.html.erb within layouts/application
+  [1m[35m (177.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "usuarios"[0m
+  [1m[35m (176.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "titular_cuentas"[0m
+  [1m[35m (174.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "actividad_alumnos" WHERE (opcion=1 OR opcion=2)[0m
+  [1m[36mAlumno Load (181.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM ( cuentas INNER JOIN titular_cuentas ON cuentas.id=titular_cuentas.cuenta_id ) INNER JOIN cuenta_alumnos ON cuentas.id=cuenta_alumnos.cuenta_id WHERE titular_cuentas.usuario_id=1) OR id IN (SELECT padre_alumnos.alumno_id FROM padre_alumnos WHERE padre_alumnos.usuario_id=1)) ORDER BY "alumnos"."nombre" ASC[0m
+  Rendered principal/index.html.erb within layouts/application (734.0ms)
+  Rendered principal/_header.html.erb (3.0ms)
+Completed 200 OK in 1356ms (Views: 438.0ms | ActiveRecord: 885.1ms)
+
+
+Started POST "/principal/asociar.usuario?locale=es" for 127.0.0.1 at 2018-04-25 20:40:41 -0300
+Processing by PrincipalController#asociar as 
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"VQvqdjms14o1iiPnrqCOp5wgkny7VmNuILUcu99vD0FjWdZqJ+UWWi+134ewqD2mZMqskMEEuKe9FNduMiW/PA==", "usuario"=>{"cedula"=>"28155487", "alumno1"=>"12339", "alumno2"=>"1"}, "commit"=>"Asociar", "locale"=>"es"}
+  [1m[36mUsuario Load (266.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUsuario Load (304.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE (cedula = '28155487') ORDER BY "usuarios"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (269.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUsuario Exists (242.0ms)[0m  [1m[34mSELECT  1 AS one FROM "usuarios" WHERE "usuarios"."cedula" = $1 AND ("usuarios"."id" != $2) LIMIT $3[0m  [["cedula", 28155487], ["id", 19], ["LIMIT", 1]]
+  [1m[35mSQL (304.0ms)[0m  [1m[33mUPDATE "usuarios" SET "encrypted_password" = $1, "updated_at" = $2 WHERE "usuarios"."id" = $3[0m  [["encrypted_password", "$2a$11$ibimJIie30xb3/RZQ2JhjO8mMDSkeERTPzxOW9rA7IJ/IwsVBIEuu"], ["updated_at", "2018-04-25 23:40:43.018872"], ["id", 19]]
+  [1m[35m (291.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCuentaAlumno Load (282.0ms)[0m  [1m[34mSELECT "cuenta_alumnos".* FROM "cuenta_alumnos" WHERE (cuenta_id = 12339)[0m
+  [1m[35m (223.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (194.0ms)[0m  [1m[32mINSERT INTO "padre_alumnos" ("usuario_id", "alumno_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["usuario_id", 19], ["alumno_id", 123392], ["created_at", "2018-04-25 23:40:44.135936"], ["updated_at", "2018-04-25 23:40:44.135936"]]
+  [1m[35m (209.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (233.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (227.0ms)[0m  [1m[32mINSERT INTO "padre_alumnos" ("usuario_id", "alumno_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["usuario_id", 19], ["alumno_id", 123391], ["created_at", "2018-04-25 23:40:44.782973"], ["updated_at", "2018-04-25 23:40:44.782973"]]
+  [1m[35m (193.0ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/?locale=es
+Completed 302 Found in 3493ms (ActiveRecord: 3237.2ms)
+
+
+Started GET "/?locale=es" for 127.0.0.1 at 2018-04-25 20:40:45 -0300
+Processing by PrincipalController#index as HTML
+  Parameters: {"locale"=>"es"}
+  [1m[36mUsuario Load (261.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering principal/index.html.erb within layouts/application
+  [1m[35m (235.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "usuarios"[0m
+  [1m[35m (212.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "titular_cuentas"[0m
+  [1m[35m (177.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "actividad_alumnos" WHERE (opcion=1 OR opcion=2)[0m
+  [1m[36mAlumno Load (206.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM ( cuentas INNER JOIN titular_cuentas ON cuentas.id=titular_cuentas.cuenta_id ) INNER JOIN cuenta_alumnos ON cuentas.id=cuenta_alumnos.cuenta_id WHERE titular_cuentas.usuario_id=1) OR id IN (SELECT padre_alumnos.alumno_id FROM padre_alumnos WHERE padre_alumnos.usuario_id=1)) ORDER BY "alumnos"."nombre" ASC[0m
+  Rendered principal/index.html.erb within layouts/application (853.0ms)
+  Rendered principal/_header.html.erb (3.0ms)
+Completed 200 OK in 1577ms (Views: 453.8ms | ActiveRecord: 1091.1ms)
+
+
+Started POST "/principal/asociar.usuario?locale=es" for 127.0.0.1 at 2018-04-25 20:42:11 -0300
+Processing by PrincipalController#asociar as 
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"v4IWyeLoNs0hyGFvWiFZFULI4fT+6cMJjSuj4baJV9qJ0CrV/KH3HTv3nQ9EKeoUuiLfGIS7GMAQimg0W8Pnpw==", "usuario"=>{"cedula"=>"28155487", "alumno1"=>"12339", "alumno2"=>"1"}, "commit"=>"Asociar", "locale"=>"es"}
+  [1m[36mUsuario Load (221.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUsuario Load (233.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE (cedula = '28155487') ORDER BY "usuarios"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (213.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUsuario Exists (514.0ms)[0m  [1m[34mSELECT  1 AS one FROM "usuarios" WHERE "usuarios"."cedula" = $1 AND ("usuarios"."id" != $2) LIMIT $3[0m  [["cedula", 28155487], ["id", 19], ["LIMIT", 1]]
+  [1m[35mSQL (249.0ms)[0m  [1m[33mUPDATE "usuarios" SET "encrypted_password" = $1, "updated_at" = $2 WHERE "usuarios"."id" = $3[0m  [["encrypted_password", "$2a$11$QIt5Y6GkMAVLGF.04dtBoedHLCsJxRCvzlr7KKS9yyO2YiA9MNF6y"], ["updated_at", "2018-04-25 23:42:14.972842"], ["id", 19]]
+  [1m[35m (182.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (232.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (233.0ms)[0m  [1m[32mINSERT INTO "titular_cuentas" ("usuario_id", "cuenta_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["usuario_id", 19], ["cuenta_id", 12339], ["created_at", "2018-04-25 23:42:16.209913"], ["updated_at", "2018-04-25 23:42:16.209913"]]
+  [1m[35m (221.0ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/?locale=es
+Completed 302 Found in 3848ms (ActiveRecord: 3530.2ms)
+
+
+Started GET "/?locale=es" for 127.0.0.1 at 2018-04-25 20:42:16 -0300
+Processing by PrincipalController#index as HTML
+  Parameters: {"locale"=>"es"}
+  [1m[36mUsuario Load (201.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering principal/index.html.erb within layouts/application
+  [1m[35m (214.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "usuarios"[0m
+  [1m[35m (185.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "titular_cuentas"[0m
+  [1m[35m (239.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "actividad_alumnos" WHERE (opcion=1 OR opcion=2)[0m
+  [1m[36mAlumno Load (251.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM ( cuentas INNER JOIN titular_cuentas ON cuentas.id=titular_cuentas.cuenta_id ) INNER JOIN cuenta_alumnos ON cuentas.id=cuenta_alumnos.cuenta_id WHERE titular_cuentas.usuario_id=1) OR id IN (SELECT padre_alumnos.alumno_id FROM padre_alumnos WHERE padre_alumnos.usuario_id=1)) ORDER BY "alumnos"."nombre" ASC[0m
+  Rendered principal/index.html.erb within layouts/application (915.1ms)
+  Rendered principal/_header.html.erb (3.0ms)
+Completed 200 OK in 1567ms (Views: 426.4ms | ActiveRecord: 1090.1ms)
+
+
+Started DELETE "/usuarios/sign_out?locale=es" for 127.0.0.1 at 2018-04-25 20:43:47 -0300
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"ochnGVC3NVabT4pGTnAn9bzLKPagza3rC1sOv1Q9akSXmlsFTv70hoFwdiZQeJT0RCEWGtqfdiKW+sVquXfaOQ==", "locale"=>"es"}
+  [1m[36mUsuario Load (267.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (288.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (392.0ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/?locale=es
+Completed 302 Found in 970ms (ActiveRecord: 947.1ms)
+
+
+Started GET "/?locale=es" for 127.0.0.1 at 2018-04-25 20:43:49 -0300
+Processing by PrincipalController#index as HTML
+  Parameters: {"locale"=>"es"}
+Completed 401 Unauthorized in 0ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/usuarios/sign_in" for 127.0.0.1 at 2018-04-25 20:43:49 -0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.0ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (13.0ms)
+  Rendered devise/_header.html.erb (3.0ms)
+Completed 200 OK in 494ms (Views: 489.6ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/usuarios/sign_in?locale=es" for 127.0.0.1 at 2018-04-25 20:44:31 -0300
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"paiyvVPJ/FrOg9rDhQOAYKZb0R5LK+9qAi4j4k7cbYYzE0p7yQohnM1IxG2ZyM40ZuUSbGCLIDKY9Ilbg2DuDA==", "usuario"=>{"cedula"=>"28155487", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Ingresar", "locale"=>"es"}
+  [1m[36mUsuario Load (204.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."cedula" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["cedula", 28155487], ["LIMIT", 1]]
+  [1m[35m (219.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (236.0ms)[0m  [1m[33mUPDATE "usuarios" SET "current_sign_in_at" = $1, "sign_in_count" = $2, "updated_at" = $3 WHERE "usuarios"."id" = $4[0m  [["current_sign_in_at", "2018-04-25 23:44:32.043039"], ["sign_in_count", 2], ["updated_at", "2018-04-25 23:44:32.267051"], ["id", 19]]
+  [1m[35m (220.0ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/?locale=es
+Completed 302 Found in 1314ms (ActiveRecord: 879.0ms)
+
+
+Started GET "/?locale=es" for 127.0.0.1 at 2018-04-25 20:44:32 -0300
+Processing by PrincipalController#index as HTML
+  Parameters: {"locale"=>"es"}
+  [1m[36mUsuario Load (222.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 19], ["LIMIT", 1]]
+  Rendering principal/index.html.erb within layouts/application
+  [1m[36mAlumno Load (227.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM ( cuentas INNER JOIN titular_cuentas ON cuentas.id=titular_cuentas.cuenta_id ) INNER JOIN cuenta_alumnos ON cuentas.id=cuenta_alumnos.cuenta_id WHERE titular_cuentas.usuario_id=19) OR id IN (SELECT padre_alumnos.alumno_id FROM padre_alumnos WHERE padre_alumnos.usuario_id=19)) ORDER BY "alumnos"."nombre" ASC[0m
+  [1m[36mActividadAlumno Load (213.0ms)[0m  [1m[34mSELECT  "actividad_alumnos".* FROM "actividad_alumnos" WHERE (alumno_id = 123392 AND actividad_id = 1) ORDER BY "actividad_alumnos"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mCuentaAlumno Load (236.0ms)[0m  [1m[34mSELECT  "cuenta_alumnos".* FROM "cuenta_alumnos" WHERE (alumno_id = 123392) ORDER BY "cuenta_alumnos"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mTitularCuenta Load (209.0ms)[0m  [1m[34mSELECT  "titular_cuentas".* FROM "titular_cuentas" WHERE (usuario_id = 19 AND cuenta_id = 12339) ORDER BY "titular_cuentas"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mActividadAlumno Load (214.0ms)[0m  [1m[34mSELECT  "actividad_alumnos".* FROM "actividad_alumnos" WHERE (alumno_id = 123391 AND actividad_id = 1) ORDER BY "actividad_alumnos"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  Rendered principal/index.html.erb within layouts/application (1892.1ms)
+  Rendered principal/_header.html.erb (3.0ms)
+Completed 200 OK in 2567ms (Views: 501.9ms | ActiveRecord: 2036.1ms)
+
+
+Started DELETE "/usuarios/sign_out?locale=es" for 127.0.0.1 at 2018-04-25 20:51:52 -0300
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"NG4qJe7xtY1ZoQa06JkrJ99cNt6Xw7zq6QjSGbRBBqAaqriZXocOKUiVfykhoMzHscZvWBwz58PiwgtXmDWSog==", "locale"=>"es"}
+  [1m[36mUsuario Load (283.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 19], ["LIMIT", 1]]
+  [1m[35m (255.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (178.0ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/?locale=es
+Completed 302 Found in 776ms (ActiveRecord: 716.0ms)
+
+
+Started GET "/?locale=es" for 127.0.0.1 at 2018-04-25 20:51:54 -0300
+Processing by PrincipalController#index as HTML
+  Parameters: {"locale"=>"es"}
+Completed 401 Unauthorized in 3ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/usuarios/sign_in" for 127.0.0.1 at 2018-04-25 20:51:55 -0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.0ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (13.0ms)
+  Rendered devise/_header.html.erb (2.0ms)
+Completed 200 OK in 575ms (Views: 571.5ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/usuarios/sign_in?locale=es" for 127.0.0.1 at 2018-04-25 20:51:58 -0300
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"pHMdgWwYK8bQKS7wMDZZ4esrHpiShLtPVm6fNO/Oa+gWaQCBseQtnApO61xGqPUMFuzpgvaD0eZE7vl1DNrj1g==", "usuario"=>{"cedula"=>"16", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Ingresar", "locale"=>"es"}
+  [1m[36mUsuario Load (223.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."cedula" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["cedula", 16], ["LIMIT", 1]]
+  [1m[35m (224.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (177.0ms)[0m  [1m[33mUPDATE "usuarios" SET "current_sign_in_at" = $1, "last_sign_in_at" = $2, "sign_in_count" = $3, "updated_at" = $4 WHERE "usuarios"."id" = $5[0m  [["current_sign_in_at", "2018-04-25 23:51:59.239705"], ["last_sign_in_at", "2018-04-25 23:40:08.361592"], ["sign_in_count", 69], ["updated_at", "2018-04-25 23:51:59.468718"], ["id", 1]]
+  [1m[35m (235.0ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/?locale=es
+Completed 302 Found in 1246ms (ActiveRecord: 859.0ms)
+
+
+Started GET "/?locale=es" for 127.0.0.1 at 2018-04-25 20:52:00 -0300
+Processing by PrincipalController#index as HTML
+  Parameters: {"locale"=>"es"}
+  [1m[36mUsuario Load (180.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering principal/index.html.erb within layouts/application
+  [1m[35m (277.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "usuarios"[0m
+  [1m[35m (260.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "titular_cuentas"[0m
+  [1m[35m (258.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "actividad_alumnos" WHERE (opcion=1 OR opcion=2)[0m
+  [1m[36mAlumno Load (1399.1ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM ( cuentas INNER JOIN titular_cuentas ON cuentas.id=titular_cuentas.cuenta_id ) INNER JOIN cuenta_alumnos ON cuentas.id=cuenta_alumnos.cuenta_id WHERE titular_cuentas.usuario_id=1) OR id IN (SELECT padre_alumnos.alumno_id FROM padre_alumnos WHERE padre_alumnos.usuario_id=1)) ORDER BY "alumnos"."nombre" ASC[0m
+  Rendered principal/index.html.erb within layouts/application (2431.1ms)
+  Rendered principal/_header.html.erb (4.0ms)
+Completed 200 OK in 3623ms (Views: 430.0ms | ActiveRecord: 3132.2ms)
+
+
+Started POST "/principal/asociar.usuario?locale=es" for 127.0.0.1 at 2018-04-25 20:52:08 -0300
+Processing by PrincipalController#asociar as 
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"wdFs68g7m1evKwbPD/HP18tkZ3PJBbeI5VaiQKZ6R+BJaVAztlFV2URHr+9VaAMrM+d5qfyBkC1yCuTBOoceXQ==", "usuario"=>{"cedula"=>"43457664", "alumno1"=>"", "alumno2"=>""}, "commit"=>"Asociar", "locale"=>"es"}
+  [1m[36mUsuario Load (175.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUsuario Load (256.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE (cedula = '43457664') ORDER BY "usuarios"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (261.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUsuario Exists (270.0ms)[0m  [1m[34mSELECT  1 AS one FROM "usuarios" WHERE "usuarios"."cedula" = $1 AND ("usuarios"."id" != $2) LIMIT $3[0m  [["cedula", 43457664], ["id", 47], ["LIMIT", 1]]
+  [1m[35mSQL (236.0ms)[0m  [1m[33mUPDATE "usuarios" SET "encrypted_password" = $1, "updated_at" = $2 WHERE "usuarios"."id" = $3[0m  [["encrypted_password", "$2a$11$tZzXYUq9Lh.KA9aqc1rG7.Pr70nYqlzQhyCtdY.X2UADNEm/ROpwu"], ["updated_at", "2018-04-25 23:52:10.072983"], ["id", 47]]
+  [1m[35m (223.0ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/?locale=es
+Completed 302 Found in 1664ms (ActiveRecord: 1421.1ms)
+
+
+Started GET "/?locale=es" for 127.0.0.1 at 2018-04-25 20:52:10 -0300
+Processing by PrincipalController#index as HTML
+  Parameters: {"locale"=>"es"}
+  [1m[36mUsuario Load (207.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering principal/index.html.erb within layouts/application
+  [1m[35m (276.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "usuarios"[0m
+  [1m[35m (204.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "titular_cuentas"[0m
+  [1m[35m (844.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "actividad_alumnos" WHERE (opcion=1 OR opcion=2)[0m
+  [1m[36mAlumno Load (303.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM ( cuentas INNER JOIN titular_cuentas ON cuentas.id=titular_cuentas.cuenta_id ) INNER JOIN cuenta_alumnos ON cuentas.id=cuenta_alumnos.cuenta_id WHERE titular_cuentas.usuario_id=1) OR id IN (SELECT padre_alumnos.alumno_id FROM padre_alumnos WHERE padre_alumnos.usuario_id=1)) ORDER BY "alumnos"."nombre" ASC[0m
+  Rendered principal/index.html.erb within layouts/application (1680.1ms)
+  Rendered principal/_header.html.erb (4.0ms)
+Completed 200 OK in 2307ms (Views: 450.1ms | ActiveRecord: 1834.1ms)
+
+
+Started GET "/?locale=es" for 127.0.0.1 at 2018-04-25 20:56:14 -0300
+Processing by PrincipalController#index as HTML
+  Parameters: {"locale"=>"es"}
+  [1m[36mUsuario Load (178.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering principal/index.html.erb within layouts/application
+  [1m[35m (194.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "usuarios"[0m
+  [1m[35m (211.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "titular_cuentas"[0m
+  [1m[35m (174.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "actividad_alumnos" WHERE (opcion=1 OR opcion=2)[0m
+  [1m[36mAlumno Load (211.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM ( cuentas INNER JOIN titular_cuentas ON cuentas.id=titular_cuentas.cuenta_id ) INNER JOIN cuenta_alumnos ON cuentas.id=cuenta_alumnos.cuenta_id WHERE titular_cuentas.usuario_id=1) OR id IN (SELECT padre_alumnos.alumno_id FROM padre_alumnos WHERE padre_alumnos.usuario_id=1)) ORDER BY "alumnos"."nombre" ASC[0m
+  Rendered principal/index.html.erb within layouts/application (815.0ms)
+  Rendered principal/_header.html.erb (3.0ms)
+Completed 200 OK in 1440ms (Views: 437.9ms | ActiveRecord: 968.1ms)
+
+
+Started GET "/?locale=es" for 127.0.0.1 at 2018-04-25 21:16:31 -0300
+Processing by PrincipalController#index as HTML
+  Parameters: {"locale"=>"es"}
+  [1m[36mUsuario Load (215.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering principal/index.html.erb within layouts/application
+  [1m[35m (210.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "usuarios"[0m
+  [1m[35m (203.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "titular_cuentas"[0m
+  [1m[35m (222.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "actividad_alumnos" WHERE (opcion=1 OR opcion=2)[0m
+  [1m[36mAlumno Load (220.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM ( cuentas INNER JOIN titular_cuentas ON cuentas.id=titular_cuentas.cuenta_id ) INNER JOIN cuenta_alumnos ON cuentas.id=cuenta_alumnos.cuenta_id WHERE titular_cuentas.usuario_id=1) OR id IN (SELECT padre_alumnos.alumno_id FROM padre_alumnos WHERE padre_alumnos.usuario_id=1)) ORDER BY "alumnos"."nombre" ASC[0m
+  Rendered principal/index.html.erb within layouts/application (878.1ms)
+  Rendered principal/_header.html.erb (3.0ms)
+Completed 200 OK in 1525ms (Views: 427.3ms | ActiveRecord: 1070.1ms)
+
+
+Started DELETE "/usuarios/sign_out?locale=es" for 127.0.0.1 at 2018-04-25 21:24:20 -0300
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"OMkqDf1NWdqZ8xWbnN+69zVstyLPZoOAgfXgO+10FHKwcRbVgyeXVHKfvLvGRnYLze+p+PripCUWqaa6cYlNzw==", "locale"=>"es"}
+  [1m[36mUsuario Load (295.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (300.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (270.0ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/?locale=es
+Completed 302 Found in 884ms (ActiveRecord: 865.0ms)
+
+
+Started GET "/?locale=es" for 127.0.0.1 at 2018-04-25 21:24:21 -0300
+Processing by PrincipalController#index as HTML
+  Parameters: {"locale"=>"es"}
+Completed 401 Unauthorized in 2ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/usuarios/sign_in" for 127.0.0.1 at 2018-04-25 21:24:22 -0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.0ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (15.0ms)
+  Rendered devise/_header.html.erb (7.0ms)
+Completed 200 OK in 561ms (Views: 558.1ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/usuarios/sign_in?locale=es" for 127.0.0.1 at 2018-04-25 21:28:11 -0300
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"/DsQ0B1G65Y3htgeKd5+mDuG3dVQh1doe3f5oZ2TFTTlN+bMRsy78h6i3n11+O62eIBuIxmV942CejFoUsD6Aw==", "usuario"=>{"cedula"=>"16", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Ingresar", "locale"=>"es"}
+  [1m[36mUsuario Load (180.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."cedula" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["cedula", 16], ["LIMIT", 1]]
+  [1m[35m (194.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (217.0ms)[0m  [1m[33mUPDATE "usuarios" SET "current_sign_in_at" = $1, "last_sign_in_at" = $2, "sign_in_count" = $3, "updated_at" = $4 WHERE "usuarios"."id" = $5[0m  [["current_sign_in_at", "2018-04-26 00:28:13.350361"], ["last_sign_in_at", "2018-04-25 23:51:59.239705"], ["sign_in_count", 70], ["updated_at", "2018-04-26 00:28:13.550372"], ["id", 1]]
+  [1m[35m (181.0ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/?locale=es
+Completed 302 Found in 1739ms (ActiveRecord: 1332.1ms)
+
+
+Started GET "/?locale=es" for 127.0.0.1 at 2018-04-25 21:28:14 -0300
+Processing by PrincipalController#index as HTML
+  Parameters: {"locale"=>"es"}
+  [1m[36mUsuario Load (177.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering principal/index.html.erb within layouts/application
+  [1m[35m (174.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "usuarios"[0m
+  [1m[35m (176.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "titular_cuentas"[0m
+  [1m[35m (177.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "actividad_alumnos" WHERE (opcion=1 OR opcion=2)[0m
+  [1m[36mAlumno Load (183.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM ( cuentas INNER JOIN titular_cuentas ON cuentas.id=titular_cuentas.cuenta_id ) INNER JOIN cuenta_alumnos ON cuentas.id=cuenta_alumnos.cuenta_id WHERE titular_cuentas.usuario_id=1) OR id IN (SELECT padre_alumnos.alumno_id FROM padre_alumnos WHERE padre_alumnos.usuario_id=1)) ORDER BY "alumnos"."nombre" ASC[0m
+  Rendered principal/index.html.erb within layouts/application (1096.1ms)
+  Rendered principal/_header.html.erb (5.0ms)
+Completed 200 OK in 2334ms (Views: 490.8ms | ActiveRecord: 1797.1ms)
+
+
+Started POST "/principal/asociar.usuario?locale=es" for 127.0.0.1 at 2018-04-25 21:28:56 -0300
+Processing by PrincipalController#asociar as 
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"rS1LKur0xdzuzMGWMio1M11GvRyykR+p6qUZUZHTe94tt1C4X0wLqnpKf4u8NVTLoywQ39Q/F9EG/yOBeiVIfw==", "usuario"=>{"cedula"=>"16836326", "alumno1"=>"11362", "alumno2"=>"0"}, "commit"=>"Asociar", "locale"=>"es"}
+  [1m[36mUsuario Load (325.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUsuario Load (875.1ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE (cedula = '16836326') ORDER BY "usuarios"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (231.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUsuario Exists (212.0ms)[0m  [1m[34mSELECT  1 AS one FROM "usuarios" WHERE "usuarios"."cedula" = $1 AND ("usuarios"."id" != $2) LIMIT $3[0m  [["cedula", 16836326], ["id", 48], ["LIMIT", 1]]
+  [1m[35mSQL (211.0ms)[0m  [1m[33mUPDATE "usuarios" SET "encrypted_password" = $1, "updated_at" = $2 WHERE "usuarios"."id" = $3[0m  [["encrypted_password", "$2a$11$PyedPiBFRIgHdG8oelJ4LeeC908b8vnHyVfGsRaZJ/nIVMMblaQuu"], ["updated_at", "2018-04-26 00:28:58.637994"], ["id", 48]]
+  [1m[35m (203.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCuentaAlumno Load (217.0ms)[0m  [1m[34mSELECT "cuenta_alumnos".* FROM "cuenta_alumnos" WHERE (cuenta_id = 11362)[0m
+  [1m[35m (225.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (220.0ms)[0m  [1m[32mINSERT INTO "padre_alumnos" ("usuario_id", "alumno_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["usuario_id", 48], ["alumno_id", 113622], ["created_at", "2018-04-26 00:29:00.462098"], ["updated_at", "2018-04-26 00:29:00.462098"]]
+  [1m[35m (209.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (207.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (216.0ms)[0m  [1m[32mINSERT INTO "padre_alumnos" ("usuario_id", "alumno_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["usuario_id", 48], ["alumno_id", 113621], ["created_at", "2018-04-26 00:29:01.110135"], ["updated_at", "2018-04-26 00:29:01.110135"]]
+  [1m[35m (212.0ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/?locale=es
+Completed 302 Found in 4762ms (ActiveRecord: 4461.3ms)
+
+
+Started GET "/?locale=es" for 127.0.0.1 at 2018-04-25 21:29:01 -0300
+Processing by PrincipalController#index as HTML
+  Parameters: {"locale"=>"es"}
+  [1m[36mUsuario Load (212.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering principal/index.html.erb within layouts/application
+  [1m[35m (212.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "usuarios"[0m
+  [1m[35m (220.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "titular_cuentas"[0m
+  [1m[35m (216.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "actividad_alumnos" WHERE (opcion=1 OR opcion=2)[0m
+  [1m[36mAlumno Load (205.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM ( cuentas INNER JOIN titular_cuentas ON cuentas.id=titular_cuentas.cuenta_id ) INNER JOIN cuenta_alumnos ON cuentas.id=cuenta_alumnos.cuenta_id WHERE titular_cuentas.usuario_id=1) OR id IN (SELECT padre_alumnos.alumno_id FROM padre_alumnos WHERE padre_alumnos.usuario_id=1)) ORDER BY "alumnos"."nombre" ASC[0m
+  Rendered principal/index.html.erb within layouts/application (875.1ms)
+  Rendered principal/_header.html.erb (3.0ms)
+Completed 200 OK in 1522ms (Views: 435.3ms | ActiveRecord: 1065.1ms)
+
+
+Started DELETE "/usuarios/sign_out?locale=es" for 127.0.0.1 at 2018-04-25 21:29:40 -0300
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"6l+85p+p0TjIRpwOub824yvK3n8Hix4h/hYv3WPTUwtqxad0KhEfTlzAIhM3oFcb1aBzvGElFlkSTBUNiCVgqg==", "locale"=>"es"}
+  [1m[36mUsuario Load (207.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (180.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (234.0ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/?locale=es
+Completed 302 Found in 636ms (ActiveRecord: 621.0ms)
+
+
+Started GET "/?locale=es" for 127.0.0.1 at 2018-04-25 21:29:41 -0300
+Processing by PrincipalController#index as HTML
+  Parameters: {"locale"=>"es"}
+Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/usuarios/sign_in" for 127.0.0.1 at 2018-04-25 21:29:41 -0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.0ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (13.0ms)
+  Rendered devise/_header.html.erb (3.0ms)
+Completed 200 OK in 466ms (Views: 465.1ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/usuarios/sign_in?locale=es" for 127.0.0.1 at 2018-04-25 21:29:50 -0300
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"jCr+Q7JLbkGsKbkmTspCvqJ6METjHEadv4I/ep+Z7MFcaUpGRBWQh5+SvHFqsgKfDeXL1nSo1yaVQJj2KsO1cA==", "usuario"=>{"cedula"=>"16836326", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Ingresar", "locale"=>"es"}
+  [1m[36mUsuario Load (193.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."cedula" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["cedula", 16836326], ["LIMIT", 1]]
+  [1m[35m (213.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (223.0ms)[0m  [1m[33mUPDATE "usuarios" SET "current_sign_in_at" = $1, "last_sign_in_at" = $2, "current_sign_in_ip" = $3, "last_sign_in_ip" = $4, "sign_in_count" = $5, "updated_at" = $6 WHERE "usuarios"."id" = $7[0m  [["current_sign_in_at", "2018-04-26 00:29:51.009321"], ["last_sign_in_at", "2018-04-26 00:29:51.009321"], ["current_sign_in_ip", "127.0.0.1/32"], ["last_sign_in_ip", "127.0.0.1/32"], ["sign_in_count", 1], ["updated_at", "2018-04-26 00:29:51.226333"], ["id", 48]]
+  [1m[35m (226.0ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/?locale=es
+Completed 302 Found in 1253ms (ActiveRecord: 855.0ms)
+
+
+Started GET "/?locale=es" for 127.0.0.1 at 2018-04-25 21:29:51 -0300
+Processing by PrincipalController#index as HTML
+  Parameters: {"locale"=>"es"}
+  [1m[36mUsuario Load (220.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 48], ["LIMIT", 1]]
+  Rendering principal/index.html.erb within layouts/application
+  [1m[36mAlumno Load (235.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM ( cuentas INNER JOIN titular_cuentas ON cuentas.id=titular_cuentas.cuenta_id ) INNER JOIN cuenta_alumnos ON cuentas.id=cuenta_alumnos.cuenta_id WHERE titular_cuentas.usuario_id=48) OR id IN (SELECT padre_alumnos.alumno_id FROM padre_alumnos WHERE padre_alumnos.usuario_id=48)) ORDER BY "alumnos"."nombre" ASC[0m
+  [1m[36mActividadAlumno Load (224.0ms)[0m  [1m[34mSELECT  "actividad_alumnos".* FROM "actividad_alumnos" WHERE (alumno_id = 113621 AND actividad_id = 1) ORDER BY "actividad_alumnos"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mActividadAlumno Load (244.0ms)[0m  [1m[34mSELECT  "actividad_alumnos".* FROM "actividad_alumnos" WHERE (alumno_id = 113622 AND actividad_id = 1) ORDER BY "actividad_alumnos"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mCuentaAlumno Load (205.0ms)[0m  [1m[34mSELECT  "cuenta_alumnos".* FROM "cuenta_alumnos" WHERE (alumno_id = 113622) ORDER BY "cuenta_alumnos"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mTitularCuenta Load (303.0ms)[0m  [1m[34mSELECT  "titular_cuentas".* FROM "titular_cuentas" WHERE (usuario_id = 48 AND cuenta_id = 11362) ORDER BY "titular_cuentas"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  Rendered principal/index.html.erb within layouts/application (1700.1ms)
+  Rendered principal/_header.html.erb (3.0ms)
+Completed 200 OK in 2343ms (Views: 443.0ms | ActiveRecord: 1883.1ms)
+
+
+Started DELETE "/usuarios/sign_out?locale=es" for 127.0.0.1 at 2018-04-25 21:32:25 -0300
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"I8l6SxZXRNVTjjrfNnnpujq806FsH7Bd72LMB81LcQH7bBJvaCQWagxUoj5E0zr9NiUu3y69c5AarDyAkW/TqA==", "locale"=>"es"}
+  [1m[36mUsuario Load (247.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 48], ["LIMIT", 1]]
+  [1m[35m (277.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (211.0ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/?locale=es
+Completed 302 Found in 755ms (ActiveRecord: 735.0ms)
+
+
+Started GET "/?locale=es" for 127.0.0.1 at 2018-04-25 21:32:26 -0300
+Processing by PrincipalController#index as HTML
+  Parameters: {"locale"=>"es"}
+Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/usuarios/sign_in" for 127.0.0.1 at 2018-04-25 21:32:27 -0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (2.0ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (15.0ms)
+  Rendered devise/_header.html.erb (3.0ms)
+Completed 200 OK in 663ms (Views: 658.6ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/usuarios/sign_in?locale=es" for 127.0.0.1 at 2018-04-25 21:34:42 -0300
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"J+1GUCuMKpNOOZvZQh3+4b80VbcntHvCxDjKvW+dQguiQXJ8i/brmnMxlfGzhAJkGsxyTYc5USJIy/90rhGYhw==", "usuario"=>{"cedula"=>"16", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Ingresar", "locale"=>"es"}
+  [1m[36mUsuario Load (232.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."cedula" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["cedula", 16], ["LIMIT", 1]]
+  [1m[35m (211.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (212.0ms)[0m  [1m[33mUPDATE "usuarios" SET "current_sign_in_at" = $1, "last_sign_in_at" = $2, "sign_in_count" = $3, "updated_at" = $4 WHERE "usuarios"."id" = $5[0m  [["current_sign_in_at", "2018-04-26 00:34:43.646001"], ["last_sign_in_at", "2018-04-26 00:28:13.350361"], ["sign_in_count", 71], ["updated_at", "2018-04-26 00:34:43.862014"], ["id", 1]]
+  [1m[35m (208.0ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/?locale=es
+Completed 302 Found in 1257ms (ActiveRecord: 863.0ms)
+
+
+Started GET "/?locale=es" for 127.0.0.1 at 2018-04-25 21:34:44 -0300
+Processing by PrincipalController#index as HTML
+  Parameters: {"locale"=>"es"}
+  [1m[36mUsuario Load (243.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering principal/index.html.erb within layouts/application
+  [1m[35m (203.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "usuarios"[0m
+  [1m[35m (175.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "titular_cuentas"[0m
+  [1m[35m (212.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "actividad_alumnos" WHERE (opcion=1 OR opcion=2)[0m
+  [1m[36mAlumno Load (182.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM ( cuentas INNER JOIN titular_cuentas ON cuentas.id=titular_cuentas.cuenta_id ) INNER JOIN cuenta_alumnos ON cuentas.id=cuenta_alumnos.cuenta_id WHERE titular_cuentas.usuario_id=1) OR id IN (SELECT padre_alumnos.alumno_id FROM padre_alumnos WHERE padre_alumnos.usuario_id=1)) ORDER BY "alumnos"."nombre" ASC[0m
+  Rendered principal/index.html.erb within layouts/application (798.0ms)
+  Rendered principal/_header.html.erb (4.0ms)
+Completed 200 OK in 1464ms (Views: 434.2ms | ActiveRecord: 1015.1ms)
+
+
+Started GET "/?locale=es" for 127.0.0.1 at 2018-04-25 21:37:35 -0300
+Processing by PrincipalController#index as HTML
+  Parameters: {"locale"=>"es"}
+  [1m[36mUsuario Load (233.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering principal/index.html.erb within layouts/application
+  [1m[35m (255.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "usuarios"[0m
+  [1m[35m (181.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "titular_cuentas"[0m
+  [1m[35m (185.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "actividad_alumnos" WHERE (opcion=1 OR opcion=2)[0m
+  [1m[36mAlumno Load (202.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM ( cuentas INNER JOIN titular_cuentas ON cuentas.id=titular_cuentas.cuenta_id ) INNER JOIN cuenta_alumnos ON cuentas.id=cuenta_alumnos.cuenta_id WHERE titular_cuentas.usuario_id=1) OR id IN (SELECT padre_alumnos.alumno_id FROM padre_alumnos WHERE padre_alumnos.usuario_id=1)) ORDER BY "alumnos"."nombre" ASC[0m
+  Rendered principal/index.html.erb within layouts/application (848.0ms)
+  Rendered principal/_header.html.erb (3.0ms)
+Completed 200 OK in 1557ms (Views: 466.7ms | ActiveRecord: 1056.1ms)
+
+
+Started DELETE "/usuarios/sign_out?locale=es" for 127.0.0.1 at 2018-04-25 21:41:39 -0300
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"OEeY+755K3+4to7jteNgo1VkkAJIdzfBz353+3Y8LD8ZWDN10B5VjkJDjK1tH7RBskVMPxCJ6/lhYvcaTLWXDQ==", "locale"=>"es"}
+  [1m[36mUsuario Load (198.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (189.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (200.0ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/?locale=es
+Completed 302 Found in 609ms (ActiveRecord: 587.0ms)
+
+
+Started GET "/?locale=es" for 127.0.0.1 at 2018-04-25 21:41:40 -0300
+Processing by PrincipalController#index as HTML
+  Parameters: {"locale"=>"es"}
+Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/usuarios/sign_in" for 127.0.0.1 at 2018-04-25 21:41:40 -0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.0ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (14.0ms)
+  Rendered devise/_header.html.erb (3.0ms)
+Completed 200 OK in 514ms (Views: 510.1ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/usuarios/sign_in?locale=es" for 127.0.0.1 at 2018-04-25 21:41:53 -0300
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"z+7x+HEPi0xhJnRPWd/tlEcA14DRDKKH0uBdzdfPtgCtf4p1vWXKHhnCubJbaq5q31/cSKfZOpLlfccPCVh51A==", "usuario"=>{"cedula"=>"16836326", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Ingresar", "locale"=>"es"}
+  [1m[36mUsuario Load (283.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."cedula" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["cedula", 16836326], ["LIMIT", 1]]
+  [1m[35m (173.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (265.0ms)[0m  [1m[33mUPDATE "usuarios" SET "current_sign_in_at" = $1, "sign_in_count" = $2, "updated_at" = $3 WHERE "usuarios"."id" = $4[0m  [["current_sign_in_at", "2018-04-26 00:41:54.423710"], ["sign_in_count", 2], ["updated_at", "2018-04-26 00:41:54.602721"], ["id", 48]]
+  [1m[35m (253.0ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/?locale=es
+Completed 302 Found in 1414ms (ActiveRecord: 974.1ms)
+
+
+Started GET "/?locale=es" for 127.0.0.1 at 2018-04-25 21:41:55 -0300
+Processing by PrincipalController#index as HTML
+  Parameters: {"locale"=>"es"}
+  [1m[36mUsuario Load (309.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 48], ["LIMIT", 1]]
+  Rendering principal/index.html.erb within layouts/application
+  [1m[36mAlumno Load (222.0ms)[0m  [1m[34mSELECT "alumnos".* FROM "alumnos" WHERE (id IN (SELECT cuenta_alumnos.alumno_id FROM ( cuentas INNER JOIN titular_cuentas ON cuentas.id=titular_cuentas.cuenta_id ) INNER JOIN cuenta_alumnos ON cuentas.id=cuenta_alumnos.cuenta_id WHERE titular_cuentas.usuario_id=48) OR id IN (SELECT padre_alumnos.alumno_id FROM padre_alumnos WHERE padre_alumnos.usuario_id=48)) ORDER BY "alumnos"."nombre" ASC[0m
+  [1m[36mActividadAlumno Load (222.0ms)[0m  [1m[34mSELECT  "actividad_alumnos".* FROM "actividad_alumnos" WHERE (alumno_id = 113621 AND actividad_id = 1) ORDER BY "actividad_alumnos"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mActividadAlumno Load (267.0ms)[0m  [1m[34mSELECT  "actividad_alumnos".* FROM "actividad_alumnos" WHERE (alumno_id = 113622 AND actividad_id = 1) ORDER BY "actividad_alumnos"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mCuentaAlumno Load (250.0ms)[0m  [1m[34mSELECT  "cuenta_alumnos".* FROM "cuenta_alumnos" WHERE (alumno_id = 113622) ORDER BY "cuenta_alumnos"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mTitularCuenta Load (208.0ms)[0m  [1m[34mSELECT  "titular_cuentas".* FROM "titular_cuentas" WHERE (usuario_id = 48 AND cuenta_id = 11362) ORDER BY "titular_cuentas"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  Rendered principal/index.html.erb within layouts/application (1201.1ms)
+  Rendered principal/_header.html.erb (3.0ms)
+Completed 200 OK in 1966ms (Views: 455.3ms | ActiveRecord: 1478.1ms)
+
+
+Started DELETE "/usuarios/sign_out?locale=es" for 127.0.0.1 at 2018-04-25 21:42:16 -0300
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"x5d4IDtx+fo9HptawIdi9wxZESCajZQzMkNEk3mvu1oy+INxB5T43Fcs2I8PMUAhetw5SEV3YP/3wkPcg1Gudw==", "locale"=>"es"}
+  [1m[36mUsuario Load (204.0ms)[0m  [1m[34mSELECT  "usuarios".* FROM "usuarios" WHERE "usuarios"."id" = $1 ORDER BY "usuarios"."id" ASC LIMIT $2[0m  [["id", 48], ["LIMIT", 1]]
+  [1m[35m (198.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (214.0ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/?locale=es
+Completed 302 Found in 635ms (ActiveRecord: 616.0ms)
+
+
+Started GET "/?locale=es" for 127.0.0.1 at 2018-04-25 21:42:17 -0300
+Processing by PrincipalController#index as HTML
+  Parameters: {"locale"=>"es"}
+Completed 401 Unauthorized in 2ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/usuarios/sign_in" for 127.0.0.1 at 2018-04-25 21:42:18 -0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.0ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (13.0ms)
+  Rendered devise/_header.html.erb (3.0ms)
+Completed 200 OK in 528ms (Views: 524.7ms | ActiveRecord: 0.0ms)
+
+

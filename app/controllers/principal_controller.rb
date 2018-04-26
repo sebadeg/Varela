@@ -68,14 +68,14 @@ class PrincipalController < ApplicationController
       password =  Digest::MD5.hexdigest(params[:usuario][:cedula] + DateTime.now.strftime('%Y%m%d%H%M%S'))[0..7]
       p password
       @usuario.update( password: password, password_confirmation: password );
-      if ( @usuario.alumno2 == "1")
+      if ( params[:usuario][:alumno2] == "1")
         TitularCuenta.create(usuario_id: @usuario.id, cuenta_id: params[:usuario][:alumno1].to_i)
       else
         CuentaAlumno.where( ["cuenta_id = ?", params[:usuario][:alumno1].to_i ]).each do |e|
           PadreAlumno.create(usuario_id: @usuario.id, alumno_id: e.alumno_id )
         end
-      end        
-    end
-    
+      end
+    end        
+    redirect_to root_path
   end
 end
