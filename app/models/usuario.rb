@@ -37,4 +37,8 @@ class Usuario < ApplicationRecord
       errors.add(:cedula, "con dígito verificador mal")
     end
   end
+
+
+
 end
+

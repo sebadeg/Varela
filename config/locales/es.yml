@@ -36,6 +36,10 @@ es:
         forgot_your_password: "Olvidé mi contraseña"
         sign_up: "Registrarse"
         sign_in: "Ingresar"
+    mailer:
+      reset_password_instructions:
+        greeting:
+          "Estimado/a %{recipient}:"
 
   time:
     formats:
