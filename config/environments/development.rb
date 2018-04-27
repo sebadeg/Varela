@@ -29,7 +29,7 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   # SMTP settings for gmail
   config.action_mailer.smtp_settings = {
-   :address              => "smtp.varela.edu.uy",
+   :address              => "190.64.88.149", #"smtp.varela.edu.uy",
    :port                 => 587,
    :domain               => "varela.edu.uy", 
    :user_name            => "soporte@varela.edu.uy",
