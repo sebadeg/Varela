@@ -10,7 +10,7 @@
       <%= stylesheet_link_tag "application", :media => "all", 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
-    <%= favicon_link_tag 'favicon.ico' %>
+    <%= favicon_link_tag 'logo.ico' %>
 
     <!-- For third-generation iPad with high-resolution Retina display: -->
     <!-- Size should be 144 x 144 pixels -->
