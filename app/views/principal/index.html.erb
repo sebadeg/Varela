@@ -73,12 +73,12 @@
 										</div>										
 										<div id="collapseu1" class="panel-collapse collapse collapse in">
 											<div class="col-md-12 col-sm-12 col-xs-12 content-table">
-												<% if false %>
-												<% @act = ActividadAlumno.where(['alumno_id = ? AND actividad_id = ?',t.id,1]).first rescue nil %>
+												
+												<% @act = ActividadAlumno.where(['alumno_id = ? AND actividad_id = ?',t.id,3]).first rescue nil %>
 												<% if (@act != nil) %>
 												    <br>
 												    <div id="textoRegistrarse">
-												    	<%= link_to 'Descargar información del campamento', principal_download_pdf_url %>
+												    	<p><%= p 'Actividad de campamento' %></p>
 												    </div>
 												    <% @cuenta = CuentaAlumno.where(['alumno_id = ?',t.id]).first rescue nil %>
 												    <% @titular = TitularCuenta.where(['usuario_id = ? AND cuenta_id = ?',current_usuario.id,@cuenta.cuenta_id]).first rescue nil %>
@@ -87,16 +87,14 @@
 
 															<div id="textoRegistrarse">
 														    <% if @act.opcion == 1 %>
-														    	<b><%= p "Está autorizado el débito contado de $U 5650" %></b>
-														    <% elsif  @act.opcion == 2 %>
-														    	<b><%= p "Está autorizado el débito en 5 cuotas de $U 1200" %></b>
+														    	<b><%= p "Está autorizado el débito de $U 170" %></b>
 														    <% else %>
 														    	<%= f.label "No está autorizado" %>
 														    <% end %>
 															<br><br>
 												            <%= f.hidden_field :alumno_id, value: t.id %>
-												            <%= f.hidden_field :actividad_id, value: 1 %>
-															<%= f.select :opcion, options_for_select([["No autorizo", 0], ["Autorizo a debitar contado de $U 5650", 1], ["Autorizo a debitar en 5 cuotas de $U 1200", 2]], @act.opcion)  %><br><br>
+												            <%= f.hidden_field :actividad_id, value: 3 %>
+															<%= f.select :opcion, options_for_select([["No autorizo", 0], ["Autorizo a debitar  $U 170", 1]], @act.opcion)  %><br><br>
 												            <%= f.submit "Confirmar"  %>
 															</div>
 
@@ -104,7 +102,7 @@
 														<br>
 													<% end %>
 												<% end %>
-												<% end %>
+												
 
 
 											</div>
