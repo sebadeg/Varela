@@ -95,7 +95,7 @@
 
 						<% arreglo = Array.new %>
 						<% ActividadOpcion.where(["actividad_id = ?",a.actividad_id]).each do |s| %>
-							<% arreglo.push( [s.eleccion,s.valor] ) %>
+							<% arreglo.push( [s.opcion,s.valor] ) %>
 						<% end %>
 
 						<% if arreglo.count > 0 %>
