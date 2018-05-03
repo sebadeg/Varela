@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get 'principal/index'
   
   get 'principal/registrado'
-  get 'principal/download_pdf'
+  post 'principal/download_pdf'
   post 'principal/autorizar'
 
   post 'principal/asociar'

@@ -1,6 +1,7 @@
 class PrincipalController < ApplicationController
 
   def index
+    @x = Actividad.new()
     @usuario = Usuario.new()
     @actividad = ActividadAlumno.new()
 
@@ -23,10 +24,10 @@ class PrincipalController < ApplicationController
     end
   end
 
-    def download_pdf
+  def download_pdf
     send_file(
-      "#{Rails.root}/data/Carta Familias 1o Secundaria Campamento 2018.pdf",
-      filename: "Carta Familias 1o Secundaria Campamento 2018.pdf",
+      "#{Rails.root}/data/" + params[:actividad][:archivo],
+      filename: params[:actividad][:archivo],
       type: "application/pdf"
     )
   end

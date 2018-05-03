@@ -74,34 +74,45 @@
 										<div id="collapseu1" class="panel-collapse collapse collapse in">
 											<div class="col-md-12 col-sm-12 col-xs-12 content-table">
 												
-												<% @act = ActividadAlumno.where(['alumno_id = ? AND actividad_id = ?',t.id,3]).first rescue nil %>
-												<% if (@act != nil) %>
-												    <br>
-												    <div id="textoRegistrarse">
-												    	<p><%= p 'Actividad de campamento' %></p>
-												    </div>
-												    <% @cuenta = CuentaAlumno.where(['alumno_id = ?',t.id]).first rescue nil %>
-												    <% @titular = TitularCuenta.where(['usuario_id = ? AND cuenta_id = ?',current_usuario.id,@cuenta.cuenta_id]).first rescue nil %>
-												    <% if @titular != nil %>
-														<%= form_for(@actividad, as: :actividad_alumno, url: principal_autorizar_path(:actividad)) do |f| %>
+		<% @act = ActividadAlumno.where(['alumno_id = ?',t.id]) %>
+		<% if (@act != nil) %>
+			<% @act.each do |a| %>
+				<% @actividad = Actividad.find(a.actividad_id) rescue nil %>
+				<% if @actividad != nil && (@actividad.fecha == nil || @actividad.fecha >= DateTime.now ) %>
+				    <br>
+					
+					<%= form_for(@x, as: :actividad, url: principal_download_pdf_path(:actividad)) do |f| %>
+			           <%= f.hidden_field :archivo, value: @actividad.archivo %>
+					    <div id="textoRegistrarse">
+					    	<p><%= p @actividad.descripcion+"  " %></p>
+					    </div>
+					    <%= f.submit "Descargar"  %>
+					<% end %>
 
-															<div id="textoRegistrarse">
-														    <% if @act.opcion == 1 %>
-														    	<b><%= p "Está autorizado el débito de $U 170" %></b>
-														    <% else %>
-														    	<%= f.label "No está autorizado" %>
-														    <% end %>
-															<br><br>
-												            <%= f.hidden_field :alumno_id, value: t.id %>
-												            <%= f.hidden_field :actividad_id, value: 3 %>
-															<%= f.select :opcion, options_for_select([["No autorizo", 0], ["Autorizo a debitar  $U 170", 1]], @act.opcion)  %><br><br>
-												            <%= f.submit "Confirmar"  %>
-															</div>
+				    <% @cuenta = CuentaAlumno.where(['alumno_id = ?',t.id]).first rescue nil %>
+				    <% @titular = TitularCuenta.where(['usuario_id = ? AND cuenta_id = ?',current_usuario.id,@cuenta.cuenta_id]).first rescue nil %>
+				    <% if @titular != nil %>
+						<%= form_for(@actividad, as: :actividad_alumno, url: principal_autorizar_path(:actividad)) do |f| %>
 
-														<% end %>													
-														<br>
-													<% end %>
-												<% end %>
+							<div id="textoRegistrarse">
+						    <% if @act.opcion == 1 %>
+						    	<b><%= p "Está autorizado el débito de $U 170" %></b>
+						    <% else %>
+						    	<%= f.label "No está autorizado" %>
+						    <% end %>
+							<br><br>
+				            <%= f.hidden_field :alumno_id, value: t.id %>
+				            <%= f.hidden_field :actividad_id, value: 3 %>
+							<%= f.select :opcion, options_for_select([["No autorizo", 0], ["Autorizo a debitar  $U 170", 1]], @act.opcion)  %><br><br>
+				            <%= f.submit "Confirmar"  %>
+							</div>
+
+						<% end %>													
+						<br>
+					<% end %>
+				<% end %>
+			<% end %>
+		<% end %>
 												
 
 
