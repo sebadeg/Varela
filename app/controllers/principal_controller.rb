@@ -2,6 +2,7 @@ class PrincipalController < ApplicationController
 
   def index
     @x = Actividad.new()
+    @y = ActividadAlumno.new()
     @usuario = Usuario.new()
     @actividad = ActividadAlumno.new()
 
@@ -25,6 +26,8 @@ class PrincipalController < ApplicationController
   end
 
   def download_pdf
+
+    p params[:actividad][:archivo]
     send_file(
       "#{Rails.root}/data/" + params[:actividad][:archivo],
       filename: params[:actividad][:archivo],
