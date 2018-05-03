@@ -85,40 +85,43 @@
 			           <%= f.hidden_field :archivo, value: @actividad.archivo %>
 					    <div id="textoRegistrarse">
 
-							<b><%= link_to "Descargar información de: " + @actividad.descripcion, "", :onclick => "$('#form_download_" + a.actividad_id.to_s + "').submit()" %></b>
+							<b><%= link_to "Descargar información: " + @actividad.descripcion, "", :onclick => "$('#form_download_" + a.actividad_id.to_s + "').submit()" %></b>
 					    </div>
 					<% end %>
 
 				    <% @cuenta = CuentaAlumno.where(['alumno_id = ?',t.id]).first rescue nil %>
 				    <% @titular = TitularCuenta.where(['usuario_id = ? AND cuenta_id = ?',current_usuario.id,@cuenta.cuenta_id]).first rescue nil %>
 				    <% if @titular != nil %>
-						<%= form_for(@y, as: :actividad_alumno, url: principal_autorizar_path(:actividad)) do |f| %>
 
-							<div id="textoRegistrarse">							
-							<% p a.actividad_id %>
-							<% p a.opcion %>
+						<% arreglo = Array.new %>
+						<% ActividadOpcion.where(["actividad_id = ?",a.actividad_id]).each do |s| %>
+							<% arreglo.push( [s.eleccion,s.valor] ) %>
+						<% end %>
+
+						<% if arreglo.count > 0 %>
+
+							<%= form_for(@y, as: :actividad_alumno, url: principal_autorizar_path(:actividad)) do |f| %>
 
 
-							<% actOpc = ActividadOpcion.where(['actividad_id = ? AND valor = ?',a.actividad_id,a.opcion]).first rescue nil %>
-							<% p actOpc %>
-						    <% if actOpc != nil %>
-						    	<b><%= p actOpc.eleccion %></b>
-						    <% else %>
-						    	<b><%= p "No está autorizado" %><b>
-						    <% end %><br><br>
+								<div id="textoRegistrarse">							
+								<% actOpc = ActividadOpcion.where(['actividad_id = ? AND valor = ?',a.actividad_id,a.opcion]).first rescue nil %>
+								<% p actOpc %>
+							    <% if actOpc != nil %>
+							    	<b><%= p actOpc.eleccion %></b>
+							    <% else %>
+							    	<b><%= p "No está autorizado" %><b>
+							    <% end %><br><br>
 
-				            <%= f.hidden_field :alumno_id, value: t.id %>
-				            <%= f.hidden_field :actividad_id, value: a.actividad_id %>
+					            <%= f.hidden_field :alumno_id, value: t.id %>
+					            <%= f.hidden_field :actividad_id, value: a.actividad_id %>
 
-							<% arreglo = Array.new %>
-							<% ActividadOpcion.where(["actividad_id = ?",a.actividad_id]).each do |s| %>
-								<% arreglo.push( [s.eleccion,s.valor] ) %>
-							<% end %>
-							<%= f.select :opcion, options_for_select(arreglo, a.opcion)  %><br><br>
-				            <%= f.submit "Confirmar"  %>
-							</div>
+								
+								<%= f.select :opcion, options_for_select(arreglo, a.opcion)  %><br><br>
+					            <%= f.submit "Confirmar"  %>
+								</div>
 
-						<% end %>													
+							<% end %>												
+						<% end %>	
 						<br>
 					<% end %>
 				<% end %>
