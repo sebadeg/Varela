@@ -64,7 +64,8 @@ Rails.application.configure do
    :user_name            => "soporte@varela.edu.uy",
    :password             => "Ene_2018",
    :authentication       => "plain",
-   :enable_starttls_auto => false
+   :enable_starttls_auto => true,
+   :openssl_verify_mode  => 'none'
   }
 
   # Don't care if the mailer can't send.
