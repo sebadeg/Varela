@@ -19,6 +19,8 @@ class PrincipalController < ApplicationController
           @van = Alumno.where("id IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos WHERE opcion=1 OR opcion=2)").order(:nombre)
           @novan = Alumno.where("id IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos WHERE opcion=0)").order(:nombre)
           @noeligio = Alumno.where("id IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos WHERE opcion IS NULL)").order(:nombre)
+        elsif current_usuario.cedula == 19873943  
+          @van = Alumno.where("id IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos WHERE actividad_id=3 AND opcion=1)").order(:nombre)
         end
     else
       @alumnos = nil
@@ -80,13 +82,13 @@ class PrincipalController < ApplicationController
       password =  Digest::MD5.hexdigest(params[:usuario][:cedula] + DateTime.now.strftime('%Y%m%d%H%M%S'))[0..7]
       p password
       @usuario.update( password: password, password_confirmation: password );
-      if ( params[:usuario][:alumno2] == "1")
-        TitularCuenta.create(usuario_id: @usuario.id, cuenta_id: params[:usuario][:alumno1].to_i)
-      else
-        CuentaAlumno.where( ["cuenta_id = ?", params[:usuario][:alumno1].to_i ]).each do |e|
-          PadreAlumno.create(usuario_id: @usuario.id, alumno_id: e.alumno_id )
-        end
-      end
+      # if ( params[:usuario][:alumno2] == "1")
+      #   TitularCuenta.create(usuario_id: @usuario.id, cuenta_id: params[:usuario][:alumno1].to_i)
+      # else
+      #   CuentaAlumno.where( ["cuenta_id = ?", params[:usuario][:alumno1].to_i ]).each do |e|
+      #     PadreAlumno.create(usuario_id: @usuario.id, alumno_id: e.alumno_id )
+      #   end
+      # end
     end        
     redirect_to root_path
   end

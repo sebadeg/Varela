@@ -1,3 +1,29 @@
+<% if usuario_signed_in? && current_usuario.cedula == 19873943 %>
+
+<div class="container">
+	<div class="row">
+  		<div class="col-md-12 col-sm-12 col-xs-12">
+			<div class="panel-group">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+						<a data-toggle="collapse" href="#collapse1"><!--i class="far fa-credit-card"></i--><%= p "Actividad integración campamento 1o Secundaria Montevideo" %></a>
+						</h4>
+					</div>
+<br>
+	<div id="collapseu1" class="panel-collapse collapse collapse in">
+		<div class="col-md-12 col-sm-12 col-xs-12 content-table">
+			<% @van.each do |a| %>
+				<%= p a.nombre %><br>
+		<% end %><br><br></div>
+<div class="clearfix"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<% end %>
 <% if usuario_signed_in? && current_usuario.cedula == 16 %>
 
 	<%= p "Cantidad usuarios: " + Usuario.all.count.to_s %><br>
@@ -48,7 +74,7 @@
 
     
 
-
+<% if usuario_signed_in? && current_usuario.cedula != 16 && current_usuario.cedula != 19873943 %>
 <div class="container">
 	<div class="row">
   		<div class="col-md-12 col-sm-12 col-xs-12">
@@ -145,7 +171,7 @@
 		</div>
 	</div>
 </div>
-
+<% end %>
 
 
 
