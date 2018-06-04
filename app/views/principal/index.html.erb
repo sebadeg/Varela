@@ -216,6 +216,8 @@
 	</div>
 </div>
 
+<% if @movimientos.count > 0 %>
+
 <div class="container">
 	<div class="row">
   		<div class="col-md-12 col-sm-12 col-xs-12">
@@ -254,7 +256,7 @@
 														<% if m.tipo != -1 %>
 															<% suma = suma + m.debe - m.haber %>
 														<% end %>
-														<td><%= m.fecha %></td>									
+														<td><%= m.fecha.strftime('%d/%m/%Y') %></td>									
 														<td><%= m.descripcion %></td>
 														<td><% if m.debe != 0 %><%= m.debe %><% end %></td>
 														<td><% if m.haber != 0 %><%= m.haber %><% end %></td>
@@ -282,6 +284,7 @@
 	</div>
 </div>
 
+<% end %>
 
 <% end %>
 
@@ -306,7 +309,7 @@
 					var texto = campo1 + "";
                 	//texto = texto.replace('/-/g', "/");
 
-                	var mes = parseInt(texto.substring(5, 7)); //Obtenemos mes
+                	var mes = parseInt(texto.substring(3, 5)); //Obtenemos mes
                 	if (mes % 2 == 0) {
                 		//alert("Es par");
                 		$(this).css("background-color", "#efeded");
