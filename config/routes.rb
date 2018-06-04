@@ -8,6 +8,19 @@ Rails.application.routes.draw do
   post 'principal/autorizar'
 
   post 'principal/asociar'
+  post 'principal/movimientos'
+  post 'principal/cuentas'
+
+  post 'principal/cambiar'
+  post 'principal/duda'
+
+  post 'principal/cargarmovimientos'
+
+  patch 'principal/movimientoupdate'
+
+  delete 'principal/movimientoborrar'
+
+  patch 'principal/movimientofin'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 

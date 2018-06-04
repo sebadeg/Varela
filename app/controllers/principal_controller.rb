@@ -1,18 +1,31 @@
 class PrincipalController < ApplicationController
 
+  $movimientosnuevos
+
   def index
     @x = Actividad.new()
     @y = ActividadAlumno.new()
     @usuario = Usuario.new()
     @actividad = ActividadAlumno.new()
 
+    @cuenta = Cuenta.new()
+
     if usuario_signed_in?
+
+      usuario = current_usuario.id 
       @alumnos = Alumno.where([
         "id IN (SELECT cuenta_alumnos.alumno_id FROM ( cuentas INNER JOIN titular_cuentas ON cuentas.id=titular_cuentas.cuenta_id ) INNER JOIN cuenta_alumnos ON cuentas.id=cuenta_alumnos.cuenta_id WHERE titular_cuentas.usuario_id=?)" +
         " OR " +
         "id IN (SELECT padre_alumnos.alumno_id FROM padre_alumnos WHERE padre_alumnos.usuario_id=?)",
-        current_usuario.id, current_usuario.id]).order(:nombre)
+        usuario, usuario]).order(:nombre)
 
+      @cuentas = Cuenta.where(["id IN (SELECT cuenta_id FROM titular_cuentas WHERE usuario_id = ?)", usuario])
+      #@cuentas = Cuenta.where(["id = ?",12338])
+
+      @movimientos = Array.new
+      @cuentas.each do |cuenta|
+        @movimientos.push( [cuenta.id, Movimiento.where(["cuenta_id = ? AND not pendiente", cuenta.id]).order(:fecha,:tipo,:alumno,:descripcion) ] )
+      end
 
         if current_usuario.cedula == 16 
           @noregistrado = Alumno.where("id NOT IN (SELECT cuenta_alumnos.alumno_id FROM cuenta_alumnos INNER JOIN titular_cuentas ON cuenta_alumnos.cuenta_id=titular_cuentas.cuenta_id) AND id IN (SELECT alumno_id FROM actividad_alumnos)").order(:nombre)
@@ -90,6 +103,151 @@ class PrincipalController < ApplicationController
       #   end
       # end
     end        
+    redirect_to root_path
+  end
+
+  def cambiar
+    #cuentas = Cuenta.where("id IN (SELECT DISTINCT cuenta_id FROM movimientos WHERE NOT valido AND NOT duda AND descripcion LIKE 'Cuota %')")
+
+    cuentas = Cuenta.all
+    cuentas.each do |cuenta|
+      (1..5).each do |alumno|
+        movs = Movimiento.where(["cuenta_id = ? AND alumno = ? AND descripcion LIKE 'Cuota%/%'", cuenta.id, alumno]).order(:fecha)
+        c = 1
+        movs.each do |mov|
+          mov.descripcion = 'Cuota ' + c.to_s + '/' + movs.count.to_s
+          mov.save!
+          c = c + 1
+        end
+
+        movs = Movimiento.where(["cuenta_id = ? AND alumno = ? AND descripcion LIKE 'Descuento%/%'", cuenta.id, alumno]).order(:fecha)
+        c = 1
+        movs.each do |mov|
+          mov.descripcion = 'Descuento ' + c.to_s + '/' + movs.count.to_s
+          mov.save!
+          c = c + 1
+        end
+      end
+    end
+
+    # (1..12).each do |mes|
+    #   p mes
+
+    #   m = Movimiento.new()
+    #   m.cuenta_id = 13917
+    #   m.alumno = 1
+    #   m.fecha = DateTime.new(2018,mes,1,0,0,0)
+    #   m.descripcion = 'Cuota ' + mes.to_s + "/12"
+    #   m.extra = 0
+    #   m.debe = 9200
+    #   m.haber = 0
+    #   m.tipo = 2 
+    #   m.pendiente = ( m.fecha < DateTime.new(2018,6,1,0,0,0) )
+    #   m.valido = false    
+    #   m.duda = false
+    #   m.save!
+
+    #   m = Movimiento.new()
+    #   m.cuenta_id = 13917
+    #   m.alumno = 1
+    #   m.fecha = DateTime.new(2018,mes,1,0,0,0)
+    #   m.descripcion = 'Descuento ' + mes.to_s + "/12"
+    #   m.extra = 0
+    #   if ( m.fecha < DateTime.new(2018,6,1,0,0,0) )
+    #     m.debe = -9200
+    #   else
+    #     m.debe = -272
+    #   end
+    #   m.haber = 0
+    #   m.tipo = 3 
+    #   m.pendiente = ( m.fecha < DateTime.new(2018,6,1,0,0,0) )
+    #   m.valido = false    
+    #   m.duda = false
+    #   m.save!
+    # end
+
+
+    redirect_to root_path
+  end
+
+
+  def duda
+    ActiveRecord::Base.connection.execute( "UPDATE movimientos SET duda=true WHERE cuenta_id = #{params[:cuenta][:id]}" )
+    redirect_to root_path
+  end
+
+
+
+
+  def movimientos
+    @movimientos = Movimiento.where(["cuenta_id = ?", params[:cuenta][:id]]).order(:fecha,:tipo,:alumno,:descripcion)
+  end
+
+  def cuentas
+    if usuario_signed_in?
+      @cuenta_id = params[:cuenta][:id]
+      
+      @alumnos = Alumno.where([
+        "id IN (SELECT cuenta_alumnos.alumno_id FROM ( cuentas INNER JOIN titular_cuentas ON cuentas.id=titular_cuentas.cuenta_id ) INNER JOIN cuenta_alumnos ON cuentas.id=cuenta_alumnos.cuenta_id WHERE titular_cuentas.cuenta_id=?)",
+        @cuenta_id]).order(:nombre)
+
+      @movimientos = Movimiento.where(["cuenta_id = ? AND not pendiente", @cuenta_id]).order(:fecha,:tipo,:alumno,:descripcion)
+
+    end
+
+
+  end
+
+
+  def movimientoupdate
+    mov = Movimiento.find(params[:movimiento][:id])
+    cuenta_id = mov.cuenta_id
+
+    mov.update( 
+      alumno: params[:movimiento][:alumno], 
+      tipo: params[:movimiento][:tipo], 
+      descripcion: params[:movimiento][:descripcion], 
+      debe: params[:movimiento][:debe], 
+      haber: params[:movimiento][:haber])
+
+    #cuenta = Cuenta.find(cuenta_id)
+    redirect_to root_path
+  end
+
+  def movimientoborrar
+    mov = Movimiento.find(params[:movimiento][:id])
+    cuenta_id = mov.cuenta_id
+
+    ActiveRecord::Base.connection.execute( "DELETE FROM movimientos WHERE id = #{params[:movimiento][:id]}" )
+
+    #cuenta = Cuenta.find(cuenta_id)
+    redirect_to root_path
+  end
+
+  def movimientofin
+    ActiveRecord::Base.connection.execute( "UPDATE movimientos SET valido=true WHERE cuenta_id = #{params[:movimiento][:cuenta_id]}" )
+
+    redirect_to root_path
+  end
+
+
+  def cargarmovimientos
+
+    $movimientosnuevos = ""
+    lines = File.readlines(params[:archivo].path, encoding: 'ISO-8859-1')
+    lines.each do |line|
+      ss = line.split(";")
+      m = Movimiento.new()
+      m.cuenta_id = ss[0].to_i
+      m.alumno = ss[1].to_i
+      m.fecha = DateTime.strptime(ss[2], "%d/%m/%Y")
+      m.descripcion = ss[3]
+      m.extra = ss[4]
+      m.tipo = ss[5].to_i
+      m.debe = ss[6].to_f
+      m.haber = ss[7].to_f
+      m.save
+    end
     redirect_to root_path
   end
 end
