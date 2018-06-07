@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180529151221) do
+ActiveRecord::Schema.define(version: 20180605122020) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -142,8 +142,9 @@ ActiveRecord::Schema.define(version: 20180529151221) do
     t.string   "alumno3"
     t.boolean  "validado"
     t.integer  "cuenta"
-    t.string   "password"
+    t.string   "passwd"
     t.boolean  "mail"
+    t.boolean  "titular"
     t.index ["cedula"], name: "index_usuarios_on_cedula", unique: true, using: :btree
     t.index ["email"], name: "index_usuarios_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_usuarios_on_reset_password_token", unique: true, using: :btree

@@ -216,7 +216,6 @@
 	</div>
 </div>
 
-<% if @movimientos.count > 0 %>
 
 <div class="container">
 	<div class="row">
@@ -230,6 +229,20 @@
 					</div>
 
 					<%= content_tag :div, id: "collapses1", class: ["panel-collapse", "collapse", "collapse"] do %>
+						
+						<% if @movimientos.count == 0 %>
+							<div class="col-md-12 col-sm-12 col-xs-12 content-table">
+										<table>
+											<tr height='30px'></tr>
+											<tr height='30px'><td width='30px'></td><td width='15px'><%= image_tag("warning.png") %></td>
+											<td width='30px'></td>
+											<td><%= p "Debe ser el titular de la cuenta para acceder a esta información" %></td></tr>
+											<tr height='30px'></tr>
+										</table>
+							</div>
+							<div class="clearfix"></div>
+						<% end %>
+
 						<% @movimientos.each do |mov| %>
 							<div class="col-md-12 col-sm-12 col-xs-12 content-table">
 								<div class="panel-group sub-grupo">
@@ -283,8 +296,6 @@
 		<div>
 	</div>
 </div>
-
-<% end %>
 
 <% end %>
 

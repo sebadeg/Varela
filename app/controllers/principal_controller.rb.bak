@@ -177,7 +177,7 @@ class PrincipalController < ApplicationController
     #   m.save!
     # end
 
-    (225..235).each do |num|
+    (218..219).each do |num|
       usuario = Usuario.find(num)
       if ( usuario != nil  && usuario.validado && ( usuario.mail == nil || !usuario.mail ) )
         p usuario.passwd
@@ -193,7 +193,7 @@ class PrincipalController < ApplicationController
             PadreAlumno.create(usuario_id: usuario.id, alumno_id: e.alumno_id )
           end
         end
-        UserMailer.aceptar_usuario(usuario).deliver_now
+        UserMailer.nuevo_usuario(usuario).deliver_now
       end 
     end     
     redirect_to root_path
