@@ -13,23 +13,6 @@ class Usuarios::RegistrationsController < Devise::RegistrationsController
   def create
     build_resource(sign_up_params)
 
-    p "Create"
-    unless params[resource_name].nil?
-    p "Create 2"
-
-      usuario = Usuario.new(
-        cedula: params[resource_name][:cedula], 
-        email: params[resource_name][:email], 
-        nombre: params[resource_name][:nombre], 
-        apellido: params[resource_name][:apellido], 
-        alumno1: params[resource_name][:alumno1], 
-        alumno2: params[resource_name][:alumno2], 
-        alumno3: params[resource_name][:alumno3] 
-        )
-      p usuario.nombre
-      UserMailer.nuevo_usuario(usuario).deliver_now
-    end
-
     resource.save
     yield resource if block_given?
     if resource.persisted?
@@ -42,6 +25,26 @@ class Usuarios::RegistrationsController < Devise::RegistrationsController
         expire_data_after_sign_in!
         respond_with resource, location: after_inactive_sign_up_path_for(resource)
       end
+
+
+      p "Create"
+      unless params[resource_name].nil?
+      p "Create 2"
+
+        usuario = Usuario.new(
+          cedula: params[resource_name][:cedula], 
+          email: params[resource_name][:email], 
+          nombre: params[resource_name][:nombre], 
+          apellido: params[resource_name][:apellido], 
+          alumno1: params[resource_name][:alumno1], 
+          alumno2: params[resource_name][:alumno2], 
+          alumno3: params[resource_name][:alumno3] 
+          )
+        p usuario.nombre
+        UserMailer.nuevo_usuario(usuario).deliver_now
+      end
+
+
     else
       clean_up_passwords resource
       set_minimum_password_length

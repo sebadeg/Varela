@@ -27,6 +27,7 @@ Rails.application.routes.draw do
 
   get 'principal/registro'
   patch 'principal/validarregistro'
+  patch 'principal/enviarpassword'
 
 
   root 'principal#index'

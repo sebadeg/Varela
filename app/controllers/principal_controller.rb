@@ -177,25 +177,25 @@ class PrincipalController < ApplicationController
     #   m.save!
     # end
 
-    (225..235).each do |num|
-      usuario = Usuario.find(num)
-      if ( usuario != nil  && usuario.validado && ( usuario.mail == nil || !usuario.mail ) )
-        p usuario.passwd
+    # (225..235).each do |num|
+    #   usuario = Usuario.find(num)
+    #   if ( usuario != nil  && usuario.validado && ( usuario.mail == nil || !usuario.mail ) )
+    #     p usuario.passwd
 
-        usuario.mail = true
-        usuario.save
+    #     usuario.mail = true
+    #     usuario.save
 
-        usuario.update( password: usuario.passwd, password_confirmation: usuario.passwd );
-        if ( usuario.titular )
-          TitularCuenta.create(usuario_id: usuario.id, cuenta_id: usuario.cuenta)
-        else
-          CuentaAlumno.where( ["cuenta_id = ?", usuario.cuenta ]).each do |e|
-            PadreAlumno.create(usuario_id: usuario.id, alumno_id: e.alumno_id )
-          end
-        end
-        UserMailer.aceptar_usuario(usuario).deliver_now
-      end 
-    end     
+    #     usuario.update( password: usuario.passwd, password_confirmation: usuario.passwd );
+    #     if ( usuario.titular )
+    #       TitularCuenta.create(usuario_id: usuario.id, cuenta_id: usuario.cuenta)
+    #     else
+    #       CuentaAlumno.where( ["cuenta_id = ?", usuario.cuenta ]).each do |e|
+    #         PadreAlumno.create(usuario_id: usuario.id, alumno_id: e.alumno_id )
+    #       end
+    #     end
+    #     UserMailer.aceptar_usuario(usuario).deliver_now
+    #   end 
+    # end     
     redirect_to root_path
   end
 
@@ -289,6 +289,7 @@ class PrincipalController < ApplicationController
 
 
     @usuarios = Usuario.where('(mail IS NULL OR NOT mail) AND (validado IS NULL OR NOT validado)').order(:cedula)
+    @usuariosmail = Usuario.where('(mail IS NULL OR NOT mail) AND validado').order(:cedula)
   end
 
   def validarregistro
@@ -298,6 +299,27 @@ class PrincipalController < ApplicationController
       titular: params[:usuario][:titular],
       validado: true,
       passwd: Digest::MD5.hexdigest(params[:usuario][:cedula] + DateTime.now.strftime('%Y%m%d%H%M%S'))[0..7])
+    redirect_to principal_registro_path
+  end
+
+  def enviarpassword
+    usuario = Usuario.find(params[:usuario][:id])
+    if ( usuario != nil  && usuario.validado && ( usuario.mail == nil || !usuario.mail ) )
+      p usuario.passwd
+
+      usuario.mail = true
+      usuario.save
+
+      usuario.update( password: usuario.passwd, password_confirmation: usuario.passwd );
+      if ( usuario.titular )
+        TitularCuenta.create(usuario_id: usuario.id, cuenta_id: usuario.cuenta)
+      else
+        CuentaAlumno.where( ["cuenta_id = ?", usuario.cuenta ]).each do |e|
+          PadreAlumno.create(usuario_id: usuario.id, alumno_id: e.alumno_id )
+        end
+      end
+      UserMailer.aceptar_usuario(usuario).deliver_now
+    end 
     redirect_to principal_registro_path
   end
 
