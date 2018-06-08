@@ -1,0 +1,2 @@
+class ListaAlumno < ApplicationRecord
+end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180605122020) do
+ActiveRecord::Schema.define(version: 20180608181630) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,6 +77,21 @@ ActiveRecord::Schema.define(version: 20180605122020) do
   end
 
   create_table "grados", force: :cascade do |t|
+    t.string   "nombre"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "lista_alumnos", force: :cascade do |t|
+    t.integer  "lista_id"
+    t.integer  "alumno_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["alumno_id"], name: "index_lista_alumnos_on_alumno_id", using: :btree
+    t.index ["lista_id"], name: "index_lista_alumnos_on_lista_id", using: :btree
+  end
+
+  create_table "listas", force: :cascade do |t|
     t.string   "nombre"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -157,6 +172,8 @@ ActiveRecord::Schema.define(version: 20180605122020) do
   add_foreign_key "cuenta_alumnos", "cuentas"
   add_foreign_key "grado_alumnos", "alumnos"
   add_foreign_key "grado_alumnos", "grados"
+  add_foreign_key "lista_alumnos", "alumnos"
+  add_foreign_key "lista_alumnos", "listas"
   add_foreign_key "movimientos", "cuentas"
   add_foreign_key "padre_alumnos", "alumnos"
   add_foreign_key "padre_alumnos", "usuarios"
