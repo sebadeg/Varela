@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180609200839) do
+ActiveRecord::Schema.define(version: 20180609232000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,24 +60,36 @@ ActiveRecord::Schema.define(version: 20180609200839) do
   end
 
   create_table "admin_usuarios", force: :cascade do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "email",                  default: "",    null: false
+    t.string   "encrypted_password",     default: "",    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.boolean  "soporte",                default: false
+    t.boolean  "primaria",               default: false
+    t.boolean  "sec_mdeo",               default: false
+    t.boolean  "sec_cc",                 default: false
     t.index ["email"], name: "index_admin_usuarios_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_admin_usuarios_on_reset_password_token", unique: true, using: :btree
   end
 
   create_table "alumnos", force: :cascade do |t|
     t.string   "nombre"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "archivos", force: :cascade do |t|
+    t.string   "nombre"
+    t.binary   "data"
+    t.string   "md5"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -196,9 +208,9 @@ ActiveRecord::Schema.define(version: 20180609200839) do
     t.index ["reset_password_token"], name: "index_usuarios_on_reset_password_token", unique: true, using: :btree
   end
 
-  add_foreign_key "actividad_alumnos", "actividades", column: "actividad_id"
+  add_foreign_key "actividad_alumnos", "actividades"
   add_foreign_key "actividad_alumnos", "alumnos"
-  add_foreign_key "actividad_opciones", "actividades", column: "actividad_id"
+  add_foreign_key "actividad_opciones", "actividades"
   add_foreign_key "cuenta_alumnos", "alumnos"
   add_foreign_key "cuenta_alumnos", "cuentas"
   add_foreign_key "grado_alumnos", "alumnos"
