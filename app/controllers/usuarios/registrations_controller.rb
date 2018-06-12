@@ -41,7 +41,7 @@ class Usuarios::RegistrationsController < Devise::RegistrationsController
           alumno3: params[resource_name][:alumno3] 
           )
         p usuario.nombre
-        #UserMailer.nuevo_usuario(usuario).deliver_now
+        UserMailer.nuevo_usuario(usuario).deliver_now
       end
 
 
