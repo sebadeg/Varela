@@ -1,0 +1,2 @@
+class EspecialAlumno < ApplicationRecord
+end
