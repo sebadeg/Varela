@@ -53,12 +53,22 @@ class PrincipalController < ApplicationController
 
   def download_pdf
 
-    p params[:actividad][:archivo]
-    send_file(
-      "#{Rails.root}/data/" + params[:actividad][:archivo],
-      filename: params[:actividad][:archivo],
-      type: "application/pdf"
-    )
+    p params[:actividad][:id]
+
+    actividad = Actividad.find(params[:actividad][:id])    
+    if ( actividad != nil )
+      file = Tempfile.new("actividad.pdf")
+      IO.binwrite(file.path, actividad.data)
+      file.unlink
+
+      send_file(
+        file.path,
+        filename: actividad.archivo,
+        type: "application/pdf"
+      )
+    else
+      redirect_to root_path
+    end
   end
 
   def autorizar
