@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  pago: 1
+  cuenta: 1
+
+two:
+  pago: 1
+  cuenta: 1
