@@ -53,12 +53,22 @@ class PrincipalController < ApplicationController
 
   def download_pdf
 
-    p params[:actividad][:archivo]
-    send_file(
-      "#{Rails.root}/data/" + params[:actividad][:archivo],
-      filename: params[:actividad][:archivo],
-      type: "application/pdf"
-    )
+    p params[:actividad][:id]
+
+    actividad = Actividad.find(params[:actividad][:id])    
+    if ( actividad != nil )
+      file = Tempfile.new("actividad.pdf")
+      IO.binwrite(file.path, actividad.data)
+      file.unlink
+
+      send_file(
+        file.path,
+        filename: actividad.archivo,
+        type: "application/pdf"
+      )
+    else
+      redirect_to root_path
+    end
   end
 
   def autorizar
@@ -322,5 +332,38 @@ class PrincipalController < ApplicationController
     end 
     redirect_to principal_registro_path
   end
+
+
+  def download_factura
+
+    p params[:cuenta][:id]
+
+    factura = Factura.where("cuenta_id=#{params[:cuenta][:id]}").order(fecha: :desc).first rescue nil
+    if factura != nil
+      file = Tempfile.new("factura.pdf")
+
+      factura.imprimir(file.path)
+
+      file.unlink
+
+      send_file(
+        file.path,
+        filename: "factura_#{params[:cuenta][:id]}_#{factura.id}.pdf",
+        type: "application/pdf"
+      )
+    else
+      redirect_to principal_index_path
+    end
+  end
+
+  # def imprimirfactura
+    
+  #   Factura.find(id).imprimir()
+
+  #   output_file = Rails.root.join("tmp", 'output.pdf')
+  #   send_file(output_file, filename: "output.pdf", type: "application/pdf")
+    
+  # end
+
 
 end

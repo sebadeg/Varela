@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
-  "https://github.com/#{repo_name}.git"
+  "http://github.com/#{repo_name}.git"
 end
 
 
@@ -44,6 +44,11 @@ gem 'jquery-turbolinks'
 gem 'devise'
 gem 'twitter-bootstrap-rails'
 gem 'devise-bootstrap-views'
+
+gem 'prawn', '~> 2.2', '>= 2.2.2'
+gem 'combine_pdf', '~> 0.2.5'
+gem 'chunky_png', '~> 1.3', '>= 1.3.10'
+gem 'barby', '~> 0.6.5'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
