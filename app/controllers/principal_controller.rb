@@ -340,7 +340,17 @@ class PrincipalController < ApplicationController
 
     factura = Factura.where("cuenta_id=#{params[:cuenta][:id]}").order(fecha: :desc).first rescue nil
     if factura != nil
+      p "-----------------------"
+      p "-----------------------"
+      p "-----------------------"
+      p "-----------------------"
+      p "-----------------------"
       file = Tempfile.new("factura.pdf")
+      p "-----------------------"
+      p "-----------------------"
+      p "-----------------------"
+      p "-----------------------"
+      p "-----------------------"
 
       factura.imprimir(file.path)
 
