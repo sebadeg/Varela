@@ -66,7 +66,6 @@ class PrincipalController < ApplicationController
         type: "application/pdf"
       )
 
-      file.unlink
     else
       redirect_to root_path
     end
@@ -351,14 +350,6 @@ class PrincipalController < ApplicationController
         filename: "factura_#{params[:cuenta][:id]}_#{factura.id}.pdf",
         type: "application/pdf"
       )
-      
-      file.unlink
-
-      p "-----------------------"
-      p "-----------------------"
-      p "-----------------------"
-      p "-----------------------"
-      p "-----------------------"
 
     else
       redirect_to principal_index_path
