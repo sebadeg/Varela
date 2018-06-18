@@ -323,4 +323,37 @@ class PrincipalController < ApplicationController
     redirect_to principal_registro_path
   end
 
+
+  def download_factura
+
+    p params[:cuenta][:id]
+
+    factura = Factura.where("cuenta_id=#{params[:cuenta][:id]}").order(fecha: :desc).first rescue nil
+    if factura != nil
+      file = Tempfile.new("factura.pdf")
+
+      factura.imprimir(file.path)
+
+      file.unlink
+
+      send_file(
+        file.path,
+        filename: "factura_#{params[:cuenta][:id]}_#{factura.id}.pdf",
+        type: "application/pdf"
+      )
+    else
+      redirect_to principal_index_path
+    end
+  end
+
+  # def imprimirfactura
+    
+  #   Factura.find(id).imprimir()
+
+  #   output_file = Rails.root.join("tmp", 'output.pdf')
+  #   send_file(output_file, filename: "output.pdf", type: "application/pdf")
+    
+  # end
+
+
 end
