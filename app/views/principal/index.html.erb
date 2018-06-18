@@ -153,7 +153,7 @@
 														    <br>
 															
 															<%= form_for(@x, as: :actividad, url: principal_download_pdf_path(:actividad), :html => {:id=>'form_download_' + a.actividad_id.to_s}) do |f| %>
-													           <%= f.hidden_field :archivo, value: @actividad.archivo %>
+													           <%= f.hidden_field :id, value: @actividad.id %>
 															    <div id="textoRegistrarse">
 
 																	<b><%= link_to "Descargar información: " + @actividad.descripcion, "", :onclick => "$('#form_download_" + a.actividad_id.to_s + "').submit()" %></b>
@@ -276,7 +276,17 @@
 														</tr>
 													<% end %>
 													<tr>
-													<td></td>
+													<td>
+														<% if current_usuario.cedula == 20154106 %>
+															<%= form_for(@cuenta, as: :cuenta, url: principal_download_factura_path(:cuenta), :html => {:id=>'form_download_' + mov[0].to_s}) do |f| %>
+													           <%= f.hidden_field :id, value: mov[0] %>
+															    <div id="textoRegistrarse">
+
+																	<b><%= link_to "Factura", "", :onclick => "$('#form_download_" + mov[0].to_s + "').submit()" %></b>
+															    </div>
+															<% end %>
+														<% end %>
+													</td>
 													<td>Saldo</td>
 													<td><%= suma %></td>
 													<td></td>
