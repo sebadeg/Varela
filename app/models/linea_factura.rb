@@ -1,0 +1,2 @@
+class LineaFactura < ApplicationRecord
+end
