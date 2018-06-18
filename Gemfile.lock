@@ -39,9 +39,9 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
     arel (7.1.4)
-    autoprefixer-rails (8.6.3)
+    autoprefixer-rails (8.3.0)
       execjs
-    bcrypt (3.1.12-x86-mingw32)
+    bcrypt (3.1.11-x86-mingw32)
     bindex (0.5.0)
     bootstrap-sass (3.3.7)
       autoprefixer-rails (>= 5.2.1)
@@ -54,8 +54,6 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.8.0)
-    combine_pdf (0.2.37)
-      ruby-rc4 (>= 0.1.5)
     commonjs (0.2.7)
     concurrent-ruby (1.0.5)
     crass (1.0.4)
@@ -68,7 +66,7 @@ GEM
     devise-bootstrap-views (0.0.11)
     erubis (2.7.0)
     execjs (2.7.0)
-    ffi (1.9.25-x86-mingw32)
+    ffi (1.9.23-x86-mingw32)
     font-awesome-rails (4.7.0.4)
       railties (>= 3.2, < 6.0)
     globalid (0.4.1)
@@ -102,17 +100,13 @@ GEM
     mini_portile2 (2.3.0)
     minitest (5.11.3)
     multi_json (1.13.1)
-    nio4r (2.3.1)
-    nokogiri (1.8.3-x86-mingw32)
+    nio4r (2.3.0)
+    nokogiri (1.8.2-x86-mingw32)
       mini_portile2 (~> 2.3.0)
     orm_adapter (0.5.0)
-    pdf-core (0.7.0)
     pg (0.21.0-x86-mingw32)
-    prawn (2.2.2)
-      pdf-core (~> 0.7.0)
-      ttfunk (~> 1.5)
     puma (3.11.4)
-    rack (2.0.5)
+    rack (2.0.4)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (5.0.7)
@@ -145,7 +139,6 @@ GEM
     responders (2.4.0)
       actionpack (>= 4.2.0, < 5.3)
       railties (>= 4.2.0, < 5.3)
-    ruby-rc4 (0.1.5)
     sass (3.5.6)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
@@ -167,7 +160,6 @@ GEM
     thor (0.20.0)
     thread_safe (0.3.6)
     tilt (2.0.8)
-    ttfunk (1.5.1)
     turbolinks (5.1.1)
       turbolinks-source (~> 5.1)
     turbolinks-source (5.1.0)
@@ -178,13 +170,13 @@ GEM
       railties (~> 5.0, >= 5.0.1)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
-    tzinfo-data (1.2018.5)
+    tzinfo-data (1.2018.4)
       tzinfo (>= 1.0.0)
-    uglifier (4.1.11)
+    uglifier (4.1.10)
       execjs (>= 0.3.0, < 3)
     warden (1.2.7)
       rack (>= 1.0)
-    web-console (3.6.2)
+    web-console (3.6.1)
       actionview (>= 5.0)
       activemodel (>= 5.0)
       bindex (>= 0.4.0)
@@ -201,7 +193,6 @@ DEPENDENCIES
   byebug
   coffee-rails (~> 4.2)
   coffee-script-source (= 1.8.0)
-  combine_pdf (~> 0.2.5)
   devise
   devise-bootstrap-views
   font-awesome-rails
@@ -209,7 +200,6 @@ DEPENDENCIES
   jquery-rails
   jquery-turbolinks
   pg (~> 0.18)
-  prawn (~> 2.2, >= 2.2.2)
   puma (~> 3.0)
   rails (~> 5.0.3)
   sass-rails (~> 5.0)
@@ -219,9 +209,6 @@ DEPENDENCIES
   tzinfo-data
   uglifier (>= 1.3.0)
   web-console (>= 3.3.0)
-
-RUBY VERSION
-   ruby 2.2.6p396
 
 BUNDLED WITH
    1.16.1
