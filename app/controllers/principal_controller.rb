@@ -59,13 +59,14 @@ class PrincipalController < ApplicationController
     if ( actividad != nil )
       file = Tempfile.new("actividad.pdf")
       IO.binwrite(file.path, actividad.data)
-      file.unlink
 
       send_file(
         file.path,
         filename: actividad.archivo,
         type: "application/pdf"
       )
+
+      file.unlink
     else
       redirect_to root_path
     end
@@ -340,27 +341,25 @@ class PrincipalController < ApplicationController
 
     factura = Factura.where("cuenta_id=#{params[:cuenta][:id]}").order(fecha: :desc).first rescue nil
     if factura != nil
-      p "-----------------------"
-      p "-----------------------"
-      p "-----------------------"
-      p "-----------------------"
-      p "-----------------------"
+
       file = Tempfile.new("factura.pdf")
-      p "-----------------------"
-      p "-----------------------"
-      p "-----------------------"
-      p "-----------------------"
-      p "-----------------------"
 
       factura.imprimir(file.path)
-
-      file.unlink
 
       send_file(
         file.path,
         filename: "factura_#{params[:cuenta][:id]}_#{factura.id}.pdf",
         type: "application/pdf"
       )
+      
+      file.unlink
+
+      p "-----------------------"
+      p "-----------------------"
+      p "-----------------------"
+      p "-----------------------"
+      p "-----------------------"
+
     else
       redirect_to principal_index_path
     end
