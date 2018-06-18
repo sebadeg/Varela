@@ -45,6 +45,11 @@ gem 'devise'
 gem 'twitter-bootstrap-rails'
 gem 'devise-bootstrap-views'
 
+gem 'prawn', '~> 2.2', '>= 2.2.2'
+gem 'combine_pdf', '~> 0.2.5'
+gem 'chunky_png', '~> 1.3', '>= 1.3.10'
+gem 'barby', '~> 0.6.5'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
