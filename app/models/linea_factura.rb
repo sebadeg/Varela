@@ -1,2 +1,0 @@
-class LineaFactura < ApplicationRecord
-end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180616120802) do
+ActiveRecord::Schema.define(version: 20180612092300) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,7 +77,6 @@ ActiveRecord::Schema.define(version: 20180616120802) do
     t.boolean  "primaria",               default: false
     t.boolean  "sec_mdeo",               default: false
     t.boolean  "sec_cc",                 default: false
-    t.boolean  "administracion",         default: false
     t.index ["email"], name: "index_admin_usuarios_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_admin_usuarios_on_reset_password_token", unique: true, using: :btree
   end
@@ -111,39 +110,6 @@ ActiveRecord::Schema.define(version: 20180616120802) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "especial_alumnos", force: :cascade do |t|
-    t.integer  "especial_id"
-    t.integer  "alumno_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.integer  "indice"
-    t.index ["alumno_id"], name: "index_especial_alumnos_on_alumno_id", using: :btree
-    t.index ["especial_id", "indice"], name: "index_especial_alumnos_on_especial_id_and_indice", unique: true, using: :btree
-    t.index ["especial_id"], name: "index_especial_alumnos_on_especial_id", using: :btree
-  end
-
-  create_table "especiales", force: :cascade do |t|
-    t.date     "fecha_comienzo"
-    t.date     "fecha_fin"
-    t.string   "descripcion"
-    t.decimal  "importe"
-    t.string   "nombre"
-    t.binary   "data"
-    t.string   "md5"
-    t.boolean  "procesado"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-  end
-
-  create_table "facturas", force: :cascade do |t|
-    t.integer  "cuenta_id"
-    t.date     "fecha"
-    t.decimal  "total"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["cuenta_id"], name: "index_facturas_on_cuenta_id", using: :btree
-  end
-
   create_table "grado_alumnos", force: :cascade do |t|
     t.integer  "grado_id"
     t.integer  "alumno_id"
@@ -158,20 +124,6 @@ ActiveRecord::Schema.define(version: 20180616120802) do
     t.string   "nombre"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "linea_facturas", force: :cascade do |t|
-    t.integer  "factura_id"
-    t.integer  "alumno_id"
-    t.string   "nombre_alumno"
-    t.integer  "indice"
-    t.string   "descripcion"
-    t.decimal  "importe"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.index ["alumno_id"], name: "index_linea_facturas_on_alumno_id", using: :btree
-    t.index ["factura_id", "indice"], name: "index_linea_facturas_on_factura_id_and_indice", unique: true, using: :btree
-    t.index ["factura_id"], name: "index_linea_facturas_on_factura_id", using: :btree
   end
 
   create_table "lista_alumnos", force: :cascade do |t|
@@ -215,29 +167,6 @@ ActiveRecord::Schema.define(version: 20180616120802) do
     t.datetime "updated_at", null: false
     t.index ["alumno_id"], name: "index_padre_alumnos_on_alumno_id", using: :btree
     t.index ["usuario_id"], name: "index_padre_alumnos_on_usuario_id", using: :btree
-  end
-
-  create_table "pago_cuentas", force: :cascade do |t|
-    t.integer  "pago_id"
-    t.integer  "cuenta_id"
-    t.date     "fecha"
-    t.string   "descripcion"
-    t.decimal  "importe"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.integer  "indice"
-    t.index ["cuenta_id"], name: "index_pago_cuentas_on_cuenta_id", using: :btree
-    t.index ["pago_id", "indice"], name: "index_pago_cuentas_on_pago_id_and_indice", unique: true, using: :btree
-    t.index ["pago_id"], name: "index_pago_cuentas_on_pago_id", using: :btree
-  end
-
-  create_table "pagos", force: :cascade do |t|
-    t.string   "nombre"
-    t.binary   "data"
-    t.string   "md5"
-    t.boolean  "procesado"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "titular_cuentas", force: :cascade do |t|
@@ -285,20 +214,13 @@ ActiveRecord::Schema.define(version: 20180616120802) do
   add_foreign_key "actividad_opciones", "actividades"
   add_foreign_key "cuenta_alumnos", "alumnos"
   add_foreign_key "cuenta_alumnos", "cuentas"
-  add_foreign_key "especial_alumnos", "alumnos"
-  add_foreign_key "especial_alumnos", "especiales"
-  add_foreign_key "facturas", "cuentas"
   add_foreign_key "grado_alumnos", "alumnos"
   add_foreign_key "grado_alumnos", "grados"
-  add_foreign_key "linea_facturas", "alumnos"
-  add_foreign_key "linea_facturas", "facturas"
   add_foreign_key "lista_alumnos", "alumnos"
   add_foreign_key "lista_alumnos", "listas"
   add_foreign_key "movimientos", "cuentas"
   add_foreign_key "padre_alumnos", "alumnos"
   add_foreign_key "padre_alumnos", "usuarios"
-  add_foreign_key "pago_cuentas", "cuentas"
-  add_foreign_key "pago_cuentas", "pagos"
   add_foreign_key "titular_cuentas", "cuentas"
   add_foreign_key "titular_cuentas", "usuarios"
 end
