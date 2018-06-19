@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   patch 'principal/movimientofin'
 
   post 'principal/download_factura'
+  patch 'principal/download_factura'
 
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
