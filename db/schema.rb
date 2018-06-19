@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180617231036) do
+ActiveRecord::Schema.define(version: 20180619184751) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -139,8 +139,9 @@ ActiveRecord::Schema.define(version: 20180617231036) do
     t.integer  "cuenta_id"
     t.date     "fecha"
     t.decimal  "total"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.date     "fecha_vencimiento"
     t.index ["cuenta_id"], name: "index_facturas_on_cuenta_id", using: :btree
   end
 
@@ -286,7 +287,7 @@ ActiveRecord::Schema.define(version: 20180617231036) do
   add_foreign_key "cuenta_alumnos", "alumnos"
   add_foreign_key "cuenta_alumnos", "cuentas"
   add_foreign_key "especial_alumnos", "alumnos"
-  add_foreign_key "especial_alumnos", "especiales"
+  add_foreign_key "especial_alumnos", "especiales", column: "especial_id"
   add_foreign_key "facturas", "cuentas"
   add_foreign_key "grado_alumnos", "alumnos"
   add_foreign_key "grado_alumnos", "grados"
