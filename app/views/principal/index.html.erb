@@ -279,10 +279,7 @@
 													<td>
 														<%= form_for(@cuenta, as: :cuenta, url: principal_download_factura_path(:cuenta), :html => {:id=>'form_download_' + mov[0].to_s}) do |f| %>
 												           <%= f.hidden_field :id, value: mov[0] %>
-														    <div id="textoRegistrarse">
-
-																<b><%= link_to "Factura", "", :onclick => "$('#form_download_" + mov[0].to_s + "').submit()" %></b>
-														    </div>
+														   <b><%= link_to "Factura", "", :onclick => "$('#form_download_" + mov[0].to_s + "').submit()" %></b>
 														<% end %>
 													</td>
 													<td>Saldo</td>
