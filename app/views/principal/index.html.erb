@@ -277,14 +277,12 @@
 													<% end %>
 													<tr>
 													<td>
-														<% if current_usuario.cedula == 20154106 || current_usuario.cedula == 37756286 %>
-															<%= form_for(@cuenta, as: :cuenta, url: principal_download_factura_path(:cuenta), :html => {:id=>'form_download_' + mov[0].to_s}) do |f| %>
-													           <%= f.hidden_field :id, value: mov[0] %>
-															    <div id="textoRegistrarse">
+														<%= form_for(@cuenta, as: :cuenta, url: principal_download_factura_path(:cuenta), :html => {:id=>'form_download_' + mov[0].to_s}) do |f| %>
+												           <%= f.hidden_field :id, value: mov[0] %>
+														    <div id="textoRegistrarse">
 
-																	<b><%= link_to "Factura", "", :onclick => "$('#form_download_" + mov[0].to_s + "').submit()" %></b>
-															    </div>
-															<% end %>
+																<b><%= link_to "Factura", "", :onclick => "$('#form_download_" + mov[0].to_s + "').submit()" %></b>
+														    </div>
 														<% end %>
 													</td>
 													<td>Saldo</td>
