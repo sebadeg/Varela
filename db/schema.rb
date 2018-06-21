@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180621120759) do
+ActiveRecord::Schema.define(version: 20180619184751) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,15 +37,6 @@ ActiveRecord::Schema.define(version: 20180621120759) do
     t.integer  "opcion"
     t.index ["actividad_id"], name: "index_actividad_alumnos_on_actividad_id", using: :btree
     t.index ["alumno_id"], name: "index_actividad_alumnos_on_alumno_id", using: :btree
-  end
-
-  create_table "actividad_listas", force: :cascade do |t|
-    t.integer  "actividad_id"
-    t.integer  "lista_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.index ["actividad_id"], name: "index_actividad_listas_on_actividad_id", using: :btree
-    t.index ["lista_id"], name: "index_actividad_listas_on_lista_id", using: :btree
   end
 
   create_table "actividad_opciones", force: :cascade do |t|
@@ -95,19 +86,12 @@ ActiveRecord::Schema.define(version: 20180621120759) do
     t.string   "nombre"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string   "apellido"
   end
 
   create_table "archivos", force: :cascade do |t|
     t.string   "nombre"
     t.binary   "data"
     t.string   "md5"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "codigos", force: :cascade do |t|
-    t.string   "nombre"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -138,15 +122,6 @@ ActiveRecord::Schema.define(version: 20180621120759) do
     t.index ["especial_id"], name: "index_especial_alumnos_on_especial_id", using: :btree
   end
 
-  create_table "especial_cuentas", force: :cascade do |t|
-    t.integer  "especial_id"
-    t.integer  "cuenta_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.index ["cuenta_id"], name: "index_especial_cuentas_on_cuenta_id", using: :btree
-    t.index ["especial_id"], name: "index_especial_cuentas_on_especial_id", using: :btree
-  end
-
   create_table "especiales", force: :cascade do |t|
     t.date     "fecha_comienzo"
     t.date     "fecha_fin"
@@ -158,8 +133,6 @@ ActiveRecord::Schema.define(version: 20180621120759) do
     t.boolean  "procesado"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
-    t.integer  "codigo_id"
-    t.index ["codigo_id"], name: "index_especiales_on_codigo_id", using: :btree
   end
 
   create_table "facturas", force: :cascade do |t|
@@ -310,16 +283,11 @@ ActiveRecord::Schema.define(version: 20180621120759) do
 
   add_foreign_key "actividad_alumnos", "actividades"
   add_foreign_key "actividad_alumnos", "alumnos"
-  add_foreign_key "actividad_listas", "actividades"
-  add_foreign_key "actividad_listas", "listas"
   add_foreign_key "actividad_opciones", "actividades"
   add_foreign_key "cuenta_alumnos", "alumnos"
   add_foreign_key "cuenta_alumnos", "cuentas"
   add_foreign_key "especial_alumnos", "alumnos"
   add_foreign_key "especial_alumnos", "especiales", column: "especial_id"
-  add_foreign_key "especial_cuentas", "cuentas"
-  add_foreign_key "especial_cuentas", "especiales", column: "especial_id"
-  add_foreign_key "especiales", "codigos"
   add_foreign_key "facturas", "cuentas"
   add_foreign_key "grado_alumnos", "alumnos"
   add_foreign_key "grado_alumnos", "grados"

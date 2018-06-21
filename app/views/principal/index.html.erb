@@ -140,7 +140,7 @@
 				 					<div class="panel panel-default">
 										<div class="panel-heading">
 											<h4 class="panel-title">
-												<%= link_to t.nombre + " " + t.apellido, "#collapseu2" + t.id.to_s, "data-toggle" => "collapse" %>
+												<%= link_to t.nombre, "#collapseu2" + t.id.to_s, "data-toggle" => "collapse" %>
 											</h4>
 										</div>										
 										<%= content_tag :div, id: "collapseu2" + t.id.to_s, class: ["panel-collapse", "collapse", "collapse", "in"] do %>
