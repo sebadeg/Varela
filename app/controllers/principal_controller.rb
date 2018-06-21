@@ -17,7 +17,7 @@ class PrincipalController < ApplicationController
         "id IN (SELECT cuenta_alumnos.alumno_id FROM ( cuentas INNER JOIN titular_cuentas ON cuentas.id=titular_cuentas.cuenta_id ) INNER JOIN cuenta_alumnos ON cuentas.id=cuenta_alumnos.cuenta_id WHERE titular_cuentas.usuario_id=?)" +
         " OR " +
         "id IN (SELECT padre_alumnos.alumno_id FROM padre_alumnos WHERE padre_alumnos.usuario_id=?)",
-        usuario, usuario]).order(:nombre)
+        usuario, usuario]).order(:apellido,:nombre)
 
       @cuentas = Cuenta.where(["id IN (SELECT cuenta_id FROM titular_cuentas WHERE usuario_id = ?)", usuario])
       #@cuentas = Cuenta.where("id IN (SELECT DISTINCT cuenta FROM usuarios)").order(:id)
@@ -228,7 +228,7 @@ class PrincipalController < ApplicationController
       
       @alumnos = Alumno.where([
         "id IN (SELECT cuenta_alumnos.alumno_id FROM ( cuentas INNER JOIN titular_cuentas ON cuentas.id=titular_cuentas.cuenta_id ) INNER JOIN cuenta_alumnos ON cuentas.id=cuenta_alumnos.cuenta_id WHERE titular_cuentas.cuenta_id=?)",
-        @cuenta_id]).order(:nombre)
+        @cuenta_id]).order(:apellido,:nombre)
 
       @movimientos = Movimiento.where(["cuenta_id = ? AND not pendiente", @cuenta_id]).order(:fecha,:tipo,:alumno,:descripcion)
 
