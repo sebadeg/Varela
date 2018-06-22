@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180621120759) do
+ActiveRecord::Schema.define(version: 20180622183654) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -160,6 +160,25 @@ ActiveRecord::Schema.define(version: 20180621120759) do
     t.datetime "updated_at",     null: false
     t.integer  "codigo_id"
     t.index ["codigo_id"], name: "index_especiales_on_codigo_id", using: :btree
+  end
+
+  create_table "evento_usuarios", force: :cascade do |t|
+    t.string   "nombres"
+    t.string   "apellidos"
+    t.string   "telefono"
+    t.string   "celular"
+    t.string   "direccion"
+    t.date     "nacimiento"
+    t.string   "nacionalidad"
+    t.string   "email"
+    t.string   "horarios"
+    t.boolean  "universidad_completa"
+    t.boolean  "universidad_incompleta"
+    t.string   "trabajo"
+    t.string   "ultimo_trabajo"
+    t.string   "comentarios"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "facturas", force: :cascade do |t|

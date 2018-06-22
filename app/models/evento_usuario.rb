@@ -1,0 +1,2 @@
+class EventoUsuario < ApplicationRecord
+end

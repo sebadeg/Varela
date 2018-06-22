@@ -2,6 +2,39 @@ class PrincipalController < ApplicationController
 
   $movimientosnuevos
 
+  def eventos
+    @evento_usuario = EventoUsuario.new()
+  end
+
+  def eventos_registrar
+
+    evento_usuario = EventoUsuario.new(
+          nombres: params[:evento_usuario][:nombres], 
+          apellidos: params[:evento_usuario][:apellidos], 
+          telefono: params[:evento_usuario][:telefono], 
+          celular: params[:evento_usuario][:celular], 
+          direccion: params[:evento_usuario][:direccion], 
+          nacimiento: params[:evento_usuario][:nacimiento], 
+          nacionalidad: params[:evento_usuario][:nacionalidad],
+          email: params[:evento_usuario][:email], 
+          horarios: params[:evento_usuario][:horarios], 
+          universidad_completa: params[:evento_usuario][:universidad_completa], 
+          universidad_incompleta: params[:evento_usuario][:universidad_incompleta], 
+          trabajo: params[:evento_usuario][:trabajo], 
+          ultimo_trabajo: params[:evento_usuario][:ultimo_trabajo], 
+          comentarios: params[:evento_usuario][:comentarios] 
+          )
+    evento_usuario.save!
+
+    UserMailer.eventos_usuario(evento_usuario).deliver_now
+
+    redirect_to principal_eventos_registrado_path
+  end
+
+  def eventos_registrado
+
+  end
+
   def index
     @x = Actividad.new()
     @y = ActividadAlumno.new()

@@ -26,6 +26,12 @@ Rails.application.routes.draw do
   patch 'principal/download_factura'
 
 
+  get 'principal/eventos'
+  patch 'principal/eventos_registrar'
+  post 'principal/eventos_registrar'
+  get 'principal/eventos_registrado'
+  
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 
