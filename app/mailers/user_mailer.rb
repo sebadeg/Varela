@@ -13,7 +13,7 @@ class UserMailer < ApplicationMailer
 
 	def eventos_usuario(usuario)
 		@usuario = usuario
-		mail(to: 'soporte@varela.edu.uy', subject: 'Registro de nuevo usuario de eventos')
+		mail(to: 'eventos@varela.edu.uy', bcc:'soporte@varela.edu.uy', subject: 'Registro de nuevo usuario de eventos')
 	end
 
 end
