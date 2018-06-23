@@ -6,7 +6,7 @@ class ActividadAlumno < ApplicationRecord
 
 		autorizar = ActividadOpcion.where(["actividad_id = ? AND importe>0",actividad_id]).first rescue nil		
 
-		ActividadOpcion.where(["actividad_id = ?",actividad_id]).each do |s|
+		ActividadOpcion.where(["actividad_id = ?",actividad_id]).order(:cuotas).each do |s|
 			if s.valor == 0
 				if autorizar == nil
 					o = "No inscribir"
