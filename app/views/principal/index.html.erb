@@ -164,17 +164,21 @@
 														    <% @titular = TitularCuenta.where(['usuario_id = ? AND cuenta_id = ?',current_usuario.id,@cuenta.cuenta_id]).first rescue nil %>
 														    <% if @titular != nil && (@actividad.fecha == nil || @actividad.fecha >= DateTime.now ) %>
 
-														    	<% arreglo = a.opciones() %>
-														    	<% p arreglo %>
+																<% arreglo = Array.new %>
+																<% ActividadOpcion.where(["actividad_id = ?",a.actividad_id]).each do |s| %>
+																	<% arreglo.push( [s.opcion,s.valor] ) %>
+																<% end %>
 
-																<% if arreglo[:opciones].count > 0 %>
+																<% if arreglo.count > 0 %>
 
 																	<%= form_for(@y, as: :actividad_alumno, url: principal_autorizar_path(:actividad)) do |f| %>
 
 
 																		<div id="textoRegistrarse">							
-																	    <% if arreglo[:elecciones][a.opcion] != nil %>
-																	    	<b><%= p arreglo[:elecciones][a.opcion] %></b>
+																		<% actOpc = ActividadOpcion.where(['actividad_id = ? AND valor = ?',a.actividad_id,a.opcion]).first rescue nil %>
+																		<% p actOpc %>
+																	    <% if actOpc != nil %>
+																	    	<b><%= p actOpc.eleccion %></b>
 																	    <% else %>
 																	    	<b><%= p "" %><b>
 																	    <% end %><br><br>
@@ -183,7 +187,7 @@
 															            <%= f.hidden_field :actividad_id, value: a.actividad_id %>
 
 																		
-																		<%= f.select :opcion, options_for_select(arreglo[:opciones], a.opcion)  %><br><br>
+																		<%= f.select :opcion, options_for_select(arreglo, a.opcion)  %><br><br>
 															            <%= f.submit "Confirmar"  %>
 																		</div>
 
