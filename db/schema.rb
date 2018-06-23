@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180622183654) do
+ActiveRecord::Schema.define(version: 20180623022205) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,6 +55,9 @@ ActiveRecord::Schema.define(version: 20180622183654) do
     t.string   "eleccion"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.integer  "cuotas"
+    t.decimal  "importe"
+    t.date     "fecha"
     t.index ["actividad_id"], name: "index_actividad_opciones_on_actividad_id", using: :btree
   end
 
@@ -335,9 +338,9 @@ ActiveRecord::Schema.define(version: 20180622183654) do
   add_foreign_key "cuenta_alumnos", "alumnos"
   add_foreign_key "cuenta_alumnos", "cuentas"
   add_foreign_key "especial_alumnos", "alumnos"
-  add_foreign_key "especial_alumnos", "especiales", column: "especial_id"
+  add_foreign_key "especial_alumnos", "especiales"
   add_foreign_key "especial_cuentas", "cuentas"
-  add_foreign_key "especial_cuentas", "especiales", column: "especial_id"
+  add_foreign_key "especial_cuentas", "especiales"
   add_foreign_key "especiales", "codigos"
   add_foreign_key "facturas", "cuentas"
   add_foreign_key "grado_alumnos", "alumnos"

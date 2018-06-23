@@ -1,2 +1,5 @@
 class ActividadOpcion < ApplicationRecord
+
+
+	
 end
