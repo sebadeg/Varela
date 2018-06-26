@@ -6,13 +6,29 @@ class Factura < ApplicationRecord
     #require 'barby/barcode/code_39'
     require 'barby/outputter/png_outputter'
 
+    def digito(s)
+      suma = 0
+      arr = [6,3,4,4,5,6,3,2,7,3,2,9,8,7,
+             6,3,4,4,5,6,3,2,7,3,2,9,8,7,
+             6,3,4,4,5,6,3,2,7,3,2,9,8,7,
+             6,3,4]
+      suma = 0
+      (0..(arr.count-1)).each do |i|
+        suma = suma + s[i,1].to_i * arr[i]
+      end
+      return (10-(suma%10))%10
+    end
+
     def imprimir(file_path,cuenta_id,factura)
 
-      codigo_barras = 
-        '*JP' + factura.fecha.strftime('%Y%m') + 
+      s = factura.fecha.strftime('%Y%m') + 
         factura.id.to_s + cuenta_id.to_s.rjust(5,'0') + 
         (factura.total * 100).to_i.to_s.rjust(8,'0') +
-        factura.fecha_vencimiento.strftime('%Y%m%d') + '000*'
+        factura.fecha_vencimiento.strftime('%Y%m%d') + '00'
+      
+      dig = digito(s).to_s
+
+      codigo_barras = '*JP' + s + dig + '*'
 
 
       usuario = Usuario.where("id IN (SELECT usuario_id FROM titular_cuentas WHERE cuenta_id=#{cuenta_id})").first!
