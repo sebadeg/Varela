@@ -122,96 +122,9 @@
 
 <% if usuario_signed_in? && current_usuario.cedula != 16 && current_usuario.cedula != 19873943 %>
 
-<div class="container">
-	<div class="row">
-  		<div class="col-md-12 col-sm-12 col-xs-12">
-			<div class="panel-group">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h4 class="panel-title">
-							<%= link_to "Alumnos", "#collapseu1", "data-toggle" => "collapse" %>
-						</h4>
-					</div>
+<%= render 'recuadro', locals: { titulo: 'Alumnos', form: 'actividades' }  %>
 
-					<%= content_tag :div, id: "collapseu1", class: ["panel-collapse", "collapse", "collapse", "in"] do %>
-						<% @alumnos.each do |t| %>
-							<div class="col-md-12 col-sm-12 col-xs-12 content-table">
-								<div class="panel-group sub-grupo">
-				 					<div class="panel panel-default">
-										<div class="panel-heading">
-											<h4 class="panel-title">
-												<%= link_to t.nombre + " " + t.apellido, "#collapseu2" + t.id.to_s, "data-toggle" => "collapse" %>
-											</h4>
-										</div>										
-										<%= content_tag :div, id: "collapseu2" + t.id.to_s, class: ["panel-collapse", "collapse", "collapse", "in"] do %>
-											<div class="col-md-12 col-sm-12 col-xs-12 content-table">
-												<% @act = ActividadAlumno.where(['alumno_id = ?',t.id]).order("actividad_id") %>
-												<% if (@act != nil) %>
-													<% @act.each do |a| %>
-														<% @actividad = Actividad.find(a.actividad_id) rescue nil %>
-														<% if @actividad != nil && (@actividad.fechainfo == nil || @actividad.fechainfo >= DateTime.now ) %>
-														    <br>
-															
-															<%= form_for(@x, as: :actividad, url: principal_download_pdf_path(:actividad), :html => {:id=>'form_download_' + a.actividad_id.to_s}) do |f| %>
-													           <%= f.hidden_field :id, value: @actividad.id %>
-															    <div id="textoRegistrarse">
-
-																	<b><%= link_to "Descargar información: " + @actividad.descripcion, "", :onclick => "$('#form_download_" + a.actividad_id.to_s + "').submit()" %></b>
-															    </div>
-															<% end %>
-
-														    <% @cuenta = CuentaAlumno.where(['alumno_id = ?',t.id]).first rescue nil %>
-														    <% @titular = TitularCuenta.where(['usuario_id = ? AND cuenta_id = ?',current_usuario.id,@cuenta.cuenta_id]).first rescue nil %>
-														    <% if @titular != nil && (@actividad.fecha == nil || @actividad.fecha >= DateTime.now ) %>
-
-														    	<% arreglo = a.opciones() %>
-														    	<% p arreglo %>
-
-																<% if arreglo[:opciones].count > 0 %>
-
-																	<%= form_for(@y, as: :actividad_alumno, url: principal_autorizar_path(:actividad)) do |f| %>
-
-
-																		<div id="textoRegistrarse">							
-																	    <% if arreglo[:elecciones][a.opcion] != nil %>
-																	    	<b><%= p arreglo[:elecciones][a.opcion] %></b>
-																	    <% else %>
-																	    	<b><%= p "" %><b>
-																	    <% end %><br><br>
-
-															            <%= f.hidden_field :alumno_id, value: t.id %>
-															            <%= f.hidden_field :actividad_id, value: a.actividad_id %>
-
-																		
-																		<%= f.select :opcion, options_for_select(arreglo[:opciones], a.opcion)  %><br><br>
-															            <%= f.submit "Confirmar"  %>
-																		</div>
-
-																	<% end %>												
-																<% end %>	
-																<br>
-															<% end %>
-														<% end %>
-													<% end %>
-												<% end %>
-												
-
-
-											</div>
-										<% end %>
-										<div class="clearfix"></div>
-									</div>
-								</div>
-							</div>
-							<div class="clearfix"></div>
-						<% end %>
-					<% end %>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-
+<%= render 'recuadro', locals: { titulo: 'Inscripciones', form: 'inscripciones' }  %>
 
 <div class="container">
 	<div class="row">
