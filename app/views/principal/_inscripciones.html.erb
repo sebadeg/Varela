@@ -1,0 +1,44 @@
+<%= form_for(@usuario, as: :usuario, url: principal_validarregistro_path(:usuario)) do |f| %>
+	<div class="col-md-12 col-sm-12 col-xs-12 content-table">
+		<div class="panel-group sub-grupo">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<%= link_to "Titular 1", "#collapse_" + locals[:form] + "_titular_1", "data-toggle" => "collapse" %>
+					</h4>
+				</div>										
+				<%= content_tag :div, id: "collapse_" + locals[:form] + "_titular_1", class: ["panel-collapse", "collapse", "collapse" ] do %>
+					<div class="col-md-12 col-sm-12 col-xs-12 content-table">
+						<%= f.label "Nombre completo" %><br>
+						<%= f.label "Documento de identidad" %><br>
+						<%= f.label "Domicilio" %><br>
+						<%= f.label "Mail" %><br>
+						<%= f.label "Tel/Cel" %><br>
+					</div>
+				<% end %>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-12 col-sm-12 col-xs-12 content-table">
+		<div class="panel-group sub-grupo">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<%= link_to "Titular 2", "#collapse_" + locals[:form] + "_titular_2", "data-toggle" => "collapse" %>
+					</h4>
+				</div>										
+				<%= content_tag :div, id: "collapse_" + locals[:form] + "_titular_2", class: ["panel-collapse", "collapse", "collapse" ] do %>
+					<div class="col-md-12 col-sm-12 col-xs-12 content-table">
+						<%= f.label "Nombre completo" %><br>
+						<%= f.label "Documento de identidad" %><br>
+						<%= f.label "Domicilio" %><br>
+						<%= f.label "Mail" %><br>
+						<%= f.label "Tel/Cel" %><br>
+					</div>
+				<% end %>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+	</div>
+<% end %>

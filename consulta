@@ -62,3 +62,8 @@ DELETE FROM movimientos WHERE cuenta_id=11646 AND tipo=1000;
 --SELECT DISTINCT cuenta_id FROM movimientos WHERE NOT valido AND cuenta_id IN (SELECT cuenta_id FROM (SELECT cuenta_id, sum(debe-haber) AS s FROM movimientos WHERE fecha<'2018-05-01' GROUP BY cuenta_id) AS t WHERE abs(s)<100) ORDER BY cuenta_id
 
 SELECT * FROM public.movimientos WHERE cuenta_id=11651 ORDER BY fecha ASC
+
+
+
+SELECT usuarios.email as e FROM usuarios INNER JOIN titular_cuentas ON usuarios.id=titular_cuentas.usuario_id 
+WHERE titular_cuentas.cuenta_id IN (SELECT DISTINCT alumno_id/10 FROM actividad_alumnos WHERE actividad_id=76)

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180623022205) do
+ActiveRecord::Schema.define(version: 20180731011559) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -115,6 +115,26 @@ ActiveRecord::Schema.define(version: 20180623022205) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "conceptos", force: :cascade do |t|
+    t.string   "nombre"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "convenio_alumnos", force: :cascade do |t|
+    t.integer  "alumno"
+    t.integer  "convenio"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "convenios", force: :cascade do |t|
+    t.string   "nombre"
+    t.decimal  "valor"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "cuenta_alumnos", force: :cascade do |t|
     t.integer  "cuenta_id"
     t.integer  "alumno_id"
@@ -128,6 +148,8 @@ ActiveRecord::Schema.define(version: 20180623022205) do
   create_table "cuentas", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "nombre"
+    t.string   "apellido"
   end
 
   create_table "especial_alumnos", force: :cascade do |t|
@@ -210,6 +232,31 @@ ActiveRecord::Schema.define(version: 20180623022205) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "inscripcion_alumnos", force: :cascade do |t|
+    t.integer  "alumno_id"
+    t.integer  "grado_id"
+    t.integer  "convenio_id"
+    t.integer  "hermanos"
+    t.integer  "cuotas"
+    t.integer  "mes"
+    t.string   "nombre1"
+    t.integer  "documento1"
+    t.string   "domicilio1"
+    t.string   "email1"
+    t.string   "celular1"
+    t.string   "nombre2"
+    t.integer  "documento2"
+    t.string   "domicilio2"
+    t.string   "email2"
+    t.string   "celular2"
+    t.boolean  "registrado"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["alumno_id"], name: "index_inscripcion_alumnos_on_alumno_id", using: :btree
+    t.index ["convenio_id"], name: "index_inscripcion_alumnos_on_convenio_id", using: :btree
+    t.index ["grado_id"], name: "index_inscripcion_alumnos_on_grado_id", using: :btree
+  end
+
   create_table "linea_facturas", force: :cascade do |t|
     t.integer  "factura_id"
     t.integer  "alumno_id"
@@ -248,13 +295,17 @@ ActiveRecord::Schema.define(version: 20180623022205) do
     t.decimal  "debe"
     t.decimal  "haber"
     t.integer  "tipo"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
-    t.boolean  "pendiente",   default: true
-    t.boolean  "valido",      default: false
-    t.boolean  "duda",        default: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.boolean  "pendiente",      default: true
+    t.boolean  "valido",         default: false
+    t.boolean  "duda",           default: false
+    t.integer  "pago_cuenta_id"
+    t.integer  "concepto_id"
+    t.index ["concepto_id"], name: "index_movimientos_on_concepto_id", using: :btree
     t.index ["cuenta_id", "fecha"], name: "index_movimientos_on_cuenta_id_and_fecha", using: :btree
     t.index ["cuenta_id"], name: "index_movimientos_on_cuenta_id", using: :btree
+    t.index ["pago_cuenta_id"], name: "index_movimientos_on_pago_cuenta_id", using: :btree
     t.index ["pendiente"], name: "index_movimientos_on_pendiente", using: :btree
   end
 
@@ -288,6 +339,30 @@ ActiveRecord::Schema.define(version: 20180623022205) do
     t.boolean  "procesado"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "proximo_grado_alumnos", force: :cascade do |t|
+    t.integer  "alumno_id"
+    t.integer  "grado_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["alumno_id"], name: "index_proximo_grado_alumnos_on_alumno_id", using: :btree
+    t.index ["grado_id"], name: "index_proximo_grado_alumnos_on_grado_id", using: :btree
+  end
+
+  create_table "sinregistro_cuentas", force: :cascade do |t|
+    t.integer  "cuenta_id"
+    t.string   "mail"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cuenta_id"], name: "index_sinregistro_cuentas_on_cuenta_id", using: :btree
+  end
+
+  create_table "tareas", force: :cascade do |t|
+    t.string   "descripcion"
+    t.boolean  "realizada"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "titular_cuentas", force: :cascade do |t|
@@ -338,22 +413,30 @@ ActiveRecord::Schema.define(version: 20180623022205) do
   add_foreign_key "cuenta_alumnos", "alumnos"
   add_foreign_key "cuenta_alumnos", "cuentas"
   add_foreign_key "especial_alumnos", "alumnos"
-  add_foreign_key "especial_alumnos", "especiales"
+  add_foreign_key "especial_alumnos", "especiales", column: "especial_id"
   add_foreign_key "especial_cuentas", "cuentas"
-  add_foreign_key "especial_cuentas", "especiales"
+  add_foreign_key "especial_cuentas", "especiales", column: "especial_id"
   add_foreign_key "especiales", "codigos"
   add_foreign_key "facturas", "cuentas"
   add_foreign_key "grado_alumnos", "alumnos"
   add_foreign_key "grado_alumnos", "grados"
+  add_foreign_key "inscripcion_alumnos", "alumnos"
+  add_foreign_key "inscripcion_alumnos", "convenios"
+  add_foreign_key "inscripcion_alumnos", "grados"
   add_foreign_key "linea_facturas", "alumnos"
   add_foreign_key "linea_facturas", "facturas"
   add_foreign_key "lista_alumnos", "alumnos"
   add_foreign_key "lista_alumnos", "listas"
+  add_foreign_key "movimientos", "conceptos"
   add_foreign_key "movimientos", "cuentas"
+  add_foreign_key "movimientos", "pago_cuentas"
   add_foreign_key "padre_alumnos", "alumnos"
   add_foreign_key "padre_alumnos", "usuarios"
   add_foreign_key "pago_cuentas", "cuentas"
   add_foreign_key "pago_cuentas", "pagos"
+  add_foreign_key "proximo_grado_alumnos", "alumnos"
+  add_foreign_key "proximo_grado_alumnos", "grados"
+  add_foreign_key "sinregistro_cuentas", "cuentas"
   add_foreign_key "titular_cuentas", "cuentas"
   add_foreign_key "titular_cuentas", "usuarios"
 end
