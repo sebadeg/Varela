@@ -18,7 +18,7 @@
 												<%= link_to t.nombre + " " + t.apellido, "#collapse" + locals[:form] + t.id.to_s, "data-toggle" => "collapse" %>
 											</h4>
 										</div>										
-										<%= content_tag :div, id: "collapse" + locals[:form] + t.id.to_s, class: ["panel-collapse", "collapse", "collapse"] do %>
+										<%= content_tag :div, id: "collapse" + locals[:form] + t.id.to_s, class: ["panel-collapse", "collapse", "collapse", "in"] do %>
 											<div class="col-md-12 col-sm-12 col-xs-12 content-table">
 												<%= render locals[:form], locals: { form: locals[:form] + "_" + t.id.to_s, alumno: t }  %>
 											</div>
