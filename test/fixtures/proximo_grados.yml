@@ -1,7 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  alumno_id: 1
+  nombre: MyString
+  precio: 9.99
 
 two:
-  alumno_id: 1
+  nombre: MyString
+  precio: 9.99

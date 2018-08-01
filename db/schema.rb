@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180731011559) do
+ActiveRecord::Schema.define(version: 20180801021912) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -117,13 +117,6 @@ ActiveRecord::Schema.define(version: 20180731011559) do
 
   create_table "conceptos", force: :cascade do |t|
     t.string   "nombre"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "convenio_alumnos", force: :cascade do |t|
-    t.integer  "alumno"
-    t.integer  "convenio"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -343,11 +336,18 @@ ActiveRecord::Schema.define(version: 20180731011559) do
 
   create_table "proximo_grado_alumnos", force: :cascade do |t|
     t.integer  "alumno_id"
-    t.integer  "grado_id"
+    t.integer  "grado"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["alumno_id"], name: "index_proximo_grado_alumnos_on_alumno_id", using: :btree
-    t.index ["grado_id"], name: "index_proximo_grado_alumnos_on_grado_id", using: :btree
+  end
+
+  create_table "proximo_grados", force: :cascade do |t|
+    t.string   "nombre"
+    t.decimal  "precio"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "grado"
   end
 
   create_table "sinregistro_cuentas", force: :cascade do |t|
@@ -435,7 +435,6 @@ ActiveRecord::Schema.define(version: 20180731011559) do
   add_foreign_key "pago_cuentas", "cuentas"
   add_foreign_key "pago_cuentas", "pagos"
   add_foreign_key "proximo_grado_alumnos", "alumnos"
-  add_foreign_key "proximo_grado_alumnos", "grados"
   add_foreign_key "sinregistro_cuentas", "cuentas"
   add_foreign_key "titular_cuentas", "cuentas"
   add_foreign_key "titular_cuentas", "usuarios"
