@@ -1,4 +1,11 @@
-<%= form_for(@usuario, as: :usuario, url: principal_validarregistro_path(:usuario)) do |f| %>
+<% alu = locals[:alumno] %>
+<% inscripcionAlumno = InscripcionAlumno.find_by( alumno_id: alu.id ) %>
+
+<%= form_for(inscripcionAlumno, as: :inscripcionAlumno, url: principal_inscribir_path(:inscripcionAlumno)) do |f| %>
+	<%= f.label "Convenio: " %>	
+	<%= f.label inscripcionAlumno.convenio_id %>
+	<br>
+
 	<div class="col-md-12 col-sm-12 col-xs-12 content-table">
 		<div class="panel-group sub-grupo">
 			<div class="panel panel-default">

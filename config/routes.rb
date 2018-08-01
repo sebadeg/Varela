@@ -39,6 +39,7 @@ Rails.application.routes.draw do
   patch 'principal/validarregistro'
   patch 'principal/enviarpassword'
 
+  patch 'principal/inscribir'
 
   root 'principal#index'
 end

@@ -36,6 +36,9 @@ class PrincipalController < ApplicationController
   end
 
   def index
+
+
+
     @x = Actividad.new()
     @y = ActividadAlumno.new()
     @usuario = Usuario.new()
@@ -401,5 +404,11 @@ class PrincipalController < ApplicationController
     
   # end
 
+  def inscribir
+
+    p "Inscribir"
+
+    redirect_to root_path
+  end
 
 end
