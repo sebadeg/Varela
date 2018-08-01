@@ -378,7 +378,8 @@ class PrincipalController < ApplicationController
 
       file = Tempfile.new("factura.pdf")
 
-      factura.imprimir(file.path,cuenta_id,factura)
+      #factura.imprimir(file.path,cuenta_id,factura)
+      factura.vale(file.path,cuenta_id)
 
       send_file(
         file.path,
