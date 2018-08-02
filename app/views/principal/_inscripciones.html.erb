@@ -3,16 +3,6 @@
 
 <%= form_for(inscripcionAlumno, as: :inscripcionAlumno, url: principal_inscribir_path(:inscripcionAlumno)) do |f| %>
 	
-	<div class="col-md-12 col-sm-12 col-xs-12 content-table">
-		<div class="panel-group sub-grupo">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h4 class="panel-title">
-						<%= link_to "Grado", "#collapse_" + locals[:form] + "_grado", "data-toggle" => "collapse" %>
-					</h4>
-				</div>	
-
-				<%= content_tag :div, id: "collapse_" + locals[:form] + "_grado", class: ["panel-collapse", "collapse", "collapse", "in" ] do %>
 					<div class="col-md-12 col-sm-12 col-xs-12 content-table">
 						<div class="panel-body">
 							
@@ -140,13 +130,5 @@
 
 						</div>
 					</div>
-				<% end %>
-				<div class="clearfix"></div>
-			</div>
-		</div>
-	</div>
-
-	<div class="col-md-12 col-sm-12 col-xs-12 content-table">
-
 
 <% end %>
