@@ -381,8 +381,8 @@ class PrincipalController < ApplicationController
 
       file = Tempfile.new("factura.pdf")
 
-      #factura.imprimir(file.path,cuenta_id,factura)
-      factura.vale(file.path,cuenta_id)
+      factura.imprimir(file.path,cuenta_id,factura)
+      
 
       send_file(
         file.path,
@@ -408,7 +408,40 @@ class PrincipalController < ApplicationController
 
     p "Inscribir"
 
-    redirect_to root_path
+    id = params[:inscripcionAlumno][:id]
+    inscripcionAlumno = InscripcionAlumno.find(id)
+    inscripcionAlumno.grado = params[:inscripcionAlumno][:grado]
+    inscripcionAlumno.convenio_id = params[:inscripcionAlumno][:convenio_id]
+    inscripcionAlumno.cuotas = params[:inscripcionAlumno][:cuotas]
+    inscripcionAlumno.hermanos = params[:inscripcionAlumno][:hermanos]
+
+    inscripcionAlumno.nombre1 = params[:inscripcionAlumno][:nombre1]
+    inscripcionAlumno.documento1 = params[:inscripcionAlumno][:documento1]
+    inscripcionAlumno.domicilio1 = params[:inscripcionAlumno][:domicilio1]
+    inscripcionAlumno.celular1 = params[:inscripcionAlumno][:celular1]
+    inscripcionAlumno.email1 = params[:inscripcionAlumno][:email1]
+
+    inscripcionAlumno.nombre2 = params[:inscripcionAlumno][:nombre2]
+    inscripcionAlumno.documento2 = params[:inscripcionAlumno][:documento2]
+    inscripcionAlumno.domicilio2 = params[:inscripcionAlumno][:domicilio2]
+    inscripcionAlumno.celular2 = params[:inscripcionAlumno][:celular2]
+    inscripcionAlumno.email2 = params[:inscripcionAlumno][:email2]
+
+    inscripcionAlumno.save!
+
+
+
+
+
+    factura = Factura.all.first
+
+    file = Tempfile.new("factura.pdf")
+    factura.vale(file.path,id)
+    send_file(
+        file.path,
+        filename: "vale_#{inscripcionAlumno.alumno_id}.pdf",
+        type: "application/pdf"
+      )
   end
 
 end

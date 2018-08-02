@@ -253,20 +253,44 @@ class Factura < ApplicationRecord
       return s
     end
 
-    def vale(file_path,cuenta_id)
+    def vale(file_path,inscripcionAlumno_id)
+
+      inscripcionAlumno = InscripcionAlumno.find(inscripcionAlumno_id)
+
+      convenio = Convenio.find(inscripcionAlumno.convenio_id)
 
 
-      importe_total = 255480
+      importe_total = ProximoGrado.find_by(id: inscripcionAlumno.grado).precio 
+
+      importe_total = importe_total * ( 100 - convenio.valor ) / 100
+      if  (inscripcionAlumno.hermanos == 1 )
+        importe_total = importe_total * 0.95
+      elsif  (inscripcionAlumno.hermanos == 2 )
+        importe_total = importe_total * 0.9
+      end
+      importe_total = (importe_total + 0.5).to_i
+
       importe_letras = numero_a_letras(importe_total,true)
-      cuotas = 12
-      importe_cuota = importe_total/cuotas
-      mes = 'Enero'
-      anio = 2019
+      cuotas = inscripcionAlumno.cuotas
+      importe_cuota = (importe_total/cuotas+0.5).to_i
+
+      if ( inscripcionAlumno.mes == 12 )
+        desde = DateTime.new(2018,12,10)
+        anio = 2018
+      else
+        desde = DateTime.new(2019,inscripcionAlumno.mes,10)
+        anio = 2019
+      end
+
+      mes = I18n.l(DateTime.new(2018,12,10), format: '%B')
+
+      hoy = DateTime.now
+      hoyS = "#{hoy.day} de #{hoy.month} de #{hoy.year}"
 
       cabezal = 
         "$U <b>#{importe_total}</b>" + 
         "<br><br>" +
-        "Lugar y fecha de emisión: <b>Montevideo, 22 de Julio de 2018</b>";
+        "Lugar y fecha de emisión: <b>Montevideo, #{I18n.l(DateTime.now, format: '%-d de %B de %Y')}</b>";
       texto =
         "<b>VALE AMORTIZABLE</b> por la cantidad de pesos uruguayos <b>#{importe_letras}</b> que debo (debemos) y pagaré (pagaremos) en forma indivisible y solidaria a la Sociedad Uruguaya de Enseñanza, Colegio Nacional José Pedro Varela - o a su orden, en la misma moneda, en <b>#{cuotas}</b> cuotas mensuales, iguales y consecutivas de $U <b>#{importe_cuota}</b> cada una, venciendo la primera el día 10 de <b>#{mes}</b> del <b>#{anio}</b>, en el domicilio del acreedor sito en la calle Colonia 1637 de la ciudad de Montevideo, o donde indique el acreedor." +
         "<br><br>" + 
@@ -276,19 +300,19 @@ class Factura < ApplicationRecord
         "<br><br>" + 
         "Para todos los efectos judiciales y/o extrajudiciales a que pudiera dar lugar éste documento, el deudor constituye como domicilio especial el abajo denunciado." +
         "<br><br><br>" + 
-        "NOMBRE COMPLETO:<br><br>" +
-        "DOCUMENTO DE IDENTIDAD:<br><br>" +
-        "DOMICILIO:<br><br>" +
-        "MAIL:<br><br>" +
-        "TEL/CEL:<br><br>" +
+        "NOMBRE COMPLETO: #{inscripcionAlumno.nombre1}<br><br>" +
+        "DOCUMENTO DE IDENTIDAD: #{inscripcionAlumno.documento1}<br><br>" +
+        "DOMICILIO: #{inscripcionAlumno.domicilio1}<br><br>" +
+        "MAIL: #{inscripcionAlumno.email1}<br><br>" +
+        "TEL/CEL: #{inscripcionAlumno.celular1}<br><br>" +
         "FIRMA:<br><br>" +
         "Aclaración:<br><br>" +
         "<br><br>" +
-        "NOMBRE COMPLETO:<br><br>" +
-        "DOCUMENTO DE IDENTIDAD:<br><br>" +
-        "DOMICILIO:<br><br>" +
-        "MAIL:<br><br>" +
-        "TEL/CEL:<br><br>" +
+        "NOMBRE COMPLETO: #{inscripcionAlumno.nombre2}<br><br>" +
+        "DOCUMENTO DE IDENTIDAD: #{inscripcionAlumno.documento2}<br><br>" +
+        "DOMICILIO: #{inscripcionAlumno.domicilio2}<br><br>" +
+        "MAIL: #{inscripcionAlumno.email2}<br><br>" +
+        "TEL/CEL: #{inscripcionAlumno.celular2}<br><br>" +
         "FIRMA:<br><br>" +
         "Aclaración:<br><br>";
 
