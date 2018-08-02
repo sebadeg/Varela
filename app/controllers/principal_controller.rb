@@ -439,7 +439,7 @@ class PrincipalController < ApplicationController
     factura.vale(file.path,id)
     send_file(
         file.path,
-        filename: "vale_#{inscripcionAlumno.alumno_id}.pdf",
+        filename: "reinscripcion_#{inscripcionAlumno.alumno_id}.pdf",
         type: "application/pdf"
       )
   end

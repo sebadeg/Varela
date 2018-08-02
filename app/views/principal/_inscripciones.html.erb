@@ -56,7 +56,7 @@
 							<div class="form-group">
 								<%= f.label "Cuotas: " %>
 								<% opcionesCuotas = Array.new %>
-								<% (1..12).each do |cuota| %>
+								<% (10..12).each do |cuota| %>
 									<% opcionesCuotas.push( [cuota.to_s,cuota] ) %>
 								<% end %>
 								<%= f.select :cuotas, options_for_select(opcionesCuotas, inscripcionAlumno.cuotas), {}, {class: 'form-control'}  %>
