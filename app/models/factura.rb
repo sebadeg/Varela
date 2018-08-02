@@ -282,7 +282,7 @@ class Factura < ApplicationRecord
         anio = 2019
       end
 
-      mes = I18n.l(DateTime.new(2018,12,10), format: '%B')
+      mes = I18n.l(desde, format: '%B')
 
       hoy = DateTime.now
       hoyS = "#{hoy.day} de #{hoy.month} de #{hoy.year}"
