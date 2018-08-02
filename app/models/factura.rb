@@ -256,45 +256,6 @@ class Factura < ApplicationRecord
     def vale(file_path,inscripcionAlumno_id)
 
   
-    File.open(Rails.root.join("data", 'numeros.txt'),'w') do |file| 
-
-      (1..69).each do |grado_id|
-        pg = ProximoGrado.find(grado_id)
-
-
-        precio = pg.precio
-        v = precio
-        p v.to_s + "-" numero_a_letras(v.to_i)
-
-        v = precio * ( 100 - 5 ) / 100
-        file.write(v.to_s + "\t" + numero_a_letras(v.to_i))
-
-        v = (precio * ( 100 - 5 ) / 100) * 0.95
-        file.write(v.to_s + "\t" + numero_a_letras(v.to_i))
-
-        v = (precio * ( 100 - 5 ) / 100) * 0.9
-        file.write(v.to_s + "\t" + numero_a_letras(v.to_i))
-
-        v = precio * ( 100 - 10 ) / 100
-        file.write(v.to_s + "\t" + numero_a_letras(v.to_i))
-
-        v = (precio * ( 100 - 10 ) / 100) * 0.95
-        file.write(v.to_s + "\t" + numero_a_letras(v.to_i))
-
-        v = (precio * ( 100 - 10 ) / 100) * 0.9
-        file.write(v.to_s + "\t" + numero_a_letras(v.to_i))
-
-        v = precio * ( 100 - 15 ) / 100
-        file.write(v.to_s + "\t" + numero_a_letras(v.to_i))
-
-        v = (precio * ( 100 - 15 ) / 100) * 0.95
-        file.write(v.to_s + "\t" + numero_a_letras(v.to_i))
-
-        v = (precio * ( 100 - 15 ) / 100) * 0.9
-        file.write(v.to_s + "\t" + numero_a_letras(v.to_i))
-
-      end
-    end
 
 
 
