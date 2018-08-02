@@ -62,17 +62,6 @@
 								<%= f.select :cuotas, options_for_select(opcionesCuotas, inscripcionAlumno.cuotas), {}, {class: 'form-control'}  %>
 							</div>
 
-							<%= f.submit "Inscribir", class: 'btn btn-primary' %>
-
-						</div>
-					</div>
-				<% end %>
-				<div class="clearfix"></div>
-			</div>
-		</div>
-	</div>
-
-	<div class="col-md-12 col-sm-12 col-xs-12 content-table">
 		<div class="panel-group sub-grupo">
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -110,8 +99,6 @@
 				<div class="clearfix"></div>
 			</div>
 		</div>
-	</div>
-	<div class="col-md-12 col-sm-12 col-xs-12 content-table">
 		<div class="panel-group sub-grupo">
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -148,6 +135,18 @@
 				<div class="clearfix"></div>
 			</div>
 		</div>
+
+							<%= f.submit "Inscribir", class: 'btn btn-primary' %>
+
+						</div>
+					</div>
+				<% end %>
+				<div class="clearfix"></div>
+			</div>
+		</div>
 	</div>
+
+	<div class="col-md-12 col-sm-12 col-xs-12 content-table">
+
 
 <% end %>
