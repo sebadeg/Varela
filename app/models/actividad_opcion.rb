@@ -1,2 +1,0 @@
-class ActividadOpcion < ApplicationRecord
-end

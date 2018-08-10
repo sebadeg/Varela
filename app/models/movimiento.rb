@@ -1,2 +1,0 @@
-class Movimiento < ApplicationRecord
-end

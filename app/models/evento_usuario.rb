@@ -1,2 +1,0 @@
-class EventoUsuario < ApplicationRecord
-end

@@ -1,2 +1,0 @@
-class ProximoGradoAlumno < ApplicationRecord
-end
