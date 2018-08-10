@@ -1,0 +1,2 @@
+class TitularCuenta < ApplicationRecord
+end

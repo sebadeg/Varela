@@ -1,0 +1,2 @@
+class ConvenioAlumno < ApplicationRecord
+end

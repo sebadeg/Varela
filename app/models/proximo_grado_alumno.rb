@@ -1,0 +1,2 @@
+class ProximoGradoAlumno < ApplicationRecord
+end

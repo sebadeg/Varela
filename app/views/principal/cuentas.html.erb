@@ -1,0 +1,170 @@
+<% if usuario_signed_in? && current_usuario.cedula == 16 %>
+
+<div class="container">
+	<div class="row">
+
+  		<div class="col-md-12 col-sm-12 col-xs-12">
+			<div class="panel-group">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+						<a data-toggle="collapse" href="#collapse1"><!--i class="far fa-credit-card"></i-->Alumnos</a>
+						</h4>
+					</div>
+
+					<% @alumnos.each do |t| %>
+						<div id="collapse1" class="panel-collapse collapse in">
+							<div class="col-md-12 col-sm-12 col-xs-12 content-table">
+								<!--CUADRO NOMBRE -->	
+								<div class="panel-group sub-grupo">
+				 					<div class="panel panel-default">
+										<div class="panel-heading">
+											<h4 class="panel-title">
+											<a data-toggle="collapse" href="#collapseu1"><%= t.nombre %></a>
+											</h4>
+										</div>										
+										<div id="collapseu1" class="panel-collapse collapse collapse in">
+											<div class="col-md-12 col-sm-12 col-xs-12 content-table">
+												
+		<% @act = ActividadAlumno.where(['alumno_id = ?',t.id]).order("actividad_id") %>
+		<% if (@act != nil) %>
+			<% @act.each do |a| %>
+				<% @actividad = Actividad.find(a.actividad_id) rescue nil %>
+				<% if @actividad != nil && (@actividad.fechainfo == nil || @actividad.fechainfo >= DateTime.now ) %>
+				    <br>
+					
+					<%= form_for(@x, as: :actividad, url: principal_download_pdf_path(:actividad), :html => {:id=>'form_download_' + a.actividad_id.to_s}) do |f| %>
+			           <%= f.hidden_field :archivo, value: @actividad.archivo %>
+					    <div id="textoRegistrarse">
+
+							<b><%= link_to "Descargar información: " + @actividad.descripcion, "", :onclick => "$('#form_download_" + a.actividad_id.to_s + "').submit()" %></b>
+					    </div>
+					<% end %>
+
+				    <% @cuenta = CuentaAlumno.where(['alumno_id = ?',t.id]).first rescue nil %>
+				    <% @titular = TitularCuenta.where(['usuario_id = ? AND cuenta_id = ?',current_usuario.id,@cuenta.cuenta_id]).first rescue nil %>
+				    <% if @titular != nil && (@actividad.fecha == nil || @actividad.fecha >= DateTime.now ) %>
+
+						<% arreglo = Array.new %>
+						<% ActividadOpcion.where(["actividad_id = ?",a.actividad_id]).each do |s| %>
+							<% arreglo.push( [s.opcion,s.valor] ) %>
+						<% end %>
+
+						<% if arreglo.count > 0 %>
+
+							<%= form_for(@y, as: :actividad_alumno, url: principal_autorizar_path(:actividad)) do |f| %>
+
+
+								<div id="textoRegistrarse">							
+								<% actOpc = ActividadOpcion.where(['actividad_id = ? AND valor = ?',a.actividad_id,a.opcion]).first rescue nil %>
+								<% p actOpc %>
+							    <% if actOpc != nil %>
+							    	<b><%= p actOpc.eleccion %></b>
+							    <% else %>
+							    	<b><%= p "No está autorizado" %><b>
+							    <% end %><br><br>
+
+					            <%= f.hidden_field :alumno_id, value: t.id %>
+					            <%= f.hidden_field :actividad_id, value: a.actividad_id %>
+
+								
+								<%= f.select :opcion, options_for_select(arreglo, a.opcion)  %><br><br>
+					            <%= f.submit "Confirmar"  %>
+								</div>
+
+							<% end %>												
+						<% end %>	
+						<br>
+					<% end %>
+				<% end %>
+			<% end %>
+		<% end %>
+												
+
+
+											</div>
+										</div>
+										<div class="clearfix"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="clearfix"></div>
+					<% end %>
+
+				</div>
+			</div>
+		</div>
+
+  		<div class="col-md-12 col-sm-12 col-xs-12">
+			<div class="panel-group">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+						<a data-toggle="collapse" href="#collapses1">Cuenta Corriente</a>
+						</h4>
+					</div>
+
+					<div id="collapses1" class="panel-collapse collapse">
+						<div class="col-md-12 col-sm-12 col-xs-12 content-table">
+							<!--CUADRO NOMBRE -->	
+							<div class="panel-group sub-grupo">
+			 					<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+										<a data-toggle="collapse" href="#collapses2">Cuenta: <%= @cuenta_id %></a>
+										</h4>
+									</div>										
+									<div id="collapses2" class="panel-collapse collapse collapse">
+										<div class="col-md-12 col-sm-12 col-xs-12 content-table">
+											
+							<% if @movimientos != nil %>
+								<table class="table table-hover" id="tabla" width="100%">
+									<tr>
+									<th><%= "Fecha" %></td>									
+									<th><%= "Descripción" %></td>
+									<th><%= "Debe" %></td>
+									<th><%= "Haber" %></td>
+									</tr>
+
+
+								<% primero = true %>
+								<% suma = 0 %>
+								<% @movimientos.each do |m| %>
+									<tr>
+									<% if m.tipo != -1 %>
+										<% suma = suma + m.debe - m.haber %>
+									<% end %>
+									<td><%= m.fecha %></td>									
+									<td><%= m.descripcion %></td>
+									<td><% if m.debe != 0 %><%= m.debe %><% end %></td>
+									<td><% if m.haber != 0 %><%= m.haber %><% end %></td>
+									</tr>
+								<% end %>
+								<tr>
+								<td></td>
+								<td>Saldo</td>
+								<td><%= suma %></td>
+								<td></td>
+								</tr>
+								</table>
+							<% end %>
+
+										</div>
+									</div>
+									<div class="clearfix"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+<% end %>
+
+

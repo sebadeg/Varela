@@ -1,0 +1,29 @@
+Se ha registrado un nuevo usuario.<br>
+<br>
+Nombre: <%= p @usuario.nombres + " " + @usuario.apellidos %><br>
+Teléfono: <%= p @usuario.telefono %><br>
+Celular: <%= p @usuario.celular %><br>
+Dirección: <%= p @usuario.direccion %><br>
+Nacimiento: <%= p @usuario.nacimiento.strftime('%d/%m/%Y') %><br>
+Nacionalidad: <%= p @usuario.nacionalidad %><br>
+Mail: <%= p @usuario.email %><br>
+Horarios: <%= p @usuario.horarios %><br>
+Universidad completa: 
+<% if @usuario.universidad_completa %>
+<%= p "Si" %>
+<% else %>
+<%= p "No" %>
+<% end %><br>
+Universidad incompleta: 
+<% if @usuario.universidad_incompleta %>
+<%= p "Si" %>
+<% else %>
+<%= p "No" %>
+<% end %><br>
+Trabajo actual: <%= p @usuario.trabajo %><br>
+Ultimo trabajo: <%= p @usuario.ultimo_trabajo %><br>
+Comentarios: <%= p @usuario.comentarios %><br>
+<br>
+Saludos cordiales,<br>
+<br>
+Equipo de Soporte

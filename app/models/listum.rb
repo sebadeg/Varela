@@ -1,0 +1,2 @@
+class Listum < ApplicationRecord
+end
