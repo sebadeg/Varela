@@ -6,13 +6,13 @@ class Factura < ApplicationRecord
     #require 'barby/barcode/code_39'
     require 'barby/outputter/png_outputter'
 
-    # def digito(s)
-    #   suma = 0
-    #   (0..(s.length-1)).each do |i|
-    #     suma = suma + s[i,1].to_i
-    #   end
-    #   return 9-(suma%10)
-    # end
+    def digito(s)
+      suma = 0
+      (0..(s.length-1)).each do |i|
+        suma = suma + s[i,1].to_i
+      end
+      return 9-(suma%10)
+    end
 
 
     def imprimir(file_path,cuenta_id,factura)
@@ -23,7 +23,7 @@ class Factura < ApplicationRecord
         (factura.total * 100).to_i.to_s.rjust(8,'0') +
         factura.fecha_vencimiento.strftime('%Y%m%d')         
       
-      dig = "0" #digito(s).to_s
+      dig = digito(s).to_s
 
       codigo_barras = '*JP' + s + "00" + dig + '*'
 
