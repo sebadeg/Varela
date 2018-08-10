@@ -1,2 +1,0 @@
-class Convenio < ApplicationRecord
-end
