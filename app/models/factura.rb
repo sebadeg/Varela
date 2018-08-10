@@ -14,7 +14,6 @@ class Factura < ApplicationRecord
       return 9-(suma%10)
     end
 
-    #Test
 
     def imprimir(file_path,cuenta_id,factura)
 
