@@ -1,0 +1,37 @@
+<div class="container">
+	<div class="row">
+  		<div class="col-md-12 col-sm-12 col-xs-12">
+			<div class="panel-group">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<%= link_to locals[:titulo], "#collapse"+locals[:form], "data-toggle" => "collapse" %>
+						</h4>
+					</div>
+					<%= content_tag :div, id: "collapse"+locals[:form], class: ["panel-collapse", "collapse", "collapse"] do %>	
+						<% @alumnos.each do |t| %>
+							<div class="col-md-12 col-sm-12 col-xs-12 content-table">
+								<div class="panel-group sub-grupo">
+				 					<div class="panel panel-default">
+										<div class="panel-heading">
+											<h4 class="panel-title">
+												<%= link_to t.nombre + " " + t.apellido, "#collapse" + locals[:form] + t.id.to_s, "data-toggle" => "collapse" %>
+											</h4>
+										</div>										
+										<%= content_tag :div, id: "collapse" + locals[:form] + t.id.to_s, class: ["panel-collapse", "collapse", "collapse", "in"] do %>
+											<div class="col-md-12 col-sm-12 col-xs-12 content-table">
+												<%= render locals[:form], locals: { form: locals[:form] + "_" + t.id.to_s, alumno: t }  %>
+											</div>
+										<% end %>
+										<div class="clearfix"></div>
+									</div>
+								</div>
+							</div>
+							<div class="clearfix"></div>
+						<% end %>
+					<% end %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
