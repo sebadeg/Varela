@@ -21,7 +21,7 @@ class Factura < ApplicationRecord
         factura.id.to_s.rjust(6,'0') +
         cuenta_id.to_s.rjust(5,'0') + 
         (factura.total * 100).to_i.to_s.rjust(8,'0') +
-        factura.fecha_vencimiento.strftime('%Y%m%d')         
+        factura.fecha_vencimiento.strftime('%Y%m%d')
       
       dig = digito(s).to_s
 
