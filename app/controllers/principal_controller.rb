@@ -465,6 +465,8 @@ class PrincipalController < ApplicationController
         inscripcionAlumno.documento2 = nil
         inscripcionAlumno.registrado = false
       end
+    else
+      inscripcionAlumno.documento2 = nil
     end
     inscripcionAlumno.domicilio2 = params[:inscripcionAlumno][:domicilio2]
     inscripcionAlumno.celular2 = params[:inscripcionAlumno][:celular2]
@@ -482,7 +484,7 @@ class PrincipalController < ApplicationController
       return
     end
 
-    if params[:inscripcionAlumno][:documento2] != nil && params[:inscripcionAlumno][:documento2] != "" && inscripcionAlumno.documento2 == nil 
+    if params[:inscripcionAlumno][:documento2] != nil && inscripcionAlumno.documento2 == nil 
       redirect_to principal_index_path, alert: "Cédula de titular 2 incorrecta"
       return
     end
