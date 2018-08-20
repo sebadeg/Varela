@@ -253,6 +253,7 @@ class Factura < ApplicationRecord
     def cedula_tos(cedula)
       if ( cedula == nil )
         return ""
+      end
       return (cedula/10).to_s + "-" + (cedula%10).to_s
     end
 
