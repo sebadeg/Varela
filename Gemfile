@@ -43,7 +43,7 @@ gem 'jquery-turbolinks'
 
 gem 'devise'
 gem 'twitter-bootstrap-rails'
-gem 'devise-bootstrap-views', '~> 1.0.0.alpha1'
+gem 'devise-bootstrap-views', '~> 0.0.11'
 
 
 gem 'prawn', '~> 2.2', '>= 2.2.2'
