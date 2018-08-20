@@ -85,9 +85,10 @@
 									<% opcionesMatricula = Array.new %>
 									<% if DateTime.now < DateTime.new(2018,10,1)  %>
 										<% opcionesMatricula.push( ["Contado - 20% descuento en la matrícula",0] ) %>
-									<% else %>
-										<% opcionesMatricula.push( ["Contado",1] ) %>
 									<% end %>
+									
+									<% opcionesMatricula.push( ["Contado",1] ) %>
+
 									<% if DateTime.now < DateTime.new(2018,11,1)  %>
 										<% opcionesMatricula.push( ["2 cuotas",2] ) %>
 									<% end %>
