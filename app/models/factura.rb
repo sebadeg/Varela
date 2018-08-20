@@ -249,6 +249,13 @@ class Factura < ApplicationRecord
       return s
     end
 
+
+    def cedula_tos(cedula)
+      if ( cedula == nil )
+        return ""
+      return (cedula/10).to_s + "-" + (cedula%10).to_s
+    end
+
     def vale(file_path,inscripcionAlumno_id)
 
   
@@ -296,7 +303,7 @@ class Factura < ApplicationRecord
 
       if alumno != nil 
         nombre = alumno.nombre + " " + alumno.apellido
-        cedula = (inscripcionAlumno.cedula/10).to_s + "-" + (inscripcionAlumno.cedula%10).to_s
+        cedula = cedula_tos(inscripcionAlumno.cedula)
         
         grado = ProximoGrado.find(inscripcionAlumno.grado)
         if grado != nil
@@ -325,7 +332,7 @@ class Factura < ApplicationRecord
         "Para todos los efectos judiciales y/o extrajudiciales a que pudiera dar lugar éste documento, el deudor constituye como domicilio especial el abajo denunciado." +
         "<br><br><br>" + 
         "NOMBRE COMPLETO: #{inscripcionAlumno.nombre1}<br><br>" +
-        "DOCUMENTO DE IDENTIDAD: #{inscripcionAlumno.documento1}<br><br>" +
+        "DOCUMENTO DE IDENTIDAD: #{cedula_tos(inscripcionAlumno.documento1)}<br><br>" +
         "DOMICILIO: #{inscripcionAlumno.domicilio1}<br><br>" +
         "MAIL: #{inscripcionAlumno.email1}<br><br>" +
         "TEL/CEL: #{inscripcionAlumno.celular1}<br><br>" +
@@ -333,7 +340,7 @@ class Factura < ApplicationRecord
         "Aclaración:<br><br>" +
         "<br><br>" +
         "NOMBRE COMPLETO: #{inscripcionAlumno.nombre2}<br><br>" +
-        "DOCUMENTO DE IDENTIDAD: #{inscripcionAlumno.documento2}<br><br>" +
+        "DOCUMENTO DE IDENTIDAD: #{cedula_tos(inscripcionAlumno.documento2}<br><br>" +
         "DOMICILIO: #{inscripcionAlumno.domicilio2}<br><br>" +
         "MAIL: #{inscripcionAlumno.email2}<br><br>" +
         "TEL/CEL: #{inscripcionAlumno.celular2}<br><br>" +

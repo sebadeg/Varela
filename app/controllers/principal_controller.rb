@@ -447,13 +447,25 @@ class PrincipalController < ApplicationController
     inscripcionAlumno.matricula = params[:inscripcionAlumno][:matricula]
 
     inscripcionAlumno.nombre1 = params[:inscripcionAlumno][:nombre1]
-    inscripcionAlumno.documento1 = params[:inscripcionAlumno][:documento1]
+    if calc_cedula_digit(params[:inscripcionAlumno][:documento1].to_i)
+      inscripcionAlumno.documento1 = params[:inscripcionAlumno][:documento1]
+    else
+      inscripcionAlumno.documento1 = nil
+      inscripcionAlumno.registrado = false
+    end
     inscripcionAlumno.domicilio1 = params[:inscripcionAlumno][:domicilio1]
     inscripcionAlumno.celular1 = params[:inscripcionAlumno][:celular1]
     inscripcionAlumno.email1 = params[:inscripcionAlumno][:email1]
 
     inscripcionAlumno.nombre2 = params[:inscripcionAlumno][:nombre2]
-    inscripcionAlumno.documento2 = params[:inscripcionAlumno][:documento2]
+    if params[:inscripcionAlumno][:documento2] != nil
+      if calc_cedula_digit(params[:inscripcionAlumno][:documento2].to_i)
+        inscripcionAlumno.documento2 = params[:inscripcionAlumno][:documento2]
+      else
+        inscripcionAlumno.documento2 = nil
+        inscripcionAlumno.registrado = false
+      end
+    end
     inscripcionAlumno.domicilio2 = params[:inscripcionAlumno][:domicilio2]
     inscripcionAlumno.celular2 = params[:inscripcionAlumno][:celular2]
     inscripcionAlumno.email2 = params[:inscripcionAlumno][:email2]
@@ -461,7 +473,17 @@ class PrincipalController < ApplicationController
     inscripcionAlumno.save!
 
     if inscripcionAlumno.cedula == nil 
-      redirect_to principal_index_path, alert: "Cédula incorrecta"
+      redirect_to principal_index_path, alert: "Cédula de alumno incorrecta"
+      return
+    end
+
+    if inscripcionAlumno.documento1 == nil 
+      redirect_to principal_index_path, alert: "Cédula de titular 1 incorrecta"
+      return
+    end
+
+    if params[:inscripcionAlumno][:documento2] != nil && inscripcionAlumno.documento2 == nil 
+      redirect_to principal_index_path, alert: "Cédula de titular 2 incorrecta"
       return
     end
 
