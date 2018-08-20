@@ -48,32 +48,35 @@
 										<%= f.select :grado, options_for_select(opciones, inscripcionAlumno.grado), {}, {class: 'form-control'}  %>
 									<% end %>
 								</div>
-								<div class="form-group">
-									<%= f.label "Convenio: " %>
-									<% if inscripcionAlumno.convenio_id != 0 %>
-										<% opcionesConvenio = Array.new %>
-										<% Convenio.all.each do |convenio| %>
-											<% if convenio.id != 0 %>
-												<% opcionesConvenio.push( ["#{convenio.nombre} - #{convenio.valor.to_i}%",convenio.id] ) %>
+
+
+								<% if inscripcionAlumno.cuotas != 0 %>
+
+									<div class="form-group">
+										<%= f.label "Convenio: " %>
+										<% if inscripcionAlumno.convenio_id != 0 %>
+											<% opcionesConvenio = Array.new %>
+											<% Convenio.all.each do |convenio| %>
+												<% if convenio.id != 0 %>
+													<% opcionesConvenio.push( ["#{convenio.nombre} - #{convenio.valor.to_i}%",convenio.id] ) %>
+												<% end %>
 											<% end %>
+											<%= f.select :convenio_id, options_for_select(opcionesConvenio, inscripcionAlumno.convenio_id), {}, {class: 'form-control'}  %>
+										<% else %>
+											<%= f.label "No aplica a este grado" %>	
+											<%= f.hidden_field :convenio_id, value: 0 %>
 										<% end %>
-										<%= f.select :convenio_id, options_for_select(opcionesConvenio, inscripcionAlumno.convenio_id), {}, {class: 'form-control'}  %>
-									<% else %>
-										<%= f.label "No aplica a este grado" %>	
-										<%= f.hidden_field :convenio_id, value: 0 %>
-									<% end %>
-								</div>
+									</div>
 
-								<div class="form-group">
-									<%= f.label "Adicional: " %>
-									<% opcionesHermanos = Array.new %>
-									<% opcionesHermanos.push( ["Sin hermanos",0] ) %>
-									<% opcionesHermanos.push( ["1 hermano - 5%",1] ) %>
-									<% opcionesHermanos.push( ["2 hermanos - 10%",2] ) %>
-									<%= f.select :hermanos, options_for_select(opcionesHermanos, inscripcionAlumno.hermanos), {}, {class: 'form-control'}  %>
-								</div>								
+									<div class="form-group">
+										<%= f.label "Adicional: " %>
+										<% opcionesHermanos = Array.new %>
+										<% opcionesHermanos.push( ["Sin hermanos",0] ) %>
+										<% opcionesHermanos.push( ["1 hermano - 5%",1] ) %>
+										<% opcionesHermanos.push( ["2 hermanos - 10%",2] ) %>
+										<%= f.select :hermanos, options_for_select(opcionesHermanos, inscripcionAlumno.hermanos), {}, {class: 'form-control'}  %>
+									</div>								
 
-								<% if inscripcionAlumno.cuotas == 0 %>
 
 									<div class="form-group">
 										<%= f.label "Cuotas: " %>
@@ -83,29 +86,28 @@
 										<% end %>
 										<%= f.select :cuotas, options_for_select(opcionesCuotas, inscripcionAlumno.cuotas), {}, {class: 'form-control'}  %>
 									</div>
+
+									<div class="form-group">
+										<%= f.label "Matrícula: " %>
+										<% opcionesMatricula = Array.new %>
+										<% if DateTime.now < DateTime.new(2018,10,1)  %>
+											<% opcionesMatricula.push( ["Contado en octubre - 20% descuento en la matrícula",0] ) %>
+										<% end %>
+										
+										<% opcionesMatricula.push( ["Contado en diciembre",1] ) %>
+
+										<% if DateTime.now < DateTime.new(2018,11,1)  %>
+											<% opcionesMatricula.push( ["2 cuotas a partir de noviembre",2] ) %>
+										<% end %>
+										<% if DateTime.now < DateTime.new(2018,10,1)  %>
+											<% opcionesMatricula.push( ["3 cuotas a partir de octubre",3] ) %>
+										<% end %>
+										<% if DateTime.now < DateTime.new(2018,9,1)  %>
+											<% opcionesMatricula.push( ["4 cuotas a partir de setiembre",4] ) %>
+										<% end %>
+										<%= f.select :matricula, options_for_select(opcionesMatricula, inscripcionAlumno.matricula), {}, {class: 'form-control'}  %>
+									</div>
 								<% end %>
-
-								<div class="form-group">
-									<%= f.label "Matrícula: " %>
-									<% opcionesMatricula = Array.new %>
-									<% if DateTime.now < DateTime.new(2018,10,1)  %>
-										<% opcionesMatricula.push( ["Contado en octubre - 20% descuento en la matrícula",0] ) %>
-									<% end %>
-									
-									<% opcionesMatricula.push( ["Contado en diciembre",1] ) %>
-
-									<% if DateTime.now < DateTime.new(2018,11,1)  %>
-										<% opcionesMatricula.push( ["2 cuotas a partir de noviembre",2] ) %>
-									<% end %>
-									<% if DateTime.now < DateTime.new(2018,10,1)  %>
-										<% opcionesMatricula.push( ["3 cuotas a partir de octubre",3] ) %>
-									<% end %>
-									<% if DateTime.now < DateTime.new(2018,9,1)  %>
-										<% opcionesMatricula.push( ["4 cuotas a partir de setiembre",4] ) %>
-									<% end %>
-									<%= f.select :matricula, options_for_select(opcionesMatricula, inscripcionAlumno.matricula), {}, {class: 'form-control'}  %>
-								</div>
-
 
 			<div class="panel-group sub-grupo">
 				<div class="panel panel-default">
