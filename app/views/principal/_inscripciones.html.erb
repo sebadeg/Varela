@@ -57,7 +57,7 @@
 								<div class="form-group">
 									<%= f.label "Adicional: " %>
 									<% opcionesHermanos = Array.new %>
-									<% opcionesHermanos.push( ["Sin hermanos - 0%",0] ) %>
+									<% opcionesHermanos.push( ["Sin hermanos",0] ) %>
 									<% opcionesHermanos.push( ["1 hermano - 5%",1] ) %>
 									<% opcionesHermanos.push( ["2 hermanos - 10%",2] ) %>
 									<%= f.select :hermanos, options_for_select(opcionesHermanos, inscripcionAlumno.hermanos), {}, {class: 'form-control'}  %>
@@ -66,8 +66,8 @@
 								<div class="form-group">
 									<%= f.label "Pago: " %>
 									<% opcionesPago = Array.new %>
-									<% opcionesPago.push( ["Efectivo - 0%",false] ) %>
-									<% opcionesPago.push( ["Débito automático tarjeta VISA  - 5%",true] ) %>
+									<% opcionesPago.push( ["Efectivo",false] ) %>
+									<% opcionesPago.push( ["Débito automático tarjeta VISA  - 5% descuento",true] ) %>
 									<%= f.select :visa, options_for_select(opcionesPago, inscripcionAlumno.visa), {}, {class: 'form-control'}  %>
 								</div>
 
@@ -84,7 +84,7 @@
 									<%= f.label "Matrícula: " %>
 									<% opcionesMatricula = Array.new %>
 									<% if DateTime.now < DateTime.new(2018,10,1)  %>
-										<% opcionesMatricula.push( ["Contado - 20% descuento",0] ) %>
+										<% opcionesMatricula.push( ["Contado - 20% descuento en la matrícula",0] ) %>
 									<% else %>
 										<% opcionesMatricula.push( ["Contado",1] ) %>
 									<% end %>
