@@ -66,7 +66,7 @@
 									<%= f.label "Pago: " %>
 									<% opcionesPago = Array.new %>
 									<% opcionesPago.push( ["Efectivo - 0%",false] ) %>
-									<% opcionesPago.push( ["Tarjeta VISA - 5%",true] ) %>
+									<% opcionesPago.push( ["Débito automático tarjeta VISA  - 5%",true] ) %>
 									<%= f.select :visa, options_for_select(opcionesPago, inscripcionAlumno.visa), {}, {class: 'form-control'}  %>
 								</div>
 
@@ -83,7 +83,7 @@
 									<%= f.label "Matrícula: " %>
 									<% opcionesMatricula = Array.new %>
 									<% if DateTime.now < DateTime.new(2018,10,1)  %>
-										<% opcionesMatricula.push( ["Contado - 10% descuento",0] ) %>
+										<% opcionesMatricula.push( ["Contado - 20% descuento",0] ) %>
 									<% else %>
 										<% opcionesMatricula.push( ["Contado",1] ) %>
 									<% end %>
