@@ -453,6 +453,7 @@ class PrincipalController < ApplicationController
       inscripcionAlumno.nombre1 = params[:inscripcionAlumno][:nombre1]
     else
       alerta = alerta + "Nombre de titular 1 vacío. " 
+      inscripcionAlumno.nombre1 = nil
       inscripcionAlumno.registrado = false
     end
 
@@ -468,6 +469,7 @@ class PrincipalController < ApplicationController
       inscripcionAlumno.domicilio1 = params[:inscripcionAlumno][:domicilio1]
     else
       alerta = alerta + "Domicilio de titular 1 vacío. " 
+      inscripcionAlumno.domicilio1 = nil
       inscripcionAlumno.registrado = false
     end
 
@@ -475,6 +477,7 @@ class PrincipalController < ApplicationController
       inscripcionAlumno.celular1 = params[:inscripcionAlumno][:celular1]
     else
       alerta = alerta + "Celular de titular 1 vacío. " 
+      inscripcionAlumno.celular1 = nil
       inscripcionAlumno.registrado = false
     end
 
@@ -482,6 +485,7 @@ class PrincipalController < ApplicationController
       inscripcionAlumno.email1 = params[:inscripcionAlumno][:email1]
     else
       alerta = alerta + "Mail de titular 1 vacío. " 
+      inscripcionAlumno.email1 = nil
       inscripcionAlumno.registrado = false
     end
 
