@@ -37,13 +37,14 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'coffee-script-source', '1.8.0'
 gem 'font-awesome-rails'
-gem 'bootstrap-sass'
+gem 'bootstrap-sass', '3.3.6'
 gem 'sprockets'
 gem 'jquery-turbolinks'
 
 gem 'devise'
 gem 'twitter-bootstrap-rails'
 gem 'devise-bootstrap-views'
+
 
 gem 'prawn', '~> 2.2', '>= 2.2.2'
 gem 'combine_pdf', '~> 0.2.5'

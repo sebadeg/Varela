@@ -275,7 +275,7 @@ class Factura < ApplicationRecord
 
       cuotas = inscripcionAlumno.cuotas
       importe_cuota = (importe_total/cuotas+0.5).to_i
-      importe_total = (importe_cuota * cuotas).to_i
+      importe_total = ( importe_cuota * cuotas).to_i
 
       importe_letras = numero_a_letras(importe_total,true)
 
