@@ -84,19 +84,19 @@
 									<%= f.label "Matrícula: " %>
 									<% opcionesMatricula = Array.new %>
 									<% if DateTime.now < DateTime.new(2018,10,1)  %>
-										<% opcionesMatricula.push( ["Contado - 20% descuento en la matrícula",0] ) %>
+										<% opcionesMatricula.push( ["Contado en octubre - 20% descuento en la matrícula",0] ) %>
 									<% end %>
 									
-									<% opcionesMatricula.push( ["Contado",1] ) %>
+									<% opcionesMatricula.push( ["Contado en diciembre",1] ) %>
 
 									<% if DateTime.now < DateTime.new(2018,11,1)  %>
-										<% opcionesMatricula.push( ["2 cuotas",2] ) %>
+										<% opcionesMatricula.push( ["2 cuotas a partir de noviembre",2] ) %>
 									<% end %>
 									<% if DateTime.now < DateTime.new(2018,10,1)  %>
-										<% opcionesMatricula.push( ["3 cuotas",3] ) %>
+										<% opcionesMatricula.push( ["3 cuotas a partir de octubre",3] ) %>
 									<% end %>
 									<% if DateTime.now < DateTime.new(2018,9,1)  %>
-										<% opcionesMatricula.push( ["4 cuotas",4] ) %>
+										<% opcionesMatricula.push( ["4 cuotas a partir de setiembre",4] ) %>
 									<% end %>
 									<%= f.select :matricula, options_for_select(opcionesMatricula, inscripcionAlumno.matricula), {}, {class: 'form-control'}  %>
 								</div>
