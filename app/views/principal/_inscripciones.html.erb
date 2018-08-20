@@ -1,13 +1,15 @@
 <% alu = locals[:alumno] %>
 <% inscripcionAlumno = InscripcionAlumno.find_by( alumno_id: alu.id ) %>
 <% if inscripcionAlumno.registrado %>
+		
+	<% if inscripcionAlumno.cuotas != 0 %>
+		<%= form_for(inscripcionAlumno, as: :inscripcionAlumno, url: principal_download_inscripcion_path(:inscripcionAlumno), :html => {:id=>'form_download_inscripcion_' + inscripcionAlumno.id.to_s}) do |f| %>
+	       <%= f.hidden_field :id, value: inscripcionAlumno.id %>
+		    <div id="textoRegistrarse">
 
-	<%= form_for(inscripcionAlumno, as: :inscripcionAlumno, url: principal_download_inscripcion_path(:inscripcionAlumno), :html => {:id=>'form_download_inscripcion_' + inscripcionAlumno.id.to_s}) do |f| %>
-       <%= f.hidden_field :id, value: inscripcionAlumno.id %>
-	    <div id="textoRegistrarse">
-
-			<b><%= link_to "Descargar reinscripción", "", :onclick => "$('#form_download_inscripcion_" + inscripcionAlumno.id.to_s + "').submit()" %></b>
-	    </div>
+				<b><%= link_to "Descargar reinscripción", "", :onclick => "$('#form_download_inscripcion_" + inscripcionAlumno.id.to_s + "').submit()" %></b>
+		    </div>
+		<% end %>
 	<% end %>
 
 <% else %>
