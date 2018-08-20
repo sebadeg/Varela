@@ -484,7 +484,7 @@ class PrincipalController < ApplicationController
       return
     end
 
-    if params[:inscripcionAlumno][:documento2] != nil && inscripcionAlumno.documento2 == nil 
+    if inscripcionAlumno.documento2 == nil && !inscripcionAlumno.registrado
       redirect_to principal_index_path, alert: "Cédula de titular 2 incorrecta"
       return
     end
