@@ -427,6 +427,11 @@ class PrincipalController < ApplicationController
     id = params[:inscripcionAlumno][:id]
     inscripcionAlumno = InscripcionAlumno.find(id)
 
+    if inscripcionAlumno.registrado 
+      redirect_to principal_index_path, alert: "El alumno ya está reinscripto"
+      return
+    end
+
     if calc_cedula_digit(params[:inscripcionAlumno][:cedula].to_i)
       inscripcionAlumno.cedula = params[:inscripcionAlumno][:cedula]
       inscripcionAlumno.registrado = true
