@@ -273,9 +273,11 @@ class Factura < ApplicationRecord
       end
       importe_total = (importe_total + 0.5).to_i
 
-      importe_letras = numero_a_letras(importe_total,true)
       cuotas = inscripcionAlumno.cuotas
       importe_cuota = (importe_total/cuotas+0.5).to_i
+      importe_total = (importe_cuota * cuotas).to_i
+
+      importe_letras = numero_a_letras(importe_total,true)
 
       if ( inscripcionAlumno.mes == 12 )
         desde = DateTime.new(2018,12,10)
