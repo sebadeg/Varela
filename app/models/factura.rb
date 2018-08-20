@@ -341,7 +341,7 @@ class Factura < ApplicationRecord
         "Aclaración:<br><br>" +
         "<br><br>" +
         "NOMBRE COMPLETO: #{inscripcionAlumno.nombre2}<br><br>" +
-        "DOCUMENTO DE IDENTIDAD: #{cedula_tos(inscripcionAlumno.documento2}<br><br>" +
+        "DOCUMENTO DE IDENTIDAD: #{cedula_tos(inscripcionAlumno.documento2)}<br><br>" +
         "DOMICILIO: #{inscripcionAlumno.domicilio2}<br><br>" +
         "MAIL: #{inscripcionAlumno.email2}<br><br>" +
         "TEL/CEL: #{inscripcionAlumno.celular2}<br><br>" +
