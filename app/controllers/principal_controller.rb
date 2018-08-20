@@ -432,10 +432,13 @@ class PrincipalController < ApplicationController
       return
     end
 
+    alerta = ""
+
+    inscripcionAlumno.registrado = true
     if calc_cedula_digit(params[:inscripcionAlumno][:cedula].to_i)
       inscripcionAlumno.cedula = params[:inscripcionAlumno][:cedula]
-      inscripcionAlumno.registrado = true
     else
+      alerta = alerta + "Cédula de alumno incorrecta. " 
       inscripcionAlumno.cedula = nil
       inscripcionAlumno.registrado = false
     end
@@ -446,16 +449,41 @@ class PrincipalController < ApplicationController
     inscripcionAlumno.visa = params[:inscripcionAlumno][:visa]
     inscripcionAlumno.matricula = params[:inscripcionAlumno][:matricula]
 
-    inscripcionAlumno.nombre1 = params[:inscripcionAlumno][:nombre1]
+    if params[:inscripcionAlumno][:nombre1] != nil && params[:inscripcionAlumno][:nombre1] != ""
+      inscripcionAlumno.nombre1 = params[:inscripcionAlumno][:nombre1]
+    else
+      alerta = alerta + "Nombre de titular 1 vacío. " 
+      inscripcionAlumno.registrado = false
+    end
+
     if calc_cedula_digit(params[:inscripcionAlumno][:documento1].to_i)
       inscripcionAlumno.documento1 = params[:inscripcionAlumno][:documento1]
     else
+      alerta = alerta + "Cédula de titular 1 incorrecta. " 
       inscripcionAlumno.documento1 = nil
       inscripcionAlumno.registrado = false
     end
-    inscripcionAlumno.domicilio1 = params[:inscripcionAlumno][:domicilio1]
-    inscripcionAlumno.celular1 = params[:inscripcionAlumno][:celular1]
-    inscripcionAlumno.email1 = params[:inscripcionAlumno][:email1]
+
+    if params[:inscripcionAlumno][:domicilio1] != nil && params[:inscripcionAlumno][:domicilio1] != ""
+      inscripcionAlumno.domicilio1 = params[:inscripcionAlumno][:domicilio1]
+    else
+      alerta = alerta + "Domicilio de titular 1 vacío. " 
+      inscripcionAlumno.registrado = false
+    end
+
+    if params[:inscripcionAlumno][:celular1] != nil && params[:inscripcionAlumno][:celular1] != ""
+      inscripcionAlumno.celular1 = params[:inscripcionAlumno][:celular1]
+    else
+      alerta = alerta + "Celular de titular 1 vacío. " 
+      inscripcionAlumno.registrado = false
+    end
+
+    if params[:inscripcionAlumno][:email1] != nil && params[:inscripcionAlumno][:email1] != ""
+      inscripcionAlumno.email1 = params[:inscripcionAlumno][:email1]
+    else
+      alerta = alerta + "Mail de titular 1 vacío. " 
+      inscripcionAlumno.registrado = false
+    end
 
     inscripcionAlumno.nombre2 = params[:inscripcionAlumno][:nombre2]
     if params[:inscripcionAlumno][:documento2] != nil
@@ -474,34 +502,28 @@ class PrincipalController < ApplicationController
 
     inscripcionAlumno.save!
 
-    if inscripcionAlumno.cedula == nil 
-      redirect_to principal_index_path, alert: "Cédula de alumno incorrecta"
+    if !inscripcionAlumno.registrado
+      redirect_to principal_index_path, alert: alerta
       return
     end
 
-    if inscripcionAlumno.documento1 == nil 
-      redirect_to principal_index_path, alert: "Cédula de titular 1 incorrecta"
-      return
+    if inscripcionAlumno.cuotas == 0 
+      redirect_to principal_index_path
+    else
+      factura = Factura.all.first
+
+      file_name = "reinscripcion_#{inscripcionAlumno.alumno_id}.pdf"
+      file = Tempfile.new("factura.pdf")
+      factura.vale(file.path,id)
+
+      UserMailer.reinscripcion(inscripcionAlumno,file_name,file).deliver_now
+
+      send_file(
+          file.path,
+          filename: file_name,
+          type: "application/pdf"
+        )
     end
-
-    if inscripcionAlumno.documento2 == nil && !inscripcionAlumno.registrado
-      redirect_to principal_index_path, alert: "Cédula de titular 2 incorrecta"
-      return
-    end
-
-    factura = Factura.all.first
-
-    file_name = "reinscripcion_#{inscripcionAlumno.alumno_id}.pdf"
-    file = Tempfile.new("factura.pdf")
-    factura.vale(file.path,id)
-
-    UserMailer.reinscripcion(inscripcionAlumno,file_name,file).deliver_now
-
-    send_file(
-        file.path,
-        filename: file_name,
-        type: "application/pdf"
-      )
   end
 
   def download_inscripcion

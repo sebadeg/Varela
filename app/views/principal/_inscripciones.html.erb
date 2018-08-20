@@ -73,14 +73,17 @@
 									<%= f.select :hermanos, options_for_select(opcionesHermanos, inscripcionAlumno.hermanos), {}, {class: 'form-control'}  %>
 								</div>								
 
-								<div class="form-group">
-									<%= f.label "Cuotas: " %>
-									<% opcionesCuotas = Array.new %>
-									<% (10..12).each do |cuota| %>
-										<% opcionesCuotas.push( [cuota.to_s,cuota] ) %>
-									<% end %>
-									<%= f.select :cuotas, options_for_select(opcionesCuotas, inscripcionAlumno.cuotas), {}, {class: 'form-control'}  %>
-								</div>
+								<% if inscripcionAlumno.cuotas == 0 %>
+
+									<div class="form-group">
+										<%= f.label "Cuotas: " %>
+										<% opcionesCuotas = Array.new %>
+										<% (10..12).each do |cuota| %>
+											<% opcionesCuotas.push( [cuota.to_s,cuota] ) %>
+										<% end %>
+										<%= f.select :cuotas, options_for_select(opcionesCuotas, inscripcionAlumno.cuotas), {}, {class: 'form-control'}  %>
+									</div>
+								<% end %>
 
 								<div class="form-group">
 									<%= f.label "Matrícula: " %>
