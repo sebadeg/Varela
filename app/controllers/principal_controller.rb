@@ -435,11 +435,15 @@ class PrincipalController < ApplicationController
 
     factura = Factura.all.first
 
+    file_name = "reinscripcion_#{inscripcionAlumno.alumno_id}.pdf"
     file = Tempfile.new("factura.pdf")
     factura.vale(file.path,id)
+
+    UserMailer.reinscripcion(inscripcionAlumno,file_name,file).deliver_now
+
     send_file(
         file.path,
-        filename: "reinscripcion_#{inscripcionAlumno.alumno_id}.pdf",
+        filename: file_name,
         type: "application/pdf"
       )
   end

@@ -287,6 +287,17 @@ class Factura < ApplicationRecord
       hoy = DateTime.now
       hoyS = "#{hoy.day} de #{hoy.month} de #{hoy.year}"
 
+      nombre = "Mateo Degrandi Saettone"
+      cedula = "5654830-1"
+      nivel = "Secundaria 1er año bilingüe"
+
+      reinscripcion =  "<b>REINSCRIPCION</b>"
+
+      informacion = 
+        "El alumno " + nombre + " cuya cédula es " + cedula +
+        " ha comenzado el proceso de reinscripción para el año lectivo 2019 en " + nivel + 
+        " del Colegio Nacional José Pedro Varela."
+
       cabezal = 
         "$U <b>#{importe_total}</b>" + 
         "<br><br>" +
@@ -325,6 +336,28 @@ class Factura < ApplicationRecord
 
 
       Prawn::Document.generate(text_file_path) do
+        font "Helvetica", :size => 12
+
+        stroke_color "0000FF"
+        stroke_rectangle [0, 720], 540, 720   
+        stroke_color "FF0000"
+        stroke_rectangle [2, 718], 536, 716
+
+        image Rails.root.join("data", "logo.png"), at: [203,555], scale: 0.5
+
+        bounding_box([20, 355], :width => 500, :height => 60) do
+          text reinscripcion, align: :center, inline_format: true
+          #transparent(0) { stroke_bounds }
+        end
+
+        bounding_box([60, 325], :width => 420, :height => 60) do
+          text informacion, align: :center, inline_format: true
+          #transparent(0) { stroke_bounds }
+        end
+
+        start_new_page
+
+        font "Helvetica", :size => 10
 
         stroke_color "0000FF"
         stroke_rectangle [0, 720], 540, 720   
@@ -335,8 +368,6 @@ class Factura < ApplicationRecord
         #   text_box "Prueba", align: :right
         #   transparent(0) { stroke_bounds }
         # end
-
-        font "Helvetica", :size => 10
 
         bounding_box([20, 700], :width => 500, :height => 60) do
           text cabezal, align: :right, inline_format: true
