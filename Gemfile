@@ -38,12 +38,12 @@ gem 'jbuilder', '~> 2.5'
 gem 'coffee-script-source', '1.8.0'
 gem 'font-awesome-rails'
 gem 'bootstrap-sass'
-gem 'sprockets'
+gem 'sprockets', '~> 3.5', '>= 3.5.2'
 gem 'jquery-turbolinks'
 
 gem 'devise'
 gem 'twitter-bootstrap-rails'
-gem 'devise-bootstrap-views'
+gem 'devise-bootstrap-views', '~> 1.0.0.alpha1'
 
 
 gem 'prawn', '~> 2.2', '>= 2.2.2'
