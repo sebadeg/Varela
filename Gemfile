@@ -37,7 +37,7 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'coffee-script-source', '1.8.0'
 gem 'font-awesome-rails'
-gem 'bootstrap-sass', '3.3.6'
+gem 'bootstrap-sass'
 gem 'sprockets'
 gem 'jquery-turbolinks'
 
