@@ -522,4 +522,16 @@ class PrincipalController < ApplicationController
       )
   end
 
+  def download_ayuda
+
+    id = params[:inscripcionAlumno][:id]
+    inscripcionAlumno = InscripcionAlumno.find(id)
+
+    send_file(
+        Rails.root.join("data", "Instructivo reinscripción.pdf"),  
+        filename: "Instructivo reinscripción.pdf",
+        type: "application/pdf"
+      )
+  end
+
 end

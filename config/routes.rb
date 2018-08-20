@@ -42,6 +42,8 @@ Rails.application.routes.draw do
   patch 'principal/inscribir'
   post 'principal/download_inscripcion'
   patch 'principal/download_inscripcion'
+  post 'principal/download_ayuda'
+  patch 'principal/download_ayuda'
 
   root 'principal#index'
 end

@@ -13,7 +13,17 @@
 	<% end %>
 
 <% else %>
+		<%= form_for(inscripcionAlumno, as: :inscripcionAlumno, url: principal_download_ayuda_path(:inscripcionAlumno), :html => {:id=>'form_download_ayuda_' + inscripcionAlumno.id.to_s}) do |f| %>
+	       <%= f.hidden_field :id, value: inscripcionAlumno.id %>
+		    <div id="textoRegistrarse">
+
+				<b><%= link_to "Leer antes de llenar el formulario", "", :onclick => "$('#form_download_ayuda_" + inscripcionAlumno.id.to_s + "').submit()" %></b>
+		    </div>
+		<% end %>
+
 	<%= form_for(inscripcionAlumno, as: :inscripcionAlumno, url: principal_inscribir_path(:inscripcionAlumno)) do |f| %>
+
+
 		
 						<div class="col-md-12 col-sm-12 col-xs-12 content-table">
 							<div class="panel-body">
@@ -61,15 +71,7 @@
 									<% opcionesHermanos.push( ["1 hermano - 5%",1] ) %>
 									<% opcionesHermanos.push( ["2 hermanos - 10%",2] ) %>
 									<%= f.select :hermanos, options_for_select(opcionesHermanos, inscripcionAlumno.hermanos), {}, {class: 'form-control'}  %>
-								</div>
-
-								<div class="form-group">
-									<%= f.label "Pago: " %>
-									<% opcionesPago = Array.new %>
-									<% opcionesPago.push( ["Efectivo",false] ) %>
-									<% opcionesPago.push( ["Débito automático tarjeta VISA  - 5% descuento",true] ) %>
-									<%= f.select :visa, options_for_select(opcionesPago, inscripcionAlumno.visa), {}, {class: 'form-control'}  %>
-								</div>
+								</div>								
 
 								<div class="form-group">
 									<%= f.label "Cuotas: " %>
@@ -176,7 +178,7 @@
 				</div>
 			</div>
 
-								<%= f.submit "Inscribir", class: 'btn btn-primary' %>
+								<%= f.submit "Inscribir", class: 'btn btn-primary', data: { confirm: "Este proceso es definitivo, Está seguro de continuar?" } %>
 
 							</div>
 						</div>
