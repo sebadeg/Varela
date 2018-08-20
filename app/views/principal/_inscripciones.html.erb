@@ -28,6 +28,7 @@
 
 
 								<div class="form-group">
+									<%= f.label "Nivel" %>
 									<% opciones = Array.new %>
 									<% proximoGrado = ProximoGradoAlumno.find_by(alumno_id: alu.id) %>
 									<% if proximoGrado != nil %>
