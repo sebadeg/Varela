@@ -404,16 +404,42 @@ class PrincipalController < ApplicationController
     
   # end
 
+  def calc_cedula_digit(cedula)
+    if ( cedula == nil )      
+      return false
+    end
+    suma = 0
+    arr = [4,3,6,7,8,9,2]
+    digit = cedula%10 
+    c = cedula/10
+    (0..6).each do |i|
+       r = c%10
+       c = c/10
+       suma = (suma + r*arr[i]) % 10
+    end
+    return digit == ((10-(suma%10))%10)
+  end
+
   def inscribir
 
     p "Inscribir"
 
     id = params[:inscripcionAlumno][:id]
     inscripcionAlumno = InscripcionAlumno.find(id)
+
+    if calc_cedula_digit(params[:inscripcionAlumno][:cedula].to_i)
+      inscripcionAlumno.cedula = params[:inscripcionAlumno][:cedula]
+      inscripcionAlumno.registrado = true
+    else
+      inscripcionAlumno.cedula = nil
+      inscripcionAlumno.registrado = false
+    end
     inscripcionAlumno.grado = params[:inscripcionAlumno][:grado]
     inscripcionAlumno.convenio_id = params[:inscripcionAlumno][:convenio_id]
     inscripcionAlumno.cuotas = params[:inscripcionAlumno][:cuotas]
     inscripcionAlumno.hermanos = params[:inscripcionAlumno][:hermanos]
+    inscripcionAlumno.visa = params[:inscripcionAlumno][:visa]
+    inscripcionAlumno.matricula = params[:inscripcionAlumno][:matricula]
 
     inscripcionAlumno.nombre1 = params[:inscripcionAlumno][:nombre1]
     inscripcionAlumno.documento1 = params[:inscripcionAlumno][:documento1]
@@ -429,9 +455,10 @@ class PrincipalController < ApplicationController
 
     inscripcionAlumno.save!
 
-
-
-
+    if inscripcionAlumno.cedula == nil 
+      redirect_to principal_index_path, alert: "Cédula incorrecta"
+      return
+    end
 
     factura = Factura.all.first
 
@@ -440,6 +467,24 @@ class PrincipalController < ApplicationController
     factura.vale(file.path,id)
 
     UserMailer.reinscripcion(inscripcionAlumno,file_name,file).deliver_now
+
+    send_file(
+        file.path,
+        filename: file_name,
+        type: "application/pdf"
+      )
+  end
+
+  def download_inscripcion
+
+    id = params[:inscripcionAlumno][:id]
+    inscripcionAlumno = InscripcionAlumno.find(id)
+
+    factura = Factura.all.first
+
+    file_name = "reinscripcion_#{inscripcionAlumno.alumno_id}.pdf"
+    file = Tempfile.new("factura.pdf")
+    factura.vale(file.path,id)
 
     send_file(
         file.path,

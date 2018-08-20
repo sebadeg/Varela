@@ -20,11 +20,7 @@ class UserMailer < ApplicationMailer
 
 		@inscripcionAlumno = inscripcionAlumno
 
-		Prawn::Document.generate(file_name + "_") do
-			text "Hola"
-		end
-
-		attachments[file_name] = {mime_type: "application/pdf" , content: File.read(file_name + "_") }
+		attachments[file_name] = {mime_type: "application/pdf" , content: File.read(file.path) }
 
 		mail(to: inscripcionAlumno.email1, bcc:'soporte@varela.edu.uy', subject: 'Comprobante de reinscripción')
 	end

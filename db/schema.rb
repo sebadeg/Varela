@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180808141416) do
+ActiveRecord::Schema.define(version: 20180820122639) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -119,6 +119,31 @@ ActiveRecord::Schema.define(version: 20180808141416) do
     t.string   "nombre"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "contrato_cuotas", force: :cascade do |t|
+    t.integer  "contrato_id"
+    t.date     "fecha"
+    t.decimal  "precio"
+    t.decimal  "descuento"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["contrato_id"], name: "index_contrato_cuotas_on_contrato_id", using: :btree
+  end
+
+  create_table "contratos", force: :cascade do |t|
+    t.integer  "cuenta_id"
+    t.integer  "anio"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.boolean  "validado"
+    t.integer  "concepto_id"
+    t.integer  "alumno_id"
+    t.string   "descripcion"
+    t.string   "alumno"
+    t.index ["alumno_id"], name: "index_contratos_on_alumno_id", using: :btree
+    t.index ["concepto_id"], name: "index_contratos_on_concepto_id", using: :btree
+    t.index ["cuenta_id"], name: "index_contratos_on_cuenta_id", using: :btree
   end
 
   create_table "convenios", force: :cascade do |t|
@@ -246,6 +271,9 @@ ActiveRecord::Schema.define(version: 20180808141416) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "grado"
+    t.integer  "matricula"
+    t.boolean  "visa"
+    t.integer  "cedula"
     t.index ["alumno_id"], name: "index_inscripcion_alumnos_on_alumno_id", using: :btree
     t.index ["convenio_id"], name: "index_inscripcion_alumnos_on_convenio_id", using: :btree
     t.index ["grado_id"], name: "index_inscripcion_alumnos_on_grado_id", using: :btree
@@ -423,6 +451,10 @@ ActiveRecord::Schema.define(version: 20180808141416) do
   add_foreign_key "actividad_listas", "actividades"
   add_foreign_key "actividad_listas", "listas"
   add_foreign_key "actividad_opciones", "actividades"
+  add_foreign_key "contrato_cuotas", "contratos"
+  add_foreign_key "contratos", "alumnos"
+  add_foreign_key "contratos", "conceptos"
+  add_foreign_key "contratos", "cuentas"
   add_foreign_key "cuenta_alumnos", "alumnos"
   add_foreign_key "cuenta_alumnos", "cuentas"
   add_foreign_key "especial_alumnos", "alumnos"

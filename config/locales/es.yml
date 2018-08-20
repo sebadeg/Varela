@@ -66,6 +66,8 @@ es:
 
   activerecord:
     attributes:
+      inscripcion_alumno:
+        cedula: "Cédula"
       usuario:
         cedula: "Cédula"
         direccion: "Dirección"

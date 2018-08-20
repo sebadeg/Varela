@@ -40,6 +40,8 @@ Rails.application.routes.draw do
   patch 'principal/enviarpassword'
 
   patch 'principal/inscribir'
+  post 'principal/download_inscripcion'
+  patch 'principal/download_inscripcion'
 
   root 'principal#index'
 end

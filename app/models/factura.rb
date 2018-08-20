@@ -268,6 +268,9 @@ class Factura < ApplicationRecord
       elsif  (inscripcionAlumno.hermanos == 2 )
         importe_total = importe_total * 0.9
       end
+      if  inscripcionAlumno.visa
+        importe_total = importe_total * 0.95
+      end
       importe_total = (importe_total + 0.5).to_i
 
       importe_letras = numero_a_letras(importe_total,true)
@@ -287,9 +290,17 @@ class Factura < ApplicationRecord
       hoy = DateTime.now
       hoyS = "#{hoy.day} de #{hoy.month} de #{hoy.year}"
 
-      nombre = "Mateo Degrandi Saettone"
-      cedula = "5654830-1"
-      nivel = "Secundaria 1er año bilingüe"
+      alumno = Alumno.find(inscripcionAlumno.alumno_id)
+
+      if alumno != nil 
+        nombre = alumno.nombre + " " + alumno.apellido
+        cedula = (inscripcionAlumno.cedula/10).to_s + "-" + (inscripcionAlumno.cedula%10).to_s
+        
+        grado = ProximoGrado.find(inscripcionAlumno.grado)
+        if grado != nil
+          nivel = grado.nombre
+        end
+      end
 
       reinscripcion =  "<b>REINSCRIPCION</b>"
 
