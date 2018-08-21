@@ -491,7 +491,7 @@ class PrincipalController < ApplicationController
     end
 
     inscripcionAlumno.nombre2 = params[:inscripcionAlumno][:nombre2]
-    if params[:inscripcionAlumno][:documento2] != nil
+    if params[:inscripcionAlumno][:documento2] != nil && params[:inscripcionAlumno][:documento2] != ""
       if calc_cedula_digit(params[:inscripcionAlumno][:documento2])
         inscripcionAlumno.documento2 = params[:inscripcionAlumno][:documento2]
       else
