@@ -50,7 +50,9 @@
 								</div>
 
 
-								<% if inscripcionAlumno.cuotas != 0 %>
+								<% if inscripcionAlumno.cuotas == 0 %>
+									<%= f.hidden_field :cuotas, value: 0 %>
+								<% else %>
 
 									<div class="form-group">
 										<%= f.label "Convenio: " %>
