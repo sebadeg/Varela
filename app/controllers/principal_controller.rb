@@ -512,7 +512,7 @@ class PrincipalController < ApplicationController
     end
 
     if inscripcionAlumno.cuotas == 0 
-      redirect_to principal_index_path
+      redirect_to principal_index_path, notice: "Ha comenzado el proceso de reinscripción"
     else
       factura = Factura.all.first
 
