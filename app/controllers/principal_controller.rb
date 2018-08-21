@@ -405,9 +405,10 @@ class PrincipalController < ApplicationController
   # end
 
   def calc_cedula_digit(cedula)
-    if ( cedula == nil )      
+    if cedula == nil && cedula == ""
       return false
     end
+    cedula = cedula.to_i
     suma = 0
     arr = [4,3,6,7,8,9,2]
     digit = cedula%10 
@@ -435,7 +436,7 @@ class PrincipalController < ApplicationController
     alerta = ""
 
     inscripcionAlumno.registrado = true
-    if calc_cedula_digit(params[:inscripcionAlumno][:cedula].to_i)
+    if calc_cedula_digit(params[:inscripcionAlumno][:cedula])
       inscripcionAlumno.cedula = params[:inscripcionAlumno][:cedula]
     else
       alerta = alerta + "Cédula de alumno incorrecta. " 
@@ -457,7 +458,7 @@ class PrincipalController < ApplicationController
       inscripcionAlumno.registrado = false
     end
 
-    if calc_cedula_digit(params[:inscripcionAlumno][:documento1].to_i)
+    if calc_cedula_digit(params[:inscripcionAlumno][:documento1])
       inscripcionAlumno.documento1 = params[:inscripcionAlumno][:documento1]
     else
       alerta = alerta + "Cédula de titular 1 incorrecta. " 
@@ -491,7 +492,7 @@ class PrincipalController < ApplicationController
 
     inscripcionAlumno.nombre2 = params[:inscripcionAlumno][:nombre2]
     if params[:inscripcionAlumno][:documento2] != nil
-      if calc_cedula_digit(params[:inscripcionAlumno][:documento2].to_i)
+      if calc_cedula_digit(params[:inscripcionAlumno][:documento2])
         inscripcionAlumno.documento2 = params[:inscripcionAlumno][:documento2]
       else
         inscripcionAlumno.documento2 = nil
