@@ -123,7 +123,7 @@
 						<div class="col-md-12 col-sm-12 col-xs-12 content-table">
 							<div class="panel-body">
 								<div class="form-group">
-									<%= f.label "Nombre completo" %>
+									<%= p "* " %><%= f.label "Nombre completo" %>
 									<%= f.text_field :nombre1, autofocus: true, class: 'form-control' %>
 								</div>
 								<div class="form-group">
@@ -131,15 +131,15 @@
 									<%= f.text_field :documento1, autofocus: true, class: 'form-control' %>
 								</div>
 								<div class="form-group">
-									<%= f.label "Domicilio" %>
+									<%= p "* " %><%= f.label "Domicilio" %>
 									<%= f.text_field :domicilio1, autofocus: true, class: 'form-control' %>
 								</div>
 								<div class="form-group">
-									<%= f.label "Mail" %>
+									<%= p "* " %><%= f.label "Mail" %>
 									<%= f.text_field :email1, autofocus: true, class: 'form-control' %>
 								</div>
 								<div class="form-group">
-									<%= f.label "Teléfono/Celular" %>
+									<%= p "* " %><%= f.label "Teléfono/Celular" %>
 									<%= f.text_field :celular1, autofocus: true, class: 'form-control' %>
 								</div>
 							</div>
@@ -163,7 +163,7 @@
 									<%= f.text_field :nombre2, autofocus: true, class: 'form-control' %>
 								</div>
 								<div class="form-group">
-									<%= p "* " %><%= f.label "Cédula" %><%= p " - (la cédula 1.234.567-2 se ingresa 12345672)" %>
+									<%= f.label "Cédula" %><%= p " - (la cédula 1.234.567-2 se ingresa 12345672)" %>
 									<%= f.text_field :documento2, autofocus: true, class: 'form-control' %>
 								</div>
 								<div class="form-group">
