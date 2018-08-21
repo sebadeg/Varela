@@ -405,7 +405,7 @@ class PrincipalController < ApplicationController
   # end
 
   def calc_cedula_digit(cedula)
-    if cedula == nil && cedula == ""
+    if cedula == nil || cedula == ""
       return false
     end
     cedula = cedula.to_i
