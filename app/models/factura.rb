@@ -290,7 +290,7 @@ class Factura < ApplicationRecord
       if ( inscripcionAlumno.mes == 12 )
         desde = DateTime.new(2018,12,10)
         anio = 2018
-      else if cuotas == 10
+      else
         desde = DateTime.new(2019,inscripcionAlumno.mes,10)
         anio = 2019
       end
