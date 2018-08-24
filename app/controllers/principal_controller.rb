@@ -450,6 +450,12 @@ class PrincipalController < ApplicationController
     inscripcionAlumno.visa = params[:inscripcionAlumno][:visa]
     inscripcionAlumno.matricula = params[:inscripcionAlumno][:matricula]
 
+    if inscripcionAlumno.cuotas == 11
+      inscripcionAlumno.mes = 2
+    elsif inscripcionAlumno.cuotas == 10
+      inscripcionAlumno.mes = 3
+    end
+
     if params[:inscripcionAlumno][:nombre1] != nil && params[:inscripcionAlumno][:nombre1] != ""
       inscripcionAlumno.nombre1 = params[:inscripcionAlumno][:nombre1]
     else
