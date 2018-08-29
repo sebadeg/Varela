@@ -8,6 +8,7 @@
 	</table>
 <% else %>
 
+
 	<% alu = locals[:alumno] %>
 	<% inscripcionAlumno = InscripcionAlumno.find_by( alumno_id: alu.id ) %>
 
@@ -20,7 +21,19 @@
 			<tr height='30px'></tr>
 		</table>
 	<% else %>
-		<% if inscripcionAlumno.registrado %>
+
+		<% if inscripcionAlumno.inscripto %>
+			<div class="col-md-12 col-sm-12 col-xs-12 content-table">
+						<table>
+							<tr height='30px'></tr>
+							<tr height='30px'><td width='30px'></td><td width='15px'><%= image_tag("tick.png") %></td>
+							<td width='30px'></td>
+							<td><%= p "El alumno esta inscripto" %></td></tr>
+							<tr height='30px'></tr>
+						</table>
+			</div>
+			<div class="clearfix"></div>
+		<% elsif inscripcionAlumno.registrado %>
 				
 			<% if inscripcionAlumno.cuotas != 0 %>
 				<%= form_for(inscripcionAlumno, as: :inscripcionAlumno, url: principal_download_inscripcion_path(:inscripcionAlumno), :html => {:id=>'form_download_inscripcion_' + inscripcionAlumno.id.to_s}) do |f| %>
