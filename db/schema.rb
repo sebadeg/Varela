@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180821010255) do
+ActiveRecord::Schema.define(version: 20180829030118) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,6 +90,7 @@ ActiveRecord::Schema.define(version: 20180821010255) do
     t.boolean  "sec_mdeo",               default: false
     t.boolean  "sec_cc",                 default: false
     t.boolean  "administracion",         default: false
+    t.boolean  "inscripciones"
     t.index ["email"], name: "index_admin_usuarios_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_admin_usuarios_on_reset_password_token", unique: true, using: :btree
   end
@@ -149,8 +150,9 @@ ActiveRecord::Schema.define(version: 20180821010255) do
   create_table "convenios", force: :cascade do |t|
     t.string   "nombre"
     t.decimal  "valor"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.boolean  "ocultar_porcentaje"
   end
 
   create_table "cuenta_alumnos", force: :cascade do |t|
@@ -280,6 +282,65 @@ ActiveRecord::Schema.define(version: 20180821010255) do
     t.index ["grado_id"], name: "index_inscripcion_alumnos_on_grado_id", using: :btree
   end
 
+  create_table "inscripciones", force: :cascade do |t|
+    t.string   "nombre"
+    t.string   "apellido"
+    t.integer  "cedula"
+    t.integer  "proximo_grado_id"
+    t.integer  "convenio_id"
+    t.integer  "matricula"
+    t.integer  "hermanos"
+    t.integer  "cuotas"
+    t.integer  "mes"
+    t.string   "nombre1"
+    t.integer  "documento1"
+    t.string   "domicilio1"
+    t.string   "email1"
+    t.string   "celular1"
+    t.string   "nombre2"
+    t.integer  "documento2"
+    t.string   "domicilio2"
+    t.string   "email2"
+    t.string   "celular2"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.string   "lugar_nacimiento"
+    t.date     "fecha_nacimiento"
+    t.string   "domicilio"
+    t.string   "celular"
+    t.string   "mutualista"
+    t.string   "emergencia"
+    t.string   "procede"
+    t.string   "nombre_padre"
+    t.string   "apellido_padre"
+    t.string   "lugar_nacimiento_padre"
+    t.date     "fecha_nacimiento_padre"
+    t.string   "email_padre"
+    t.string   "domicilio_padre"
+    t.string   "celular_padre"
+    t.string   "profesion_padre"
+    t.string   "trabajo_padre"
+    t.string   "telefono_trabajo_padre"
+    t.boolean  "titular_padre"
+    t.string   "nombre_madre"
+    t.string   "apellido_madre"
+    t.string   "lugar_nacimiento_madre"
+    t.date     "fecha_nacimiento_madre"
+    t.string   "email_madre"
+    t.string   "domicilio_madre"
+    t.string   "celular_madre"
+    t.string   "profesion_madre"
+    t.string   "trabajo_madre"
+    t.string   "telefono_trabajo_madre"
+    t.boolean  "titular_madre"
+    t.date     "fecha"
+    t.string   "recibida"
+    t.integer  "cedula_padre"
+    t.integer  "cedula_madre"
+    t.index ["convenio_id"], name: "index_inscripciones_on_convenio_id", using: :btree
+    t.index ["proximo_grado_id"], name: "index_inscripciones_on_proximo_grado_id", using: :btree
+  end
+
   create_table "linea_facturas", force: :cascade do |t|
     t.integer  "factura_id"
     t.integer  "alumno_id"
@@ -382,6 +443,7 @@ ActiveRecord::Schema.define(version: 20180821010255) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "grado"
+    t.decimal  "descuento"
   end
 
   create_table "sinregistro_cuentas", force: :cascade do |t|
@@ -469,6 +531,8 @@ ActiveRecord::Schema.define(version: 20180821010255) do
   add_foreign_key "inscripcion_alumnos", "alumnos"
   add_foreign_key "inscripcion_alumnos", "convenios"
   add_foreign_key "inscripcion_alumnos", "grados"
+  add_foreign_key "inscripciones", "convenios"
+  add_foreign_key "inscripciones", "proximo_grados"
   add_foreign_key "linea_facturas", "alumnos"
   add_foreign_key "linea_facturas", "facturas"
   add_foreign_key "lista_alumnos", "alumnos"

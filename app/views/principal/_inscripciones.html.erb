@@ -80,7 +80,11 @@
 													<% opcionesConvenio = Array.new %>
 													<% Convenio.all.each do |convenio| %>
 														<% if convenio.id != 0 %>
-															<% opcionesConvenio.push( ["#{convenio.nombre} - #{convenio.valor.to_i}%",convenio.id] ) %>
+															<% if convenio.ocultar_porcentaje %>
+																<% opcionesConvenio.push( ["#{convenio.nombre}",convenio.id] ) %>
+															<% else %>
+																<% opcionesConvenio.push( ["#{convenio.nombre} - #{convenio.valor.to_i}%",convenio.id] ) %>
+															<% end %>
 														<% end %>
 													<% end %>
 													<%= f.select :convenio_id, options_for_select(opcionesConvenio, inscripcionAlumno.convenio_id), {}, {class: 'form-control'}  %>
