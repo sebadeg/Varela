@@ -85,7 +85,7 @@
 												<% if inscripcionAlumno.convenio_id != 0 %>
 													<% opcionesConvenio = Array.new %>
 													<% Convenio.all.each do |convenio| %>
-														<% esp = ConvenioCuenta.where( ["convenio_id=?",convenio.id] ).count %>
+														<% esp = ConvenioAlumno.where( ["convenio_id=?",convenio.id] ).count %>
 														<% if convenio.id != 0 && esp == 0 %>
 															<% if convenio.ocultar_porcentaje %>
 																<% opcionesConvenio.push( ["#{convenio.nombre}",convenio.id] ) %>
@@ -95,8 +95,8 @@
 														<% end %>
 													<% end %>
 
-													<% ConvenioCuenta.where( ["cuenta_id=?",alu.id/10] ).each do |convenio_cuenta| %>
-														<% Convenio.where(["id=?",convenio_cuenta.convenio_id] ).each do |convenio| %>
+													<% ConvenioAlumno.where( ["alumno_id=?",alu.id] ).each do |convenio_alumno| %>
+														<% Convenio.where(["id=?",convenio_alumno.convenio_id] ).each do |convenio| %>
 															<% if convenio.id != 0 %>
 																<% if convenio.ocultar_porcentaje %>
 																	<% opcionesConvenio.push( ["#{convenio.nombre}",convenio.id] ) %>

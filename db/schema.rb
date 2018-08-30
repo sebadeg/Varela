@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180830160451) do
+ActiveRecord::Schema.define(version: 20180830172036) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -145,6 +145,15 @@ ActiveRecord::Schema.define(version: 20180830160451) do
     t.index ["alumno_id"], name: "index_contratos_on_alumno_id", using: :btree
     t.index ["concepto_id"], name: "index_contratos_on_concepto_id", using: :btree
     t.index ["cuenta_id"], name: "index_contratos_on_cuenta_id", using: :btree
+  end
+
+  create_table "convenio_alumnos", force: :cascade do |t|
+    t.integer  "convenio_id"
+    t.integer  "alumno_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["alumno_id"], name: "index_convenio_alumnos_on_alumno_id", using: :btree
+    t.index ["convenio_id"], name: "index_convenio_alumnos_on_convenio_id", using: :btree
   end
 
   create_table "convenio_cuentas", force: :cascade do |t|
@@ -528,6 +537,8 @@ ActiveRecord::Schema.define(version: 20180830160451) do
   add_foreign_key "contratos", "alumnos"
   add_foreign_key "contratos", "conceptos"
   add_foreign_key "contratos", "cuentas"
+  add_foreign_key "convenio_alumnos", "alumnos"
+  add_foreign_key "convenio_alumnos", "convenios"
   add_foreign_key "convenio_cuentas", "convenios"
   add_foreign_key "convenio_cuentas", "cuentas"
   add_foreign_key "cuenta_alumnos", "alumnos"
