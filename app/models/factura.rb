@@ -383,29 +383,32 @@ class Factura < ApplicationRecord
           #transparent(0) { stroke_bounds }
         end
 
-        start_new_page
+        if cuotas > 1
 
-        font "Helvetica", :size => 10
+          start_new_page
 
-        stroke_color "0000FF"
-        stroke_rectangle [0, 720], 540, 720   
-        stroke_color "FF0000"
-        stroke_rectangle [2, 718], 536, 716
+          font "Helvetica", :size => 10
 
-        # bounding_box([0, 0], :width => 200, :height => 200) do
-        #   text_box "Prueba", align: :right
-        #   transparent(0) { stroke_bounds }
-        # end
+          stroke_color "0000FF"
+          stroke_rectangle [0, 720], 540, 720   
+          stroke_color "FF0000"
+          stroke_rectangle [2, 718], 536, 716
 
-        bounding_box([20, 700], :width => 500, :height => 60) do
-          text cabezal, align: :right, inline_format: true
-          #transparent(0) { stroke_bounds }
+          # bounding_box([0, 0], :width => 200, :height => 200) do
+          #   text_box "Prueba", align: :right
+          #   transparent(0) { stroke_bounds }
+          # end
+
+          bounding_box([20, 700], :width => 500, :height => 60) do
+            text cabezal, align: :right, inline_format: true
+            #transparent(0) { stroke_bounds }
+          end
+          bounding_box([20, 640], :width => 500, :height => 600) do
+            text texto, align: :justify, inline_format: true
+            #transparent(0) { stroke_bounds }
+          end
+
         end
-        bounding_box([20, 640], :width => 500, :height => 600) do
-          text texto, align: :justify, inline_format: true
-          #transparent(0) { stroke_bounds }
-        end
-
 
 
 # La falta de pago de dos o más cuotas a su vencimiento producirá la mora de pleno derecho sin necesidad de interpelación de
