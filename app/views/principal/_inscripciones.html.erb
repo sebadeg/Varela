@@ -34,30 +34,23 @@
 			</div>
 			<div class="clearfix"></div>
 		<% elsif inscripcionAlumno.registrado %>
-				
 			<% if inscripcionAlumno.cuotas != 0 %>
 				<%= form_for(inscripcionAlumno, as: :inscripcionAlumno, url: principal_download_inscripcion_path(:inscripcionAlumno), :html => {:id=>'form_download_inscripcion_' + inscripcionAlumno.id.to_s}) do |f| %>
-			       <%= f.hidden_field :id, value: inscripcionAlumno.id %>
-				    <div id="textoRegistrarse">
-
+					<%= f.hidden_field :id, value: inscripcionAlumno.id %>
+					<div id="textoRegistrarse">
 						<b><%= link_to "Descargar reinscripción", "", :onclick => "$('#form_download_inscripcion_" + inscripcionAlumno.id.to_s + "').submit()" %></b>
-				    </div>
+					</div>
 				<% end %>
 			<% end %>
-
 		<% else %>
-				<%= form_for(inscripcionAlumno, as: :inscripcionAlumno, url: principal_download_ayuda_path(:inscripcionAlumno), :html => {:id=>'form_download_ayuda_' + inscripcionAlumno.id.to_s}) do |f| %>
-			       <%= f.hidden_field :id, value: inscripcionAlumno.id %>
-				    <div id="textoRegistrarse">
+			<%= form_for(inscripcionAlumno, as: :inscripcionAlumno, url: principal_download_ayuda_path(:inscripcionAlumno), :html => {:id=>'form_download_ayuda_' + inscripcionAlumno.id.to_s}) do |f| %>
+		       <%= f.hidden_field :id, value: inscripcionAlumno.id %>
+			    <div id="textoRegistrarse">
 
-						<b><%= link_to "Leer antes de llenar el formulario", "", :onclick => "$('#form_download_ayuda_" + inscripcionAlumno.id.to_s + "').submit()" %></b>
-				    </div>
-				<% end %>
-
+					<b><%= link_to "Leer antes de llenar el formulario", "", :onclick => "$('#form_download_ayuda_" + inscripcionAlumno.id.to_s + "').submit()" %></b>
+			    </div>
+			<% end %>
 			<%= form_for(inscripcionAlumno, as: :inscripcionAlumno, url: principal_inscribir_path(:inscripcionAlumno)) do |f| %>
-
-
-				
 								<div class="col-md-12 col-sm-12 col-xs-12 content-table">
 									<div class="panel-body">
 										

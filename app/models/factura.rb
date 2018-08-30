@@ -266,11 +266,18 @@ class Factura < ApplicationRecord
       inscripcionAlumno = InscripcionAlumno.find(inscripcionAlumno_id)
 
       convenio = Convenio.find(inscripcionAlumno.convenio_id)
+      convenio_valor = convenio.valor
 
+      proximo_grado = ProximoGrado.find_by(id: inscripcionAlumno.grado)
 
-      importe_total = ProximoGrado.find_by(id: inscripcionAlumno.grado).precio 
+      importe_total = proximo_grado.precio 
 
-      importe_total = importe_total * ( 100 - convenio.valor ) / 100
+      if (convenio_valor != 0) && (proximo_grado.descuento != 0)
+          importe_total = importe_total * ( 100 - convenio_valor ) / (100 - proximo_grado.descuento )
+      else  
+          importe_total = importe_total * ( 100 - convenio_valor ) / 100
+      end
+      
       if  (inscripcionAlumno.hermanos == 1 )
         importe_total = importe_total * 0.95
       elsif  (inscripcionAlumno.hermanos == 2 )
