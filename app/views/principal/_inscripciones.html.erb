@@ -89,7 +89,7 @@
 															<% if convenio.ocultar_porcentaje %>
 																<% opcionesConvenio.push( ["#{convenio.nombre}",convenio.id] ) %>
 															<% else %>
-																<% opcionesConvenio.push( ["#{convenio.nombre} - #{'%.2f' % convenio.valor}%",convenio.id] ) %>
+																<% opcionesConvenio.push( ["#{convenio.nombre} - #{number_with_precision(convenio.valor, precision: 2,  strip_insignificant_zeros: true)}%",convenio.id] ) %>
 															<% end %>
 														<% end %>
 													<% end %>
@@ -100,7 +100,7 @@
 																<% if convenio.ocultar_porcentaje %>
 																	<% opcionesConvenio.push( ["#{convenio.nombre}",convenio.id] ) %>
 																<% else %>
-																	<% opcionesConvenio.push( ["#{convenio.nombre} - #{'%.2f' % convenio.valor}%",convenio.id] ) %>
+																	<% opcionesConvenio.push( ["#{convenio.nombre} - #{number_with_precision(convenio.valor, precision: 2,  strip_insignificant_zeros: true)}%",convenio.id] ) %>
 																<% end %>
 															<% end %>
 														<% end %>
