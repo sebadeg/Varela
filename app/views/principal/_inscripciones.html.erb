@@ -85,8 +85,7 @@
 												<% if inscripcionAlumno.convenio_id != 0 %>
 													<% opcionesConvenio = Array.new %>
 													<% Convenio.all.each do |convenio| %>
-														<% esp = ConvenioAlumno.where( ["convenio_id=?",convenio.id] ).count %>
-														<% if convenio.id != 0 && esp == 0 %>
+														<% if convenio.id != 0 && !convenio.formulario %>
 															<% if convenio.ocultar_porcentaje %>
 																<% opcionesConvenio.push( ["#{convenio.nombre}",convenio.id] ) %>
 															<% else %>
