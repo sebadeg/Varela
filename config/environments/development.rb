@@ -33,7 +33,7 @@ Rails.application.configure do
    :port                 => 587,
    :domain               => "varela.edu.uy", 
    :user_name            => "soporte@varela.edu.uy",
-   :password             => "Ene_2018",
+   :password             => "Ago_2018",
    :authentication       => "plain",
    :enable_starttls_auto => true,
    :openssl_verify_mode  => 'none'
