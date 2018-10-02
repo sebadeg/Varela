@@ -8,7 +8,10 @@ class ActividadAlumno < ApplicationRecord
 
 		ActividadOpcion.where(["actividad_id = ?",actividad_id]).order(:cuotas).each do |s|
 			if s.valor == 0
-				if autorizar == nil
+				if s.opcion != nil && s.opcion != ""
+					o = s.opcion
+					e = s.eleccion
+				elsif autorizar == nil
 					o = "No inscribir"
 					e = "No está inscripto"
 				else
@@ -18,8 +21,10 @@ class ActividadAlumno < ApplicationRecord
 				opciones.push( [o,s.valor] )
 				elecciones[s.valor] = e
 			else
-
-				if autorizar == nil 
+				if s.opcion != nil && s.opcion != ""
+					o = s.opcion
+					e = s.eleccion
+				elsif autorizar == nil 
 					o = "Inscribir"
 					e = "Está inscripto"
 				elsif s.cuotas == 1
