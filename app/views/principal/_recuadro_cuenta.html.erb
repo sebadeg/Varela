@@ -63,10 +63,10 @@
 				 					<div class="panel panel-default">
 										<div class="panel-heading">
 											<h4 class="panel-title">
-												<%= link_to "Cuenta: " + t.id.to_s + "(Movimientos pendientes)", "#collapse" + locals[:form] + t.id.to_s + "pendientes", "data-toggle" => "collapse" %>
+												<%= link_to "Cuenta: " + t.id.to_s + " (Movimientos pendientes)", "#collapse" + locals[:form] + t.id.to_s + "pendientes", "data-toggle" => "collapse" %>
 											</h4>
 										</div>										
-										<%= content_tag :div, id: "collapse" + locals[:form] + t.id.to_s + "pendientes", class: ["panel-collapse", "collapse", "collapse", "in"] do %>
+										<%= content_tag :div, id: "collapse" + locals[:form] + t.id.to_s + "pendientes", class: ["panel-collapse", "collapse", "collapse"] do %>
 											<div class="col-md-12 col-sm-12 col-xs-12 content-table">
 												<%= render locals[:form], locals: { form: locals[:form] + "_" + t.id.to_s, cuenta: t, pendientes: true }  %>
 											</div>
