@@ -35,9 +35,6 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-
-
-
 gem 'coffee-script-source', '1.8.0'
 gem 'font-awesome-rails'
 gem 'bootstrap-sass'
@@ -55,17 +52,19 @@ gem 'activeadmin_addons', '1.6'
 gem 'twitter-bootstrap-rails', '4.0'
 gem 'devise-bootstrap-views', '0.0.11'
 
-#gem 'dbf', '~> 3.1', '>= 3.1.1'
-#gem 'roo', '~> 2.7', '>= 2.7.1'
-#gem 'roo-xls', '~> 1.2'
-#gem 'pdf-reader', '~> 2.0'
-#gem 'pdf-toolkit', '~> 1.1'
-#gem 'cancancan', '~> 2.0'
-
+gem 'dbf', '~> 3.1', '>= 3.1.1'
+gem 'roo', '~> 2.7', '>= 2.7.1'
+gem 'roo-xls', '~> 1.2'
+gem 'pdf-reader', '~> 2.0'
 gem 'prawn', '~> 2.2', '>= 2.2.2'
+gem 'pdf-toolkit', '~> 1.1'
+gem 'cancancan', '~> 2.0'
 gem 'combine_pdf', '~> 0.2.5'
 gem 'chunky_png', '~> 1.3', '>= 1.3.10'
 gem 'barby', '~> 0.6.5'
+
+gem 'geocoder', '~> 1.5'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
