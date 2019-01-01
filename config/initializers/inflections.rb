@@ -9,6 +9,7 @@
 #   inflect.irregular 'person', 'people'
 #   inflect.uncountable %w( fish sheep )
 # end
+
 ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.irregular 'cuenta', 'cuentas'
   inflect.irregular 'titular_cuenta', 'titular_cuentas'
@@ -19,6 +20,7 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.irregular 'especial_cuenta', 'especial_cuentas'
   inflect.irregular 'contrato_cuota', 'contrato_cuotas'
   inflect.irregular 'inscripcion', 'inscripciones'
+  inflect.irregular 'direccion', 'direcciones'
 end
 
 # These inflection rules are supported but not enabled by default:
