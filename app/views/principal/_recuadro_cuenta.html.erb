@@ -22,6 +22,7 @@
 							</div>
 							<div class="clearfix"></div>
 						<% else %>
+                            <% if false %>
 							<div class="col-md-12 col-sm-12 col-xs-12 content-table">
 										<table>
 											<tr height='30px'></tr>
@@ -32,9 +33,10 @@
 										</table>
 							</div>
 							<div class="clearfix"></div>						
+							<% end %>
 						<% end %>
 
-						<% if false %>
+						
 						<% @cuentas.each do |t| %>
 							<div class="col-md-12 col-sm-12 col-xs-12 content-table">
 								<div class="panel-group sub-grupo">
@@ -54,7 +56,7 @@
 								</div>
 							</div>
 						<% end %>
-						<% end %>
+						
 					<% end %>
 					<div class="clearfix"></div>
 				</div>
