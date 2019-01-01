@@ -45,10 +45,10 @@ gem 'inherited_resources', '1.8'
 gem 'rubyzip', '~> 1.2', '>= 1.2.2'
 
 gem 'devise', '4.4.3'
-gem 'activeadmin', '1.3'
-gem 'responsive_active_admin', '0.0.5'
-gem 'active_skin', '0.0.12'
-gem 'activeadmin_addons', '1.6'
+#gem 'activeadmin', '1.3'
+#gem 'responsive_active_admin', '0.0.5'
+#gem 'active_skin', '0.0.12'
+#gem 'activeadmin_addons', '1.6'
 gem 'twitter-bootstrap-rails', '4.0'
 gem 'devise-bootstrap-views', '0.0.11'
 
@@ -59,12 +59,12 @@ gem 'roo-xls', '~> 1.2'
 #gem 'pdf-reader', '~> 2.0'
 gem 'prawn', '~> 2.2', '>= 2.2.2'
 #gem 'pdf-toolkit', '~> 1.1'
-gem 'cancancan', '~> 2.0'
+#gem 'cancancan', '~> 2.0'
 gem 'combine_pdf', '~> 0.2.5'
 gem 'chunky_png', '~> 1.3', '>= 1.3.10'
 gem 'barby', '~> 0.6.5'
 
-gem 'geocoder', '~> 1.5'
+#gem 'geocoder', '~> 1.5'
 
 
 group :development, :test do
