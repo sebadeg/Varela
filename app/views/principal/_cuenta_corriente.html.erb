@@ -21,10 +21,25 @@
 		<% suma = suma + m['debe'].to_f - m['haber'].to_f %>
 		<tr><td><%= m['fecha'].to_date.strftime('%d/%m/%Y') %></td>
 		<td><%= m['descripcion'] %></td>
-		<td><% if m['debe'].to_f != 0 %><%= m['debe'].to_f %><% end %></td>
+		<td><% if m['debe'].to_f != 0 %>			
+			<%= m['debe'].to_f %>
+				<% if pendientes && m['fecha'].to_date.month >= 7 %>
+					<b>*</b>
+				<% end %>
+			<% end %></td>
 		<td><% if m['haber'].to_f != 0 %><%= m['haber'].to_f %><% end %></td>
 		</tr>
 	<% end %>
+	<% if pendientes %>
+		<tr>
+		<td></td>
+		<td></td>
+		<td>
+			<b>*</b> Incrementa por IPC
+		</td>
+		<td></td>
+		</tr>
+
 
 	<% if !pendientes %>
 	<tr>
