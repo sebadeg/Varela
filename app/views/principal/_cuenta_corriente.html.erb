@@ -1,4 +1,5 @@
 <% cuenta = locals[:cuenta] %>
+<% pendientes = locals[:pendientes] %>
 
 <table class="table table-hover" id="tabla" width="100%" style="font-size:10px">
 	<tr>
@@ -8,7 +9,12 @@
 	<th><%= "Haber" %></td>
 	</tr>
 
-	<% movimientos = cuenta.movimientos() %>
+	<% if pendientes %>
+		<% movimientos = cuenta.movimientos_pendientes() %>
+	<% else %>
+		<% movimientos = cuenta.movimientos() %>
+	<% end %>
+
 	<% primero = true %>
 	<% suma = 0 %>
 	<% movimientos.each do |m| %>
@@ -19,6 +25,8 @@
 		<td><% if m['haber'].to_f != 0 %><%= m['haber'].to_f %><% end %></td>
 		</tr>
 	<% end %>
+
+	<% if !pendientes %>
 	<tr>
 	<td>
 		<%= form_for(@cuenta, as: :cuenta, url: principal_download_factura_path(:cuenta), :html => {:id=>'form_download_' + cuenta.id.to_s}) do |f| %>
@@ -30,18 +38,6 @@
 	<td><%= suma %></td>
 	<td></td>
 	</tr>
-
-	<tr></tr>
-	<tr>
-	<td>Movimientos Pendientes</td>
-	</tr>
-
-	<% movimientos = cuenta.movimientos_pendientes() %>
-	<% movimientos.each do |m| %>
-		<tr><td><%= m['fecha'].to_date.strftime('%d/%m/%Y') %></td>
-		<td><%= m['descripcion'] %></td>
-		<td><% if m['debe'].to_f != 0 %><%= m['debe'].to_f %><% end %></td>
-		<td><% if m['haber'].to_f != 0 %><%= m['haber'].to_f %><% end %></td>
-		</tr>
 	<% end %>
+
 </table>

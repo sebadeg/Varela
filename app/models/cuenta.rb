@@ -22,7 +22,7 @@ class Cuenta < ApplicationRecord
 
     def movimientos_pendientes
 		sql=
-			"SELECT * FROM movimientos WHERE NOT pendiente AND cuenta_id = #{id} ORDER BY fecha, tipo";
+			"SELECT * FROM movimientos WHERE pendiente AND cuenta_id = #{id} ORDER BY fecha, tipo";
 
 		# sql=
 		# 	"SELECT * FROM " +
