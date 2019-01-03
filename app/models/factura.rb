@@ -69,7 +69,11 @@ class Factura < ApplicationRecord
         indice = 1
         lineas.each do |linea|
 
-          text_box linea.nombre_alumno, :at => [10, i-indice*renglon]
+          bounding_box([10, i-indice*renglon], :width => 160, :height => renglon) do
+            text_box linea.nombre_alumno, align: :left
+            transparent(0) { stroke_bounds }
+          end
+
           text_box "", :at => [190, i-indice*renglon]
           text_box linea.descripcion, :at => [280, i-indice*renglon]
 
