@@ -10,8 +10,8 @@
 
 
 	<% alu = locals[:alumno] %>
-	<% inscripcionAlumno = InscripcionAlumno.find_by( alumno_id: alu.id ) %>
-
+	<% inscripcionAlumno = InscripcionAlumno.find_by( alumno_id: alu.id ) rescue nil %>
+	<% if inscripcionAlumno != nil %>
 	<% if inscripcionAlumno.inhabilitado %>
 		<table>
 			<tr height='30px'></tr>
@@ -238,5 +238,6 @@
 
 			<% end %>
 		<% end %>
+	<% end %>
 	<% end %>
 <% end %>
