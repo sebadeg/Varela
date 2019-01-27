@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_30_232100) do
+ActiveRecord::Schema.define(version: 2019_01_27_174453) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -180,6 +180,7 @@ ActiveRecord::Schema.define(version: 2018_12_30_232100) do
     t.datetime "updated_at", null: false
     t.string "nombre"
     t.string "apellido"
+    t.text "comentario"
   end
 
   create_table "direcciones", force: :cascade do |t|
@@ -274,7 +275,9 @@ ActiveRecord::Schema.define(version: 2018_12_30_232100) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.date "fecha_vencimiento"
+    t.boolean "mail", default: false
     t.index ["cuenta_id"], name: "index_facturas_on_cuenta_id"
+    t.index ["mail"], name: "index_facturas_on_mail"
   end
 
   create_table "grado_alumnos", id: :serial, force: :cascade do |t|
@@ -326,6 +329,8 @@ ActiveRecord::Schema.define(version: 2018_12_30_232100) do
     t.boolean "inscripto", default: false
     t.date "facturado"
     t.boolean "inhabilitado"
+    t.boolean "no_inscribe"
+    t.boolean "pase"
     t.index ["alumno_id"], name: "index_inscripcion_alumnos_on_alumno_id"
     t.index ["convenio_id"], name: "index_inscripcion_alumnos_on_convenio_id"
     t.index ["grado_id"], name: "index_inscripcion_alumnos_on_grado_id"
@@ -427,6 +432,9 @@ ActiveRecord::Schema.define(version: 2018_12_30_232100) do
     t.string "nombre"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "anio"
+    t.bigint "sector_id"
+    t.index ["sector_id"], name: "index_listas_on_sector_id"
   end
 
   create_table "matriculas", force: :cascade do |t|
@@ -461,6 +469,39 @@ ActiveRecord::Schema.define(version: 2018_12_30_232100) do
     t.index ["pendiente"], name: "index_movimientos_on_pendiente"
   end
 
+  create_table "movs", force: :cascade do |t|
+    t.bigint "placta_id"
+    t.integer "movgru"
+    t.integer "movcap"
+    t.integer "movrub"
+    t.integer "movsub"
+    t.bigint "movcta"
+    t.date "movfec"
+    t.integer "movord"
+    t.datetime "movnow"
+    t.integer "movcgr"
+    t.string "movcajpen"
+    t.integer "movcmx"
+    t.bigint "movasi"
+    t.integer "movcom"
+    t.string "movdes"
+    t.date "movvto"
+    t.integer "movcod"
+    t.decimal "movdeb"
+    t.decimal "movhab"
+    t.decimal "movmed"
+    t.decimal "movmeh"
+    t.bigint "movcta1"
+    t.string "movnom"
+    t.string "movnompla"
+    t.bigint "movcta2"
+    t.string "movmov"
+    t.bigint "movint"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["placta_id"], name: "index_movs_on_placta_id"
+  end
+
   create_table "padre_alumnos", id: :serial, force: :cascade do |t|
     t.integer "usuario_id"
     t.integer "alumno_id"
@@ -493,6 +534,18 @@ ActiveRecord::Schema.define(version: 2018_12_30_232100) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "plactas", force: :cascade do |t|
+    t.integer "plagru"
+    t.integer "placap"
+    t.integer "plarub"
+    t.integer "plasub"
+    t.bigint "placta"
+    t.integer "moncod"
+    t.string "planom"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "proximo_grado_alumnos", id: :serial, force: :cascade do |t|
     t.integer "alumno_id"
     t.integer "grado"
@@ -511,6 +564,40 @@ ActiveRecord::Schema.define(version: 2018_12_30_232100) do
     t.decimal "matricula"
     t.string "codigo"
     t.integer "grado_id"
+    t.bigint "sector_id"
+    t.index ["sector_id"], name: "index_proximo_grados_on_sector_id"
+  end
+
+  create_table "recibos", force: :cascade do |t|
+    t.bigint "cuenta_id"
+    t.string "nombre"
+    t.date "fecha"
+    t.string "suma"
+    t.string "concepto"
+    t.string "cheque"
+    t.string "banco"
+    t.date "fecha_vto"
+    t.decimal "importe"
+    t.integer "hoja_nro"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cuenta_id"], name: "index_recibos_on_cuenta_id"
+  end
+
+  create_table "sector_alumnos", force: :cascade do |t|
+    t.bigint "alumno_id"
+    t.bigint "sector_id"
+    t.integer "anio"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["alumno_id"], name: "index_sector_alumnos_on_alumno_id"
+    t.index ["sector_id"], name: "index_sector_alumnos_on_sector_id"
+  end
+
+  create_table "sectores", force: :cascade do |t|
+    t.string "nombre"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "seguimientos", force: :cascade do |t|
@@ -647,14 +734,20 @@ ActiveRecord::Schema.define(version: 2018_12_30_232100) do
   add_foreign_key "linea_facturas", "facturas"
   add_foreign_key "lista_alumnos", "alumnos"
   add_foreign_key "lista_alumnos", "listas"
+  add_foreign_key "listas", "sectores"
   add_foreign_key "movimientos", "conceptos"
   add_foreign_key "movimientos", "cuentas"
   add_foreign_key "movimientos", "pago_cuentas"
+  add_foreign_key "movs", "plactas"
   add_foreign_key "padre_alumnos", "alumnos"
   add_foreign_key "padre_alumnos", "usuarios"
   add_foreign_key "pago_cuentas", "cuentas"
   add_foreign_key "pago_cuentas", "pagos"
   add_foreign_key "proximo_grado_alumnos", "alumnos"
+  add_foreign_key "proximo_grados", "sectores"
+  add_foreign_key "recibos", "cuentas"
+  add_foreign_key "sector_alumnos", "alumnos"
+  add_foreign_key "sector_alumnos", "sectores"
   add_foreign_key "seguimientos", "alumnos"
   add_foreign_key "sinregistro_cuentas", "cuentas"
   add_foreign_key "subgrado_alumnos", "alumnos"

@@ -11,7 +11,7 @@
 
 	<% alu = locals[:alumno] %>
 	<% inscripcionAlumno = InscripcionAlumno.find_by( alumno_id: alu.id ) rescue nil %>
-	<% if inscripcionAlumno != nil %>
+	<% if inscripcionAlumno != nil && !inscripcionAlumno.pase %>
 	<% if inscripcionAlumno.inhabilitado %>
 		<table>
 			<tr height='30px'></tr>
