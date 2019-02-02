@@ -29,7 +29,7 @@ class Factura < ApplicationRecord
 
       usuario = Usuario.where("id IN (SELECT usuario_id FROM titular_cuentas WHERE cuenta_id=#{cuenta_id})").first!
       lineas = LineaFactura.where( "factura_id=#{factura.id}" ).order(:indice)
-
+      cuenta = Cuenta.find(cuenta_id)
 
    	  text_file = Tempfile.new("text.pdf")
  	    text_file_path = text_file.path
@@ -52,10 +52,13 @@ class Factura < ApplicationRecord
 
         text_box "Titular", :at => [190, 710]
         text_box "Cuenta", :at => [190, 710-renglon]
-        text_box "Comprobante", :at => [190, 710-2*renglon]
+        text_box "Factura", :at => [190, 710-2*renglon]
         text_box "Vencimiento", :at => [190, 710-3*renglon]
 
-        text_box usuario.nombre + ' ' + usuario.apellido, :at => [280, 710]
+        bounding_box([280, 710], :width => 240, :height => renglon) do
+          text_box cuenta.nombre, align: :left
+          transparent(0) { stroke_bounds }
+        end
         text_box cuenta_id.to_s, :at => [280, 710-renglon]
         text_box factura.id.to_s, :at => [280, 710-2*renglon]
         text_box factura.fecha_vencimiento.strftime('%d/%m/%Y'), :at => [280, 710-3*renglon]
@@ -103,7 +106,7 @@ class Factura < ApplicationRecord
         text_box "Vencimiento", :at => [20+delta, 41], size:8
         text_box "Documento", :at => [20+2*delta, 41], size:8
         text_box "Cuenta", :at => [20+3*delta, 41], size:8
-        text_box "Comprobante", :at => [20+4*delta, 41], size:8
+        text_box "Factura", :at => [20+4*delta, 41], size:8
         text_box "Moneda", :at => [20+5*delta, 41], size:8
         text_box "Importe", :at => [20+6*delta, 41], size:8
 
