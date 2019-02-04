@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    added_attrs = [:cedula, :nombre, :apellido, :direccion, :celular, :alumno1, :alumno2, :alumno3, :email, :password, :password, :current_password, :remember_me]
+    added_attrs = [:cedula, :nombre, :apellido, :direccion, :celular, :factura, :alumno1, :alumno2, :alumno3, :email, :password, :password, :current_password, :remember_me]
     devise_parameter_sanitizer.permit :sign_up, keys: added_attrs
     devise_parameter_sanitizer.permit :sign_in, keys: added_attrs
     devise_parameter_sanitizer.permit :account_update, keys: added_attrs
