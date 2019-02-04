@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_27_174453) do
+ActiveRecord::Schema.define(version: 2019_02_04_012459) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -118,6 +118,12 @@ ActiveRecord::Schema.define(version: 2019_01_27_174453) do
 
   create_table "conceptos", id: :serial, force: :cascade do |t|
     t.string "nombre"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "configs", force: :cascade do |t|
+    t.integer "anio"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -462,11 +468,13 @@ ActiveRecord::Schema.define(version: 2019_01_27_174453) do
     t.integer "pago_cuenta_id"
     t.integer "concepto_id"
     t.integer "factura"
+    t.bigint "recibo_id"
     t.index ["concepto_id"], name: "index_movimientos_on_concepto_id"
     t.index ["cuenta_id", "fecha"], name: "index_movimientos_on_cuenta_id_and_fecha"
     t.index ["cuenta_id"], name: "index_movimientos_on_cuenta_id"
     t.index ["pago_cuenta_id"], name: "index_movimientos_on_pago_cuenta_id"
     t.index ["pendiente"], name: "index_movimientos_on_pendiente"
+    t.index ["recibo_id"], name: "index_movimientos_on_recibo_id"
   end
 
   create_table "movs", force: :cascade do |t|
@@ -534,6 +542,15 @@ ActiveRecord::Schema.define(version: 2019_01_27_174453) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "pases", force: :cascade do |t|
+    t.bigint "alumno_id"
+    t.date "fecha"
+    t.text "destino"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["alumno_id"], name: "index_pases_on_alumno_id"
+  end
+
   create_table "plactas", force: :cascade do |t|
     t.integer "plagru"
     t.integer "placap"
@@ -566,6 +583,17 @@ ActiveRecord::Schema.define(version: 2019_01_27_174453) do
     t.integer "grado_id"
     t.bigint "sector_id"
     t.index ["sector_id"], name: "index_proximo_grados_on_sector_id"
+  end
+
+  create_table "recargos", force: :cascade do |t|
+    t.bigint "cuenta_id"
+    t.boolean "recargo"
+    t.text "comentario"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.date "fecha_comienzo"
+    t.date "fecha_fin"
+    t.index ["cuenta_id"], name: "index_recargos_on_cuenta_id"
   end
 
   create_table "recibos", force: :cascade do |t|
@@ -698,6 +726,7 @@ ActiveRecord::Schema.define(version: 2019_01_27_174453) do
     t.string "passwd"
     t.boolean "mail"
     t.boolean "titular"
+    t.boolean "factura"
     t.index ["cedula"], name: "index_usuarios_on_cedula", unique: true
     t.index ["email"], name: "index_usuarios_on_email", unique: true
     t.index ["reset_password_token"], name: "index_usuarios_on_reset_password_token", unique: true
@@ -738,13 +767,16 @@ ActiveRecord::Schema.define(version: 2019_01_27_174453) do
   add_foreign_key "movimientos", "conceptos"
   add_foreign_key "movimientos", "cuentas"
   add_foreign_key "movimientos", "pago_cuentas"
+  add_foreign_key "movimientos", "recibos"
   add_foreign_key "movs", "plactas"
   add_foreign_key "padre_alumnos", "alumnos"
   add_foreign_key "padre_alumnos", "usuarios"
   add_foreign_key "pago_cuentas", "cuentas"
   add_foreign_key "pago_cuentas", "pagos"
+  add_foreign_key "pases", "alumnos"
   add_foreign_key "proximo_grado_alumnos", "alumnos"
   add_foreign_key "proximo_grados", "sectores"
+  add_foreign_key "recargos", "cuentas"
   add_foreign_key "recibos", "cuentas"
   add_foreign_key "sector_alumnos", "alumnos"
   add_foreign_key "sector_alumnos", "sectores"
