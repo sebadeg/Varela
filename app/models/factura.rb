@@ -17,6 +17,8 @@ class Factura < ApplicationRecord
 
     def imprimir(file_path,cuenta_id,factura)
 
+      dolar = factura.dolar
+
       s = factura.fecha.strftime('%Y%m') + 
         factura.id.to_s.rjust(6,'0') +
         cuenta_id.to_s.rjust(5,'0') + 
@@ -81,7 +83,12 @@ class Factura < ApplicationRecord
           text_box linea.descripcion, :at => [280, i-indice*renglon]
 
           bounding_box([450, i-indice*renglon], :width => 70, :height => renglon) do
-           text_box linea.importe.to_s, align: :right
+           if dolar == nil
+              text_box linea.importe.to_s, align: :right
+            else
+              text_box "US$", align: :left
+              text_box (linea.importe/dolar).round(1).to_s, align: :right
+            end
            transparent(0) { stroke_bounds }
           end
 
@@ -90,7 +97,12 @@ class Factura < ApplicationRecord
 
         text_box "Total", :at => [200, 145]
         bounding_box([320, 145], :width => 200, :height => renglon) do
-          text_box factura.total.to_s, align: :right
+          if dolar == nil
+            text_box factura.total.to_s, align: :right
+          else
+            text_box "US$", align: :left
+            text_box (factura.total/dolar).round(1).to_s, align: :right
+          end
           transparent(0) { stroke_bounds }
         end
 
@@ -115,7 +127,11 @@ class Factura < ApplicationRecord
         text_box "Factura", :at => [20+2*delta, 33], size:8
         text_box cuenta_id.to_s, :at => [20+3*delta, 33], size:8
         text_box factura.id.to_s, :at => [20+4*delta, 33], size:8
-        text_box "UYU", :at => [20+5*delta, 33], size:8
+        if ( dolar == nil )
+          text_box "UYU", :at => [20+5*delta, 33], size:8
+        else
+          text_box "USD", :at => [20+5*delta, 33], size:8
+        end
         text_box factura.total.to_s , :at => [20+6*delta, 33], size:8
       end
 
