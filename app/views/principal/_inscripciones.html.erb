@@ -128,10 +128,10 @@
 												<%= f.label "Cuotas: " %>
 												<% opcionesCuotas = Array.new %>
 												<% opcionesCuotas.push( ["Contado",1] ) %>
-												<% (10..12).each do |cuota| %>
+												<% (10..10).each do |cuota| %>
 													<% opcionesCuotas.push( [cuota.to_s,cuota] ) %>
 												<% end %>
-												<% opcionesCuotas.push( ["24",24] ) %>
+												<% #opcionesCuotas.push( ["24",24] ) %>
 												<%= f.select :cuotas, options_for_select(opcionesCuotas, inscripcionAlumno.cuotas), {}, {class: 'form-control'}  %>
 											</div>
 
