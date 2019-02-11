@@ -130,7 +130,11 @@
 												<%= f.label "Cuotas: " %>
 												<% opcionesCuotas = Array.new %>
 												<% opcionesCuotas.push( ["Contado",1] ) %>
-												<% (10..10).each do |cuota| %>
+												<% cantidad_cuotas = inscripcionAlumno.cuotas %>
+												<% if cantidad_cuotas < 10 %>
+												<%   cantidad_cuotas=10 %>
+												<% end %> 
+												<% (10..cantidad_cuotas).each do |cuota| %>
 													<% opcionesCuotas.push( [cuota.to_s,cuota] ) %>
 												<% end %>
 												<% #opcionesCuotas.push( ["24",24] ) %>
