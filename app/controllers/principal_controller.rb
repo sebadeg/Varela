@@ -92,14 +92,14 @@ class PrincipalController < ApplicationController
     p params[:actividad][:id]
 
 
-    actividad = Actividad.find(params[:id])
+    actividad = Actividad.find(params[:actividad][:id])
     if ( actividad != nil )
       file_name = "#{actividad.nombre}.pdf"
       file = Tempfile.new(file_name)
       
 
       pdf = CombinePDF.new
-      ActividadArchivo.where("actividad_id=#{params[:id]}").order(:id).each do |arch|
+      ActividadArchivo.where("actividad_id=#{params[:actividad][:id]}").order(:id).each do |arch|
         
         file2_name = "#{arch.nombre}"
         file2 = Tempfile.new(file2_name)
