@@ -10,10 +10,63 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_05_010802) do
+ActiveRecord::Schema.define(version: 2019_02_23_164100) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "aactividad_alumnos", force: :cascade do |t|
+    t.bigint "aactividad_id"
+    t.bigint "alumno_id"
+    t.integer "opcion"
+    t.date "fecha"
+    t.boolean "secretaria"
+    t.boolean "mail"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["aactividad_id"], name: "index_aactividad_alumnos_on_aactividad_id"
+    t.index ["alumno_id"], name: "index_aactividad_alumnos_on_alumno_id"
+  end
+
+  create_table "aactividad_archivos", force: :cascade do |t|
+    t.bigint "aactividad_id"
+    t.string "nombre"
+    t.binary "data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["aactividad_id"], name: "index_aactividad_archivos_on_aactividad_id"
+  end
+
+  create_table "aactividad_listas", force: :cascade do |t|
+    t.bigint "aactividad_id"
+    t.bigint "lista_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["aactividad_id"], name: "index_aactividad_listas_on_aactividad_id"
+    t.index ["lista_id"], name: "index_aactividad_listas_on_lista_id"
+  end
+
+  create_table "aactividad_opciones", force: :cascade do |t|
+    t.bigint "aactividad_id"
+    t.integer "valor"
+    t.string "opcion"
+    t.string "eleccion"
+    t.integer "cuotas"
+    t.decimal "importe"
+    t.date "fecha"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "concepto"
+    t.index ["aactividad_id"], name: "index_aactividad_opciones_on_aactividad_id"
+  end
+
+  create_table "aactividades", force: :cascade do |t|
+    t.string "nombre"
+    t.date "fecha"
+    t.date "fechainfo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "active_admin_comments", id: :serial, force: :cascade do |t|
     t.string "namespace"
@@ -37,6 +90,15 @@ ActiveRecord::Schema.define(version: 2019_02_05_010802) do
     t.integer "opcion"
     t.index ["actividad_id"], name: "index_actividad_alumnos_on_actividad_id"
     t.index ["alumno_id"], name: "index_actividad_alumnos_on_alumno_id"
+  end
+
+  create_table "actividad_archivos", force: :cascade do |t|
+    t.bigint "actividad_id"
+    t.string "nombre"
+    t.binary "data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["actividad_id"], name: "index_actividad_archivos_on_actividad_id"
   end
 
   create_table "actividad_listas", id: :serial, force: :cascade do |t|
@@ -187,6 +249,27 @@ ActiveRecord::Schema.define(version: 2019_02_05_010802) do
     t.string "nombre"
     t.string "apellido"
     t.text "comentario"
+    t.string "convenio"
+    t.integer "cedula"
+    t.string "direccion"
+    t.string "celular"
+    t.string "email"
+    t.text "info"
+    t.boolean "concurre"
+    t.index ["nombre"], name: "index_cuentas_on_nombre"
+  end
+
+  create_table "deudores", force: :cascade do |t|
+    t.bigint "cuenta_id"
+    t.decimal "deuda360"
+    t.decimal "deuda180"
+    t.decimal "deuda90"
+    t.decimal "deuda60"
+    t.decimal "deuda30"
+    t.decimal "deuda0"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cuenta_id"], name: "index_deudores_on_cuenta_id"
   end
 
   create_table "direcciones", force: :cascade do |t|
@@ -444,12 +527,33 @@ ActiveRecord::Schema.define(version: 2019_02_05_010802) do
     t.index ["sector_id"], name: "index_listas_on_sector_id"
   end
 
+  create_table "lote_recibos", force: :cascade do |t|
+    t.bigint "cuenta_id"
+    t.string "nombre"
+    t.date "fecha"
+    t.string "suma"
+    t.string "concepto"
+    t.integer "hoja_nro"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cuenta_id"], name: "index_lote_recibos_on_cuenta_id"
+  end
+
   create_table "matriculas", force: :cascade do |t|
     t.string "nombre"
     t.integer "codigo"
     t.integer "anio"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "movimiento2018s", force: :cascade do |t|
+    t.bigint "cuenta_id"
+    t.date "fecha"
+    t.decimal "importe"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cuenta_id"], name: "index_movimiento2018s_on_cuenta_id"
   end
 
   create_table "movimientos", id: :serial, force: :cascade do |t|
@@ -470,6 +574,8 @@ ActiveRecord::Schema.define(version: 2019_02_05_010802) do
     t.integer "concepto_id"
     t.integer "factura"
     t.bigint "recibo_id"
+    t.decimal "saldo"
+    t.integer "indice"
     t.index ["concepto_id"], name: "index_movimientos_on_concepto_id"
     t.index ["cuenta_id", "fecha"], name: "index_movimientos_on_cuenta_id_and_fecha"
     t.index ["cuenta_id"], name: "index_movimientos_on_cuenta_id"
@@ -508,6 +614,8 @@ ActiveRecord::Schema.define(version: 2019_02_05_010802) do
     t.bigint "movint"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["movcta", "movfec"], name: "index_movs_fec"
+    t.index ["movgru", "movcap", "movrub", "movsub"], name: "index_movs_cta"
     t.index ["placta_id"], name: "index_movs_on_placta_id"
   end
 
@@ -598,19 +706,14 @@ ActiveRecord::Schema.define(version: 2019_02_05_010802) do
   end
 
   create_table "recibos", force: :cascade do |t|
-    t.bigint "cuenta_id"
-    t.string "nombre"
-    t.date "fecha"
-    t.string "suma"
-    t.string "concepto"
     t.string "cheque"
     t.string "banco"
     t.date "fecha_vto"
     t.decimal "importe"
-    t.integer "hoja_nro"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["cuenta_id"], name: "index_recibos_on_cuenta_id"
+    t.bigint "lote_recibo_id"
+    t.index ["lote_recibo_id"], name: "index_recibos_on_lote_recibo_id"
   end
 
   create_table "sector_alumnos", force: :cascade do |t|
@@ -684,6 +787,13 @@ ActiveRecord::Schema.define(version: 2019_02_05_010802) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "temps", force: :cascade do |t|
+    t.integer "usuario_id"
+    t.integer "temp_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "tipo_cuentas", id: :serial, force: :cascade do |t|
     t.integer "cuenta_id"
     t.integer "tipo"
@@ -733,8 +843,15 @@ ActiveRecord::Schema.define(version: 2019_02_05_010802) do
     t.index ["reset_password_token"], name: "index_usuarios_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "aactividad_alumnos", "aactividades"
+  add_foreign_key "aactividad_alumnos", "alumnos"
+  add_foreign_key "aactividad_archivos", "aactividades"
+  add_foreign_key "aactividad_listas", "aactividades"
+  add_foreign_key "aactividad_listas", "listas"
+  add_foreign_key "aactividad_opciones", "aactividades"
   add_foreign_key "actividad_alumnos", "actividades"
   add_foreign_key "actividad_alumnos", "alumnos"
+  add_foreign_key "actividad_archivos", "actividades"
   add_foreign_key "actividad_listas", "actividades"
   add_foreign_key "actividad_listas", "listas"
   add_foreign_key "actividad_opciones", "actividades"
@@ -746,6 +863,7 @@ ActiveRecord::Schema.define(version: 2019_02_05_010802) do
   add_foreign_key "convenio_alumnos", "convenios"
   add_foreign_key "cuenta_alumnos", "alumnos"
   add_foreign_key "cuenta_alumnos", "cuentas"
+  add_foreign_key "deudores", "cuentas"
   add_foreign_key "direcciones", "usuarios"
   add_foreign_key "especial_alumnos", "alumnos"
   add_foreign_key "especial_alumnos", "especiales"
@@ -765,6 +883,8 @@ ActiveRecord::Schema.define(version: 2019_02_05_010802) do
   add_foreign_key "lista_alumnos", "alumnos"
   add_foreign_key "lista_alumnos", "listas"
   add_foreign_key "listas", "sectores"
+  add_foreign_key "lote_recibos", "cuentas"
+  add_foreign_key "movimiento2018s", "cuentas"
   add_foreign_key "movimientos", "conceptos"
   add_foreign_key "movimientos", "cuentas"
   add_foreign_key "movimientos", "pago_cuentas"
@@ -778,7 +898,7 @@ ActiveRecord::Schema.define(version: 2019_02_05_010802) do
   add_foreign_key "proximo_grado_alumnos", "alumnos"
   add_foreign_key "proximo_grados", "sectores"
   add_foreign_key "recargos", "cuentas"
-  add_foreign_key "recibos", "cuentas"
+  add_foreign_key "recibos", "lote_recibos"
   add_foreign_key "sector_alumnos", "alumnos"
   add_foreign_key "sector_alumnos", "sectores"
   add_foreign_key "seguimientos", "alumnos"

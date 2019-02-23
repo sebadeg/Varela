@@ -1,0 +1,2 @@
+class ActividadArchivo < ApplicationRecord
+end
