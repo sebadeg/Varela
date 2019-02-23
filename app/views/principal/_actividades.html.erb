@@ -10,7 +10,7 @@
 	           <%= f.hidden_field :id, value: @actividad.id %>
 			    <div id="textoRegistrarse">
 
-					<b><%= link_to "Descargar información: " + @actividad.descripcion, "", :onclick => "$('#form_download_" + a.actividad_id.to_s + "').submit()" %></b>
+					<b><%= link_to "Descargar información: " + @actividad.nombre, "", :onclick => "$('#form_download_" + a.actividad_id.to_s + "').submit()" %></b>
 			    </div>
 			<% end %>
 
