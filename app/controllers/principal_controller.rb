@@ -91,16 +91,40 @@ class PrincipalController < ApplicationController
 
     p params[:actividad][:id]
 
-    actividad = Actividad.find(params[:actividad][:id])    
+
+    actividad = Actividad.find(params[:id])
     if ( actividad != nil )
-      file = Tempfile.new("actividad.pdf")
-      IO.binwrite(file.path, actividad.data)
+      file_name = "#{actividad.nombre}.pdf"
+      file = Tempfile.new(file_name)
+      
+
+      pdf = CombinePDF.new
+      ActividadArchivo.where("actividad_id=#{params[:id]}").order(:id).each do |arch|
+        
+        file2_name = "#{arch.nombre}"
+        file2 = Tempfile.new(file2_name)
+        IO.binwrite(file2.path, arch.data)
+        pdf << CombinePDF.load(file2.path)
+
+      end
+      pdf.save file.path
 
       send_file(
         file.path,
-        filename: actividad.archivo,
+        filename: file_name,
         type: "application/pdf"
       )
+
+    # actividad = Actividad.find(params[:actividad][:id])    
+    # if ( actividad != nil )
+    #   file = Tempfile.new("actividad.pdf")
+    #   IO.binwrite(file.path, actividad.data)
+
+    #   send_file(
+    #     file.path,
+    #     filename: actividad.archivo,
+    #     type: "application/pdf"
+    #   )
 
     else
       redirect_to root_path
