@@ -10,63 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_23_164100) do
+ActiveRecord::Schema.define(version: 2019_02_23_170100) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "aactividad_alumnos", force: :cascade do |t|
-    t.bigint "aactividad_id"
-    t.bigint "alumno_id"
-    t.integer "opcion"
-    t.date "fecha"
-    t.boolean "secretaria"
-    t.boolean "mail"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["aactividad_id"], name: "index_aactividad_alumnos_on_aactividad_id"
-    t.index ["alumno_id"], name: "index_aactividad_alumnos_on_alumno_id"
-  end
-
-  create_table "aactividad_archivos", force: :cascade do |t|
-    t.bigint "aactividad_id"
-    t.string "nombre"
-    t.binary "data"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["aactividad_id"], name: "index_aactividad_archivos_on_aactividad_id"
-  end
-
-  create_table "aactividad_listas", force: :cascade do |t|
-    t.bigint "aactividad_id"
-    t.bigint "lista_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["aactividad_id"], name: "index_aactividad_listas_on_aactividad_id"
-    t.index ["lista_id"], name: "index_aactividad_listas_on_lista_id"
-  end
-
-  create_table "aactividad_opciones", force: :cascade do |t|
-    t.bigint "aactividad_id"
-    t.integer "valor"
-    t.string "opcion"
-    t.string "eleccion"
-    t.integer "cuotas"
-    t.decimal "importe"
-    t.date "fecha"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "concepto"
-    t.index ["aactividad_id"], name: "index_aactividad_opciones_on_aactividad_id"
-  end
-
-  create_table "aactividades", force: :cascade do |t|
-    t.string "nombre"
-    t.date "fecha"
-    t.date "fechainfo"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
   create_table "active_admin_comments", id: :serial, force: :cascade do |t|
     t.string "namespace"
@@ -88,6 +35,10 @@ ActiveRecord::Schema.define(version: 2019_02_23_164100) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "opcion"
+    t.date "fecha"
+    t.boolean "secretaria"
+    t.boolean "mail"
+    t.date "bajado"
     t.index ["actividad_id"], name: "index_actividad_alumnos_on_actividad_id"
     t.index ["alumno_id"], name: "index_actividad_alumnos_on_alumno_id"
   end
@@ -120,6 +71,7 @@ ActiveRecord::Schema.define(version: 2019_02_23_164100) do
     t.integer "cuotas"
     t.decimal "importe"
     t.date "fecha"
+    t.string "concepto"
     t.index ["actividad_id"], name: "index_actividad_opciones_on_actividad_id"
   end
 
@@ -843,12 +795,6 @@ ActiveRecord::Schema.define(version: 2019_02_23_164100) do
     t.index ["reset_password_token"], name: "index_usuarios_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "aactividad_alumnos", "aactividades"
-  add_foreign_key "aactividad_alumnos", "alumnos"
-  add_foreign_key "aactividad_archivos", "aactividades"
-  add_foreign_key "aactividad_listas", "aactividades"
-  add_foreign_key "aactividad_listas", "listas"
-  add_foreign_key "aactividad_opciones", "aactividades"
   add_foreign_key "actividad_alumnos", "actividades"
   add_foreign_key "actividad_alumnos", "alumnos"
   add_foreign_key "actividad_archivos", "actividades"

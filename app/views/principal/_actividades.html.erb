@@ -8,6 +8,7 @@
 			
 			<%= form_for(@x, as: :actividad, url: principal_download_pdf_path(:actividad), :html => {:id=>'form_download_' + a.actividad_id.to_s}) do |f| %>
 	           <%= f.hidden_field :id, value: @actividad.id %>
+	           <%= f.hidden_field :alumno_id, value: t.id %>
 			    <div id="textoRegistrarse">
 
 					<b><%= link_to "Descargar información: " + @actividad.nombre, "", :onclick => "$('#form_download_" + a.actividad_id.to_s + "').submit()" %></b>

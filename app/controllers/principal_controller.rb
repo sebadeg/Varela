@@ -109,6 +109,9 @@ class PrincipalController < ApplicationController
       end
       pdf.save file.path
 
+      actividad_alumno = ActividadAlumno.find_by(actividad_id: params[:actividad][:id], alumno_id: params[:actividad][:alumno_id])
+      actividad_alumno.update!( bajado: DateTime.now)
+
       send_file(
         file.path,
         filename: file_name,
