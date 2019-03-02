@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_23_170600) do
+ActiveRecord::Schema.define(version: 2019_02_23_170900) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -214,6 +214,8 @@ ActiveRecord::Schema.define(version: 2019_02_23_170600) do
     t.string "email"
     t.text "info"
     t.boolean "concurre"
+    t.boolean "brou"
+    t.string "retencion"
     t.index ["nombre"], name: "index_cuentas_on_nombre"
   end
 
@@ -324,6 +326,7 @@ ActiveRecord::Schema.define(version: 2019_02_23_170600) do
     t.date "fecha_vencimiento"
     t.boolean "mail", default: false
     t.decimal "dolar"
+    t.datetime "bajado"
     t.index ["cuenta_id"], name: "index_facturas_on_cuenta_id"
     t.index ["mail"], name: "index_facturas_on_mail"
   end
