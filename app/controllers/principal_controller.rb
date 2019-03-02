@@ -410,6 +410,7 @@ class PrincipalController < ApplicationController
 
       factura.imprimir(file.path,cuenta_id,factura)
       
+      factura.update!( bajado: DateTime.now)
 
       send_file(
         file.path,
