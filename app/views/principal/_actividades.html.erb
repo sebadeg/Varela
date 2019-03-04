@@ -19,7 +19,7 @@
 		    <% @titular = TitularCuenta.where(['usuario_id = ? AND cuenta_id = ?',current_usuario.id,@cuenta.cuenta_id]).first rescue nil %>
 		    <% if @titular != nil && (@actividad.fecha == nil || @actividad.fecha >= DateTime.now ) %>
 
-		    	<% arreglo = ActividadOpcion.opciones(@actividad_id) %>
+		    	<% arreglo = ActividadOpcion.opciones(@actividad.id) %>
 				<% if arreglo[:opciones].count > 0 %>
 					<%= form_for(@y, as: :actividad_alumno, url: principal_autorizar_path(:actividad)) do |f| %>
 						<div id="textoRegistrarse">							
