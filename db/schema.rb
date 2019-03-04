@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_23_170900) do
+ActiveRecord::Schema.define(version: 2019_03_03_190000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 2019_02_23_170900) do
     t.binary "data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "indice"
     t.index ["actividad_id"], name: "index_actividad_archivos_on_actividad_id"
   end
 
@@ -74,7 +75,10 @@ ActiveRecord::Schema.define(version: 2019_02_23_170900) do
     t.decimal "importe"
     t.date "fecha"
     t.string "concepto"
+    t.bigint "opcion_concepto_id"
+    t.integer "indice"
     t.index ["actividad_id"], name: "index_actividad_opciones_on_actividad_id"
+    t.index ["opcion_concepto_id"], name: "index_actividad_opciones_on_opcion_concepto_id"
   end
 
   create_table "actividades", id: :serial, force: :cascade do |t|
@@ -582,6 +586,12 @@ ActiveRecord::Schema.define(version: 2019_02_23_170900) do
     t.index ["placta_id"], name: "index_movs_on_placta_id"
   end
 
+  create_table "opcion_conceptos", force: :cascade do |t|
+    t.string "nombre"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "padre_alumnos", id: :serial, force: :cascade do |t|
     t.integer "usuario_id"
     t.integer "alumno_id"
@@ -612,6 +622,8 @@ ActiveRecord::Schema.define(version: 2019_02_23_170900) do
     t.boolean "procesado"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "tipo_pago_id"
+    t.index ["tipo_pago_id"], name: "index_pagos_on_tipo_pago_id"
   end
 
   create_table "pases", force: :cascade do |t|
@@ -765,6 +777,12 @@ ActiveRecord::Schema.define(version: 2019_02_23_170900) do
     t.index ["cuenta_id"], name: "index_tipo_cuentas_on_cuenta_id"
   end
 
+  create_table "tipo_pagos", force: :cascade do |t|
+    t.string "nombre"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "titular_cuentas", id: :serial, force: :cascade do |t|
     t.integer "usuario_id"
     t.integer "cuenta_id"
@@ -812,6 +830,7 @@ ActiveRecord::Schema.define(version: 2019_02_23_170900) do
   add_foreign_key "actividad_listas", "actividades"
   add_foreign_key "actividad_listas", "listas"
   add_foreign_key "actividad_opciones", "actividades"
+  add_foreign_key "actividad_opciones", "opcion_conceptos"
   add_foreign_key "contrato_cuotas", "contratos"
   add_foreign_key "contratos", "alumnos"
   add_foreign_key "contratos", "conceptos"
@@ -852,6 +871,7 @@ ActiveRecord::Schema.define(version: 2019_02_23_170900) do
   add_foreign_key "padre_alumnos", "usuarios"
   add_foreign_key "pago_cuentas", "cuentas"
   add_foreign_key "pago_cuentas", "pagos"
+  add_foreign_key "pagos", "tipo_pagos"
   add_foreign_key "pases", "alumnos"
   add_foreign_key "proximo_grado_alumnos", "alumnos"
   add_foreign_key "proximo_grados", "sectores"

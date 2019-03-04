@@ -14,12 +14,15 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.irregular 'cuenta', 'cuentas'
   inflect.irregular 'titular_cuenta', 'titular_cuentas'
   inflect.irregular 'actividad', 'actividades'
+  inflect.irregular 'autorizacion', 'autorizaciones'
+  inflect.irregular 'opcion', 'opciones'
   inflect.irregular 'actividad_opcion', 'actividad_opciones'
   inflect.irregular 'lista', 'listas'
   inflect.irregular 'especial', 'especiales'
   inflect.irregular 'especial_cuenta', 'especial_cuentas'
   inflect.irregular 'contrato_cuota', 'contrato_cuotas'
   inflect.irregular 'inscripcion', 'inscripciones'
+  inflect.irregular 'sector', 'sectores'
   inflect.irregular 'direccion', 'direcciones'
 end
 
