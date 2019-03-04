@@ -145,6 +145,7 @@ class PrincipalController < ApplicationController
 
     if ( actividad_alumno != nil )
       actividad_alumno.opcion = params[:actividad_alumno][:opcion]
+      actividad_alumno.fecha = params[:actividad_alumno][:fecha]
       actividad_alumno.save!()
     end
     redirect_to root_path
