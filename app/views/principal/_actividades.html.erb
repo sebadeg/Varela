@@ -21,7 +21,23 @@
 
 		    	<% arreglo = ActividadOpcion.opciones(@actividad.id) %>
 		    	<% p arreglo %>
+				<% if arreglo[:opciones].count > 0 %>
+					<%= form_for(@y, as: :actividad_alumno, url: principal_autorizar_path(:actividad)) do |f| %>
+						<div id="textoRegistrarse">	
 
+					    <% if a.opcion != nil && arreglo[:elecciones][a.opcion] != nil %>
+					    	<b><%= p arreglo[:elecciones][a.opcion] %></b>
+					    <% else %>
+					    	<b><%= p "" %><b>
+					    <% end %><br><br>
+			            <%= f.hidden_field :alumno_id, value: t.id %>
+			            <%= f.hidden_field :actividad_id, value: a.actividad_id %>
+						<%= f.select :opcion, options_for_select(arreglo[:opciones], a.opcion)  %><br><br>
+			            <%= f.submit "Confirmar"  %>
+						</div>
+
+					<% end %>												
+				<% end %>
 				<br>
 			<% end %>
 		<% end %>
