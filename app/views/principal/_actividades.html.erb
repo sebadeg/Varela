@@ -10,7 +10,6 @@
 	           <%= f.hidden_field :id, value: @actividad.id %>
 	           <%= f.hidden_field :alumno_id, value: t.id %>
 			    <div id="textoRegistrarse">
-
 					<b><%= link_to "Descargar información: " + @actividad.nombre, "", :onclick => "$('#form_download_" + a.actividad_id.to_s + "').submit()" %></b>
 			    </div>
 			<% end %>
@@ -20,7 +19,6 @@
 		    <% if @titular != nil && (@actividad.fecha == nil || @actividad.fecha >= DateTime.now ) %>
 
 		    	<% arreglo = ActividadOpcion.opciones(@actividad.id) %>
-		    	<% p arreglo %>
 				<% if arreglo[:opciones].count > 0 %>
 					<%= form_for(@y, as: :actividad_alumno, url: principal_autorizar_path(:actividad)) do |f| %>
 						<div id="textoRegistrarse">	
@@ -28,7 +26,7 @@
 					    <% if a.opcion != nil && arreglo[:elecciones][a.opcion] != nil %>
 					    	<b><%= p arreglo[:elecciones][a.opcion] %></b>
 					    <% else %>
-					    	<b><%= p "" %><b>
+					    	<b><%= p "" %></b>
 					    <% end %><br><br>
 			            <%= f.hidden_field :alumno_id, value: t.id %>
 			            <%= f.hidden_field :actividad_id, value: a.actividad_id %>
