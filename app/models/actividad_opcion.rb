@@ -5,7 +5,8 @@ class ActividadOpcion < ApplicationRecord
 
     ActividadOpcion.where(["actividad_id=#{actividad_id}"]).order(:indice).each do |opcion|
       
-      s = opcion.concepto != nil ? opcion.concepto : ""
+      concepto = OpcionConcepto.find(opcion.opcion_concepto_id)
+      s = concepto != nil ? concepto.nombre : ""
       if ( opcion.cuotas != nil && opcion.cuotas > 0 )
         if ( opcion.cuotas == 1 )
           s = s + " a debitar contado de $U "

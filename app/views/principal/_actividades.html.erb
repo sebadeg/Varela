@@ -20,7 +20,8 @@
 		    <% if @titular != nil && (@actividad.fecha == nil || @actividad.fecha >= DateTime.now ) %>
 
 		    	<% arreglo = ActividadOpcion.opciones(@actividad.id) %>
-				<% if arreglo[:opciones].count > 0 %>
+		    	<% p arreglo %>
+				<!-- <% if arreglo[:opciones].count > 0 %>
 					<%= form_for(@y, as: :actividad_alumno, url: principal_autorizar_path(:actividad)) do |f| %>
 						<div id="textoRegistrarse">							
 					    <% if arreglo[:opciones][a.opcion] != nil %>
@@ -35,7 +36,7 @@
 						</div>
 
 					<% end %>												
-				<% end %>	
+				<% end %>	 -->
 				<br>
 			<% end %>
 		<% end %>
