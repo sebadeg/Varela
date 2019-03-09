@@ -23,7 +23,7 @@
 		<td><%= m['descripcion'] %></td>
 		<td><% if m['debe'].to_f != 0 %>			
 			<%= m['debe'].to_f %>
-				<% if pendientes && m['fecha'].to_date.month >= 7 %>
+				<% if pendientes && m['fecha'].to_date.month >= 7 && m['tipo'] == 1001 %>
 					<b>*</b>
 				<% end %>
 			<% end %></td>
