@@ -144,9 +144,13 @@ class PrincipalController < ApplicationController
     actividad_alumno = ActividadAlumno.where( ["alumno_id = ? AND actividad_id = ?", params[:actividad_alumno][:alumno_id], params[:actividad_alumno][:actividad_id]]).first rescue nil
 
     if ( actividad_alumno != nil )
+
+      actividad_alumno.elegir_opcion(params[:actividad_alumno][:opcion])
+
       actividad_alumno.opcion = params[:actividad_alumno][:opcion]
       actividad_alumno.fecha = params[:actividad_alumno][:fecha]
       actividad_alumno.save!()
+
     end
     redirect_to root_path
   end
