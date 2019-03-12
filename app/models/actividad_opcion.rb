@@ -1,10 +1,10 @@
 class ActividadOpcion < ApplicationRecord
-  def self.opciones(actividad_id)
+  def self.opciones(actividad_id, opciones_ocultas )
     opciones = Array.new
     elecciones = Hash.new
 
     ActividadOpcion.where(["actividad_id=#{actividad_id}"]).order(:indice).each do |opcion|
-      if (opcion.fecha == nil || opcion.fecha >= DateTime.now )
+      if (opciones_ocultas || opcion.fecha == nil || opcion.fecha >= DateTime.now )
         s = ""
         if opcion.opcion_concepto_id != nil  
           concepto = OpcionConcepto.find(opcion.opcion_concepto_id)

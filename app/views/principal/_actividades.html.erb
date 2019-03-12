@@ -16,12 +16,13 @@
 
 		    <% @cuenta = CuentaAlumno.where(['alumno_id = ?',t.id]).first rescue nil %>
 		    <% @titular = TitularCuenta.where(['usuario_id = ? AND cuenta_id = ?',current_usuario.id,@cuenta.cuenta_id]).first rescue nil %>
-		    <% arreglo = ActividadOpcion.opciones(@actividad.id) %>
+		    <% arreglo = ActividadOpcion.opciones(@actividad.id,false) %>
+		    <% arregloTodo = ActividadOpcion.opciones(@actividad.id,true) %>
 		    <% if @titular != nil && arreglo[:opciones].count > 0 %>
 				<%= form_for(@y, as: :actividad_alumno, url: principal_autorizar_path(:actividad)) do |f| %>
 					<div id="textoRegistrarse">	
 				    <% if a.opcion != nil && arreglo[:elecciones][a.opcion] != nil %>
-				    	<b><%= p arreglo[:elecciones][a.opcion] %></b>
+				    	<b><%= p arregloTodo[:elecciones][a.opcion] %></b>
 				    <% else %>
 				    	<b><%= p "" %></b>
 				    <% end %><br><br>
