@@ -21,7 +21,7 @@
 		    <% if @titular != nil && arreglo[:opciones].count > 0 %>
 				<%= form_for(@y, as: :actividad_alumno, url: principal_autorizar_path(:actividad)) do |f| %>
 					<div id="textoRegistrarse">	
-				    <% if a.opcion != nil && arreglo[:elecciones][a.opcion] != nil %>
+				    <% if a.opcion != nil && arregloTodo[:elecciones][a.opcion] != nil %>
 				    	<b><%= p arregloTodo[:elecciones][a.opcion] %></b>
 				    <% else %>
 				    	<b><%= p "" %></b>
