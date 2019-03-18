@@ -3,7 +3,7 @@ class Cuenta < ApplicationRecord
 	def movimientos
 		#sql= "SELECT * FROM movimientos WHERE NOT pendiente AND cuenta_id = #{id} ORDER BY fecha, tipo";
 
-      	return Movimiento.where(["fecha<=? AND cuenta_id=?",DateTime.now,id).order(:fecha,:tipo)
+      	return Movimiento.where(["fecha<=? AND cuenta_id=?",DateTime.now,id]).order(:fecha,:tipo)
       	#return ActiveRecord::Base.connection.execute(sql)
 
 	end
@@ -23,7 +23,7 @@ class Cuenta < ApplicationRecord
 		# 	"SELECT cuenta_id, fecha, 1000 as indice,'Pago' as descripcion,0 as debe,haber as haber FROM movimientos WHERE cuenta_id = #{id} AND descripcion='Pago' AND pago_cuenta_id IS NULL ) AS movimientos " +
 		# 	"ORDER BY cuenta_id, fecha, indice";
 
-      	return Movimiento.where(["fecha>? AND cuenta_id=?",DateTime.now,id).order(:fecha,:tipo)
+      	return Movimiento.where(["fecha>? AND cuenta_id=?",DateTime.now,id]).order(:fecha,:tipo)
       	#return ActiveRecord::Base.connection.execute(sql)
 
 	end
