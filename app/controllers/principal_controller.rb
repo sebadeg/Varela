@@ -404,28 +404,28 @@ class PrincipalController < ApplicationController
 
   def download_factura
 
-    p params[:cuenta][:id]
+    # p params[:cuenta][:id]
 
-    cuenta_id = params[:cuenta][:id]
+    # cuenta_id = params[:cuenta][:id]
 
-    factura = Factura.where("cuenta_id=#{cuenta_id}").order(fecha: :desc).first rescue nil
-    if factura != nil
+    # factura = Factura.where("cuenta_id=#{cuenta_id}").order(fecha: :desc).first rescue nil
+    # if factura != nil
 
-      file = Tempfile.new("factura.pdf")
+    #   file = Tempfile.new("factura.pdf")
 
-      factura.imprimir(file.path,cuenta_id,factura)
+    #   factura.imprimir(file.path,cuenta_id,factura)
       
-      factura.update!( bajado: DateTime.now)
+    #   factura.update!( bajado: DateTime.now)
 
-      send_file(
-        file.path,
-        filename: "factura_#{cuenta_id}_#{factura.id}.pdf",
-        type: "application/pdf"
-      )
+    #   send_file(
+    #     file.path,
+    #     filename: "factura_#{cuenta_id}_#{factura.id}.pdf",
+    #     type: "application/pdf"
+    #   )
 
-    else
+    # else
       redirect_to principal_index_path
-    end
+    #end
   end
 
   # def imprimirfactura
