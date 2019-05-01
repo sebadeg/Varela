@@ -80,7 +80,14 @@ class Factura < ApplicationRecord
           end
 
           text_box "", :at => [190, i-indice*renglon]
-          text_box linea.descripcion, :at => [280, i-indice*renglon]
+
+          #text_box linea.descripcion, :at => [280, i-indice*renglon]
+          bounding_box([280, i-indice*renglon], :width => 160, :height => renglon) do
+            text_box linea.descripcion, align: :left
+            transparent(0) { stroke_bounds }
+          end
+
+
 
           bounding_box([450, i-indice*renglon], :width => 70, :height => renglon) do
            if dolar == nil
