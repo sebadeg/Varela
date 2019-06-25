@@ -23,23 +23,28 @@
 		<td><%= m['descripcion'] %></td>
 		<td><% if m['debe'].to_f != 0 %>			
 			<%= m['debe'].to_f %>
+				<!--
 				<% if pendientes && m['fecha'].to_date.month >= 7 && m['tipo'] == 1001 %>
 					<b>*</b>
 				<% end %>
+				!>
+
 			<% end %></td>
 		<td><% if m['haber'].to_f != 0 %><%= m['haber'].to_f %><% end %></td>
 		</tr>
 	<% end %>
+	<!--
 	<% if pendientes %>
 		<tr>
 		<td></td>
 		<td></td>
-		<td>
+		<td>		
 			<b>*</b> Sujeta a ajuste a determinar
 		</td>
 		<td></td>
 		</tr>
 	<% end %>
+	!>
 
 
 	<% if !pendientes %>
