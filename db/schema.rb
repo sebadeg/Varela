@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_03_190000) do
+ActiveRecord::Schema.define(version: 2019_08_11_214928) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,6 +90,10 @@ ActiveRecord::Schema.define(version: 2019_03_03_190000) do
     t.date "fecha"
     t.date "fechainfo"
     t.binary "data"
+    t.bigint "sector_id"
+    t.boolean "mail"
+    t.string "creada"
+    t.index ["sector_id"], name: "index_actividades_on_sector_id"
   end
 
   create_table "admin_usuarios", id: :serial, force: :cascade do |t|
@@ -111,6 +115,8 @@ ActiveRecord::Schema.define(version: 2019_03_03_190000) do
     t.boolean "sec_cc", default: false
     t.boolean "administracion", default: false
     t.boolean "inscripciones"
+    t.boolean "secretaria"
+    t.boolean "sue"
     t.index ["email"], name: "index_admin_usuarios_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admin_usuarios_on_reset_password_token", unique: true
   end
@@ -120,6 +126,19 @@ ActiveRecord::Schema.define(version: 2019_03_03_190000) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "apellido"
+    t.string "mutualista"
+    t.string "emergencia"
+    t.string "procede"
+    t.bigint "cedula_padre_id"
+    t.bigint "cedula_madre_id"
+    t.integer "cedula"
+    t.string "lugar_nacimiento"
+    t.date "fecha_nacimiento"
+    t.string "domicilio"
+    t.string "celular"
+    t.integer "anio_ingreso"
+    t.index ["cedula_madre_id"], name: "index_alumnos_on_cedula_madre_id"
+    t.index ["cedula_padre_id"], name: "index_alumnos_on_cedula_padre_id"
   end
 
   create_table "archivos", id: :serial, force: :cascade do |t|
@@ -146,6 +165,9 @@ ActiveRecord::Schema.define(version: 2019_03_03_190000) do
     t.integer "anio"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "anio_pases"
+    t.integer "anio_inscripciones"
+    t.date "fecha_facturacion"
   end
 
   create_table "contrato_cuotas", id: :serial, force: :cascade do |t|
@@ -186,6 +208,25 @@ ActiveRecord::Schema.define(version: 2019_03_03_190000) do
     t.index ["convenio_id"], name: "index_convenio_alumnos_on_convenio_id"
   end
 
+  create_table "convenio_cuota", force: :cascade do |t|
+    t.bigint "convenio_id"
+    t.date "fecha"
+    t.decimal "importe"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "cantidad"
+    t.index ["convenio_id"], name: "index_convenio_cuota_on_convenio_id"
+  end
+
+  create_table "convenio_descuentos", force: :cascade do |t|
+    t.bigint "convenio_id"
+    t.bigint "descuento_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["convenio_id"], name: "index_convenio_descuentos_on_convenio_id"
+    t.index ["descuento_id"], name: "index_convenio_descuentos_on_descuento_id"
+  end
+
   create_table "convenios", id: :serial, force: :cascade do |t|
     t.string "nombre"
     t.decimal "valor"
@@ -193,6 +234,11 @@ ActiveRecord::Schema.define(version: 2019_03_03_190000) do
     t.datetime "updated_at", null: false
     t.boolean "ocultar_porcentaje"
     t.boolean "formulario", default: false
+    t.integer "cedula"
+    t.decimal "importe"
+    t.decimal "porcentaje"
+    t.decimal "matricula_importe"
+    t.decimal "matricula_porcentaje"
   end
 
   create_table "cuenta_alumnos", id: :serial, force: :cascade do |t|
@@ -220,7 +266,41 @@ ActiveRecord::Schema.define(version: 2019_03_03_190000) do
     t.boolean "concurre"
     t.boolean "brou"
     t.string "retencion"
+    t.boolean "visa"
+    t.boolean "oca"
     t.index ["nombre"], name: "index_cuentas_on_nombre"
+  end
+
+  create_table "cuota_socios", force: :cascade do |t|
+    t.bigint "socio_id"
+    t.date "fecha"
+    t.string "concepto"
+    t.decimal "importe"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["socio_id"], name: "index_cuota_socios_on_socio_id"
+  end
+
+  create_table "delayed_jobs", force: :cascade do |t|
+    t.integer "priority", default: 0, null: false
+    t.integer "attempts", default: 0, null: false
+    t.text "handler", null: false
+    t.text "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string "locked_by"
+    t.string "queue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["priority", "run_at"], name: "delayed_jobs_priority"
+  end
+
+  create_table "descuentos", force: :cascade do |t|
+    t.string "nombre"
+    t.decimal "porcentaje"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "deudores", force: :cascade do |t|
@@ -335,6 +415,25 @@ ActiveRecord::Schema.define(version: 2019_03_03_190000) do
     t.index ["mail"], name: "index_facturas_on_mail"
   end
 
+  create_table "formulario_inscripcion_opciones", force: :cascade do |t|
+    t.bigint "formulario_id"
+    t.bigint "inscripcion_opcion_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["formulario_id"], name: "index_formulario_inscripcion_opciones_on_formulario_id"
+    t.index ["inscripcion_opcion_id"], name: "index_formulario_inscripcion_opciones_on_inscripcion_opcion_id"
+  end
+
+  create_table "formularios", force: :cascade do |t|
+    t.string "nombre"
+    t.integer "cedula"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "proximo_grado_id"
+    t.integer "anio"
+    t.index ["proximo_grado_id"], name: "index_formularios_on_proximo_grado_id"
+  end
+
   create_table "grado_alumnos", id: :serial, force: :cascade do |t|
     t.integer "grado_id"
     t.integer "alumno_id"
@@ -389,6 +488,25 @@ ActiveRecord::Schema.define(version: 2019_03_03_190000) do
     t.index ["alumno_id"], name: "index_inscripcion_alumnos_on_alumno_id"
     t.index ["convenio_id"], name: "index_inscripcion_alumnos_on_convenio_id"
     t.index ["grado_id"], name: "index_inscripcion_alumnos_on_grado_id"
+  end
+
+  create_table "inscripcion_opcion_tipos", force: :cascade do |t|
+    t.string "nombre"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "inscripcion_opciones", force: :cascade do |t|
+    t.string "nombre"
+    t.integer "anio"
+    t.bigint "inscripcion_opcion_tipo_id"
+    t.date "fecha"
+    t.decimal "valor"
+    t.string "formato"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "general"
+    t.index ["inscripcion_opcion_tipo_id"], name: "index_inscripcion_opciones_on_inscripcion_opcion_tipo_id"
   end
 
   create_table "inscripciones", id: :serial, force: :cascade do |t|
@@ -453,7 +571,15 @@ ActiveRecord::Schema.define(version: 2019_03_03_190000) do
     t.string "especial"
     t.integer "cuenta_id"
     t.integer "alumno_id"
+    t.boolean "reinscripcion"
+    t.boolean "registrado"
+    t.boolean "inscripto"
+    t.bigint "grado_id"
+    t.boolean "inhabilitado"
+    t.date "fecha_pase"
+    t.string "destino_pase"
     t.index ["convenio_id"], name: "index_inscripciones_on_convenio_id"
+    t.index ["grado_id"], name: "index_inscripciones_on_grado_id"
     t.index ["proximo_grado_id"], name: "index_inscripciones_on_proximo_grado_id"
   end
 
@@ -501,6 +627,7 @@ ActiveRecord::Schema.define(version: 2019_03_03_190000) do
     t.integer "hoja_nro"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "nota_credito", default: false
     t.index ["cuenta_id"], name: "index_lote_recibos_on_cuenta_id"
   end
 
@@ -542,13 +669,22 @@ ActiveRecord::Schema.define(version: 2019_03_03_190000) do
     t.decimal "saldo"
     t.integer "indice"
     t.bigint "contrato_id"
+    t.bigint "actividad_alumno_id"
+    t.integer "actividad_alumno_opcion"
+    t.bigint "especial_id"
+    t.bigint "tipo_movimiento_id"
+    t.integer "rubro_debe"
+    t.integer "rubro_haber"
+    t.index ["actividad_alumno_id"], name: "index_movimientos_on_actividad_alumno_id"
     t.index ["concepto_id"], name: "index_movimientos_on_concepto_id"
     t.index ["contrato_id"], name: "index_movimientos_on_contrato_id"
     t.index ["cuenta_id", "fecha"], name: "index_movimientos_on_cuenta_id_and_fecha"
     t.index ["cuenta_id"], name: "index_movimientos_on_cuenta_id"
+    t.index ["especial_id"], name: "index_movimientos_on_especial_id"
     t.index ["pago_cuenta_id"], name: "index_movimientos_on_pago_cuenta_id"
     t.index ["pendiente"], name: "index_movimientos_on_pendiente"
     t.index ["recibo_id"], name: "index_movimientos_on_recibo_id"
+    t.index ["tipo_movimiento_id"], name: "index_movimientos_on_tipo_movimiento_id"
   end
 
   create_table "movs", force: :cascade do |t|
@@ -635,6 +771,21 @@ ActiveRecord::Schema.define(version: 2019_03_03_190000) do
     t.index ["alumno_id"], name: "index_pases_on_alumno_id"
   end
 
+  create_table "personas", force: :cascade do |t|
+    t.string "nombre"
+    t.string "apellido"
+    t.string "lugar_nacimiento"
+    t.date "fecha_nacimiento"
+    t.string "email"
+    t.string "domicilio"
+    t.string "celular"
+    t.string "profesion"
+    t.string "trabajo"
+    t.string "telefono_trabajo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "plactas", force: :cascade do |t|
     t.integer "plagru"
     t.integer "placap"
@@ -666,6 +817,7 @@ ActiveRecord::Schema.define(version: 2019_03_03_190000) do
     t.string "codigo"
     t.integer "grado_id"
     t.bigint "sector_id"
+    t.integer "anio"
     t.index ["sector_id"], name: "index_proximo_grados_on_sector_id"
   end
 
@@ -728,6 +880,20 @@ ActiveRecord::Schema.define(version: 2019_03_03_190000) do
     t.index ["cuenta_id"], name: "index_sinregistro_cuentas_on_cuenta_id"
   end
 
+  create_table "socios", force: :cascade do |t|
+    t.string "nombre"
+    t.integer "cedula"
+    t.string "email"
+    t.string "domicilio"
+    t.string "celular"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "apellido"
+    t.date "fecha_ingreso"
+    t.string "telefono"
+    t.date "fecha_egreso"
+  end
+
   create_table "spams", force: :cascade do |t|
     t.string "email"
     t.datetime "created_at", null: false
@@ -755,11 +921,20 @@ ActiveRecord::Schema.define(version: 2019_03_03_190000) do
     t.index ["grado_id"], name: "index_subgrados_on_grado_id"
   end
 
+  create_table "tarea_tipos", force: :cascade do |t|
+    t.string "nombre"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "tareas", id: :serial, force: :cascade do |t|
     t.string "descripcion"
     t.boolean "realizada"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "tarea_tipo_id"
+    t.integer "prioridad"
+    t.index ["tarea_tipo_id"], name: "index_tareas_on_tarea_tipo_id"
   end
 
   create_table "temps", force: :cascade do |t|
@@ -777,6 +952,12 @@ ActiveRecord::Schema.define(version: 2019_03_03_190000) do
     t.index ["cuenta_id"], name: "index_tipo_cuentas_on_cuenta_id"
   end
 
+  create_table "tipo_movimientos", force: :cascade do |t|
+    t.string "nombre"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "tipo_pagos", force: :cascade do |t|
     t.string "nombre"
     t.datetime "created_at", null: false
@@ -790,6 +971,16 @@ ActiveRecord::Schema.define(version: 2019_03_03_190000) do
     t.datetime "updated_at", null: false
     t.index ["cuenta_id"], name: "index_titular_cuentas_on_cuenta_id"
     t.index ["usuario_id"], name: "index_titular_cuentas_on_usuario_id"
+  end
+
+  create_table "usuario_sectores", force: :cascade do |t|
+    t.bigint "admin_usuario_id"
+    t.bigint "sector_id"
+    t.integer "indice", default: 1
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["admin_usuario_id"], name: "index_usuario_sectores_on_admin_usuario_id"
+    t.index ["sector_id"], name: "index_usuario_sectores_on_sector_id"
   end
 
   create_table "usuarios", id: :serial, force: :cascade do |t|
@@ -831,14 +1022,21 @@ ActiveRecord::Schema.define(version: 2019_03_03_190000) do
   add_foreign_key "actividad_listas", "listas"
   add_foreign_key "actividad_opciones", "actividades"
   add_foreign_key "actividad_opciones", "opcion_conceptos"
+  add_foreign_key "actividades", "sectores"
+  add_foreign_key "alumnos", "personas", column: "cedula_madre_id"
+  add_foreign_key "alumnos", "personas", column: "cedula_padre_id"
   add_foreign_key "contrato_cuotas", "contratos"
   add_foreign_key "contratos", "alumnos"
   add_foreign_key "contratos", "conceptos"
   add_foreign_key "contratos", "cuentas"
   add_foreign_key "convenio_alumnos", "alumnos"
   add_foreign_key "convenio_alumnos", "convenios"
+  add_foreign_key "convenio_cuota", "convenios"
+  add_foreign_key "convenio_descuentos", "convenios"
+  add_foreign_key "convenio_descuentos", "descuentos"
   add_foreign_key "cuenta_alumnos", "alumnos"
   add_foreign_key "cuenta_alumnos", "cuentas"
+  add_foreign_key "cuota_socios", "socios"
   add_foreign_key "deudores", "cuentas"
   add_foreign_key "direcciones", "usuarios"
   add_foreign_key "especial_alumnos", "alumnos"
@@ -847,12 +1045,17 @@ ActiveRecord::Schema.define(version: 2019_03_03_190000) do
   add_foreign_key "especial_cuentas", "especiales"
   add_foreign_key "especiales", "codigos"
   add_foreign_key "facturas", "cuentas"
+  add_foreign_key "formulario_inscripcion_opciones", "formularios"
+  add_foreign_key "formulario_inscripcion_opciones", "inscripcion_opciones"
+  add_foreign_key "formularios", "proximo_grados"
   add_foreign_key "grado_alumnos", "alumnos"
   add_foreign_key "grado_alumnos", "grados"
   add_foreign_key "inscripcion_alumnos", "alumnos"
   add_foreign_key "inscripcion_alumnos", "convenios"
   add_foreign_key "inscripcion_alumnos", "grados"
+  add_foreign_key "inscripcion_opciones", "inscripcion_opcion_tipos"
   add_foreign_key "inscripciones", "convenios"
+  add_foreign_key "inscripciones", "grados"
   add_foreign_key "inscripciones", "proximo_grados"
   add_foreign_key "linea_facturas", "alumnos"
   add_foreign_key "linea_facturas", "facturas"
@@ -861,11 +1064,14 @@ ActiveRecord::Schema.define(version: 2019_03_03_190000) do
   add_foreign_key "listas", "sectores"
   add_foreign_key "lote_recibos", "cuentas"
   add_foreign_key "movimiento2018s", "cuentas"
+  add_foreign_key "movimientos", "actividad_alumnos"
   add_foreign_key "movimientos", "conceptos"
   add_foreign_key "movimientos", "contratos"
   add_foreign_key "movimientos", "cuentas"
+  add_foreign_key "movimientos", "especiales"
   add_foreign_key "movimientos", "pago_cuentas"
   add_foreign_key "movimientos", "recibos"
+  add_foreign_key "movimientos", "tipo_movimientos"
   add_foreign_key "movs", "plactas"
   add_foreign_key "padre_alumnos", "alumnos"
   add_foreign_key "padre_alumnos", "usuarios"
@@ -884,7 +1090,10 @@ ActiveRecord::Schema.define(version: 2019_03_03_190000) do
   add_foreign_key "subgrado_alumnos", "alumnos"
   add_foreign_key "subgrado_alumnos", "subgrados"
   add_foreign_key "subgrados", "grados"
+  add_foreign_key "tareas", "tarea_tipos"
   add_foreign_key "tipo_cuentas", "cuentas"
   add_foreign_key "titular_cuentas", "cuentas"
   add_foreign_key "titular_cuentas", "usuarios"
+  add_foreign_key "usuario_sectores", "admin_usuarios"
+  add_foreign_key "usuario_sectores", "sectores"
 end
