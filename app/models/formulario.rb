@@ -1,9 +1,9 @@
 class Formulario < ApplicationRecord
 
   def self.OpcionesFormulario(inscripcionAlumno)
-    opciones = Array.new
-    opciones.push( ["Prueba 1",1] )
-    return opciones
+    opciones1 = Array.new
+    opciones1.push( ["Prueba 1",1] )
+    return opciones1
   end
 
   def self.OpcionesConvenio(inscripcionAlumno)
