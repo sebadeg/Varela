@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_11_214928) do
+ActiveRecord::Schema.define(version: 2019_08_13_233754) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -578,6 +578,11 @@ ActiveRecord::Schema.define(version: 2019_08_11_214928) do
     t.boolean "inhabilitado"
     t.date "fecha_pase"
     t.string "destino_pase"
+    t.integer "formulario_id"
+    t.integer "adicional_id"
+    t.integer "hermanos_id"
+    t.integer "cuotas_id"
+    t.integer "matricula_id"
     t.index ["convenio_id"], name: "index_inscripciones_on_convenio_id"
     t.index ["grado_id"], name: "index_inscripciones_on_grado_id"
     t.index ["proximo_grado_id"], name: "index_inscripciones_on_proximo_grado_id"
