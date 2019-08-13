@@ -7,7 +7,7 @@ class Inscripcion < ApplicationRecord
   end
 
   def PuedeInscribir()
-    return !inhabilitado && (fecha_pase != nil)
+    return !inhabilitado && (fecha_pase == nil)
   end
 
   def EstaInscripto()

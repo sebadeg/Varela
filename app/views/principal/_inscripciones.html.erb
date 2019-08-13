@@ -9,7 +9,7 @@
 <% else %>
   <% alu = locals[:alumno] %>
   <% inscripcionAlumno = Inscripcion.FindInscripcion(alu.id) %>
-  <% if inscripcionAlumno == nil || inscripcionAlumno.PuedeInscribir() %>
+  <% if inscripcionAlumno == nil || !inscripcionAlumno.PuedeInscribir() %>
     <table>
       <tr height='30px'></tr>
       <tr height='30px'><td width='30px'></td><td width='15px'><%= image_tag("warning.png") %></td>
