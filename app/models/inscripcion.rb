@@ -3,7 +3,7 @@ class Inscripcion < ApplicationRecord
   belongs_to :proximo_grado
 
   def self.FindInscripcion(alumno)
-    return Inscripciones.where("alumno_id=#{alumno} AND anio IN (SELECT anio_inscripciones FROM configs WHERE NOT anio_inscripciones IS NULL)").first rescue nil
+    return Inscripcion.where("alumno_id=#{alumno} AND anio IN (SELECT anio_inscripciones FROM configs WHERE NOT anio_inscripciones IS NULL)").first rescue nil
   end
 
   def PuedeInscribir()
