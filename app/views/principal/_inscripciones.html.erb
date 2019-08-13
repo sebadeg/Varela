@@ -1,249 +1,289 @@
 <% if @cuentas.count == 0 %>
-	<table>
-		<tr height='30px'></tr>
-		<tr height='30px'><td width='30px'></td><td width='15px'><%= image_tag("warning.png") %></td>
-		<td width='30px'></td>
-		<td><%= p "Debe ser el titular de la cuenta para realizar la reinscripción" %></td></tr>
-		<tr height='30px'></tr>
-	</table>
+  <table>
+    <tr height='30px'></tr>
+    <tr height='30px'><td width='30px'></td><td width='15px'><%= image_tag("warning.png") %></td>
+    <td width='30px'></td>
+    <td><%= p "Debe ser el titular de la cuenta para realizar la reinscripción" %></td></tr>
+    <tr height='30px'></tr>
+  </table>
 <% else %>
+  <% alu = locals[:alumno] %>
+  <% inscripcionAlumno = Inscripcion.FindInscripcion(alu.id) %>
+  <% if inscripcionAlumno == nil || inscripcionAlumno.PuedeInscribir() %>
+    <table>
+      <tr height='30px'></tr>
+      <tr height='30px'><td width='30px'></td><td width='15px'><%= image_tag("warning.png") %></td>
+      <td width='30px'></td>
+      <td><%= p "Reinscripción Inhabilitada. Comuníquese con administración" %></td></tr>
+      <tr height='30px'></tr>
+    </table>
+  <% elsif inscripcionAlumno.EstaInscripto() %>
+    <div class="col-md-12 col-sm-12 col-xs-12 content-table">
+      <table>
+        <tr height='30px'></tr>
+        <tr height='30px'><td width='30px'></td><td width='15px'><%= image_tag("tick.png") %></td>
+        <td width='30px'></td>
+        <td><%= p "El alumno está inscripto" %></td></tr>
+        <tr height='30px'></tr>
+      </table>
+    </div>
+    <div class="clearfix"></div>
+  <% elsif inscripcionAlumno.EstaRegistrado() %>
+    <%= form_for(inscripcionAlumno, as: :inscripcionAlumno, url: principal_download_inscripcion_path(:inscripcionAlumno), :html => {:id=>'form_download_inscripcion_' + inscripcionAlumno.id.to_s}) do |f| %>
+      <%= f.hidden_field :id, value: inscripcionAlumno.id %>
+      <div id="textoRegistrarse">
+        <b><%= link_to "Descargar reinscripción", "", :onclick => "$('#form_download_inscripcion_" + inscripcionAlumno.id.to_s + "').submit()" %></b>
+      </div>
+    <% end %>
+  <% else %>
+    <%= form_for(inscripcionAlumno, as: :inscripcionAlumno, url: principal_download_ayuda_path(:inscripcionAlumno), :html => {:id=>'form_download_ayuda_' + inscripcionAlumno.id.to_s}) do |f| %>
+      <%= f.hidden_field :id, value: inscripcionAlumno.id %>
+      <div id="textoRegistrarse">
+        <b><%= link_to "Leer antes de llenar el formulario", "", :onclick => "$('#form_download_ayuda_" + inscripcionAlumno.id.to_s + "').submit()" %></b>
+      </div>
+    <% end %>
+    <%= form_for(inscripcionAlumno, as: :inscripcionAlumno, url: principal_inscribir_path(:inscripcionAlumno)) do |f| %>
+      <div class="col-md-12 col-sm-12 col-xs-12 content-table">
+        <div class="panel-body">
+          <%= f.hidden_field :id, value: inscripcionAlumno.id %>
+		  
+          <div class="form-group">
+            <%= p "* " %><%= f.label "Cédula del alumno" %><%= p " - (la cédula 1.234.567-2 se ingresa 12345672)" %>
+            <%= f.text_field :cedula, autofocus: true, class: 'form-control' %>
+          </div>
+		  
+          <div class="form-group">
+            <% opciones = ProximoGrado.OpcionesGrados(inscripcionAlumno) %>
+            <%= f.label "Nivel" %>
+            <%= f.select :proximo_grado_id, options_for_select(opciones, inscripcionAlumno.grado_id), {}, {class: 'form-control'}  %>
+          </div>
+		  
+          <div class="form-group">
+            <% opciones = Formulario.OpcionesFormulario(inscripcionAlumno) %>
+            <%= f.label "Formulario: " %>
+			<%= f.select :formulario_id, options_for_select(opciones, inscripcionAlumno.formulario_id), {}, {class: 'form-control'}  %>
+          </div>
 
+          <div class="form-group">
+            <% opciones = Formulario.OpcionesConvenio(inscripcionAlumno) %>
+            <%= f.label "Convenio: " %>
+			<%= f.select :convenio_id, options_for_select(opciones, inscripcionAlumno.convenio_id), {}, {class: 'form-control'}  %>
+          </div>
 
-	<% alu = locals[:alumno] %>
-	<% inscripcionAlumno = InscripcionAlumno.find_by( alumno_id: alu.id ) rescue nil %>
-	<% if inscripcionAlumno != nil %>
-	<% pase = Pase.find_by( alumno_id: alu.id ) rescue nil %>
+          <div class="form-group">
+            <% opciones = Formulario.OpcionesAdicional(inscripcionAlumno) %>
+            <%= f.label "Adicional: " %>
+			<%= f.select :adicional_id, options_for_select(opciones, inscripcionAlumno.adicional_id), {}, {class: 'form-control'}  %>
+          </div>
 
-	<% if inscripcionAlumno.inhabilitado || ( pase != nil && pase.fecha != nil ) %>
-		<table>
-			<tr height='30px'></tr>
-			<tr height='30px'><td width='30px'></td><td width='15px'><%= image_tag("warning.png") %></td>
-			<td width='30px'></td>
-			<td><%= p "Reinscripción Inhabilitada. Comuníquese con administración" %></td></tr>
-			<tr height='30px'></tr>
-		</table>
-	<% else %>
+          <div class="form-group">
+            <% opciones = Formulario.OpcionesHermanos(inscripcionAlumno) %>
+            <%= f.label "Hermanos: " %>
+			<%= f.select :hermanos_id, options_for_select(opciones, inscripcionAlumno.hermanos_id), {}, {class: 'form-control'}  %>
+          </div>
 
-		<% if inscripcionAlumno.inscripto %>
-			<div class="col-md-12 col-sm-12 col-xs-12 content-table">
-						<table>
-							<tr height='30px'></tr>
-							<tr height='30px'><td width='30px'></td><td width='15px'><%= image_tag("tick.png") %></td>
-							<td width='30px'></td>
-							<td><%= p "El alumno está inscripto" %></td></tr>
-							<tr height='30px'></tr>
-						</table>
-			</div>
-			<div class="clearfix"></div>
-		<% elsif inscripcionAlumno.registrado %>
-			<% if inscripcionAlumno.cuotas != 0 %>
-				<%= form_for(inscripcionAlumno, as: :inscripcionAlumno, url: principal_download_inscripcion_path(:inscripcionAlumno), :html => {:id=>'form_download_inscripcion_' + inscripcionAlumno.id.to_s}) do |f| %>
-					<%= f.hidden_field :id, value: inscripcionAlumno.id %>
-					<div id="textoRegistrarse">
-						<b><%= link_to "Descargar reinscripción", "", :onclick => "$('#form_download_inscripcion_" + inscripcionAlumno.id.to_s + "').submit()" %></b>
-					</div>
-				<% end %>
-			<% end %>
-		<% else %>
-			<%= form_for(inscripcionAlumno, as: :inscripcionAlumno, url: principal_download_ayuda_path(:inscripcionAlumno), :html => {:id=>'form_download_ayuda_' + inscripcionAlumno.id.to_s}) do |f| %>
-		       <%= f.hidden_field :id, value: inscripcionAlumno.id %>
-			    <div id="textoRegistrarse">
+          <div class="form-group">
+            <% opciones = Formulario.OpcionesCuotas(inscripcionAlumno) %>
+            <%= f.label "Cuotas: " %>
+			<%= f.select :cuotas_id, options_for_select(opciones, inscripcionAlumno.cuotas_id), {}, {class: 'form-control'}  %>
+          </div>
 
-					<b><%= link_to "Leer antes de llenar el formulario", "", :onclick => "$('#form_download_ayuda_" + inscripcionAlumno.id.to_s + "').submit()" %></b>
-			    </div>
-			<% end %>
-			<%= form_for(inscripcionAlumno, as: :inscripcionAlumno, url: principal_inscribir_path(:inscripcionAlumno)) do |f| %>
-								<div class="col-md-12 col-sm-12 col-xs-12 content-table">
-									<div class="panel-body">
-										
-										<%= f.hidden_field :id, value: inscripcionAlumno.id %>
+          <div class="form-group">
+            <% opciones = Formulario.OpcionesMatricula(inscripcionAlumno) %>
+            <%= f.label "Matrícula: " %>
+			<%= f.select :matricula_id, options_for_select(opciones, inscripcionAlumno.matricula_id), {}, {class: 'form-control'}  %>
+          </div>
 
-										<div class="form-group">
+          <div class="panel-group sub-grupo">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <%= link_to "Padre", "#collapse_" + locals[:form] + "_padre", "data-toggle" => "collapse" %>
+                </h4>
+              </div>  
+              <%= content_tag :div, id: "collapse_" + locals[:form] + "_padre", class: ["panel-collapse", "collapse", "collapse", "in" ] do %>
+                <div class="col-md-12 col-sm-12 col-xs-12 content-table">
+                  <div class="panel-body">
+                    <div class="form-group">
+                      <%= p "* " %><%= f.label "Nombre" %>
+                      <%= f.text_field :nombre_padre, autofocus: true, class: 'form-control' %>
+                    </div>
+                    <div class="form-group">
+                      <%= p "* " %><%= f.label "Apellido" %>
+                      <%= f.text_field :apellido_padre, autofocus: true, class: 'form-control' %>
+                    </div>                    
+                    <div class="form-group">
+                      <%= p "* " %><%= f.label "Cédula" %><%= p " - (la cédula 1.234.567-2 se ingresa 12345672)" %>
+                      <%= f.text_field :cedula_padre, autofocus: true, class: 'form-control' %>
+                    </div>
+                    <div class="form-group">
+                      <%= p "* " %><%= f.label "Domicilio" %>
+                      <%= f.text_field :domicilio_padre, autofocus: true, class: 'form-control' %>
+                    </div>
+                    <div class="form-group">
+                      <%= p "* " %><%= f.label "Mail" %>
+                      <%= f.text_field :email_padre, autofocus: true, class: 'form-control' %>
+                    </div>
+                    <div class="form-group">
+                      <%= p "* " %><%= f.label "Teléfono/Celular" %>
+                      <%= f.text_field :celular_padre, autofocus: true, class: 'form-control' %>
+                    </div>
+                    <div class="form-group">
+                      <%= p "* " %><%= f.label "Profesión" %>
+                      <%= f.text_field :profesion_padre, autofocus: true, class: 'form-control' %>
+                    </div>
+                    <div class="form-group">
+                      <%= p "* " %><%= f.label "Trabajo" %>
+                      <%= f.text_field :trabajo_padre, autofocus: true, class: 'form-control' %>
+                    </div>
+                    <div class="form-group">
+                      <%= p "* " %><%= f.label "Teléfono trabajo" %>
+                      <%= f.text_field :telefono_trabajo_padre, autofocus: true, class: 'form-control' %>
+                    </div>
+                    <div class="form-group">
+                      <%= f.check_box :titular_padre, autofocus: true, class: 'form-control' %>
+                      <%= f.label "Titular" %>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+              <div class="clearfix"></div>
+            </div>
+          </div>
 
-											<%= p "* " %><%= f.label "Cédula del alumno" %><%= p " - (la cédula 1.234.567-2 se ingresa 12345672)" %>
-			        						<%= f.text_field :cedula, autofocus: true, class: 'form-control' %>
-										</div>
+          <div class="panel-group sub-grupo">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <%= link_to "Madre", "#collapse_" + locals[:form] + "_madre", "data-toggle" => "collapse" %>
+                </h4>
+              </div>  
+              <%= content_tag :div, id: "collapse_" + locals[:form] + "_madre", class: ["panel-collapse", "collapse", "collapse", "in" ] do %>
+                <div class="col-md-12 col-sm-12 col-xs-12 content-table">
+                  <div class="panel-body">
+                    <div class="form-group">
+                      <%= p "* " %><%= f.label "Nombre" %>
+                      <%= f.text_field :nombre_madre, autofocus: true, class: 'form-control' %>
+                    </div>
+                    <div class="form-group">
+                      <%= p "* " %><%= f.label "Apellido" %>
+                      <%= f.text_field :apellido_madre, autofocus: true, class: 'form-control' %>
+                    </div>                    
+                    <div class="form-group">
+                      <%= p "* " %><%= f.label "Cédula" %><%= p " - (la cédula 1.234.567-2 se ingresa 12345672)" %>
+                      <%= f.text_field :cedula_madre, autofocus: true, class: 'form-control' %>
+                    </div>
+                    <div class="form-group">
+                      <%= p "* " %><%= f.label "Domicilio" %>
+                      <%= f.text_field :domicilio_madre, autofocus: true, class: 'form-control' %>
+                    </div>
+                    <div class="form-group">
+                      <%= p "* " %><%= f.label "Mail" %>
+                      <%= f.text_field :email_madre, autofocus: true, class: 'form-control' %>
+                    </div>
+                    <div class="form-group">
+                      <%= p "* " %><%= f.label "Teléfono/Celular" %>
+                      <%= f.text_field :celular_madre, autofocus: true, class: 'form-control' %>
+                    </div>
+                    <div class="form-group">
+                      <%= p "* " %><%= f.label "Profesión" %>
+                      <%= f.text_field :profesion_madre, autofocus: true, class: 'form-control' %>
+                    </div>
+                    <div class="form-group">
+                      <%= p "* " %><%= f.label "Trabajo" %>
+                      <%= f.text_field :trabajo_madre, autofocus: true, class: 'form-control' %>
+                    </div>
+                    <div class="form-group">
+                      <%= p "* " %><%= f.label "Teléfono trabajo" %>
+                      <%= f.text_field :telefono_trabajo_madre, autofocus: true, class: 'form-control' %>
+                    </div>
+                    <div class="form-group">
+                      <%= f.check_box :titular_madre, autofocus: true, class: 'form-control' %>
+                      <%= f.label "Titular" %>
+                    </div>
 
+                  </div>
+                </div>
+              <% end %>
+              <div class="clearfix"></div>
+            </div>
+          </div>
 
-										<div class="form-group">
-											<%= f.label "Nivel" %>
-											<% opciones = Array.new %>
-											<% proximoGrado = ProximoGradoAlumno.find_by(alumno_id: alu.id) %>
-											<% if proximoGrado != nil %>
-												<% ProximoGrado.where(["grado=?",proximoGrado.grado]).each do |grado| %>
-													<% opciones.push( ["#{grado.nombre} - $U #{grado.precio}",grado.id] ) %>
-												<% end %>
-												<%= f.select :grado, options_for_select(opciones, inscripcionAlumno.grado), {}, {class: 'form-control'}  %>
-											<% end %>
-										</div>
-
-
-										<% if inscripcionAlumno.cuotas == 0 %>
-											<%= f.hidden_field :cuotas, value: 0 %>
-										<% else %>
-
-											<div class="form-group">
-												<%= f.label "Convenio: " %>
-												<% if inscripcionAlumno.convenio_id != 0 %>
-													<% opcionesConvenio = Array.new %>
-													<% Convenio.all.each do |convenio| %>
-														<% if convenio.id != 0 && !convenio.formulario %>
-															<% if convenio.ocultar_porcentaje %>
-																<% opcionesConvenio.push( ["#{convenio.nombre}",convenio.id] ) %>
-															<% else %>
-																<% opcionesConvenio.push( ["#{convenio.nombre} - #{number_with_precision(convenio.valor, precision: 2,  strip_insignificant_zeros: true)}%",convenio.id] ) %>
-															<% end %>
-														<% end %>
-													<% end %>
-
-													<% ConvenioAlumno.where( ["alumno_id=?",alu.id] ).each do |convenio_alumno| %>
-														<% Convenio.where(["id=?",convenio_alumno.convenio_id] ).each do |convenio| %>
-															<% if convenio.id != 0 %>
-																<% if convenio.ocultar_porcentaje %>
-																	<% opcionesConvenio.push( ["#{convenio.nombre}",convenio.id] ) %>
-																<% else %>
-																	<% opcionesConvenio.push( ["#{convenio.nombre} - #{number_with_precision(convenio.valor, precision: 2,  strip_insignificant_zeros: true)}%",convenio.id] ) %>
-																<% end %>
-															<% end %>
-														<% end %>
-													<% end %>
-
-
-													<%= f.select :convenio_id, options_for_select(opcionesConvenio, inscripcionAlumno.convenio_id), {}, {class: 'form-control'}  %>
-												<% else %>
-													<%= f.label "No aplica a este grado" %>	
-													<%= f.hidden_field :convenio_id, value: 0 %>
-												<% end %>
-											</div>
-
-											<div class="form-group">
-												<%= f.label "Adicional: " %>
-												<% opcionesHermanos = Array.new %>
-												<% opcionesHermanos.push( ["Sin hermanos",0] ) %>
-												<% opcionesHermanos.push( ["1 hermano - 5%",1] ) %>
-												<% opcionesHermanos.push( ["2 hermanos - 10%",2] ) %>
-												<%= f.select :hermanos, options_for_select(opcionesHermanos, inscripcionAlumno.hermanos), {}, {class: 'form-control'}  %>
-											</div>								
-
-
-											<div class="form-group">
-												<%= f.label "Cuotas: " %>
-												<% opcionesCuotas = Array.new %>
-												<% opcionesCuotas.push( ["Contado",1] ) %>
-												<% cantidad_cuotas = inscripcionAlumno.cuotas %>
-												<% if cantidad_cuotas < 10 %>
-												<%   cantidad_cuotas=10 %>
-												<% end %> 
-												<% (10..cantidad_cuotas).each do |cuota| %>
-													<% opcionesCuotas.push( [cuota.to_s,cuota] ) %>
-												<% end %>
-												<% #opcionesCuotas.push( ["24",24] ) %>
-												<%= f.select :cuotas, options_for_select(opcionesCuotas, inscripcionAlumno.cuotas), {}, {class: 'form-control'}  %>
-											</div>
-
-											<div class="form-group">
-												<%= f.label "Matrícula: " %>
-												<% opcionesMatricula = Array.new %>
-												<% if DateTime.now < DateTime.new(2018,10,1)  %>
-													<% opcionesMatricula.push( ["Contado en octubre - 20% descuento en la matrícula",0] ) %>
-												<% end %>
-												
-												<% opcionesMatricula.push( ["Contado en diciembre",1] ) %>
-
-												<% if DateTime.now < DateTime.new(2018,11,1)  %>
-													<% opcionesMatricula.push( ["2 cuotas a partir de noviembre",2] ) %>
-												<% end %>
-												<% if DateTime.now < DateTime.new(2018,10,1)  %>
-													<% opcionesMatricula.push( ["3 cuotas a partir de octubre",3] ) %>
-												<% end %>
-												<% if DateTime.now < DateTime.new(2018,9,1)  %>
-													<% opcionesMatricula.push( ["4 cuotas a partir de setiembre",4] ) %>
-												<% end %>
-												<%= f.select :matricula, options_for_select(opcionesMatricula, inscripcionAlumno.matricula), {}, {class: 'form-control'}  %>
-											</div>
-										<% end %>
-
-					<div class="panel-group sub-grupo">
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<h4 class="panel-title">
-									<%= link_to "Titular 1", "#collapse_" + locals[:form] + "_titular_1", "data-toggle" => "collapse" %>
-								</h4>
-							</div>	
-
-							<%= content_tag :div, id: "collapse_" + locals[:form] + "_titular_1", class: ["panel-collapse", "collapse", "collapse", "in" ] do %>
-								<div class="col-md-12 col-sm-12 col-xs-12 content-table">
-									<div class="panel-body">
-										<div class="form-group">
-											<%= p "* " %><%= f.label "Nombre completo" %>
-											<%= f.text_field :nombre1, autofocus: true, class: 'form-control' %>
-										</div>
-										<div class="form-group">
-											<%= p "* " %><%= f.label "Cédula" %><%= p " - (la cédula 1.234.567-2 se ingresa 12345672)" %>
-											<%= f.text_field :documento1, autofocus: true, class: 'form-control' %>
-										</div>
-										<div class="form-group">
-											<%= p "* " %><%= f.label "Domicilio" %>
-											<%= f.text_field :domicilio1, autofocus: true, class: 'form-control' %>
-										</div>
-										<div class="form-group">
-											<%= p "* " %><%= f.label "Mail" %>
-											<%= f.text_field :email1, autofocus: true, class: 'form-control' %>
-										</div>
-										<div class="form-group">
-											<%= p "* " %><%= f.label "Teléfono/Celular" %>
-											<%= f.text_field :celular1, autofocus: true, class: 'form-control' %>
-										</div>
-									</div>
-								</div>
-							<% end %>
-							<div class="clearfix"></div>
-						</div>
-					</div>
-					<div class="panel-group sub-grupo">
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<h4 class="panel-title">
-									<%= link_to "Titular 2", "#collapse_" + locals[:form] + "_titular_2", "data-toggle" => "collapse" %>
-								</h4>
-							</div>										
-							<%= content_tag :div, id: "collapse_" + locals[:form] + "_titular_2", class: ["panel-collapse", "collapse", "collapse" ] do %>
-								<div class="col-md-12 col-sm-12 col-xs-12 content-table">
-									<div class="panel-body">
-										<div class="form-group">
-											<%= f.label "Nombre completo" %>
-											<%= f.text_field :nombre2, autofocus: true, class: 'form-control' %>
-										</div>
-										<div class="form-group">
-											<%= f.label "Cédula" %><%= p " - (la cédula 1.234.567-2 se ingresa 12345672)" %>
-											<%= f.text_field :documento2, autofocus: true, class: 'form-control' %>
-										</div>
-										<div class="form-group">
-											<%= f.label "Domicilio" %>
-											<%= f.text_field :domicilio2, autofocus: true, class: 'form-control' %>
-										</div>
-										<div class="form-group">
-											<%= f.label "Mail" %>
-											<%= f.text_field :email2, autofocus: true, class: 'form-control' %>
-										</div>
-										<div class="form-group">
-											<%= f.label "Teléfono/Celular" %>
-											<%= f.text_field :celular2, autofocus: true, class: 'form-control' %>
-										</div>
-									</div>
-								</div>
-							<% end %>
-							<div class="clearfix"></div>
-						</div>
-					</div>
-
-										<%= f.submit "Inscribir", class: 'btn btn-primary', data: { confirm: "Este formulario sólo puede modificarse en la administración. Está seguro de continuar?" } %>
-
-									</div>
-								</div>
-
-			<% end %>
-		<% end %>
+          <div class="panel-group sub-grupo">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <%= link_to "Titular 1", "#collapse_" + locals[:form] + "_titular_1", "data-toggle" => "collapse" %>
+                </h4>
+              </div>  
+              <%= content_tag :div, id: "collapse_" + locals[:form] + "_titular_1", class: ["panel-collapse", "collapse", "collapse", "in" ] do %>
+                <div class="col-md-12 col-sm-12 col-xs-12 content-table">
+                  <div class="panel-body">
+                    <div class="form-group">
+                      <%= p "* " %><%= f.label "Nombre completo" %>
+                      <%= f.text_field :nombre1, autofocus: true, class: 'form-control' %>
+                    </div>
+                    <div class="form-group">
+                      <%= p "* " %><%= f.label "Cédula" %><%= p " - (la cédula 1.234.567-2 se ingresa 12345672)" %>
+                      <%= f.text_field :cedula1, autofocus: true, class: 'form-control' %>
+                    </div>
+                    <div class="form-group">
+                      <%= p "* " %><%= f.label "Domicilio" %>
+                      <%= f.text_field :domicilio1, autofocus: true, class: 'form-control' %>
+                    </div>
+                    <div class="form-group">
+                      <%= p "* " %><%= f.label "Mail" %>
+                      <%= f.text_field :email1, autofocus: true, class: 'form-control' %>
+                    </div>
+                    <div class="form-group">
+                      <%= p "* " %><%= f.label "Teléfono/Celular" %>
+                      <%= f.text_field :celular1, autofocus: true, class: 'form-control' %>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+              <div class="clearfix"></div>
+            </div>
+          </div>
+		  
+          <div class="panel-group sub-grupo">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <%= link_to "Titular 2", "#collapse_" + locals[:form] + "_titular_2", "data-toggle" => "collapse" %>
+                </h4>
+              </div>                    
+              <%= content_tag :div, id: "collapse_" + locals[:form] + "_titular_2", class: ["panel-collapse", "collapse", "collapse" ] do %>
+                <div class="col-md-12 col-sm-12 col-xs-12 content-table">
+                  <div class="panel-body">
+                  <div class="form-group">
+                    <%= f.label "Nombre completo" %>
+                    <%= f.text_field :nombre2, autofocus: true, class: 'form-control' %>
+                  </div>
+                  <div class="form-group">
+                    <%= f.label "Cédula" %><%= p " - (la cédula 1.234.567-2 se ingresa 12345672)" %>
+                    <%= f.text_field :cedula2, autofocus: true, class: 'form-control' %>
+                  </div>
+                  <div class="form-group">
+                    <%= f.label "Domicilio" %>
+                    <%= f.text_field :domicilio2, autofocus: true, class: 'form-control' %>
+                  </div>
+                  <div class="form-group">
+                    <%= f.label "Mail" %>
+                    <%= f.text_field :email2, autofocus: true, class: 'form-control' %>
+                  </div>
+                  <div class="form-group">
+                    <%= f.label "Teléfono/Celular" %>
+                    <%= f.text_field :celular2, autofocus: true, class: 'form-control' %>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+            <div class="clearfix"></div>
+          </div>
+        </div>
+        <%= f.submit "Inscribir", class: 'btn btn-primary', data: { confirm: "Este formulario sólo puede modificarse en la administración. Está seguro de continuar?" } %>
+      </div>
 	<% end %>
-	<% end %>
+  <% end %>
 <% end %>
