@@ -6,16 +6,16 @@ class Inscripcion < ApplicationRecord
     return Inscripciones.where("alumno_id=#{alumno} AND anio IN (SELECT anio_inscripciones FROM configs WHERE NOT anio_inscripciones IS NULL)").first rescue nil
   end
 
-  def PuedeInscribir(alumno)
-    return false;
+  def PuedeInscribir()
+    return !inhabilitado && (fecha_pase != nil);
   end
 
-  def EstaInscripto(alumno)
-    return false;
+  def EstaInscripto()
+    return inscripto;
   end
 
-  def EstaRegistrado(alumno)
-    return false;
+  def EstaRegistrado()
+    return registrado;
   end
 
 end
