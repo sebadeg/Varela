@@ -492,11 +492,11 @@ class PrincipalController < ApplicationController
       inscripcionAlumno.registrado = false
     end
 
-    if calc_cedula_digit(params[:inscripcionAlumno][:documento1])
-      inscripcionAlumno.documento1 = params[:inscripcionAlumno][:documento1]
+    if calc_cedula_digit(params[:inscripcionAlumno][:cedula1])
+      inscripcionAlumno.cedula1 = params[:inscripcionAlumno][:cedula1]
     else
       alerta = alerta + "Cédula de titular 1 incorrecta. " 
-      inscripcionAlumno.documento1 = nil
+      inscripcionAlumno.cedula1 = nil
       inscripcionAlumno.registrado = false
     end
 
@@ -525,19 +525,32 @@ class PrincipalController < ApplicationController
     end
 
     inscripcionAlumno.nombre2 = params[:inscripcionAlumno][:nombre2]
-    if params[:inscripcionAlumno][:documento2] != nil && params[:inscripcionAlumno][:documento2] != ""
-      if calc_cedula_digit(params[:inscripcionAlumno][:documento2])
-        inscripcionAlumno.documento2 = params[:inscripcionAlumno][:documento2]
+    if params[:inscripcionAlumno][:cedula2] != nil && params[:inscripcionAlumno][:cedula2] != ""
+      if calc_cedula_digit(params[:inscripcionAlumno][:cedula2])
+        inscripcionAlumno.cedula2 = params[:inscripcionAlumno][:cedula2]
       else
-        inscripcionAlumno.documento2 = nil
+        inscripcionAlumno.cedula2 = nil
         inscripcionAlumno.registrado = false
       end
     else
-      inscripcionAlumno.documento2 = nil
+      inscripcionAlumno.cedula2 = nil
     end
     inscripcionAlumno.domicilio2 = params[:inscripcionAlumno][:domicilio2]
     inscripcionAlumno.celular2 = params[:inscripcionAlumno][:celular2]
     inscripcionAlumno.email2 = params[:inscripcionAlumno][:email2]
+
+    inscripcionAlumno.cedula_padre = params[:inscripcionAlumno][:cedula_padre]
+    Persona.find_or_create_by(id: inscripcionAlumno.cedula_padre) do |padre|
+      padre.nombre = params[:inscripcionAlumno][:nombre_padre]
+      padre.apellido = params[:inscripcionAlumno][:apellido_padre]
+      padre.domicilio = params[:inscripcionAlumno][:domicilio_padre]
+      padre.email = params[:inscripcionAlumno][:email_padre]
+      padre.celular = params[:inscripcionAlumno][:celular_padre]
+      padre.profesion = params[:inscripcionAlumno][:profesion_padre]
+      padre.trabajo = params[:inscripcionAlumno][:trabajo_padre]
+      padre.telefono_trabajo = params[:inscripcionAlumno][:telefono_trabajo_padre]
+    end
+    padre.save
 
     inscripcionAlumno.save!
 
