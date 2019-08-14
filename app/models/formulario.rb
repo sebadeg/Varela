@@ -1,9 +1,16 @@
 class Formulario < ApplicationRecord
 
   def self.OpcionesFormulario(inscripcionAlumno)
-    opciones1 = Array.new
-    opciones1.push( ["Prueba 1",1] )
-    return opciones1
+
+    opciones = Array.new
+    tipo = InscripcionOpcionTipo.where("nombre='Formulario'").first rescue nil
+    if tipo == nil 
+      return opciones
+    end
+    InscripcionOpcion.where("inscripcion_opcion_tipo_id=#{tipo.id} AND general").each do |opcion|
+      opciones.push( [opcion.nombre,opcion.id] )
+    end 
+    return opciones
   end
 
   def self.OpcionesConvenio(inscripcionAlumno)

@@ -1,0 +1,2 @@
+class InscripcionOpcionTipo < ApplicationRecord
+end
