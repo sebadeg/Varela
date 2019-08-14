@@ -20,25 +20,24 @@ class Formulario < ApplicationRecord
     return opciones
   end
 
-
   def self.OpcionesConvenio(inscripcionAlumno)
-    return OpcionesPorNombre('Convenio')
+    return OpcionesPorNombre(inscripcionAlumno,'Convenio')
   end
 
   def self.OpcionesAdicional(inscripcionAlumno)
-    return OpcionesPorNombre('Adicional')
+    return OpcionesPorNombre(inscripcionAlumno,'Adicional')
   end
 
   def self.OpcionesHermanos(inscripcionAlumno)
-    return OpcionesPorNombre('Hermanos')
+    return OpcionesPorNombre(inscripcionAlumno,'Hermanos')
   end
 
   def self.OpcionesCuotas(inscripcionAlumno)
-    return OpcionesPorNombre('Cuotas')
+    return OpcionesPorNombre(inscripcionAlumno,'Cuotas')
   end
 
   def self.OpcionesMatricula(inscripcionAlumno)
-    return OpcionesPorNombre('Matrícula')
+    return OpcionesPorNombre(inscripcionAlumno,'Matrícula')
   end
 
 end
