@@ -470,18 +470,20 @@ class PrincipalController < ApplicationController
     inscripcionAlumno.registrado = true
     if calc_cedula_digit(params[:inscripcionAlumno][:cedula])
       inscripcionAlumno.cedula = params[:inscripcionAlumno][:cedula]
+
+      alumno = Alumno.find_or_create_by(id: inscripcionAlumno.cedula)
+      alumno.lugar_nacimiento = params[:inscripcionAlumno][:lugar_nacimiento]
+      alumno.fecha_nacimiento = params[:inscripcionAlumno][:fecha_nacimiento]
+      alumno.domicilio = params[:inscripcionAlumno][:domicilio]
+      alumno.celular = params[:inscripcionAlumno][:celular]
+      alumno.mutualista = params[:inscripcionAlumno][:mutualista]
+      alumno.emergencia = params[:inscripcionAlumno][:emergencia]
+      alumno.save!
     else
       alerta = alerta + "Cédula de alumno incorrecta. " 
       inscripcionAlumno.cedula = nil
       inscripcionAlumno.registrado = false
     end
-
-    inscripcionAlumno.lugar_nacimiento = params[:inscripcionAlumno][:lugar_nacimiento]
-    inscripcionAlumno.fecha_nacimiento = params[:inscripcionAlumno][:fecha_nacimiento]
-    inscripcionAlumno.domicilio = params[:inscripcionAlumno][:domicilio]
-    inscripcionAlumno.celular = params[:inscripcionAlumno][:celular]
-    inscripcionAlumno.mutualista = params[:inscripcionAlumno][:mutualista]
-    inscripcionAlumno.emergencia = params[:inscripcionAlumno][:emergencia]
 
     inscripcionAlumno.proximo_grado_id = params[:inscripcionAlumno][:proximo_grado_id]
     inscripcionAlumno.formulario_id = params[:inscripcionAlumno][:formulario_id]
