@@ -550,7 +550,6 @@ class PrincipalController < ApplicationController
       padre.trabajo = params[:inscripcionAlumno][:trabajo_padre]
       padre.telefono_trabajo = params[:inscripcionAlumno][:telefono_trabajo_padre]
     end
-    padre.save
 
     inscripcionAlumno.save!
 
