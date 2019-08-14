@@ -540,7 +540,7 @@ class PrincipalController < ApplicationController
     inscripcionAlumno.email2 = params[:inscripcionAlumno][:email2]
 
     inscripcionAlumno.cedula_padre = params[:inscripcionAlumno][:cedula_padre]
-    if inscripcionAlumno.cedula_padre != nil
+    if inscripcionAlumno.cedula_padre != nil && inscripcionAlumno.cedula_padre != ""
       padre = Persona.find_or_create_by(id: inscripcionAlumno.cedula_padre)
       padre.nombre = params[:inscripcionAlumno][:nombre_padre]
       padre.apellido = params[:inscripcionAlumno][:apellido_padre]
@@ -554,7 +554,7 @@ class PrincipalController < ApplicationController
     end
 
     inscripcionAlumno.cedula_madre = params[:inscripcionAlumno][:cedula_madre]
-    if inscripcionAlumno.cedula_madre != nil
+    if inscripcionAlumno.cedula_madre != nil && inscripcionAlumno.cedula_madre != ""
       madre = Persona.find_or_create_by(id: inscripcionAlumno.cedula_madre)
       madre.nombre = params[:inscripcionAlumno][:nombre_madre]
       madre.apellido = params[:inscripcionAlumno][:apellido_madre]
@@ -568,7 +568,7 @@ class PrincipalController < ApplicationController
     end
 
     inscripcionAlumno.cedula1 = params[:inscripcionAlumno][:cedula1]
-    if inscripcionAlumno.cedula1 != nil
+    if inscripcionAlumno.cedula1 != nil && inscripcionAlumno.cedula1 != ""
       titular1 = Persona.find_or_create_by(id: inscripcionAlumno.cedula1)
       titular1.nombre = params[:inscripcionAlumno][:nombre1]
       titular1.apellido = params[:inscripcionAlumno][:apellido1]
@@ -579,7 +579,7 @@ class PrincipalController < ApplicationController
     end
 
     inscripcionAlumno.cedula2 = params[:inscripcionAlumno][:cedula2]
-    if inscripcionAlumno.cedula2 != nil
+    if inscripcionAlumno.cedula2 != nil && inscripcionAlumno.cedula2 != ""
       titular2 = Persona.find_or_create_by(id: inscripcionAlumno.cedula2)
       titular2.nombre = params[:inscripcionAlumno][:nombre2]
       titular2.apellido = params[:inscripcionAlumno][:apellido2]
