@@ -258,35 +258,36 @@
               <%= content_tag :div, id: "collapse_" + locals[:form] + "_titular_2", class: ["panel-collapse", "collapse", "collapse" ] do %>
                 <div class="col-md-12 col-sm-12 col-xs-12 content-table">
                   <div class="panel-body">
-                    <div class="form-group">
-                      <%= f.label "Nombre completo" %>
-                      <%= f.text_field :nombre2, autofocus: true, class: 'form-control' %>
-                    </div>
-                    <div class="form-group">
-                      <%= f.label "Cédula" %><%= p " - (la cédula 1.234.567-2 se ingresa 12345672)" %>
-                      <%= f.text_field :documento2, autofocus: true, class: 'form-control' %>
-                    </div>
-                    <div class="form-group">
-                      <%= f.label "Domicilio" %>
-                      <%= f.text_field :domicilio2, autofocus: true, class: 'form-control' %>
-                    </div>
-                    <div class="form-group">
-                      <%= f.label "Mail" %>
-                      <%= f.text_field :email2, autofocus: true, class: 'form-control' %>
-                    </div>
-                    <div class="form-group">
-                      <%= f.label "Teléfono/Celular" %>
-                      <%= f.text_field :celular2, autofocus: true, class: 'form-control' %>
-                    </div>
+                  <div class="form-group">
+                    <%= f.label "Nombre completo" %>
+                    <%= f.text_field :nombre2, autofocus: true, class: 'form-control' %>
+                  </div>
+                  <div class="form-group">
+                    <%= f.label "Cédula" %><%= p " - (la cédula 1.234.567-2 se ingresa 12345672)" %>
+                    <%= f.text_field :documento2, autofocus: true, class: 'form-control' %>
+                  </div>
+                  <div class="form-group">
+                    <%= f.label "Domicilio" %>
+                    <%= f.text_field :domicilio2, autofocus: true, class: 'form-control' %>
+                  </div>
+                  <div class="form-group">
+                    <%= f.label "Mail" %>
+                    <%= f.text_field :email2, autofocus: true, class: 'form-control' %>
+                  </div>
+                  <div class="form-group">
+                    <%= f.label "Teléfono/Celular" %>
+                    <%= f.text_field :celular2, autofocus: true, class: 'form-control' %>
                   </div>
                 </div>
-              <% end %>
-              <div class="clearfix"></div>
-            </div>
+              </div>
+            <% end %>
+            <div class="clearfix"></div>
           </div>
-          <%= f.submit "Inscribir", class: 'btn btn-primary', data: { confirm: "Este formulario sólo puede modificarse en la administración. Está seguro de continuar?" } %>
         </div>
+        <%= f.submit "Inscribir", class: 'btn btn-primary', data: { confirm: "Este formulario sólo puede modificarse en la administración. Está seguro de continuar?" } %>
       </div>
+      </div>
+
     <% end %>
   <% end %>
 <% end %>
