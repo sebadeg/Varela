@@ -8,9 +8,9 @@ class Formulario < ApplicationRecord
     return opciones
   end
 
-  def self.OpcionesConvenio(inscripcionAlumno)
+  def self.OpcionesPorNombre(inscripcionAlumno,nombre)
     opciones = Array.new
-    tipo = InscripcionOpcionTipo.where("nombre='Convenio'").first rescue nil
+    tipo = InscripcionOpcionTipo.where("nombre='#{nombre}'").first rescue nil
     if tipo == nil 
       return opciones
     end
@@ -20,28 +20,25 @@ class Formulario < ApplicationRecord
     return opciones
   end
 
+
+  def self.OpcionesConvenio(inscripcionAlumno)
+    return OpcionesPorNombre('Convenio')
+  end
+
   def self.OpcionesAdicional(inscripcionAlumno)
-    opciones = Array.new
-    opciones.push( ["Prueba 1",1] )
-    return opciones
+    return OpcionesPorNombre('Adicional')
   end
 
   def self.OpcionesHermanos(inscripcionAlumno)
-    opciones = Array.new
-    opciones.push( ["Prueba 1",1] )
-    return opciones
+    return OpcionesPorNombre('Hermanos')
   end
 
   def self.OpcionesCuotas(inscripcionAlumno)
-    opciones = Array.new
-    opciones.push( ["Prueba 1",1] )
-    return opciones
+    return OpcionesPorNombre('Cuotas')
   end
 
   def self.OpcionesMatricula(inscripcionAlumno)
-    opciones = Array.new
-    opciones.push( ["Prueba 1",1] )
-    return opciones
+    return OpcionesPorNombre('Matrícula')
   end
 
 end
