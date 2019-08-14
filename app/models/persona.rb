@@ -4,6 +4,7 @@ class Persona < ApplicationRecord
     persona = Persona.find(p) rescue nil
     if persona == nil
       persona = Persona.new
+      persona.id = p
     end
     return persona
   end
