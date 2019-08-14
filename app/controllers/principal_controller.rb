@@ -484,60 +484,60 @@ class PrincipalController < ApplicationController
     inscripcionAlumno.hermanos_id = params[:inscripcionAlumno][:hermanos_id]
     inscripcionAlumno.matricula_id = params[:inscripcionAlumno][:matricula_id]
 
-    if params[:inscripcionAlumno][:nombre1] != nil && params[:inscripcionAlumno][:nombre1] != ""
-      inscripcionAlumno.nombre1 = params[:inscripcionAlumno][:nombre1]
-    else
-      alerta = alerta + "Nombre de titular 1 vacío. " 
-      inscripcionAlumno.nombre1 = nil
-      inscripcionAlumno.registrado = false
-    end
+    # if params[:inscripcionAlumno][:nombre1] != nil && params[:inscripcionAlumno][:nombre1] != ""
+    #   inscripcionAlumno.nombre1 = params[:inscripcionAlumno][:nombre1]
+    # else
+    #   alerta = alerta + "Nombre de titular 1 vacío. " 
+    #   inscripcionAlumno.nombre1 = nil
+    #   inscripcionAlumno.registrado = false
+    # end
 
-    if calc_cedula_digit(params[:inscripcionAlumno][:cedula1])
-      inscripcionAlumno.cedula1 = params[:inscripcionAlumno][:cedula1]
-    else
-      alerta = alerta + "Cédula de titular 1 incorrecta. " 
-      inscripcionAlumno.cedula1 = nil
-      inscripcionAlumno.registrado = false
-    end
+    # if calc_cedula_digit(params[:inscripcionAlumno][:cedula1])
+    #   inscripcionAlumno.cedula1 = params[:inscripcionAlumno][:cedula1]
+    # else
+    #   alerta = alerta + "Cédula de titular 1 incorrecta. " 
+    #   inscripcionAlumno.cedula1 = nil
+    #   inscripcionAlumno.registrado = false
+    # end
 
-    if params[:inscripcionAlumno][:domicilio1] != nil && params[:inscripcionAlumno][:domicilio1] != ""
-      inscripcionAlumno.domicilio1 = params[:inscripcionAlumno][:domicilio1]
-    else
-      alerta = alerta + "Domicilio de titular 1 vacío. " 
-      inscripcionAlumno.domicilio1 = nil
-      inscripcionAlumno.registrado = false
-    end
+    # if params[:inscripcionAlumno][:domicilio1] != nil && params[:inscripcionAlumno][:domicilio1] != ""
+    #   inscripcionAlumno.domicilio1 = params[:inscripcionAlumno][:domicilio1]
+    # else
+    #   alerta = alerta + "Domicilio de titular 1 vacío. " 
+    #   inscripcionAlumno.domicilio1 = nil
+    #   inscripcionAlumno.registrado = false
+    # end
 
-    if params[:inscripcionAlumno][:celular1] != nil && params[:inscripcionAlumno][:celular1] != ""
-      inscripcionAlumno.celular1 = params[:inscripcionAlumno][:celular1]
-    else
-      alerta = alerta + "Celular de titular 1 vacío. " 
-      inscripcionAlumno.celular1 = nil
-      inscripcionAlumno.registrado = false
-    end
+    # if params[:inscripcionAlumno][:celular1] != nil && params[:inscripcionAlumno][:celular1] != ""
+    #   inscripcionAlumno.celular1 = params[:inscripcionAlumno][:celular1]
+    # else
+    #   alerta = alerta + "Celular de titular 1 vacío. " 
+    #   inscripcionAlumno.celular1 = nil
+    #   inscripcionAlumno.registrado = false
+    # end
 
-    if params[:inscripcionAlumno][:email1] != nil && params[:inscripcionAlumno][:email1] != ""
-      inscripcionAlumno.email1 = params[:inscripcionAlumno][:email1]
-    else
-      alerta = alerta + "Mail de titular 1 vacío. " 
-      inscripcionAlumno.email1 = nil
-      inscripcionAlumno.registrado = false
-    end
+    # if params[:inscripcionAlumno][:email1] != nil && params[:inscripcionAlumno][:email1] != ""
+    #   inscripcionAlumno.email1 = params[:inscripcionAlumno][:email1]
+    # else
+    #   alerta = alerta + "Mail de titular 1 vacío. " 
+    #   inscripcionAlumno.email1 = nil
+    #   inscripcionAlumno.registrado = false
+    # end
 
-    inscripcionAlumno.nombre2 = params[:inscripcionAlumno][:nombre2]
-    if params[:inscripcionAlumno][:cedula2] != nil && params[:inscripcionAlumno][:cedula2] != ""
-      if calc_cedula_digit(params[:inscripcionAlumno][:cedula2])
-        inscripcionAlumno.cedula2 = params[:inscripcionAlumno][:cedula2]
-      else
-        inscripcionAlumno.cedula2 = nil
-        inscripcionAlumno.registrado = false
-      end
-    else
-      inscripcionAlumno.cedula2 = nil
-    end
-    inscripcionAlumno.domicilio2 = params[:inscripcionAlumno][:domicilio2]
-    inscripcionAlumno.celular2 = params[:inscripcionAlumno][:celular2]
-    inscripcionAlumno.email2 = params[:inscripcionAlumno][:email2]
+    # inscripcionAlumno.nombre2 = params[:inscripcionAlumno][:nombre2]
+    # if params[:inscripcionAlumno][:cedula2] != nil && params[:inscripcionAlumno][:cedula2] != ""
+    #   if calc_cedula_digit(params[:inscripcionAlumno][:cedula2])
+    #     inscripcionAlumno.cedula2 = params[:inscripcionAlumno][:cedula2]
+    #   else
+    #     inscripcionAlumno.cedula2 = nil
+    #     inscripcionAlumno.registrado = false
+    #   end
+    # else
+    #   inscripcionAlumno.cedula2 = nil
+    # end
+    # inscripcionAlumno.domicilio2 = params[:inscripcionAlumno][:domicilio2]
+    # inscripcionAlumno.celular2 = params[:inscripcionAlumno][:celular2]
+    # inscripcionAlumno.email2 = params[:inscripcionAlumno][:email2]
 
     inscripcionAlumno.cedula_padre = params[:inscripcionAlumno][:cedula_padre]
     if inscripcionAlumno.cedula_padre != nil && inscripcionAlumno.cedula_padre != ""
