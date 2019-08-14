@@ -540,7 +540,8 @@ class PrincipalController < ApplicationController
     inscripcionAlumno.email2 = params[:inscripcionAlumno][:email2]
 
     inscripcionAlumno.cedula_padre = params[:inscripcionAlumno][:cedula_padre]
-    Persona.find_or_create_by(id: inscripcionAlumno.cedula_padre) do |padre|
+    if inscripcionAlumno.cedula_padre != nil
+      padre = Persona.find_or_create_by(id: inscripcionAlumno.cedula_padre)
       padre.nombre = params[:inscripcionAlumno][:nombre_padre]
       padre.apellido = params[:inscripcionAlumno][:apellido_padre]
       padre.domicilio = params[:inscripcionAlumno][:domicilio_padre]
@@ -549,6 +550,43 @@ class PrincipalController < ApplicationController
       padre.profesion = params[:inscripcionAlumno][:profesion_padre]
       padre.trabajo = params[:inscripcionAlumno][:trabajo_padre]
       padre.telefono_trabajo = params[:inscripcionAlumno][:telefono_trabajo_padre]
+      padre.save
+    end
+
+    inscripcionAlumno.cedula_madre = params[:inscripcionAlumno][:cedula_madre]
+    if inscripcionAlumno.cedula_madre != nil
+      madre = Persona.find_or_create_by(id: inscripcionAlumno.cedula_madre)
+      madre.nombre = params[:inscripcionAlumno][:nombre_madre]
+      madre.apellido = params[:inscripcionAlumno][:apellido_madre]
+      madre.domicilio = params[:inscripcionAlumno][:domicilio_madre]
+      madre.email = params[:inscripcionAlumno][:email_madre]
+      madre.celular = params[:inscripcionAlumno][:celular_madre]
+      madre.profesion = params[:inscripcionAlumno][:profesion_madre]
+      madre.trabajo = params[:inscripcionAlumno][:trabajo_madre]
+      madre.telefono_trabajo = params[:inscripcionAlumno][:telefono_trabajo_madre]
+      madre.save
+    end
+
+    inscripcionAlumno.cedula1 = params[:inscripcionAlumno][:cedula1]
+    if inscripcionAlumno.cedula1 != nil
+      titular1 = Persona.find_or_create_by(id: inscripcionAlumno.cedula1)
+      titular1.nombre = params[:inscripcionAlumno][:nombre1]
+      titular1.apellido = params[:inscripcionAlumno][:apellido1]
+      titular1.domicilio = params[:inscripcionAlumno][:domicilio1]
+      titular1.email = params[:inscripcionAlumno][:email1]
+      titular1.celular = params[:inscripcionAlumno][:celular1]
+      titular1.save
+    end
+
+    inscripcionAlumno.cedula2 = params[:inscripcionAlumno][:cedula2]
+    if inscripcionAlumno.cedula2 != nil
+      titular2 = Persona.find_or_create_by(id: inscripcionAlumno.cedula2)
+      titular2.nombre = params[:inscripcionAlumno][:nombre2]
+      titular2.apellido = params[:inscripcionAlumno][:apellido2]
+      titular2.domicilio = params[:inscripcionAlumno][:domicilio2]
+      titular2.email = params[:inscripcionAlumno][:email2]
+      titular2.celular = params[:inscripcionAlumno][:celular2]
+      titular2.save
     end
 
     inscripcionAlumno.save!
