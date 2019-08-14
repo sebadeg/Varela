@@ -89,9 +89,10 @@
             <%= f.label "Nivel" %>
             <%= f.select :proximo_grado_id, options_for_select(opciones, inscripcionAlumno.proximo_grado_id), {}, {class: 'form-control'}  %>
           </div>
+
       
           <% opciones = Formulario.OpcionesFormulario(inscripcionAlumno) %>
-          <% if opciones != nil %>
+          <% if opciones != nil && opciones.count > 0 %>
             <div class="form-group">
               <%= f.label "Formulario: " %>
               <%= f.select :formulario_id, options_for_select(opciones, inscripcionAlumno.formulario_id), {}, {class: 'form-control'}  %>
