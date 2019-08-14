@@ -51,7 +51,39 @@
             <%= p "* " %><%= f.label "Cédula del alumno" %><%= p " - (la cédula 1.234.567-2 se ingresa 12345672)" %>
             <%= f.text_field :cedula, autofocus: true, class: 'form-control' %>
           </div>
-      
+          <div class="form-group">
+            <%= f.label "Nombre" %>
+            <%= f.text_field :nombre, autofocus: true, class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            <%= f.label "Apellido" %>
+            <%= f.text_field :apellido, autofocus: true, class: 'form-control' %>
+          </div>  
+          <div class="form-group">
+            <%= f.label "Lugar de nacimiento" %>
+            <%= f.text_field :lugar_nacimiento, autofocus: true, class: 'form-control' %>
+          </div>  
+          <div class="form-group">
+            <%= f.label "Fecha de nacimiento" %>
+            <%= f.date_field :fecha_nacimiento, autofocus: true, class: 'form-control' %>
+          </div>  
+          <div class="form-group">
+            <%= f.label "Domicilio" %>
+            <%= f.text_field :domicilio, autofocus: true, class: 'form-control' %>
+          </div>  
+          <div class="form-group">
+            <%= f.label "Teléfono/Celular" %>
+            <%= f.text_field :celular, autofocus: true, class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            <%= f.label "Mutualista" %>
+            <%= f.text_field :mutualista, autofocus: true, class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            <%= f.label "Emergencia" %>
+            <%= f.text_field :emergencia, autofocus: true, class: 'form-control' %>
+          </div>
+
           <div class="form-group">
             <% opciones = ProximoGrado.OpcionesGrados(inscripcionAlumno) %>
             <%= f.label "Nivel" %>
@@ -143,7 +175,7 @@
                       <%= f.text_field :telefono_trabajo_padre, autofocus: true, class: 'form-control' %>
                     </div>
                     <div class="form-group">
-                      <%= f.check_box :titular_padre, autofocus: true, class: 'form-control' %>
+                      <%= f.check_box :titular_padre %>
                       <%= f.label "Titular" %>
                     </div>
                   </div>
@@ -222,8 +254,12 @@
                 <div class="col-md-12 col-sm-12 col-xs-12 content-table">
                   <div class="panel-body">
                     <div class="form-group">
-                      <%= p "* " %><%= f.label "Nombre completo" %>
+                      <%= p "* " %><%= f.label "Nombre" %>
                       <%= f.text_field :nombre1, autofocus: true, class: 'form-control' %>
+                    </div>
+                    <div class="form-group">
+                      <%= p "* " %><%= f.label "Apellido" %>
+                      <%= f.text_field :apellido1, autofocus: true, class: 'form-control' %>
                     </div>
                     <div class="form-group">
                       <%= p "* " %><%= f.label "Cédula" %><%= p " - (la cédula 1.234.567-2 se ingresa 12345672)" %>
@@ -255,12 +291,16 @@
                   <%= link_to "Titular 2", "#collapse_" + locals[:form] + "_titular_2", "data-toggle" => "collapse" %>
                 </h4>
               </div>                    
-              <%= content_tag :div, id: "collapse_" + locals[:form] + "_titular_2", class: ["panel-collapse", "collapse", "collapse" ] do %>
+              <%= content_tag :div, id: "collapse_" + locals[:form] + "_titular_2", class: ["panel-collapse", "collapse", "collapse", "in" ] do %>
                 <div class="col-md-12 col-sm-12 col-xs-12 content-table">
                   <div class="panel-body">
                     <div class="form-group">
-                      <%= f.label "Nombre completo" %>
+                      <%= f.label "Nombre" %>
                       <%= f.text_field :nombre2, autofocus: true, class: 'form-control' %>
+                    </div>
+                    <div class="form-group">
+                      <%= f.label "Apellido" %>
+                      <%= f.text_field :apellido2, autofocus: true, class: 'form-control' %>
                     </div>
                     <div class="form-group">
                       <%= f.label "Cédula" %><%= p " - (la cédula 1.234.567-2 se ingresa 12345672)" %>
