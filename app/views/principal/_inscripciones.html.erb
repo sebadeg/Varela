@@ -52,14 +52,6 @@
             <%= f.text_field :cedula, autofocus: true, class: 'form-control' %>
           </div>
           <div class="form-group">
-            <%= f.label "Nombre" %>
-            <%= f.text_field :nombre, autofocus: true, class: 'form-control' %>
-          </div>
-          <div class="form-group">
-            <%= f.label "Apellido" %>
-            <%= f.text_field :apellido, autofocus: true, class: 'form-control' %>
-          </div>  
-          <div class="form-group">
             <%= f.label "Lugar de nacimiento" %>
             <%= f.text_field :lugar_nacimiento, autofocus: true, class: 'form-control' %>
           </div>  
@@ -97,6 +89,8 @@
               <%= f.label "Formulario: " %>
               <%= f.select :formulario_id, options_for_select(opciones, inscripcionAlumno.formulario_id), {}, {class: 'form-control'}  %>
             </div>
+          <% else %>
+            <%= f.hidden_field :formulario_id, value: nil %>
           <% end %>
 
           <div class="form-group">

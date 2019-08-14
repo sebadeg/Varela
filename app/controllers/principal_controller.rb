@@ -476,6 +476,13 @@ class PrincipalController < ApplicationController
       inscripcionAlumno.registrado = false
     end
 
+    inscripcionAlumno.lugar_nacimiento = params[:inscripcionAlumno][:lugar_nacimiento]
+    inscripcionAlumno.fecha_nacimiento = params[:inscripcionAlumno][:fecha_nacimiento]
+    inscripcionAlumno.domicilio = params[:inscripcionAlumno][:domicilio]
+    inscripcionAlumno.celular = params[:inscripcionAlumno][:celular]
+    inscripcionAlumno.mutualista = params[:inscripcionAlumno][:mutualista]
+    inscripcionAlumno.emergencia = params[:inscripcionAlumno][:emergencia]
+
     inscripcionAlumno.proximo_grado_id = params[:inscripcionAlumno][:proximo_grado_id]
     inscripcionAlumno.formulario_id = params[:inscripcionAlumno][:formulario_id]
     inscripcionAlumno.convenio_id = params[:inscripcionAlumno][:convenio_id]
@@ -539,8 +546,11 @@ class PrincipalController < ApplicationController
     # inscripcionAlumno.celular2 = params[:inscripcionAlumno][:celular2]
     # inscripcionAlumno.email2 = params[:inscripcionAlumno][:email2]
 
+    titulares = 0
+
     inscripcionAlumno.cedula_padre = params[:inscripcionAlumno][:cedula_padre]
     if inscripcionAlumno.cedula_padre != nil && inscripcionAlumno.cedula_padre != ""
+      titulares = titulares + 1
       padre = Persona.find_or_create_by(id: inscripcionAlumno.cedula_padre)
       padre.nombre = params[:inscripcionAlumno][:nombre_padre]
       padre.apellido = params[:inscripcionAlumno][:apellido_padre]
@@ -552,9 +562,11 @@ class PrincipalController < ApplicationController
       padre.telefono_trabajo = params[:inscripcionAlumno][:telefono_trabajo_padre]
       padre.save
     end
+    inscripcionAlumno.titular_padre = params[:inscripcionAlumno][:titular_padre]
 
     inscripcionAlumno.cedula_madre = params[:inscripcionAlumno][:cedula_madre]
     if inscripcionAlumno.cedula_madre != nil && inscripcionAlumno.cedula_madre != ""
+      titulares = titulares + 1
       madre = Persona.find_or_create_by(id: inscripcionAlumno.cedula_madre)
       madre.nombre = params[:inscripcionAlumno][:nombre_madre]
       madre.apellido = params[:inscripcionAlumno][:apellido_madre]
@@ -566,9 +578,11 @@ class PrincipalController < ApplicationController
       madre.telefono_trabajo = params[:inscripcionAlumno][:telefono_trabajo_madre]
       madre.save
     end
+    inscripcionAlumno.titular_madre = params[:inscripcionAlumno][:titular_madre]
 
     inscripcionAlumno.cedula1 = params[:inscripcionAlumno][:cedula1]
     if inscripcionAlumno.cedula1 != nil && inscripcionAlumno.cedula1 != ""
+      titulares = titulares + 1
       titular1 = Persona.find_or_create_by(id: inscripcionAlumno.cedula1)
       titular1.nombre = params[:inscripcionAlumno][:nombre1]
       titular1.apellido = params[:inscripcionAlumno][:apellido1]
@@ -580,6 +594,7 @@ class PrincipalController < ApplicationController
 
     inscripcionAlumno.cedula2 = params[:inscripcionAlumno][:cedula2]
     if inscripcionAlumno.cedula2 != nil && inscripcionAlumno.cedula2 != ""
+      titulares = titulares + 1
       titular2 = Persona.find_or_create_by(id: inscripcionAlumno.cedula2)
       titular2.nombre = params[:inscripcionAlumno][:nombre2]
       titular2.apellido = params[:inscripcionAlumno][:apellido2]
@@ -587,6 +602,11 @@ class PrincipalController < ApplicationController
       titular2.email = params[:inscripcionAlumno][:email2]
       titular2.celular = params[:inscripcionAlumno][:celular2]
       titular2.save
+    end
+
+    if titulares == 0
+      alerta = alerta + "No ha ingresado titulares." 
+      inscripcionAlumno.registrado = false
     end
 
     inscripcionAlumno.save!
