@@ -548,7 +548,7 @@ class PrincipalController < ApplicationController
 
 
     redirect_to principal_index_path
-    
+
     #if inscripcionAlumno.cuotas == 0 
     #  redirect_to principal_index_path, notice: "Ha comenzado el proceso de reinscripción"
     #else
@@ -570,8 +570,8 @@ class PrincipalController < ApplicationController
 
   def download_inscripcion
 
-    id = params[:inscripcionAlumno][:id]
-    inscripcionAlumno = InscripcionAlumno.find(id)
+    alumno_id = params[:inscripcionAlumno][:alumno_id]
+    inscripcionAlumno = Inscripcion.FindInscripcion(alumno_id)
 
     factura = Factura.all.first
 

@@ -30,14 +30,14 @@
     <div class="clearfix"></div>
   <% elsif inscripcionAlumno.EstaRegistrado() %>
     <%= form_for(inscripcionAlumno, as: :inscripcionAlumno, url: principal_download_inscripcion_path(:inscripcionAlumno), :html => {:id=>'form_download_inscripcion_' + inscripcionAlumno.alumno_id.to_s}) do |f| %>
-      <%= f.hidden_field :id, value: inscripcionAlumno.alumno_id %>
+      <%= f.hidden_field :alumno_id, value: inscripcionAlumno.alumno_id %>
       <div id="textoRegistrarse">
         <b><%= link_to "Descargar reinscripción", "", :onclick => "$('#form_download_inscripcion_" + inscripcionAlumno.alumno_id.to_s + "').submit()" %></b>
       </div>
     <% end %>
   <% else %>
     <%= form_for(inscripcionAlumno, as: :inscripcionAlumno, url: principal_download_ayuda_path(:inscripcionAlumno), :html => {:id=>'form_download_ayuda_' + inscripcionAlumno.alumno_id.to_s}) do |f| %>
-      <%= f.hidden_field :id, value: inscripcionAlumno.alumno_id %>
+      <%= f.hidden_field :alumno_id, value: inscripcionAlumno.alumno_id %>
       <div id="textoRegistrarse">
         <b><%= link_to "Leer antes de llenar el formulario", "", :onclick => "$('#form_download_ayuda_" + inscripcionAlumno.alumno_id.to_s + "').submit()" %></b>
       </div>
@@ -45,7 +45,7 @@
     <%= form_for(inscripcionAlumno, as: :inscripcionAlumno, url: principal_inscribir_path(:inscripcionAlumno)) do |f| %>
       <div class="col-md-12 col-sm-12 col-xs-12 content-table">
         <div class="panel-body">
-          <%= f.hidden_field :id, value: inscripcionAlumno.alumno_id %>
+          <%= f.hidden_field :alumno_id, value: inscripcionAlumno.alumno_id %>
       
           <div class="form-group">
             <%= p "* " %><%= f.label "Cédula del alumno" %><%= p " - (la cédula 1.234.567-2 se ingresa 12345672)" %>
@@ -107,39 +107,39 @@
                 <div class="col-md-12 col-sm-12 col-xs-12 content-table">
                   <div class="panel-body">
                     <div class="form-group">
-                      <%= p "* " %><%= f.label "Nombre" %>
+                      <%= f.label "Nombre" %>
                       <%= f.text_field :nombre_padre, autofocus: true, class: 'form-control' %>
                     </div>
                     <div class="form-group">
-                      <%= p "* " %><%= f.label "Apellido" %>
+                      <%= f.label "Apellido" %>
                       <%= f.text_field :apellido_padre, autofocus: true, class: 'form-control' %>
                     </div>                    
                     <div class="form-group">
-                      <%= p "* " %><%= f.label "Cédula" %><%= p " - (la cédula 1.234.567-2 se ingresa 12345672)" %>
+                      <%= f.label "Cédula" %><%= p " - (la cédula 1.234.567-2 se ingresa 12345672)" %>
                       <%= f.text_field :cedula_padre, autofocus: true, class: 'form-control' %>
                     </div>
                     <div class="form-group">
-                      <%= p "* " %><%= f.label "Domicilio" %>
+                      <%= f.label "Domicilio" %>
                       <%= f.text_field :domicilio_padre, autofocus: true, class: 'form-control' %>
                     </div>
                     <div class="form-group">
-                      <%= p "* " %><%= f.label "Mail" %>
+                      <%= f.label "Mail" %>
                       <%= f.text_field :email_padre, autofocus: true, class: 'form-control' %>
                     </div>
                     <div class="form-group">
-                      <%= p "* " %><%= f.label "Teléfono/Celular" %>
+                      <%= f.label "Teléfono/Celular" %>
                       <%= f.text_field :celular_padre, autofocus: true, class: 'form-control' %>
                     </div>
                     <div class="form-group">
-                      <%= p "* " %><%= f.label "Profesión" %>
+                      <%= f.label "Profesión" %>
                       <%= f.text_field :profesion_padre, autofocus: true, class: 'form-control' %>
                     </div>
                     <div class="form-group">
-                      <%= p "* " %><%= f.label "Trabajo" %>
+                      <%= f.label "Trabajo" %>
                       <%= f.text_field :trabajo_padre, autofocus: true, class: 'form-control' %>
                     </div>
                     <div class="form-group">
-                      <%= p "* " %><%= f.label "Teléfono trabajo" %>
+                      <%= f.label "Teléfono trabajo" %>
                       <%= f.text_field :telefono_trabajo_padre, autofocus: true, class: 'form-control' %>
                     </div>
                     <div class="form-group">
@@ -164,43 +164,43 @@
                 <div class="col-md-12 col-sm-12 col-xs-12 content-table">
                   <div class="panel-body">
                     <div class="form-group">
-                      <%= p "* " %><%= f.label "Nombre" %>
+                      <%= f.label "Nombre" %>
                       <%= f.text_field :nombre_madre, autofocus: true, class: 'form-control' %>
                     </div>
                     <div class="form-group">
-                      <%= p "* " %><%= f.label "Apellido" %>
+                      <%= f.label "Apellido" %>
                       <%= f.text_field :apellido_madre, autofocus: true, class: 'form-control' %>
                     </div>                    
                     <div class="form-group">
-                      <%= p "* " %><%= f.label "Cédula" %><%= p " - (la cédula 1.234.567-2 se ingresa 12345672)" %>
+                      <%= f.label "Cédula" %><%= p " - (la cédula 1.234.567-2 se ingresa 12345672)" %>
                       <%= f.text_field :cedula_madre, autofocus: true, class: 'form-control' %>
                     </div>
                     <div class="form-group">
-                      <%= p "* " %><%= f.label "Domicilio" %>
+                      <%= f.label "Domicilio" %>
                       <%= f.text_field :domicilio_madre, autofocus: true, class: 'form-control' %>
                     </div>
                     <div class="form-group">
-                      <%= p "* " %><%= f.label "Mail" %>
+                      <%= f.label "Mail" %>
                       <%= f.text_field :email_madre, autofocus: true, class: 'form-control' %>
                     </div>
                     <div class="form-group">
-                      <%= p "* " %><%= f.label "Teléfono/Celular" %>
+                      <%= f.label "Teléfono/Celular" %>
                       <%= f.text_field :celular_madre, autofocus: true, class: 'form-control' %>
                     </div>
                     <div class="form-group">
-                      <%= p "* " %><%= f.label "Profesión" %>
+                      <%= f.label "Profesión" %>
                       <%= f.text_field :profesion_madre, autofocus: true, class: 'form-control' %>
                     </div>
                     <div class="form-group">
-                      <%= p "* " %><%= f.label "Trabajo" %>
+                      <%= f.label "Trabajo" %>
                       <%= f.text_field :trabajo_madre, autofocus: true, class: 'form-control' %>
                     </div>
                     <div class="form-group">
-                      <%= p "* " %><%= f.label "Teléfono trabajo" %>
+                      <%= f.label "Teléfono trabajo" %>
                       <%= f.text_field :telefono_trabajo_madre, autofocus: true, class: 'form-control' %>
                     </div>
                     <div class="form-group">
-                      <%= f.check_box :titular_madre, autofocus: true, class: 'form-control' %>
+                      <%= f.check_box :titular_madre, label: 'Titular', autofocus: true, class: 'form-control' %>
                       <%= f.label "Titular" %>
                     </div>
 
