@@ -476,7 +476,7 @@ class PrincipalController < ApplicationController
       inscripcionAlumno.registrado = false
     end
 
-    inscripcionAlumno.proximo_grado_id = params[:inscripcionAlumno][:formulario_id]
+    inscripcionAlumno.proximo_grado_id = params[:inscripcionAlumno][:proximo_grado_id]
     inscripcionAlumno.formulario_id = params[:inscripcionAlumno][:formulario_id]
     inscripcionAlumno.convenio_id = params[:inscripcionAlumno][:convenio_id]
     inscripcionAlumno.adicional_id = params[:inscripcionAlumno][:adicional_id]

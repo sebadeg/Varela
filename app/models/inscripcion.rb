@@ -1,5 +1,4 @@
 class Inscripcion < ApplicationRecord
-  belongs_to :convenio
   belongs_to :proximo_grado
 
   attr_accessor :nombre, :apellido, :lugar_nacimiento, :fecha_nacimiento, :domicilio, :celular, :mutualista, :emergencia, :apellido1, :cedula1, :apellido2, :cedula2
