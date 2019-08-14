@@ -471,7 +471,7 @@ class PrincipalController < ApplicationController
     if calc_cedula_digit(params[:inscripcionAlumno][:cedula])
       inscripcionAlumno.cedula = params[:inscripcionAlumno][:cedula]
 
-      alumno = Alumno.find_or_create_by(id: inscripcionAlumno.cedula)
+      alumno = Alumno.find_or_create_by(cedula: inscripcionAlumno.cedula)
       alumno.lugar_nacimiento = params[:inscripcionAlumno][:lugar_nacimiento]
       alumno.fecha_nacimiento = params[:inscripcionAlumno][:fecha_nacimiento]
       alumno.domicilio = params[:inscripcionAlumno][:domicilio]
