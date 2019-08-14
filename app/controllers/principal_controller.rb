@@ -457,8 +457,8 @@ class PrincipalController < ApplicationController
 
     p "Inscribir"
 
-    id = params[:inscripcionAlumno][:id]
-    inscripcionAlumno = InscripcionAlumno.find(id)
+    alumno_id = params[:inscripcionAlumno][:alumno_id]
+    inscripcionAlumno = Inscripcion.FindInscripcion(alumno_id)
 
     if inscripcionAlumno.registrado 
       redirect_to principal_index_path, alert: "El alumno ya está reinscripto"
@@ -475,18 +475,14 @@ class PrincipalController < ApplicationController
       inscripcionAlumno.cedula = nil
       inscripcionAlumno.registrado = false
     end
-    inscripcionAlumno.grado = params[:inscripcionAlumno][:grado]
-    inscripcionAlumno.convenio_id = params[:inscripcionAlumno][:convenio_id]
-    inscripcionAlumno.cuotas = params[:inscripcionAlumno][:cuotas]
-    inscripcionAlumno.hermanos = params[:inscripcionAlumno][:hermanos]
-    inscripcionAlumno.visa = params[:inscripcionAlumno][:visa]
-    inscripcionAlumno.matricula = params[:inscripcionAlumno][:matricula]
 
-    if inscripcionAlumno.cuotas == 11
-      inscripcionAlumno.mes = 2
-    elsif inscripcionAlumno.cuotas == 10
-      inscripcionAlumno.mes = 3
-    end
+    inscripcionAlumno.proximo_grado_id = params[:inscripcionAlumno][:formulario_id]
+    inscripcionAlumno.formulario_id = params[:inscripcionAlumno][:formulario_id]
+    inscripcionAlumno.convenio_id = params[:inscripcionAlumno][:convenio_id]
+    inscripcionAlumno.adicional_id = params[:inscripcionAlumno][:adicional_id]
+    inscripcionAlumno.cuotas_id = params[:inscripcionAlumno][:cuotas_id]
+    inscripcionAlumno.hermanos_id = params[:inscripcionAlumno][:hermanos_id]
+    inscripcionAlumno.matricula_id = params[:inscripcionAlumno][:matricula_id]
 
     if params[:inscripcionAlumno][:nombre1] != nil && params[:inscripcionAlumno][:nombre1] != ""
       inscripcionAlumno.nombre1 = params[:inscripcionAlumno][:nombre1]
@@ -550,23 +546,26 @@ class PrincipalController < ApplicationController
       return
     end
 
-    if inscripcionAlumno.cuotas == 0 
-      redirect_to principal_index_path, notice: "Ha comenzado el proceso de reinscripción"
-    else
-      factura = Factura.all.first
 
-      file_name = "reinscripcion_#{inscripcionAlumno.alumno_id}.pdf"
-      file = Tempfile.new("factura.pdf")
-      factura.vale(file.path,id)
+    redirect_to principal_index_path
+    
+    #if inscripcionAlumno.cuotas == 0 
+    #  redirect_to principal_index_path, notice: "Ha comenzado el proceso de reinscripción"
+    #else
+      #factura = Factura.all.first
 
-      UserMailer.reinscripcion(inscripcionAlumno,file_name,file).deliver_now
+      #file_name = "reinscripcion_#{inscripcionAlumno.alumno_id}.pdf"
+      #file = Tempfile.new("factura.pdf")
+      #factura.vale(file.path,id)
 
-      send_file(
-          file.path,
-          filename: file_name,
-          type: "application/pdf"
-        )
-    end
+      #UserMailer.reinscripcion(inscripcionAlumno,file_name,file).deliver_now
+
+      #send_file(
+      #    file.path,
+      #    filename: file_name,
+      #    type: "application/pdf"
+      #  )
+    #end
   end
 
   def download_inscripcion
@@ -588,10 +587,6 @@ class PrincipalController < ApplicationController
   end
 
   def download_ayuda
-
-    id = params[:inscripcionAlumno][:id]
-    inscripcionAlumno = InscripcionAlumno.find(id)
-
     send_file(
         Rails.root.join("data", "Instructivo reinscripción.pdf"),  
         filename: "Instructivo reinscripción.pdf",

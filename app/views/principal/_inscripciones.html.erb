@@ -55,7 +55,7 @@
           <div class="form-group">
             <% opciones = ProximoGrado.OpcionesGrados(inscripcionAlumno) %>
             <%= f.label "Nivel" %>
-            <%= f.select :proximo_grado_id, options_for_select(opciones, inscripcionAlumno.grado_id), {}, {class: 'form-control'}  %>
+            <%= f.select :proximo_grado_id, options_for_select(opciones, inscripcionAlumno.proximo_grado_id), {}, {class: 'form-control'}  %>
           </div>
       
           <% opciones = Formulario.OpcionesFormulario(inscripcionAlumno) %>
