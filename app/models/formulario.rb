@@ -14,7 +14,7 @@ class Formulario < ApplicationRecord
     if tipo == nil 
       return opciones
     end
-    InscripcionOpcion.where("inscripcion_opcion_tipo_id=#{tipo.id} AND general").order(:orden).each do |opcion|
+    InscripcionOpcion.where("inscripcion_opcion_tipo_id=#{tipo.id} AND (general OR id IN (SELECT inscripcion_opcion_id FROM inscripcion_opcion_alumnos WHERE cedula=#{inscripcionAlumno.cedula} AND NOT inscripcion_opcion_id IS NULL))").order(:orden).each do |opcion|
       opciones.push( [opcion.nombre,opcion.id] )
     end 
     return opciones
