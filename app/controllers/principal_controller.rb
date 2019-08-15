@@ -646,7 +646,7 @@ class PrincipalController < ApplicationController
     inscripcionAlumno = Inscripcion.FindInscripcion(alumno_id)
 
     file_name = "reinscripcion_#{inscripcionAlumno.alumno_id}.pdf"
-    file = Tempfile.new("factura.pdf")
+    file = Tempfile.new(file_name)
     inscripcionAlumno.vale(file.path,id)
 
     send_file(
