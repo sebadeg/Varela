@@ -647,7 +647,7 @@ class PrincipalController < ApplicationController
 
     file_name = "reinscripcion_#{inscripcionAlumno.alumno_id}.pdf"
     file = Tempfile.new(file_name)
-    inscripcionAlumno.vale(file.path,id)
+    inscripcionAlumno.vale(file.path)
 
     send_file(
         file.path,
