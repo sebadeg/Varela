@@ -645,11 +645,9 @@ class PrincipalController < ApplicationController
     alumno_id = params[:inscripcionAlumno][:alumno_id]
     inscripcionAlumno = Inscripcion.FindInscripcion(alumno_id)
 
-    factura = Factura.all.first
-
     file_name = "reinscripcion_#{inscripcionAlumno.alumno_id}.pdf"
     file = Tempfile.new("factura.pdf")
-    factura.vale(file.path,id)
+    inscripcionAlumno.vale(file.path,id)
 
     send_file(
         file.path,
