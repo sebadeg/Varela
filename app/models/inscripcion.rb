@@ -368,6 +368,7 @@ class Inscripcion < ApplicationRecord
 
 
     cuotas = [[12,10000,DateTime.new(2020,1,10)]]
+    total = 120000
 
     total_letras = numero_a_letras(total,true)
 
