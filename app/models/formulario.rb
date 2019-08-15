@@ -3,7 +3,7 @@ class Formulario < ApplicationRecord
   def self.OpcionesFormulario(inscripcionAlumno)
     opciones = Array.new
     Formulario.where("cedula=#{inscripcionAlumno.cedula} AND " + 
-      "anio IN (SELECT anio_inscripciones FROM configs WHERE NOT anio_inscripciones IS NULL) AND" +
+      "anio IN (SELECT anio_inscripciones FROM configs WHERE NOT anio_inscripciones IS NULL) AND " +
       "id IN (SELECT formulario_id FROM formulario_alumnos WHERE cedula=#{inscripcionAlumno.cedula} AND NOT formulario_id IS NULL)"
       ).each do |formulario|
       opciones.push( [formulario.nombre,formulario.id] )
