@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_14_222157) do
+ActiveRecord::Schema.define(version: 2019_08_15_010400) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -507,6 +507,7 @@ ActiveRecord::Schema.define(version: 2019_08_14_222157) do
     t.datetime "updated_at", null: false
     t.boolean "general"
     t.integer "orden"
+    t.integer "valor_ent"
     t.index ["inscripcion_opcion_tipo_id"], name: "index_inscripcion_opciones_on_inscripcion_opcion_tipo_id"
   end
 
