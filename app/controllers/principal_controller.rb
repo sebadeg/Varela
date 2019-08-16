@@ -493,6 +493,43 @@ class PrincipalController < ApplicationController
     inscripcionAlumno.hermanos_id = params[:inscripcionAlumno][:hermanos_id]
     inscripcionAlumno.matricula_id = params[:inscripcionAlumno][:matricula_id]
 
+    inscripcionAlumno.cedula_padre = params[:inscripcionAlumno][:cedula_padre]
+    inscripcionAlumno.nombre_padre = params[:inscripcionAlumno][:nombre_padre]
+    inscripcionAlumno.apellido_padre = params[:inscripcionAlumno][:apellido_padre]
+    inscripcionAlumno.domicilio_padre = params[:inscripcionAlumno][:domicilio_padre]
+    inscripcionAlumno.email_padre = params[:inscripcionAlumno][:email_padre]
+    inscripcionAlumno.celular_padre = params[:inscripcionAlumno][:celular_padre]
+    inscripcionAlumno.profesion_padre = params[:inscripcionAlumno][:profesion_padre]
+    inscripcionAlumno.trabajo_padre = params[:inscripcionAlumno][:trabajo_padre]
+    inscripcionAlumno.telefono_trabajo_padre = params[:inscripcionAlumno][:telefono_trabajo_padre]
+    inscripcionAlumno.titular_padre = params[:inscripcionAlumno][:titular_padre]
+    
+    inscripcionAlumno.cedula_madre = params[:inscripcionAlumno][:cedula_madre]
+    inscripcionAlumno.nombre_madre = params[:inscripcionAlumno][:nombre_madre]
+    inscripcionAlumno.apellido_madre = params[:inscripcionAlumno][:apellido_madre]
+    inscripcionAlumno.domicilio_madre = params[:inscripcionAlumno][:domicilio_madre]
+    inscripcionAlumno.email_madre = params[:inscripcionAlumno][:email_madre]
+    inscripcionAlumno.celular_madre = params[:inscripcionAlumno][:celular_madre]
+    inscripcionAlumno.profesion_madre = params[:inscripcionAlumno][:profesion_madre]
+    inscripcionAlumno.trabajo_madre = params[:inscripcionAlumno][:trabajo_madre]
+    inscripcionAlumno.telefono_trabajo_madre = params[:inscripcionAlumno][:telefono_trabajo_madre]
+    inscripcionAlumno.titular_madre = params[:inscripcionAlumno][:titular_madre]
+
+    inscripcionAlumno.documento1 = params[:inscripcionAlumno][:cedula1]
+    inscripcionAlumno.nombre_titular1.nombre = params[:inscripcionAlumno][:nombre1]
+    inscripcionAlumno.apellido_titular1 = params[:inscripcionAlumno][:apellido1]
+    inscripcionAlumno.domicilio_titular1 = params[:inscripcionAlumno][:domicilio1]
+    inscripcionAlumno.email_titular1 = params[:inscripcionAlumno][:email1]
+    inscripcionAlumno.celular_titular1 = params[:inscripcionAlumno][:celular1]
+
+    inscripcionAlumno.documento2 = params[:inscripcionAlumno][:cedula2]
+    inscripcionAlumno.nombre_titular2 = params[:inscripcionAlumno][:nombre2]
+    inscripcionAlumno.apellido_titular2 = params[:inscripcionAlumno][:apellido2]
+    inscripcionAlumno.domicilio_titular2 = params[:inscripcionAlumno][:domicilio2]
+    inscripcionAlumno.email_titular2 = params[:inscripcionAlumno][:email2]
+    inscripcionAlumno.celular_titular2 = params[:inscripcionAlumno][:celular2]
+
+
     # if params[:inscripcionAlumno][:nombre1] != nil && params[:inscripcionAlumno][:nombre1] != ""
     #   inscripcionAlumno.nombre1 = params[:inscripcionAlumno][:nombre1]
     # else
@@ -547,62 +584,33 @@ class PrincipalController < ApplicationController
     # inscripcionAlumno.domicilio2 = params[:inscripcionAlumno][:domicilio2]
     # inscripcionAlumno.celular2 = params[:inscripcionAlumno][:celular2]
     # inscripcionAlumno.email2 = params[:inscripcionAlumno][:email2]
-
+    
     titulares = 0
-
-    inscripcionAlumno.cedula_padre = params[:inscripcionAlumno][:cedula_padre]
     if calc_cedula_digit(inscripcionAlumno.cedula_padre)
-      inscripcionAlumno.nombre_padre = params[:inscripcionAlumno][:nombre_padre]
-      inscripcionAlumno.apellido_padre = params[:inscripcionAlumno][:apellido_padre]
-      inscripcionAlumno.domicilio_padre = params[:inscripcionAlumno][:domicilio_padre]
-      inscripcionAlumno.email_padre = params[:inscripcionAlumno][:email_padre]
-      inscripcionAlumno.celular_padre = params[:inscripcionAlumno][:celular_padre]
-      inscripcionAlumno.profesion_padre = params[:inscripcionAlumno][:profesion_padre]
-      inscripcionAlumno.trabajo_padre = params[:inscripcionAlumno][:trabajo_padre]
-      inscripcionAlumno.telefono_trabajo_padre = params[:inscripcionAlumno][:telefono_trabajo_padre]
-
-      inscripcionAlumno.titular_padre = params[:inscripcionAlumno][:titular_padre]
       if inscripcionAlumno.titular_padre
         titulares = titulares + 1
       end
+    else
+      inscripcionAlumno.cedula_padre = nil
     end
-
-    
-    inscripcionAlumno.cedula_madre = params[:inscripcionAlumno][:cedula_madre]
-    if calc_cedula_digit(inscripcionAlumno.cedula_madre)
-      inscripcionAlumno.nombre_madre = params[:inscripcionAlumno][:nombre_madre]
-      inscripcionAlumno.apellido_madre = params[:inscripcionAlumno][:apellido_madre]
-      inscripcionAlumno.domicilio_madre = params[:inscripcionAlumno][:domicilio_madre]
-      inscripcionAlumno.email_madre = params[:inscripcionAlumno][:email_madre]
-      inscripcionAlumno.celular_madre = params[:inscripcionAlumno][:celular_madre]
-      inscripcionAlumno.profesion_madre = params[:inscripcionAlumno][:profesion_madre]
-      inscripcionAlumno.trabajo_madre = params[:inscripcionAlumno][:trabajo_madre]
-      inscripcionAlumno.telefono_trabajo_madre = params[:inscripcionAlumno][:telefono_trabajo_madre]
-
-      inscripcionAlumno.titular_madre = params[:inscripcionAlumno][:titular_madre]
+    if calc_cedula_digit(inscripcionAlumno.cedula_madre)      
       if inscripcionAlumno.titular_madre
         titulares = titulares + 1
       end
+    else
+      inscripcionAlumno.cedula_madre = nil
     end
-
-    inscripcionAlumno.documento1 = params[:inscripcionAlumno][:cedula1]
     if calc_cedula_digit(inscripcionAlumno.documento1)
+      inscripcionAlumno.documento1 = nil
       titulares = titulares + 1
-      inscripcionAlumno.nombre_titular1.nombre = params[:inscripcionAlumno][:nombre1]
-      inscripcionAlumno.apellido_titular1 = params[:inscripcionAlumno][:apellido1]
-      inscripcionAlumno.domicilio_titular1 = params[:inscripcionAlumno][:domicilio1]
-      inscripcionAlumno.email_titular1 = params[:inscripcionAlumno][:email1]
-      inscripcionAlumno.celular_titular1 = params[:inscripcionAlumno][:celular1]
+    else
+      inscripcionAlumno.documento1 = nil
     end
-
-    inscripcionAlumno.documento2 = params[:inscripcionAlumno][:cedula2]
     if calc_cedula_digit(inscripcionAlumno.documento2)
+      inscripcionAlumno.documento2 = nil
       titulares = titulares + 1
-      inscripcionAlumno.nombre_titular2 = params[:inscripcionAlumno][:nombre2]
-      inscripcionAlumno.apellido_titular2 = params[:inscripcionAlumno][:apellido2]
-      inscripcionAlumno.domicilio_titular2 = params[:inscripcionAlumno][:domicilio2]
-      inscripcionAlumno.email_titular2 = params[:inscripcionAlumno][:email2]
-      inscripcionAlumno.celular_titular2 = params[:inscripcionAlumno][:celular2]
+    else
+      inscripcionAlumno.documento2 = nil
     end
 
     if titulares == 0
