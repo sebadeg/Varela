@@ -377,7 +377,7 @@ class Inscripcion < ApplicationRecord
       idx = idx+1
     end
 
-    if inscripcion.documeento2 != nil
+    if inscripcion.documento2 != nil
       nombreT[idx] = "#{inscripcion.nombre2} #{inscripcion.apellido2}"
       documentoT[idx] = inscripcion.documento2
       domicilioT[idx] = inscripcion.domicilio2
