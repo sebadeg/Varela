@@ -364,11 +364,7 @@ class Inscripcion < ApplicationRecord
 
   def vale(file_path)
 
-    #CalcularPrecio(cuotas,total)
-
-
-    cuotas = [[12,10000,DateTime.new(2020,1,10)]]
-    total = 120000
+    CalcularPrecio(cuotas,total)
 
     total_letras = Inscripcion.numero_a_letras(total,true)
 
