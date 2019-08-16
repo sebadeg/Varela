@@ -414,6 +414,7 @@ class Inscripcion < ApplicationRecord
       idx = idx+1
     end
 
+
     if reinscripcion
       titulo = "<b>REINSCRIPCION</b>"
     else
@@ -523,9 +524,11 @@ class Inscripcion < ApplicationRecord
     text_file = Tempfile.new("text.pdf")
     text_file_path = text_file.path
 
+    reinsc = reinscripcion
+
     Prawn::Document.generate(text_file_path) do
 
-      if reinscripcion
+      if reinsc
         font "Helvetica", :size => 12
 
         stroke_color "0000FF"
@@ -546,7 +549,7 @@ class Inscripcion < ApplicationRecord
         start_new_page
       end
 
-      if !reinscripcion
+      if !reinsc
         font "Helvetica", :size => 10
         
         stroke_color "0000FF"
