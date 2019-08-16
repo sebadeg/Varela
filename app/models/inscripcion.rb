@@ -82,54 +82,56 @@ class Inscripcion < ApplicationRecord
 
   def CalcularPrecio()
 
-    proximo_grado = ProximoGrado.find(proximo_grado_id) rescue nil
-    importe_total = proximo_grado.precio
+    # proximo_grado = ProximoGrado.find(proximo_grado_id) rescue nil
+    # importe_total = proximo_grado.precio
 
-    descuentos = Array.new
-    if formulario_id != nil
-      formulario = Formulario.find(formulario_id) rescue nil
-      FormularioInscripcionOpcion.where("formulario_id=#{formulario_id} AND inscripcion_opcion_id IN (SELECT id FROM InscripcionOpcion WHERE nombre IN ('Convenio','Adicional','Hermanos'))").each do |formulario_inscripcion_opcion|
-        descuentos.push(formulario_inscripcion_opcion.inscripcion_opcion_id)
-      end
-    else
-      descuentos = [convenio_id,adicional_id,hermanos_id]
-    end
+    # descuentos = Array.new
+    # if formulario_id != nil
+    #   formulario = Formulario.find(formulario_id) rescue nil
+    #   FormularioInscripcionOpcion.where("formulario_id=#{formulario_id} AND inscripcion_opcion_id IN (SELECT id FROM InscripcionOpcion WHERE nombre IN ('Convenio','Adicional','Hermanos'))").each do |formulario_inscripcion_opcion|
+    #     descuentos.push(formulario_inscripcion_opcion.inscripcion_opcion_id)
+    #   end
+    # else
+    #   descuentos = [convenio_id,adicional_id,hermanos_id]
+    # end
 
-    descuentos.each do |inscripcion_opcion_id|
-      inscripcion_opcion = InscripcionOpcion.find(inscripcion_opcion_id) rescue nil
-      if inscripcion_opcion != nil 
-        importe_total = importe_total * ( 100.0 - inscripcion_opcion.valor ) / 100.0
-      end
-    end
+    # descuentos.each do |inscripcion_opcion_id|
+    #   inscripcion_opcion = InscripcionOpcion.find(inscripcion_opcion_id) rescue nil
+    #   if inscripcion_opcion != nil 
+    #     importe_total = importe_total * ( 100.0 - inscripcion_opcion.valor ) / 100.0
+    #   end
+    # end
 
-    cuotas = Array.new
-    if formulario_id != nil
-      FormularioInscripcionOpcion.where("formulario_id=#{formulario_id} AND inscripcion_opcion_id IN (SELECT id FROM InscripcionOpcion WHERE nombre='Cuotas')").each do |formulario_inscripcion_opcion|
-        inscripcion_opcion_cuotas = InscripcionOpcion.find(formulario_inscripcion_opcion.inscripcion_opcion_id) rescue nil
-        if inscripcion_opcion_cuotas != nil
-          if ( inscripcion_opcion_cuotas.valor == nil )
-            ncuotas = ncuotas + inscripcion_opcion_cuotas.valor
-          else            
-            cuotas.push([inscripcion_opcion_cuotas.valor_ent,inscripcion_opcion_cuotas.valor])
-            ncuotas = 0
-          end
-        end
-      end        
-    else
-      inscripcion_opcion_cuotas = InscripcionOpcion.find(cuotas_id) rescue nil 
-      cuotas.push([inscripcion_opcion_cuotas.valor_ent,inscripcion_opcion_cuotas.valor])
+    # cuotas = Array.new
+    # if formulario_id != nil
+    #   FormularioInscripcionOpcion.where("formulario_id=#{formulario_id} AND inscripcion_opcion_id IN (SELECT id FROM InscripcionOpcion WHERE nombre='Cuotas')").each do |formulario_inscripcion_opcion|
+    #     inscripcion_opcion_cuotas = InscripcionOpcion.find(formulario_inscripcion_opcion.inscripcion_opcion_id) rescue nil
+    #     if inscripcion_opcion_cuotas != nil
+    #       if ( inscripcion_opcion_cuotas.valor == nil )
+    #         ncuotas = ncuotas + inscripcion_opcion_cuotas.valor
+    #       else            
+    #         cuotas.push([inscripcion_opcion_cuotas.valor_ent,inscripcion_opcion_cuotas.valor])
+    #         ncuotas = 0
+    #       end
+    #     end
+    #   end        
+    # else
+    #   inscripcion_opcion_cuotas = InscripcionOpcion.find(cuotas_id) rescue nil 
+    #   cuotas.push([inscripcion_opcion_cuotas.valor_ent,inscripcion_opcion_cuotas.valor])
       
-      ncuotas = 12
-      if inscripcion_opcion_cuotas != nil
-        ncuotas = inscripcion_opcion_cuotas.valor_ent
-      end
-    end    
+    #   ncuotas = 12
+    #   if inscripcion_opcion_cuotas != nil
+    #     ncuotas = inscripcion_opcion_cuotas.valor_ent
+    #   end
+    # end    
 
-    if cuotas.count == 0
-      importe_cuota = (importe_total/ncuotas+0.5).to_i
-      total = (importe_cuota*ncuotas).to_i
-      cuotas.push([ncuotas,importe_cuota])
-    end
+    # if cuotas.count == 0
+    #   importe_cuota = (importe_total/ncuotas+0.5).to_i
+    #   total = (importe_cuota*ncuotas).to_i
+    #   cuotas.push([ncuotas,importe_cuota])
+    # end
+    cuotas = Array.new
+    cuotas.push([12,10000,Date.new(2020,1,10)])
     return cuotas
   end
 
