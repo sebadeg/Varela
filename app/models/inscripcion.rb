@@ -382,7 +382,7 @@ class Inscripcion < ApplicationRecord
 
     nombre_grado = ""
     proximo_grado = ProximoGrado.find(proximo_grado_id) rescue nil
-    if grado != nil
+    if proximo_grado != nil
       nombre_grado = proximo_grado.nombre
     end
 
@@ -444,11 +444,11 @@ class Inscripcion < ApplicationRecord
       "Recibida por: #{inscripcion.recibida}<br>" +
       "<br>" +
       "<b>NIVEL</b><br>" +
-      "Grado: #{proximo_grado_nombre}<br>" +
-      "Descuento: #{convenio_nombre}<br>" +
-      "Matrícula: #{matriculaS}<br>" +
-      "Hermanos: #{hermanosS}<br>" +
-      "Cuotas: #{inscripcion.cuotas}<br>" + 
+      "Grado: #{nombre_grado}<br>" +
+      #"Descuento: #{convenio_nombre}<br>" +
+      #"Matrícula: #{matriculaS}<br>" +
+      #"Hermanos: #{hermanosS}<br>" +
+      #"Cuotas: #{inscripcion.cuotas}<br>" + 
       "<br>"+
       "<b>ALUMNO</b><br>" +
       "Nombre: #{inscripcion.nombre} #{inscripcion.apellido}<br>" +
