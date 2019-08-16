@@ -102,36 +102,39 @@ class Inscripcion < ApplicationRecord
       end
     end
 
-    # cuotas = Array.new
-    # if formulario_id != nil
-    #   FormularioInscripcionOpcion.where("formulario_id=#{formulario_id} AND inscripcion_opcion_id IN (SELECT id FROM InscripcionOpcion WHERE nombre='Cuotas')").each do |formulario_inscripcion_opcion|
-    #     inscripcion_opcion_cuotas = InscripcionOpcion.find(formulario_inscripcion_opcion.inscripcion_opcion_id) rescue nil
-    #     if inscripcion_opcion_cuotas != nil
-    #       if ( inscripcion_opcion_cuotas.valor == nil )
-    #         ncuotas = ncuotas + inscripcion_opcion_cuotas.valor
-    #       else            
-    #         cuotas.push([inscripcion_opcion_cuotas.valor_ent,inscripcion_opcion_cuotas.valor])
-    #         ncuotas = 0
-    #       end
-    #     end
-    #   end        
-    # else
-    #   inscripcion_opcion_cuotas = InscripcionOpcion.find(cuotas_id) rescue nil 
-    #   cuotas.push([inscripcion_opcion_cuotas.valor_ent,inscripcion_opcion_cuotas.valor])
-      
-    #   ncuotas = 12
-    #   if inscripcion_opcion_cuotas != nil
-    #     ncuotas = inscripcion_opcion_cuotas.valor_ent
-    #   end
-    # end    
-
-    # if cuotas.count == 0
-    #   importe_cuota = (importe_total/ncuotas+0.5).to_i
-    #   total = (importe_cuota*ncuotas).to_i
-    #   cuotas.push([ncuotas,importe_cuota])
-    # end
     cuotas = Array.new
-    cuotas.push([12,importe_total/12,Date.new(2020,1,10)])
+    numero_cuotas = 0
+    fecha_cuota = nil
+    if formulario_id != nil
+      InscripcionOpcion.where( "id IN (SELECT inscripcion_opcion_id FROM formulario_inscripcion_opcion " +
+        "WHERE formulario_id=#{formulario_id} AND NOT inscripcion_opcion_id IS NULL) AND " +
+        "inscripcion_opcion_tipo IN (SELECT id FROM InscripcionOpcionTipo WHERE nombre='Cuotas' AND NOT id IS NULL)"
+        ).each do |inscripcion_opcion_cuotas|
+        if ( inscripcion_opcion_cuotas.valor == nil )
+          numero_cuotas = inscripcion_opcion_cuotas.valor
+          if fecha_cuota == nil
+            fecha_cuota = inscripcion_opcion_cuotas.fecha
+          end
+        else            
+          cuotas.push([inscripcion_opcion_cuotas.valor_ent,inscripcion_opcion_cuotas.valor,inscripcion_opcion_cuotas.fecha])
+        end
+      end        
+    else
+      inscripcion_opcion_cuotas = InscripcionOpcion.find(cuotas_id) rescue nil 
+      if inscripcion_opcion_cuotas != nil
+        if ( inscripcion_opcion_cuotas.valor == nil )
+          numero_cuotas = inscripcion_opcion_cuotas.valor
+          fecha_cuota = inscripcion_opcion_cuotas.fecha
+        else            
+          cuotas.push([inscripcion_opcion_cuotas.valor_ent,inscripcion_opcion_cuotas.valor,inscripcion_opcion_cuotas.fecha])
+        else
+      end
+    end    
+
+    if cuotas.count == 0 && numero_cuotas != 0 
+      cuotas.push([numero_cuotas,(importe_total/numero_cuotas+0.5).to_i,fecha_cuota])
+    end
+
     return cuotas
   end
 
