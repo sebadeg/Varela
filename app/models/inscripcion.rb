@@ -111,7 +111,7 @@ class Inscripcion < ApplicationRecord
         "inscripcion_opcion_tipo IN (SELECT id FROM InscripcionOpcionTipo WHERE nombre='Cuotas' AND NOT id IS NULL)"
         ).each do |inscripcion_opcion_cuotas|
         if ( inscripcion_opcion_cuotas.valor == nil )
-          numero_cuotas = inscripcion_opcion_cuotas.valor
+          numero_cuotas = inscripcion_opcion_cuotas.valor_ent
           if fecha_cuota == nil
             fecha_cuota = inscripcion_opcion_cuotas.fecha
           end
@@ -123,7 +123,7 @@ class Inscripcion < ApplicationRecord
       inscripcion_opcion_cuotas = InscripcionOpcion.find(cuotas_id) rescue nil 
       if inscripcion_opcion_cuotas != nil
         if ( inscripcion_opcion_cuotas.valor == nil )
-          numero_cuotas = inscripcion_opcion_cuotas.valor
+          numero_cuotas = inscripcion_opcion_cuotas.valor_ent
           fecha_cuota = inscripcion_opcion_cuotas.fecha
         else            
           cuotas.push([inscripcion_opcion_cuotas.valor_ent,inscripcion_opcion_cuotas.valor,inscripcion_opcion_cuotas.fecha])
