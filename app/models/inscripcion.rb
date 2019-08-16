@@ -80,7 +80,7 @@ class Inscripcion < ApplicationRecord
     return registrado
   end
 
-  def CalcularPrecio( cuotas, total )
+  def CalcularPrecio()
 
     proximo_grado = ProximoGrado.find(proximo_grado_id) rescue nil
     importe_total = proximo_grado.precio
@@ -130,12 +130,7 @@ class Inscripcion < ApplicationRecord
       total = (importe_cuota*ncuotas).to_i
       cuotas.push([ncuotas,importe_cuota])
     end
-
-    total = 0
-    cuotas.each do |cuota|
-      total = total + cuota[0]*cuota[1]
-    end
-
+    return cuotas
   end
 
 
@@ -364,9 +359,13 @@ class Inscripcion < ApplicationRecord
 
   def vale(file_path)
 
-    cuotas = nil
-    total = nil
-    CalcularPrecio(cuotas,total)
+    cuotas = CalcularPrecio()
+
+    total = 0
+    cuotas.each do |cuota|
+      total = total + cuota[0]*cuota[1]
+    end
+
 
     total_letras = Inscripcion.numero_a_letras(total,true)
 
