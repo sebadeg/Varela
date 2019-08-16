@@ -562,7 +562,7 @@ class PrincipalController < ApplicationController
       inscripcionAlumno.telefono_trabajo_padre = params[:inscripcionAlumno][:telefono_trabajo_padre]
 
       inscripcionAlumno.titular_padre = params[:inscripcionAlumno][:titular_padre]
-      if inscripcionAlumno.titular_padre.to_i == 1
+      if inscripcionAlumno.titular_padre
         titulares = titulares + 1
       end
     end
@@ -580,7 +580,7 @@ class PrincipalController < ApplicationController
       inscripcionAlumno.telefono_trabajo_madre = params[:inscripcionAlumno][:telefono_trabajo_madre]
 
       inscripcionAlumno.titular_madre = params[:inscripcionAlumno][:titular_madre]
-      if inscripcionAlumno.titular_madre.to_i == 1
+      if inscripcionAlumno.titular_madre
         titulares = titulares + 1
       end
     end
