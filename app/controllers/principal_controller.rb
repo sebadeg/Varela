@@ -552,7 +552,6 @@ class PrincipalController < ApplicationController
 
     inscripcionAlumno.cedula_padre = params[:inscripcionAlumno][:cedula_padre]
     if calc_cedula_digit(inscripcionAlumno.cedula_padre)
-      
       inscripcionAlumno.nombre_padre = params[:inscripcionAlumno][:nombre_padre]
       inscripcionAlumno.apellido_padre = params[:inscripcionAlumno][:apellido_padre]
       inscripcionAlumno.domicilio_padre = params[:inscripcionAlumno][:domicilio_padre]
@@ -563,15 +562,14 @@ class PrincipalController < ApplicationController
       inscripcionAlumno.telefono_trabajo_padre = params[:inscripcionAlumno][:telefono_trabajo_padre]
 
       inscripcionAlumno.titular_padre = params[:inscripcionAlumno][:titular_padre]
-      #if inscripcionAlumno.titular_padre == "1"
-      #  titulares = titulares + 1
-      #end
+      if inscripcionAlumno.titular_padre.to_i == 1
+        titulares = titulares + 1
+      end
     end
 
     
     inscripcionAlumno.cedula_madre = params[:inscripcionAlumno][:cedula_madre]
     if calc_cedula_digit(inscripcionAlumno.cedula_madre)
-      titulares = titulares + 1
       inscripcionAlumno.nombre_madre = params[:inscripcionAlumno][:nombre_madre]
       inscripcionAlumno.apellido_madre = params[:inscripcionAlumno][:apellido_madre]
       inscripcionAlumno.domicilio_madre = params[:inscripcionAlumno][:domicilio_madre]
@@ -582,9 +580,9 @@ class PrincipalController < ApplicationController
       inscripcionAlumno.telefono_trabajo_madre = params[:inscripcionAlumno][:telefono_trabajo_madre]
 
       inscripcionAlumno.titular_madre = params[:inscripcionAlumno][:titular_madre]
-      #if inscripcionAlumno.titular_madre == "1"
-      #  titulares = titulares + 1
-      #end
+      if inscripcionAlumno.titular_madre.to_i == 1
+        titulares = titulares + 1
+      end
     end
 
     inscripcionAlumno.documento1 = params[:inscripcionAlumno][:cedula1]
