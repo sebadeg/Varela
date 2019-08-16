@@ -82,25 +82,25 @@ class Inscripcion < ApplicationRecord
 
   def CalcularPrecio()
 
-    # proximo_grado = ProximoGrado.find(proximo_grado_id) rescue nil
-    # importe_total = proximo_grado.precio
+    proximo_grado = ProximoGrado.find(proximo_grado_id) rescue nil
+    importe_total = proximo_grado.precio
 
-    # descuentos = Array.new
-    # if formulario_id != nil
-    #   formulario = Formulario.find(formulario_id) rescue nil
-    #   FormularioInscripcionOpcion.where("formulario_id=#{formulario_id} AND inscripcion_opcion_id IN (SELECT id FROM InscripcionOpcion WHERE nombre IN ('Convenio','Adicional','Hermanos'))").each do |formulario_inscripcion_opcion|
-    #     descuentos.push(formulario_inscripcion_opcion.inscripcion_opcion_id)
-    #   end
-    # else
-    #   descuentos = [convenio_id,adicional_id,hermanos_id]
-    # end
+    descuentos = Array.new
+    if formulario_id != nil
+      formulario = Formulario.find(formulario_id) rescue nil
+      FormularioInscripcionOpcion.where("formulario_id=#{formulario_id} AND inscripcion_opcion_id IN (SELECT id FROM InscripcionOpcion WHERE nombre IN ('Convenio','Adicional','Hermanos'))").each do |formulario_inscripcion_opcion|
+        descuentos.push(formulario_inscripcion_opcion.inscripcion_opcion_id)
+      end
+    else
+      descuentos = [convenio_id,adicional_id,hermanos_id]
+    end
 
-    # descuentos.each do |inscripcion_opcion_id|
-    #   inscripcion_opcion = InscripcionOpcion.find(inscripcion_opcion_id) rescue nil
-    #   if inscripcion_opcion != nil 
-    #     importe_total = importe_total * ( 100.0 - inscripcion_opcion.valor ) / 100.0
-    #   end
-    # end
+    descuentos.each do |inscripcion_opcion_id|
+      inscripcion_opcion = InscripcionOpcion.find(inscripcion_opcion_id) rescue nil
+      if inscripcion_opcion != nil 
+        importe_total = importe_total * ( 100.0 - inscripcion_opcion.valor ) / 100.0
+      end
+    end
 
     # cuotas = Array.new
     # if formulario_id != nil
@@ -131,7 +131,7 @@ class Inscripcion < ApplicationRecord
     #   cuotas.push([ncuotas,importe_cuota])
     # end
     cuotas = Array.new
-    cuotas.push([12,10000,Date.new(2020,1,10)])
+    cuotas.push([12,importe_total/12,Date.new(2020,1,10)])
     return cuotas
   end
 
@@ -543,51 +543,55 @@ class Inscripcion < ApplicationRecord
 
     Prawn::Document.generate(text_file_path) do
 
-      font "Helvetica", :size => 12
+      #if reinscripcion
+        font "Helvetica", :size => 12
 
-      stroke_color "0000FF"
-      stroke_rectangle [0, 720], 540, 720   
-      stroke_color "FF0000"
-      stroke_rectangle [2, 718], 536, 716
+        stroke_color "0000FF"
+        stroke_rectangle [0, 720], 540, 720   
+        stroke_color "FF0000"
+        stroke_rectangle [2, 718], 536, 716
 
-      image Rails.root.join("data", "logo.png"), at: [203,555], scale: 0.5
+        image Rails.root.join("data", "logo.png"), at: [203,555], scale: 0.5
 
-      bounding_box([20, 355], :width => 500, :height => 60) do
-        text titulo, align: :center, inline_format: true
-      end
+        bounding_box([20, 355], :width => 500, :height => 60) do
+          text titulo, align: :center, inline_format: true
+        end
 
-      bounding_box([60, 325], :width => 420, :height => 60) do
-        text informacion, align: :center, inline_format: true
-      end
+        bounding_box([60, 325], :width => 420, :height => 60) do
+          text informacion, align: :center, inline_format: true
+        end
 
-      start_new_page
+        start_new_page
+      #end
 
-      font "Helvetica", :size => 10
-      
-      stroke_color "0000FF"
-      stroke_rectangle [0, 720], 540, 720   
-      stroke_color "FF0000"
-      stroke_rectangle [2, 718], 536, 716
+      #if !reinscripcion
+        font "Helvetica", :size => 10
+        
+        stroke_color "0000FF"
+        stroke_rectangle [0, 720], 540, 720   
+        stroke_color "FF0000"
+        stroke_rectangle [2, 718], 536, 716
 
-      image Rails.root.join("data", "logo.png"), at: [203,700], scale: 0.5
+        image Rails.root.join("data", "logo.png"), at: [203,700], scale: 0.5
 
-      bounding_box([20, 570], :width => 500, :height => 300) do
-        text texto_inscripcion, align: :left, inline_format: true
-      end
+        bounding_box([20, 570], :width => 500, :height => 300) do
+          text texto_inscripcion, align: :left, inline_format: true
+        end
 
-      bounding_box([20, 280], :width => 250, :height => 150) do
-        text texto_padre, align: :left, inline_format: true
-      end
+        bounding_box([20, 280], :width => 250, :height => 150) do
+          text texto_padre, align: :left, inline_format: true
+        end
 
-      bounding_box([270, 280], :width => 250, :height => 150) do
-        text texto_madre, align: :left, inline_format: true
-      end
+        bounding_box([270, 280], :width => 250, :height => 150) do
+          text texto_madre, align: :left, inline_format: true
+        end
 
-      bounding_box([20, 120], :width => 500, :height => 120) do
-        text texto_nota, align: :justify, inline_format: true
-      end
+        bounding_box([20, 120], :width => 500, :height => 120) do
+          text texto_nota, align: :justify, inline_format: true
+        end
 
-      start_new_page
+        start_new_page
+      #end
 
       font "Helvetica", :size => 10
 
