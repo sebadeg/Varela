@@ -416,8 +416,8 @@ class Inscripcion < ApplicationRecord
       idx = idx+1
     end
 
-    if (inscripcion.nombre1 != nil && inscripcion.nombre1 != "")
-      nombreT[idx] = inscripcion.nombre1 + " " + inscripcion.apellido1
+    if inscripcion.cedula1 != nil
+      nombreT[idx] = "#{inscripcion.nombre1} #{inscripcion.apellido1}"
       documentoT[idx] = inscripcion.documento1
       domicilioT[idx] = inscripcion.domicilio1
       emailT[idx] = inscripcion.email1
@@ -425,8 +425,8 @@ class Inscripcion < ApplicationRecord
       idx = idx+1
     end
 
-    if (inscripcion.nombre2 != nil && inscripcion.nombre2 != "")
-      nombreT[idx] = inscripcion.nombre2 + " " + inscripcion.apellido2
+    if inscripcion.cedula2 != nil
+      nombreT[idx] = "#{inscripcion.nombre2} #{inscripcion.apellido2}"
       documentoT[idx] = inscripcion.documento2
       domicilioT[idx] = inscripcion.domicilio2
       emailT[idx] = inscripcion.email2
