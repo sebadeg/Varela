@@ -525,7 +525,7 @@ class Inscripcion < ApplicationRecord
 
     Prawn::Document.generate(text_file_path) do
 
-      #if reinscripcion
+      if reinscripcion
         font "Helvetica", :size => 12
 
         stroke_color "0000FF"
@@ -544,9 +544,9 @@ class Inscripcion < ApplicationRecord
         end
 
         start_new_page
-      #end
+      end
 
-      #if !reinscripcion
+      if !reinscripcion
         font "Helvetica", :size => 10
         
         stroke_color "0000FF"
@@ -573,7 +573,7 @@ class Inscripcion < ApplicationRecord
         end
 
         start_new_page
-      #end
+      end
 
       font "Helvetica", :size => 10
 
