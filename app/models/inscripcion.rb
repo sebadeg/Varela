@@ -364,6 +364,8 @@ class Inscripcion < ApplicationRecord
 
   def vale(file_path)
 
+    cuotas = nil
+    total = nil
     CalcularPrecio(cuotas,total)
 
     total_letras = Inscripcion.numero_a_letras(total,true)
@@ -393,7 +395,7 @@ class Inscripcion < ApplicationRecord
     celularT = Array.new
 
     if (inscripcion.titular_padre)
-      nombreT[idx] = inscripcion.nombre_padre
+      nombreT[idx] = inscripcion.nombre_padre + " " + inscripcion.apellido_padre
       documentoT[idx] = inscripcion.cedula_padre
       domicilioT[idx] = inscripcion.domicilio_padre
       emailT[idx] = inscripcion.email_padre
@@ -402,7 +404,7 @@ class Inscripcion < ApplicationRecord
     end
 
     if (inscripcion.titular_madre)
-      nombreT[idx] = inscripcion.nombre_madre
+      nombreT[idx] = inscripcion.nombre_madre + " " + inscripcion.apellido_madre
       documentoT[idx] = inscripcion.cedula_madre
       domicilioT[idx] = inscripcion.domicilio_madre
       emailT[idx] = inscripcion.email_madre
@@ -411,7 +413,7 @@ class Inscripcion < ApplicationRecord
     end
 
     if (inscripcion.nombre1 != nil && inscripcion.nombre1 != "")
-      nombreT[idx] = inscripcion.nombre1
+      nombreT[idx] = inscripcion.nombre1 + " " + inscripcion.apellido1
       documentoT[idx] = inscripcion.documento1
       domicilioT[idx] = inscripcion.domicilio1
       emailT[idx] = inscripcion.email1
@@ -420,7 +422,7 @@ class Inscripcion < ApplicationRecord
     end
 
     if (inscripcion.nombre2 != nil && inscripcion.nombre2 != "")
-      nombreT[idx] = inscripcion.nombre2
+      nombreT[idx] = inscripcion.nombre2 + " " + inscripcion.apellido2
       documentoT[idx] = inscripcion.documento2
       domicilioT[idx] = inscripcion.domicilio2
       emailT[idx] = inscripcion.email2
@@ -459,7 +461,7 @@ class Inscripcion < ApplicationRecord
 
       texto_padre =
       "<b>PADRE</b><br>" +
-      "Nombre: #{inscripcion.nombre_padre}<br>" +
+      "Nombre: #{inscripcion.nombre_padre} #{inscripcion.apellido_padre}<br>" +
       "Documento de identidad: #{Inscripcion.cedula_tos(inscripcion.cedula_padre)}<br>" +
       "Lugar de nacimiento: #{inscripcion.lugar_nacimiento_padre}<br>" +
       "Fecha de nacimiento: #{fecha_tos(inscripcion.fecha_nacimiento_padre)}<br>" +
@@ -472,7 +474,7 @@ class Inscripcion < ApplicationRecord
 
       texto_madre =
       "<b>MADRE</b><br>" +
-      "Nombre: #{inscripcion.nombre_madre}<br>" +
+      "Nombre: #{inscripcion.nombre_madre} #{inscripcion.apellido_madre}<br>" +
       "Documento de identidad: #{Inscripcion.cedula_tos(inscripcion.cedula_madre)}<br>" +
       "Lugar de nacimiento: #{inscripcion.lugar_nacimiento_madre}<br>" +
       "Fecha de nacimiento: #{fecha_tos(inscripcion.fecha_nacimiento_madre)}<br>" +
