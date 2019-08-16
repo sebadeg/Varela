@@ -596,6 +596,7 @@ class PrincipalController < ApplicationController
       end
     else
       inscripcionAlumno.cedula_padre = nil
+      inscripcionAlumno.titular_padre = false
     end
     if calc_cedula_digit(inscripcionAlumno.cedula_madre)      
       if inscripcionAlumno.titular_madre
@@ -603,6 +604,7 @@ class PrincipalController < ApplicationController
       end
     else
       inscripcionAlumno.cedula_madre = nil
+      inscripcionAlumno.titular_madre = false
     end
     if calc_cedula_digit(inscripcionAlumno.documento1)
       inscripcionAlumno.documento1 = nil
