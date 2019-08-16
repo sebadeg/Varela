@@ -387,7 +387,7 @@ class Inscripcion < ApplicationRecord
     end
 
 
-    inscripcion = FindInscripcion(alumno_id)
+    inscripcion = Inscripcion.FindInscripcion(alumno_id)
 
     idx=0
     nombreT = Array.new
