@@ -586,7 +586,7 @@ class PrincipalController < ApplicationController
     end
 
     inscripcionAlumno.documento1 = params[:inscripcionAlumno][:cedula1]
-    if inscripcionAlumno.documento1 != nil && inscripcionAlumno.cedula1 != "" && calc_cedula_digit(inscripcionAlumno.documento1)
+    if inscripcionAlumno.documento1 != nil && inscripcionAlumno.documento1 != "" && calc_cedula_digit(inscripcionAlumno.documento1)
       titulares = titulares + 1
       inscripcionAlumno.nombre_titular1.nombre = params[:inscripcionAlumno][:nombre1]
       inscripcionAlumno.apellido_titular1 = params[:inscripcionAlumno][:apellido1]
@@ -596,7 +596,7 @@ class PrincipalController < ApplicationController
     end
 
     inscripcionAlumno.documento2 = params[:inscripcionAlumno][:cedula2]
-    if inscripcionAlumno.documento2 != nil && inscripcionAlumno.cedula2 != "" && calc_cedula_digit(inscripcionAlumno.documento2)
+    if inscripcionAlumno.documento2 != nil && inscripcionAlumno.documento2 != "" && calc_cedula_digit(inscripcionAlumno.documento2)
       titulares = titulares + 1
       inscripcionAlumno.nombre_titular2 = params[:inscripcionAlumno][:nombre2]
       inscripcionAlumno.apellido_titular2 = params[:inscripcionAlumno][:apellido2]
