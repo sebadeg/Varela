@@ -127,7 +127,7 @@ class Inscripcion < ApplicationRecord
           fecha_cuota = inscripcion_opcion_cuotas.fecha
         else            
           cuotas.push([inscripcion_opcion_cuotas.valor_ent,inscripcion_opcion_cuotas.valor,inscripcion_opcion_cuotas.fecha])
-        else
+        end
       end
     end    
 
