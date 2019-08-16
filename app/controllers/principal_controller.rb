@@ -551,7 +551,7 @@ class PrincipalController < ApplicationController
     titulares = 0
 
     inscripcionAlumno.cedula_padre = params[:inscripcionAlumno][:cedula_padre]
-    if inscripcionAlumno.cedula_padre != nil && inscripcionAlumno.cedula_padre != "" && calc_cedula_digit(inscripcionAlumno.cedula_padre)
+    if calc_cedula_digit(inscripcionAlumno.cedula_padre)
       
       inscripcionAlumno.nombre_padre = params[:inscripcionAlumno][:nombre_padre]
       inscripcionAlumno.apellido_padre = params[:inscripcionAlumno][:apellido_padre]
@@ -570,7 +570,7 @@ class PrincipalController < ApplicationController
 
     
     inscripcionAlumno.cedula_madre = params[:inscripcionAlumno][:cedula_madre]
-    if inscripcionAlumno.cedula_madre != nil && inscripcionAlumno.cedula_madre != "" && calc_cedula_digit(inscripcionAlumno.cedula_madre)
+    if calc_cedula_digit(inscripcionAlumno.cedula_madre)
       titulares = titulares + 1
       inscripcionAlumno.nombre_madre = params[:inscripcionAlumno][:nombre_madre]
       inscripcionAlumno.apellido_madre = params[:inscripcionAlumno][:apellido_madre]
@@ -588,7 +588,7 @@ class PrincipalController < ApplicationController
     end
 
     inscripcionAlumno.documento1 = params[:inscripcionAlumno][:cedula1]
-    if inscripcionAlumno.documento1 != nil && inscripcionAlumno.documento1 != "" && calc_cedula_digit(inscripcionAlumno.documento1)
+    if calc_cedula_digit(inscripcionAlumno.documento1)
       titulares = titulares + 1
       inscripcionAlumno.nombre_titular1.nombre = params[:inscripcionAlumno][:nombre1]
       inscripcionAlumno.apellido_titular1 = params[:inscripcionAlumno][:apellido1]
@@ -598,7 +598,7 @@ class PrincipalController < ApplicationController
     end
 
     inscripcionAlumno.documento2 = params[:inscripcionAlumno][:cedula2]
-    if inscripcionAlumno.documento2 != nil && inscripcionAlumno.documento2 != "" && calc_cedula_digit(inscripcionAlumno.documento2)
+    if calc_cedula_digit(inscripcionAlumno.documento2)
       titulares = titulares + 1
       inscripcionAlumno.nombre_titular2 = params[:inscripcionAlumno][:nombre2]
       inscripcionAlumno.apellido_titular2 = params[:inscripcionAlumno][:apellido2]
