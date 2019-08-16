@@ -563,6 +563,8 @@ class PrincipalController < ApplicationController
       padre.trabajo = params[:inscripcionAlumno][:trabajo_padre]
       padre.telefono_trabajo = params[:inscripcionAlumno][:telefono_trabajo_padre]
       padre.save
+    else
+      inscripcionAlumno.cedula_padre = nil
     end
     inscripcionAlumno.titular_padre = params[:inscripcionAlumno][:titular_padre]
 
@@ -579,6 +581,8 @@ class PrincipalController < ApplicationController
       madre.trabajo = params[:inscripcionAlumno][:trabajo_madre]
       madre.telefono_trabajo = params[:inscripcionAlumno][:telefono_trabajo_madre]
       madre.save
+    else
+      inscripcionAlumno.cedula_madre = nil
     end
     inscripcionAlumno.titular_madre = params[:inscripcionAlumno][:titular_madre]
 
@@ -592,6 +596,8 @@ class PrincipalController < ApplicationController
       titular1.email = params[:inscripcionAlumno][:email1]
       titular1.celular = params[:inscripcionAlumno][:celular1]
       titular1.save
+    else
+      inscripcionAlumno.cedula1 = nil
     end
 
     inscripcionAlumno.cedula2 = params[:inscripcionAlumno][:cedula2]
@@ -604,6 +610,8 @@ class PrincipalController < ApplicationController
       titular2.email = params[:inscripcionAlumno][:email2]
       titular2.celular = params[:inscripcionAlumno][:celular2]
       titular2.save
+    else
+      inscripcionAlumno.cedula2 = nil
     end
 
     if titulares == 0
