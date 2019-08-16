@@ -146,6 +146,14 @@
                       <%= f.text_field :cedula_padre, autofocus: true, class: 'form-control' %>
                     </div>
                     <div class="form-group">
+                      <%= f.label "Lugar de nacimiento" %>
+                      <%= f.text_field :lugar_nacimiento_padre, autofocus: true, class: 'form-control' %>
+                    </div>  
+                    <div class="form-group">
+                      <%= f.label "Fecha de nacimiento" %>
+                      <%= f.date_field :fecha_nacimiento_padre, autofocus: true, class: 'form-control' %>
+                    </div>
+                    <div class="form-group">
                       <%= f.label "Domicilio" %>
                       <%= f.text_field :domicilio_padre, autofocus: true, class: 'form-control' %>
                     </div>
@@ -201,6 +209,14 @@
                     <div class="form-group">
                       <%= f.label "Cédula" %><%= p " - (la cédula 1.234.567-2 se ingresa 12345672)" %>
                       <%= f.text_field :cedula_madre, autofocus: true, class: 'form-control' %>
+                    </div>
+                    <div class="form-group">
+                      <%= f.label "Lugar de nacimiento" %>
+                      <%= f.text_field :lugar_nacimiento_madre, autofocus: true, class: 'form-control' %>
+                    </div>  
+                    <div class="form-group">
+                      <%= f.label "Fecha de nacimiento" %>
+                      <%= f.date_field :fecha_nacimiento_madre, autofocus: true, class: 'form-control' %>
                     </div>
                     <div class="form-group">
                       <%= f.label "Domicilio" %>

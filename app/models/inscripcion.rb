@@ -340,6 +340,34 @@ class Inscripcion < ApplicationRecord
       nombre_grado = proximo_grado.nombre
     end
 
+    convenio_nombre = ""
+    matricula_nombre = ""
+    hermanos_nombre = ""
+    if formulario_id != nil
+      formulario = Formulario.find(formulario_id) rescue nil
+      if formulario != nil 
+        convenio_nombre = formulario.nombre
+      end
+    else
+      inscripcion_opcion = InscripcionOpcion.find(convenio_id) rescue nil
+      if inscripcion_opcion != nil 
+        convenio_nombre = inscripcion_opcion.nombre
+      end
+      inscripcion_opcion = InscripcionOpcion.find(adicional_id) rescue nil
+      if inscripcion_opcion != nil 
+        convenio_nombre = convenio_nombre + " + " + inscripcion_opcion.nombre
+      end
+
+      inscripcion_opcion = InscripcionOpcion.find(matricula_id) rescue nil
+      if inscripcion_opcion != nil 
+        matricula_nombre = inscripcion_opcion.nombre
+      end
+
+      inscripcion_opcion = InscripcionOpcion.find(hermanos_id) rescue nil
+      if inscripcion_opcion != nil 
+        hermanos_nombre = inscripcion_opcion.nombre
+      end
+    end
 
     inscripcion = Inscripcion.FindInscripcion(alumno_id)
 
@@ -399,10 +427,9 @@ class Inscripcion < ApplicationRecord
       "<br>" +
       "<b>NIVEL</b><br>" +
       "Grado: #{nombre_grado}<br>" +
-      #"Descuento: #{convenio_nombre}<br>" +
-      #"Matrícula: #{matriculaS}<br>" +
-      #"Hermanos: #{hermanosS}<br>" +
-      #"Cuotas: #{inscripcion.cuotas}<br>" + 
+      "Descuento: #{convenio_nombre}<br>" +
+      "Matrícula: #{matricula_nombre}<br>" +
+      "Hermanos: #{hermanos_nombre}<br>" +
       "<br>"+
       "<b>ALUMNO</b><br>" +
       "Nombre: #{inscripcion.nombre} #{inscripcion.apellido}<br>" +
