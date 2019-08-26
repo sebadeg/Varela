@@ -62,7 +62,7 @@ Rails.application.configure do
    :port                 => 587,
    :domain               => "varela.edu.uy", 
    :user_name            => "soporte@varela.edu.uy",
-   :password             => "v@r18827664",
+   :password             => "v18827664@r",
    :authentication       => "plain",
    :enable_starttls_auto => true,
    :openssl_verify_mode  => 'none'
