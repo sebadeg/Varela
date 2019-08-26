@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_15_230829) do
+ActiveRecord::Schema.define(version: 2019_08_26_133600) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -168,6 +168,13 @@ ActiveRecord::Schema.define(version: 2019_08_15_230829) do
     t.integer "anio_pases"
     t.integer "anio_inscripciones"
     t.date "fecha_facturacion"
+  end
+
+  create_table "contrasenas", force: :cascade do |t|
+    t.string "mail"
+    t.string "password"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "contrato_cuotas", id: :serial, force: :cascade do |t|
@@ -506,6 +513,16 @@ ActiveRecord::Schema.define(version: 2019_08_15_230829) do
     t.index ["inscripcion_opcion_id"], name: "index_inscripcion_opcion_alumnos_on_inscripcion_opcion_id"
   end
 
+  create_table "inscripcion_opcion_cuotas", force: :cascade do |t|
+    t.bigint "inscripcion_opcion_id"
+    t.date "fecha"
+    t.integer "cantidad"
+    t.decimal "importe"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["inscripcion_opcion_id"], name: "index_inscripcion_opcion_cuotas_on_inscripcion_opcion_id"
+  end
+
   create_table "inscripcion_opcion_tipos", force: :cascade do |t|
     t.string "nombre"
     t.datetime "created_at", null: false
@@ -601,6 +618,8 @@ ActiveRecord::Schema.define(version: 2019_08_15_230829) do
     t.integer "hermanos_id"
     t.integer "cuotas_id"
     t.integer "matricula_id"
+    t.string "apellido1"
+    t.string "apellido2"
     t.index ["convenio_id"], name: "index_inscripciones_on_convenio_id"
     t.index ["grado_id"], name: "index_inscripciones_on_grado_id"
     t.index ["proximo_grado_id"], name: "index_inscripciones_on_proximo_grado_id"
@@ -696,8 +715,8 @@ ActiveRecord::Schema.define(version: 2019_08_15_230829) do
     t.integer "actividad_alumno_opcion"
     t.bigint "especial_id"
     t.bigint "tipo_movimiento_id"
-    t.integer "rubro_debe"
-    t.integer "rubro_haber"
+    t.bigint "rubro_id"
+    t.datetime "fecha_exportado"
     t.index ["actividad_alumno_id"], name: "index_movimientos_on_actividad_alumno_id"
     t.index ["concepto_id"], name: "index_movimientos_on_concepto_id"
     t.index ["contrato_id"], name: "index_movimientos_on_contrato_id"
@@ -707,6 +726,7 @@ ActiveRecord::Schema.define(version: 2019_08_15_230829) do
     t.index ["pago_cuenta_id"], name: "index_movimientos_on_pago_cuenta_id"
     t.index ["pendiente"], name: "index_movimientos_on_pendiente"
     t.index ["recibo_id"], name: "index_movimientos_on_recibo_id"
+    t.index ["rubro_id"], name: "index_movimientos_on_rubro_id"
     t.index ["tipo_movimiento_id"], name: "index_movimientos_on_tipo_movimiento_id"
   end
 
@@ -866,6 +886,32 @@ ActiveRecord::Schema.define(version: 2019_08_15_230829) do
     t.index ["lote_recibo_id"], name: "index_recibos_on_lote_recibo_id"
   end
 
+  create_table "refinanciacion_cuotas", force: :cascade do |t|
+    t.bigint "refinanciacion_id"
+    t.date "fecha"
+    t.integer "cantidad"
+    t.decimal "importe"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["refinanciacion_id"], name: "index_refinanciacion_cuotas_on_refinanciacion_id"
+  end
+
+  create_table "refinanciaciones", force: :cascade do |t|
+    t.bigint "cuenta_id"
+    t.date "fecha"
+    t.decimal "importe"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cuenta_id"], name: "index_refinanciaciones_on_cuenta_id"
+  end
+
+  create_table "rubros", force: :cascade do |t|
+    t.string "nombre"
+    t.string "descripcion"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "sector_alumnos", force: :cascade do |t|
     t.bigint "alumno_id"
     t.bigint "sector_id"
@@ -992,6 +1038,7 @@ ActiveRecord::Schema.define(version: 2019_08_15_230829) do
     t.integer "cuenta_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "anio"
     t.index ["cuenta_id"], name: "index_titular_cuentas_on_cuenta_id"
     t.index ["usuario_id"], name: "index_titular_cuentas_on_usuario_id"
   end
@@ -1033,6 +1080,12 @@ ActiveRecord::Schema.define(version: 2019_08_15_230829) do
     t.boolean "mail"
     t.boolean "titular"
     t.boolean "factura"
+    t.boolean "habilitado"
+    t.string "lugar_nacimiento"
+    t.date "fecha_nacimiento"
+    t.string "profesion"
+    t.string "trabajo"
+    t.string "telefono_trabajo"
     t.index ["cedula"], name: "index_usuarios_on_cedula", unique: true
     t.index ["email"], name: "index_usuarios_on_email", unique: true
     t.index ["reset_password_token"], name: "index_usuarios_on_reset_password_token", unique: true
@@ -1078,6 +1131,7 @@ ActiveRecord::Schema.define(version: 2019_08_15_230829) do
   add_foreign_key "inscripcion_alumnos", "convenios"
   add_foreign_key "inscripcion_alumnos", "grados"
   add_foreign_key "inscripcion_opcion_alumnos", "inscripcion_opciones"
+  add_foreign_key "inscripcion_opcion_cuotas", "inscripcion_opciones"
   add_foreign_key "inscripcion_opciones", "inscripcion_opcion_tipos"
   add_foreign_key "inscripciones", "convenios"
   add_foreign_key "inscripciones", "grados"
@@ -1096,6 +1150,7 @@ ActiveRecord::Schema.define(version: 2019_08_15_230829) do
   add_foreign_key "movimientos", "especiales"
   add_foreign_key "movimientos", "pago_cuentas"
   add_foreign_key "movimientos", "recibos"
+  add_foreign_key "movimientos", "rubros"
   add_foreign_key "movimientos", "tipo_movimientos"
   add_foreign_key "movs", "plactas"
   add_foreign_key "padre_alumnos", "alumnos"
@@ -1108,6 +1163,8 @@ ActiveRecord::Schema.define(version: 2019_08_15_230829) do
   add_foreign_key "proximo_grados", "sectores"
   add_foreign_key "recargos", "cuentas"
   add_foreign_key "recibos", "lote_recibos"
+  add_foreign_key "refinanciacion_cuotas", "refinanciaciones"
+  add_foreign_key "refinanciaciones", "cuentas"
   add_foreign_key "sector_alumnos", "alumnos"
   add_foreign_key "sector_alumnos", "sectores"
   add_foreign_key "seguimientos", "alumnos"

@@ -631,6 +631,7 @@ class PrincipalController < ApplicationController
       return
     end
 
+    UserMailer.nueva_reinscripcion(inscripcionAlumno).deliver_now
 
     redirect_to principal_index_path
 

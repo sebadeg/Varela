@@ -16,12 +16,19 @@ class UserMailer < ApplicationMailer
 		mail(to: 'eventos@varela.edu.uy', bcc:'soporte@varela.edu.uy', subject: 'Registro de nuevo usuario de eventos')
 	end
 
-	def reinscripcion(inscripcionAlumno,file_name,file)
-
-		@inscripcionAlumno = inscripcionAlumno
-
-		attachments[file_name] = {mime_type: "application/pdf" , content: File.read(file.path) }
-
-		mail(to: inscripcionAlumno.email1, bcc:'soporte@varela.edu.uy', subject: 'Comprobante de reinscripción')
+	def nueva_reinscripcion(inscripcionAlumno)
+	  @inscripcionAlumno = inscripcionAlumno
+	  #'inscripciones@varela.edu.uy'
+      mail(to: 'soporte@varela.edu.uy', cc: 'soporte@varela.edu.uy', subject: 'Nueva reinscripción')
 	end
+
+
+	# def reinscripcion(inscripcionAlumno,file_name,file)
+
+	# 	@inscripcionAlumno = inscripcionAlumno
+
+	# 	attachments[file_name] = {mime_type: "application/pdf" , content: File.read(file.path) }
+
+	# 	mail(to: inscripcionAlumno.email1, bcc:'soporte@varela.edu.uy', subject: 'Comprobante de reinscripción')
+	# end
 end
