@@ -28,6 +28,13 @@
       </table>
     </div>
     <div class="clearfix"></div>
+  <% elsif inscripcionAlumno.HayVale() %>
+    <%= form_for(inscripcionAlumno, as: :inscripcionAlumno, url: principal_download_inscripcion_path(:inscripcionAlumno), :html => {:id=>'form_download_inscripcion_' + inscripcionAlumno.alumno_id.to_s}) do |f| %>
+      <%= f.hidden_field :alumno_id, value: inscripcionAlumno.alumno_id %>
+      <div id="textoRegistrarse">
+        <b><%= link_to "Descargar reinscripción", "", :onclick => "$('#form_download_inscripcion_" + inscripcionAlumno.alumno_id.to_s + "').submit()" %></b>
+      </div>
+    <% end %>    
   <% elsif inscripcionAlumno.EstaRegistrado() %>
       <table>
         <tr height='30px'></tr>
