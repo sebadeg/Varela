@@ -1,0 +1,2 @@
+class Contrasena < ApplicationRecord
+end

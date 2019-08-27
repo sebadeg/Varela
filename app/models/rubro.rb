@@ -1,0 +1,2 @@
+class Rubro < ApplicationRecord
+end

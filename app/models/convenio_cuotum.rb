@@ -1,0 +1,2 @@
+class ConvenioCuotum < ApplicationRecord
+end

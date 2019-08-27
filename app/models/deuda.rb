@@ -1,0 +1,2 @@
+class Deuda < ApplicationRecord
+end

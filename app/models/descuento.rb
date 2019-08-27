@@ -1,0 +1,2 @@
+class Descuento < ApplicationRecord
+end

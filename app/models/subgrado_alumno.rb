@@ -1,0 +1,2 @@
+class SubgradoAlumno < ApplicationRecord
+end

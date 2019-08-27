@@ -1,0 +1,2 @@
+class Concepto < ApplicationRecord
+end
