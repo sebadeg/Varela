@@ -17,9 +17,27 @@ class UserMailer < ApplicationMailer
 	end
 
 	def nueva_reinscripcion(inscripcionAlumno)
+
+      mail = "soporte@varela.edu.uy"
+      contrasena = Contrasena.find_by(mail: mail) rescue nil
+      passwd = contrasena != nil ? contrasena.password : ""
+
+	  delivery_options = {
+        address: "smtp.varela.edu.uy",
+	    port: 587,
+	    domain: "varela.edu.uy", 
+	    user_name: mail,
+	    password: passwd,
+	    authentication: "plain",
+	    enable_starttls_auto: true,
+	    openssl_verify_mode: 'none'
+	  }
+
 	  @inscripcionAlumno = inscripcionAlumno
-	  #'inscripciones@varela.edu.uy'
-      mail(to: 'soporte@varela.edu.uy', cc: 'soporte@varela.edu.uy', subject: 'Nueva reinscripción')
+
+      mail_to = Config.find(1).mail_inscripcion
+
+      mail(from: mail, to: mail_to, subject: 'Nueva reinscripción', delivery_method_options: delivery_options)
 	end
 
 
