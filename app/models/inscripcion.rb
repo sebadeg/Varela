@@ -28,6 +28,10 @@ class Inscripcion < ApplicationRecord
     return inscripto
   end
 
+  def HayVale()
+    return vale
+  end
+
   def EstaRegistrado()
     return registrado
   end
