@@ -21,19 +21,19 @@ class Inscripcion < ApplicationRecord
   end
 
   def PuedeInscribir()
-    return !inhabilitado && (fecha_pase == nil)
+    return (inhabilitado != nil) && !inhabilitado && (fecha_pase == nil)
   end
 
   def EstaInscripto()
-    return inscripto
+    return (inscripto != nil) && inscripto
   end
 
   def HayVale()
-    return vale
+    return (vale != nil) && vale
   end
 
   def EstaRegistrado()
-    return registrado
+    return (registrado != nil) && registrado
   end
 
   def CalcularPrecio()
