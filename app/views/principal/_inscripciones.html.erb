@@ -28,7 +28,7 @@
       </table>
     </div>
     <div class="clearfix"></div>
-  <% elsif inscripcionAlumno.HayVale() %>
+  <% elsif inscripcionAlumno.EstaRegistrado() %>
     <%= form_for(inscripcionAlumno, as: :inscripcionAlumno, url: principal_download_inscripcion_path(:inscripcionAlumno), :html => {:id=>'form_download_inscripcion_' + inscripcionAlumno.alumno_id.to_s}) do |f| %>
       <%= f.hidden_field :alumno_id, value: inscripcionAlumno.alumno_id %>
       <div id="textoRegistrarse">
