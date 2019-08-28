@@ -5,7 +5,7 @@ git_source(:github) do |repo_name|
   "http://github.com/#{repo_name}.git"
 end
 
-ruby '2.5.1' 
+ruby '2.4.1' 
 
 gem 'pg'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
