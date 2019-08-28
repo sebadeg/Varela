@@ -36,6 +36,7 @@
       </div>
     <% end %>    
   <% elsif inscripcionAlumno.EstaRegistrado() %>
+    <div class="col-md-12 col-sm-12 col-xs-12 content-table">
       <table>
         <tr height='30px'></tr>
         <tr height='30px'><td width='30px'></td><td width='15px'><%= image_tag("wait.png") %></td>
@@ -43,6 +44,8 @@
         <td><%= p "Se está procesando la información" %></td></tr>
         <tr height='30px'></tr>
       </table>
+    </div>
+    <div class="clearfix"></div>
   <% else %>
     <%= form_for(inscripcionAlumno, as: :inscripcionAlumno, url: principal_download_ayuda_path(:inscripcionAlumno), :html => {:id=>'form_download_ayuda_' + inscripcionAlumno.alumno_id.to_s}) do |f| %>
       <%= f.hidden_field :alumno_id, value: inscripcionAlumno.alumno_id %>
