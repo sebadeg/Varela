@@ -28,7 +28,7 @@ class Inscripcion < ApplicationRecord
     return (inscripto != nil) && inscripto
   end
 
-  def HayVale()
+  def BajarVale()
     return (vale != nil) && vale
   end
 
