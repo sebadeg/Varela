@@ -117,7 +117,7 @@ class Factura < ApplicationRecord
 
         text_box codigo_barras, :at => [170, 8], size:8
 
-        text_box (factura.fecha - 1.days).strftime('%d/%m/%Y'), :at => [325, 106], size:8
+        text_box factura.fecha_pagos.strftime('%d/%m/%Y'), :at => [325, 106], size:8
 
         delta=73
 

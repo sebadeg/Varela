@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_28_000000) do
+ActiveRecord::Schema.define(version: 2019_08_30_200513) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -419,6 +419,7 @@ ActiveRecord::Schema.define(version: 2019_08_28_000000) do
     t.boolean "mail", default: false
     t.decimal "dolar"
     t.datetime "bajado"
+    t.date "fecha_pagos"
     t.index ["cuenta_id"], name: "index_facturas_on_cuenta_id"
     t.index ["mail"], name: "index_facturas_on_mail"
   end
