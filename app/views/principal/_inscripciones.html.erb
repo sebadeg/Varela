@@ -138,75 +138,10 @@
             <div class="panel panel-default">
               <div class="panel-heading">
                 <h4 class="panel-title">
-                  <%= link_to "Padre", "#collapse_" + locals[:form] + "_padre", "data-toggle" => "collapse" %>
-                </h4>
-              </div>  
-              <%= content_tag :div, id: "collapse_" + locals[:form] + "_padre", class: ["panel-collapse", "collapse", "collapse", "in" ] do %>
-                <div class="col-md-12 col-sm-12 col-xs-12 content-table">
-                  <div class="panel-body">
-                    <div class="form-group">
-                      <%= f.label "Nombre" %>
-                      <%= f.text_field :nombre_padre, autofocus: true, class: 'form-control' %>
-                    </div>
-                    <div class="form-group">
-                      <%= f.label "Apellido" %>
-                      <%= f.text_field :apellido_padre, autofocus: true, class: 'form-control' %>
-                    </div>                    
-                    <div class="form-group">
-                      <%= f.label "Cédula" %><%= p " - (la cédula 1.234.567-2 se ingresa 12345672)" %>
-                      <%= f.text_field :cedula_padre, autofocus: true, class: 'form-control' %>
-                    </div>
-                    <div class="form-group">
-                      <%= f.label "Lugar de nacimiento" %>
-                      <%= f.text_field :lugar_nacimiento_padre, autofocus: true, class: 'form-control' %>
-                    </div>  
-                    <div class="form-group">
-                      <%= f.label "Fecha de nacimiento" %>
-                      <%= f.date_field :fecha_nacimiento_padre, autofocus: true, class: 'form-control' %>
-                    </div>
-                    <div class="form-group">
-                      <%= f.label "Domicilio" %>
-                      <%= f.text_field :domicilio_padre, autofocus: true, class: 'form-control' %>
-                    </div>
-                    <div class="form-group">
-                      <%= f.label "Mail" %>
-                      <%= f.text_field :email_padre, autofocus: true, class: 'form-control' %>
-                    </div>
-                    <div class="form-group">
-                      <%= f.label "Teléfono/Celular" %>
-                      <%= f.text_field :celular_padre, autofocus: true, class: 'form-control' %>
-                    </div>
-                    <div class="form-group">
-                      <%= f.label "Profesión" %>
-                      <%= f.text_field :profesion_padre, autofocus: true, class: 'form-control' %>
-                    </div>
-                    <div class="form-group">
-                      <%= f.label "Trabajo" %>
-                      <%= f.text_field :trabajo_padre, autofocus: true, class: 'form-control' %>
-                    </div>
-                    <div class="form-group">
-                      <%= f.label "Teléfono trabajo" %>
-                      <%= f.text_field :telefono_trabajo_padre, autofocus: true, class: 'form-control' %>
-                    </div>
-                    <div class="form-group">
-                      <%= f.check_box :titular_padre %>
-                      <%= f.label "Titular" %>
-                    </div>
-                  </div>
-                </div>
-              <% end %>
-              <div class="clearfix"></div>
-            </div>
-          </div>
-
-          <div class="panel-group sub-grupo">
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h4 class="panel-title">
                   <%= link_to "Madre", "#collapse_" + locals[:form] + "_madre", "data-toggle" => "collapse" %>
                 </h4>
               </div>  
-              <%= content_tag :div, id: "collapse_" + locals[:form] + "_madre", class: ["panel-collapse", "collapse", "collapse", "in" ] do %>
+              <%= content_tag :div, id: "collapse_" + locals[:form] + "_madre", class: ["panel-collapse", "collapse", "collapse" ] do %>
                 <div class="col-md-12 col-sm-12 col-xs-12 content-table">
                   <div class="panel-body">
                     <div class="form-group">
@@ -269,9 +204,81 @@
             <div class="panel panel-default">
               <div class="panel-heading">
                 <h4 class="panel-title">
-                  <%= link_to "Titular 1", "#collapse_" + locals[:form] + "_titular_1", "data-toggle" => "collapse" %>
+                  <%= link_to "Padre", "#collapse_" + locals[:form] + "_padre", "data-toggle" => "collapse" %>
                 </h4>
               </div>  
+              <%= content_tag :div, id: "collapse_" + locals[:form] + "_padre", class: ["panel-collapse", "collapse", "collapse" ] do %>
+                <div class="col-md-12 col-sm-12 col-xs-12 content-table">
+                  <div class="panel-body">
+                    <div class="form-group">
+                      <%= f.label "Nombre" %>
+                      <%= f.text_field :nombre_padre, autofocus: true, class: 'form-control' %>
+                    </div>
+                    <div class="form-group">
+                      <%= f.label "Apellido" %>
+                      <%= f.text_field :apellido_padre, autofocus: true, class: 'form-control' %>
+                    </div>                    
+                    <div class="form-group">
+                      <%= f.label "Cédula" %><%= p " - (la cédula 1.234.567-2 se ingresa 12345672)" %>
+                      <%= f.text_field :cedula_padre, autofocus: true, class: 'form-control' %>
+                    </div>
+                    <div class="form-group">
+                      <%= f.label "Lugar de nacimiento" %>
+                      <%= f.text_field :lugar_nacimiento_padre, autofocus: true, class: 'form-control' %>
+                    </div>  
+                    <div class="form-group">
+                      <%= f.label "Fecha de nacimiento" %>
+                      <%= f.date_field :fecha_nacimiento_padre, autofocus: true, class: 'form-control' %>
+                    </div>
+                    <div class="form-group">
+                      <%= f.label "Domicilio" %>
+                      <%= f.text_field :domicilio_padre, autofocus: true, class: 'form-control' %>
+                    </div>
+                    <div class="form-group">
+                      <%= f.label "Mail" %>
+                      <%= f.text_field :email_padre, autofocus: true, class: 'form-control' %>
+                    </div>
+                    <div class="form-group">
+                      <%= f.label "Teléfono/Celular" %>
+                      <%= f.text_field :celular_padre, autofocus: true, class: 'form-control' %>
+                    </div>
+                    <div class="form-group">
+                      <%= f.label "Profesión" %>
+                      <%= f.text_field :profesion_padre, autofocus: true, class: 'form-control' %>
+                    </div>
+                    <div class="form-group">
+                      <%= f.label "Trabajo" %>
+                      <%= f.text_field :trabajo_padre, autofocus: true, class: 'form-control' %>
+                    </div>
+                    <div class="form-group">
+                      <%= f.label "Teléfono trabajo" %>
+                      <%= f.text_field :telefono_trabajo_padre, autofocus: true, class: 'form-control' %>
+                    </div>
+                    <div class="form-group">
+                      <%= f.check_box :titular_padre %>
+                      <%= f.label "Titular" %>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+              <div class="clearfix"></div>
+            </div>
+          </div>
+
+          <div class="panel-group sub-grupo">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <%= link_to "Titular 1", "#collapse_" + locals[:form] + "_titular_1", "data-toggle" => "collapse" %>
+                </h4>
+              </div>
+              <table>
+                <tr height='30px'></tr>
+                <tr height='30px'><td width='30px'></td><td width='15px'><%= image_tag("warning.png") %></td>
+                <td width='30px'></td>
+                <td><%= p "No debe completar si el titular es madre o padre" %></td></tr>
+                <tr height='30px'></tr>
+              </table>  
               <%= content_tag :div, id: "collapse_" + locals[:form] + "_titular_1", class: ["panel-collapse", "collapse", "collapse" ] do %>
                 <div class="col-md-12 col-sm-12 col-xs-12 content-table">
                   <div class="panel-body">
@@ -313,6 +320,13 @@
                   <%= link_to "Titular 2", "#collapse_" + locals[:form] + "_titular_2", "data-toggle" => "collapse" %>
                 </h4>
               </div>                    
+              <table>
+                <tr height='30px'></tr>
+                <tr height='30px'><td width='30px'></td><td width='15px'><%= image_tag("warning.png") %></td>
+                <td width='30px'></td>
+                <td><%= p "No debe completar si el titular es madre o padre" %></td></tr>
+                <tr height='30px'></tr>
+              </table>  
               <%= content_tag :div, id: "collapse_" + locals[:form] + "_titular_2", class: ["panel-collapse", "collapse", "collapse" ] do %>
                 <div class="col-md-12 col-sm-12 col-xs-12 content-table">
                   <div class="panel-body">
