@@ -2,9 +2,8 @@ Estimados,<br>
 <br>
 Aviso de nueva reinscripcion,<br>
 <br>
-Cédula: <%= p "#{@inscripcionAlumno.cedula}" %><br>
-Nombre: <%= p "#{@inscripcionAlumno.nombre} #{@inscripcionAlumno.apellido}" %><br><br>
-Link: <%= p "<a href=#{'"'}http://varela-adm.herokuapp.com/admin/inscripciones/#{@inscripcionAlumno.id}/edit?locale=es#{'"'}>http://varela-adm.herokuapp.com/admin/inscripciones/#{@inscripcionAlumno.id}/edit?locale=es</a>" %><br>
+Cédula: <%= link_to "#{@inscripcionAlumno.cedula}" "http://varela-adm.herokuapp.com/admin/inscripciones/#{@inscripcionAlumno.id}/edit?locale=es" %><br>
+Nombre: <%= p "#{@inscripcionAlumno.nombre} #{@inscripcionAlumno.apellido}" %><br>
 <br>
 Saludos cordiales,<br>
 <br>
