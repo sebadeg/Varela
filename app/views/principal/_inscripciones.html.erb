@@ -274,16 +274,16 @@
                   <%= link_to "Titular 1", "#collapse_" + locals[:form] + "_titular_1", "data-toggle" => "collapse" %>
                 </h4>
               </div>
-              <table>
-                <tr height='30px'></tr>
-                <tr height='30px'><td width='30px'></td><td width='15px'><%= image_tag("warning.png") %></td>
-                <td width='30px'></td>
-                <td><%= p "No debe completar si el titular es madre o padre" %></td></tr>
-                <tr height='30px'></tr>
-              </table>  
               <%= content_tag :div, id: "collapse_" + locals[:form] + "_titular_1", class: ["panel-collapse", "collapse", "collapse" ] do %>
                 <div class="col-md-12 col-sm-12 col-xs-12 content-table">
                   <div class="panel-body">
+                    <table>
+                      <tr height='30px'></tr>
+                      <tr height='30px'><td width='30px'></td><td width='15px'><%= image_tag("warning.png") %></td>
+                      <td width='30px'></td>
+                      <td><%= p "No debe completar si el titular es madre o padre" %></td></tr>
+                      <tr height='30px'></tr>
+                    </table>
                     <div class="form-group">
                       <%= f.label "Nombre" %>
                       <%= f.text_field :nombre1, autofocus: true, class: 'form-control' %>
@@ -322,16 +322,16 @@
                   <%= link_to "Titular 2", "#collapse_" + locals[:form] + "_titular_2", "data-toggle" => "collapse" %>
                 </h4>
               </div>                    
-              <table>
-                <tr height='30px'></tr>
-                <tr height='30px'><td width='30px'></td><td width='15px'><%= image_tag("warning.png") %></td>
-                <td width='30px'></td>
-                <td><%= p "No debe completar si el titular es madre o padre" %></td></tr>
-                <tr height='30px'></tr>
-              </table>  
               <%= content_tag :div, id: "collapse_" + locals[:form] + "_titular_2", class: ["panel-collapse", "collapse", "collapse" ] do %>
                 <div class="col-md-12 col-sm-12 col-xs-12 content-table">
                   <div class="panel-body">
+                    <table>
+                      <tr height='30px'></tr>
+                      <tr height='30px'><td width='30px'></td><td width='15px'><%= image_tag("warning.png") %></td>
+                      <td width='30px'></td>
+                      <td><%= p "No debe completar si el titular es madre o padre" %></td></tr>
+                      <tr height='30px'></tr>
+                    </table>
                     <div class="form-group">
                       <%= f.label "Nombre" %>
                       <%= f.text_field :nombre2, autofocus: true, class: 'form-control' %>
