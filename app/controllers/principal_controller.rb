@@ -671,11 +671,22 @@ class PrincipalController < ApplicationController
   end
 
   def download_ayuda
-    send_file(
-        Rails.root.join("data", "Instructivo reinscripción.pdf"),  
+    alumno_id = params[:inscripcionAlumno][:alumno_id]
+    inscripcionAlumno = Inscripcion.FindInscripcion(alumno_id)
+
+    if inscripcionAlumno.grado_id>=18
+      send_file(
+        Rails.root.join("data", "Instructivo Reinscripción 2020_CC.pdf"),  
         filename: "Instructivo reinscripción.pdf",
         type: "application/pdf"
       )
+    else
+      send_file(
+        Rails.root.join("data", "Instructivo Reinscripción 2020_MDEO.pdf"),  
+        filename: "Instructivo reinscripción.pdf",
+        type: "application/pdf"
+      )
+    end
   end
 
 end
