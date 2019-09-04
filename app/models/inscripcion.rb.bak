@@ -238,65 +238,65 @@ class Inscripcion < ApplicationRecord
 
   def self.numero_cuota_letras(cuota)
     s = ""
-    case cuota
-    when 1
-      s = "primera"
-    when 2
-      s = "segunda"
-    when 3
-      s = "tercera"
-    when 4
-      s = "cuarta"
-    when 5
-      s = "quinta"
-    when 6
-      s = "sexta"
-    when 7
-      s = "septima"
-    when 8
-      s = "octava"
-    when 9
-      s = "novena"
-    when 10
-      s = "d√©cima"
-    when 11
-      s = "und√©cima"
-    when 12
-      s = "duod√©cima"
-    when 13
-      s = "decimotercera"
-    when 14
-      s = "decimocuarta"
-    when 15
-      s = "decimoquinta"
-    when 16
-      s = "decimosexta"
-    when 17
-      s = "decimoseptima"
-    when 18
-      s = "decimoctava"
-    when 19
-      s = "decimonovena"
-    when 20
-      s = "vig√©sima"
-    when 21
-      s = "vigesimoprimera"
-    when 22
-      s = "vigesimosegunda"
-    when 23
-      s = "vigesimotercera"
-    when 24
-      s = "vigesimocuarta"
-    end
+    # case cuota
+    # when 1
+    #   s = "primera"
+    # when 2
+    #   s = "segunda"
+    # when 3
+    #   s = "tercera"
+    # when 4
+    #   s = "cuarta"
+    # when 5
+    #   s = "quinta"
+    # when 6
+    #   s = "sexta"
+    # when 7
+    #   s = "septima"
+    # when 8
+    #   s = "octava"
+    # when 9
+    #   s = "novena"
+    # when 10
+    #   s = "dÈcima"
+    # when 11
+    #   s = "undÈcima"
+    # when 12
+    #   s = "duodÈcima"
+    # when 13
+    #   s = "decimotercera"
+    # when 14
+    #   s = "decimocuarta"
+    # when 15
+    #   s = "decimoquinta"
+    # when 16
+    #   s = "decimosexta"
+    # when 17
+    #   s = "decimoseptima"
+    # when 18
+    #   s = "decimoctava"
+    # when 19
+    #   s = "decimonovena"
+    # when 20
+    #   s = "vigÈsima"
+    # when 21
+    #   s = "vigesimoprimera"
+    # when 22
+    #   s = "vigesimosegunda"
+    # when 23
+    #   s = "vigesimotercera"
+    # when 24
+    #   s = "vigesimocuarta"
+    # end
     return s
   end
 
   def cuotas_a_letras(cuotas)
     if cuotas.count == 1
       if cuotas[0][0] == 1        
-        return "<b>1</b> cuota de $U <b>#{cuotas[0][1]}</b>, venciendo el d√≠a #{I18n.l(cuotas[0][2], format: '<b>%-d</b> de <b>%B</b> de <b>%Y</b>')}"
+        return "<b>1</b> cuota de $U <b>#{cuotas[0][1]}</b>, venciendo el dÌa #{I18n.l(cuotas[0][2], format: '<b>%-d</b> de <b>%B</b> de <b>%Y</b>')}"
       else
-        return "<b>#{cuotas[0][0]}</b> cuotas mensuales, iguales y consecutivas de $U <b>#{cuotas[0][1]}</b> cada una, venciendo la primera el d√≠a #{I18n.l(cuotas[0][2], format: '<b>%-d</b> de <b>%B</b> de <b>%Y</b>')}"
+        return "<b>#{cuotas[0][0]}</b> cuotas mensuales, iguales y consecutivas de $U <b>#{cuotas[0][1]}</b> cada una, venciendo la primera el dÌa #{I18n.l(cuotas[0][2], format: '<b>%-d</b> de <b>%B</b> de <b>%Y</b>')}"
       end
     else
       mensaje = ""
@@ -306,9 +306,9 @@ class Inscripcion < ApplicationRecord
           mensaje = mensaje + ", "
         end
         if c[0] == 1
-          mensaje = mensaje + "la #{numero_cuota_letras(cuota+1)} de $U <b>#{c[1]}</b> venciendo el d√≠a #{I18n.l(c[2], format: '<b>%-d</b> de <b>%B</b> de <b>%Y</b>')}"
+          mensaje = mensaje + "la #{numero_cuota_letras(cuota+1)} de $U <b>#{c[1]}</b> venciendo el dÌa #{I18n.l(c[2], format: '<b>%-d</b> de <b>%B</b> de <b>%Y</b>')}"
         else
-          mensaje = mensaje + "de la #{numero_cuota_letras(cuota+1)} a la #{numero_cuota_letras(cuota+c[0])} de $U <b>#{c[1]}</b> venciendo el d√≠a #{I18n.l(c[2], format: '<b>%-d</b> de <b>%B</b> de <b>%Y</b>')} y cada mes subsiguiente"
+          mensaje = mensaje + "de la #{numero_cuota_letras(cuota+1)} a la #{numero_cuota_letras(cuota+c[0])} de $U <b>#{c[1]}</b> venciendo el dÌa #{I18n.l(c[2], format: '<b>%-d</b> de <b>%B</b> de <b>%Y</b>')} y cada mes subsiguiente"
         end
         cuota = cuota + c[0]
       end
@@ -433,7 +433,7 @@ class Inscripcion < ApplicationRecord
       "<b>NIVEL</b><br>" +
       "Grado: #{nombre_grado}<br>" +
       "Descuento: #{convenio_nombre}<br>" +
-      "Matr√≠cula: #{matricula_nombre}<br>" +
+      "MatrÌcula: #{matricula_nombre}<br>" +
       "Hermanos: #{hermanos_nombre}<br>" +
       "<br>"+
       "<b>ALUMNO</b><br>" +
@@ -442,7 +442,7 @@ class Inscripcion < ApplicationRecord
       "Lugar de nacimiento: #{inscripcion.lugar_nacimiento}<br>" +
       "Fecha de nacimiento: #{fecha_tos(inscripcion.fecha_nacimiento)}<br>" +
       "Domicilio: #{inscripcion.domicilio}<br>" + 
-      "Tel√©fono/Celular: #{inscripcion.celular}<br>" + 
+      "TelÈfono/Celular: #{inscripcion.celular}<br>" + 
       "Mutualista: #{inscripcion.mutualista}<br>" + 
       "Emergencia: #{inscripcion.emergencia}<br>" + 
       "Procede de: #{inscripcion.procede}<br>"
@@ -455,10 +455,10 @@ class Inscripcion < ApplicationRecord
       "Fecha de nacimiento: #{fecha_tos(inscripcion.fecha_nacimiento_padre)}<br>" +
       "Mail: #{inscripcion.email_padre}<br>" + 
       "Domicilio: #{inscripcion.domicilio_padre}<br>" + 
-      "Tel√©fono/Celular: #{inscripcion.celular_padre}<br>" + 
-      "Profesi√≥n: #{inscripcion.profesion_padre}<br>" + 
+      "TelÈfono/Celular: #{inscripcion.celular_padre}<br>" + 
+      "ProfesiÛn: #{inscripcion.profesion_padre}<br>" + 
       "Lugar de trabajo: #{inscripcion.trabajo_padre}<br>" + 
-      "Tel√©fono de trabajo: #{inscripcion.telefono_trabajo_padre}<br>" 
+      "TelÈfono de trabajo: #{inscripcion.telefono_trabajo_padre}<br>" 
 
       texto_madre =
       "<b>MADRE</b><br>" +
@@ -468,25 +468,25 @@ class Inscripcion < ApplicationRecord
       "Fecha de nacimiento: #{fecha_tos(inscripcion.fecha_nacimiento_madre)}<br>" +
       "Mail: #{inscripcion.email_madre}<br>" + 
       "Domicilio: #{inscripcion.domicilio_madre}<br>" + 
-      "Tel√©fono/Celular: #{inscripcion.celular_madre}<br>" + 
-      "Profesi√≥n: #{inscripcion.profesion_madre}<br>" + 
+      "TelÈfono/Celular: #{inscripcion.celular_madre}<br>" + 
+      "ProfesiÛn: #{inscripcion.profesion_madre}<br>" + 
       "Lugar de trabajo: #{inscripcion.trabajo_madre}<br>" + 
-      "Tel√©fono de trabajo: #{inscripcion.telefono_trabajo_madre}<br><br>"
+      "TelÈfono de trabajo: #{inscripcion.telefono_trabajo_madre}<br><br>"
 
-    texto_nota = "<b>NOTA: Para la inscripci√≥n deber√° presentar: fotocopia de la C.I. del/los Titular/es de la cuenta y si corresponde Libre de Deuda o recibo del √∫ltimo pago realizado en la Instituci√≥n de donde proviene.<br><br>" +
-           "LA AUTORIZACI√ìN DEFINITIVA SER√Å DADA UNA VEZ REALIZADO EL CLEARING DE INFORMES<br><br>" +
-           "El que suscribe ______________________________ declara que los datos aportados son ciertos y actuales y los informa a los efectos de la contrataci√≥n de los servicios educativos que el Colegio Nacional Jos√© Pedro Varela provee. La actualizaci√≥n de los datos prove√≠dos es responsabilidad de la parte.</b>"
+    texto_nota = "<b>NOTA: Para la inscripciÛn deber· presentar: fotocopia de la C.I. del/los Titular/es de la cuenta y si corresponde Libre de Deuda o recibo del ˙ltimo pago realizado en la InstituciÛn de donde proviene.<br><br>" +
+           "LA AUTORIZACI”N DEFINITIVA SER¡ DADA UNA VEZ REALIZADO EL CLEARING DE INFORMES<br><br>" +
+           "El que suscribe ______________________________ declara que los datos aportados son ciertos y actuales y los informa a los efectos de la contrataciÛn de los servicios educativos que el Colegio Nacional JosÈ Pedro Varela provee. La actualizaciÛn de los datos proveÌdos es responsabilidad de la parte.</b>"
 
 
 
     informacion = 
-      "El alumno #{nombre_alumno} cuya c√©dula es #{cedula_alumno} ha comenzado el proceso de reinscripci√≥n para el a√±o lectivo #{anio} en " + 
-      "#{nombre_grado} del Colegio Nacional Jos√© Pedro Varela."
+      "El alumno #{nombre_alumno} cuya cÈdula es #{cedula_alumno} ha comenzado el proceso de reinscripciÛn para el aÒo lectivo #{anio} en " + 
+      "#{nombre_grado} del Colegio Nacional JosÈ Pedro Varela."
 
     cabezal = 
       "$U <b>#{total}</b>" + 
       "<br><br>" +
-      "Lugar y fecha de emisi√≥n: <b>Montevideo, #{I18n.l(DateTime.now, format: '%-d de %B de %Y')}</b>";
+      "Lugar y fecha de emisiÛn: <b>Montevideo, #{I18n.l(DateTime.now, format: '%-d de %B de %Y')}</b>";
 
     if cuotas.count==1 && cuotas[0][0] == 1
       texto = "<b>VALE</b>"
@@ -494,19 +494,19 @@ class Inscripcion < ApplicationRecord
       texto = "<b>VALE AMORTIZABLE</b>"
     end
 
-    texto = texto + " por la cantidad de pesos uruguayos <b>#{total_letras}</b> que debo (debemos) y pagar√© (pagaremos) en forma " +
-      "indivisible y solidaria a la Sociedad Uruguaya de Ense√±anza, Colegio Nacional Jos√© Pedro Varela - o a su orden, en la misma moneda, en " +
+    texto = texto + " por la cantidad de pesos uruguayos <b>#{total_letras}</b> que debo (debemos) y pagarÈ (pagaremos) en forma " +
+      "indivisible y solidaria a la Sociedad Uruguaya de EnseÒanza, Colegio Nacional JosÈ Pedro Varela - o a su orden, en la misma moneda, en " +
       "#{cuotas_a_letras(cuotas)}, en el domicilio del acreedor sito en la calle Colonia 1637 de la ciudad de Montevideo, o donde indique el acreedor." +
       "<br><br>" + 
-      "La falta de pago de dos o m√°s cuotas a su vencimiento producir√° la mora de pleno derecho sin necesidad de interpelaci√≥n de clase alguna, " +
-      "deveng√°ndose por esa sola circunstancias, intereses moratorios del 40% (cuarenta por ciento) tasa efectiva anual (aprobada por BCU) y har√° " +
-      "exigible la totalidad del monto adeudado m√°s los intereses moratorios generados a partir del incumplimiento y hasta su efectiva y total " + 
-      "cancelaci√≥n." +
+      "La falta de pago de dos o m·s cuotas a su vencimiento producir· la mora de pleno derecho sin necesidad de interpelaciÛn de clase alguna, " +
+      "deveng·ndose por esa sola circunstancias, intereses moratorios del 40% (cuarenta por ciento) tasa efectiva anual (aprobada por BCU) y har· " +
+      "exigible la totalidad del monto adeudado m·s los intereses moratorios generados a partir del incumplimiento y hasta su efectiva y total " + 
+      "cancelaciÛn." +
       "<br><br>" + 
-      "En caso de incumplimiento total o parcial del presente t√≠tulo, el acreedor a su elecci√≥n, podr√° demandar la ejecuci√≥n de este t√≠tulo ante " +
-      "los Jueces del lugar de residencia del deudor o ante los del lugar del cumplimiento de la obligaci√≥n." +
+      "En caso de incumplimiento total o parcial del presente tÌtulo, el acreedor a su elecciÛn, podr· demandar la ejecuciÛn de este tÌtulo ante " +
+      "los Jueces del lugar de residencia del deudor o ante los del lugar del cumplimiento de la obligaciÛn." +
       "<br><br>" + 
-      "Para todos los efectos judiciales y/o extrajudiciales a que pudiera dar lugar √©ste documento, el deudor constituye como domicilio especial el " +
+      "Para todos los efectos judiciales y/o extrajudiciales a que pudiera dar lugar Èste documento, el deudor constituye como domicilio especial el " +
       "abajo denunciado." +
       "<br><br><br>" + 
       "NOMBRE COMPLETO: #{nombreT[0]}<br><br>" +
@@ -515,7 +515,7 @@ class Inscripcion < ApplicationRecord
       "MAIL: #{emailT[0]}<br><br>" +
       "TEL/CEL: #{celularT[0]}<br><br>" +
       "FIRMA:<br><br>" +
-      "Aclaraci√≥n:<br><br>" +
+      "AclaraciÛn:<br><br>" +
       "<br><br>" +
       "NOMBRE COMPLETO: #{nombreT[1]}<br><br>" +
       "DOCUMENTO DE IDENTIDAD: #{Inscripcion.cedula_tos(documentoT[1])}<br><br>" +
@@ -523,7 +523,7 @@ class Inscripcion < ApplicationRecord
       "MAIL: #{emailT[1]}<br><br>" +
       "TEL/CEL: #{celularT[1]}<br><br>" +
       "FIRMA:<br><br>" +
-      "Aclaraci√≥n:<br><br>";
+      "AclaraciÛn:<br><br>";
 
     text_file = Tempfile.new("text.pdf")
     text_file_path = text_file.path
@@ -707,29 +707,29 @@ class Inscripcion < ApplicationRecord
   #   cabezal = 
   #     "$U <b>#{importe_total}</b>" + 
   #     "<br><br>" +
-  #     "Lugar y fecha de emisi√≥n: <b>Montevideo, #{I18n.l(DateTime.now, format: '%-d de %B de %Y')}</b>";
+  #     "Lugar y fecha de emisiÛn: <b>Montevideo, #{I18n.l(DateTime.now, format: '%-d de %B de %Y')}</b>";
     
   #   if cuotas == 1
   #   texto =
-  #       "<b>VALE</b> por la cantidad de pesos uruguayos <b>#{importe_letras}</b> que debo (debemos) y pagar√© (pagaremos) en forma indivisible y solidaria a la Sociedad Uruguaya de Ense√±anza, Colegio Nacional Jos√© Pedro Varela - o a su orden, en la misma moneda, en <b>1</b> cuota de $U <b>#{importe_cuota}</b>, venciendo el d√≠a <b>#{dia}</b> de <b>#{mesS}</b> del <b>#{anio}</b>, en el domicilio del acreedor sito en la calle Colonia 1637 de la ciudad de Montevideo, o donde indique el acreedor.";
+  #       "<b>VALE</b> por la cantidad de pesos uruguayos <b>#{importe_letras}</b> que debo (debemos) y pagarÈ (pagaremos) en forma indivisible y solidaria a la Sociedad Uruguaya de EnseÒanza, Colegio Nacional JosÈ Pedro Varela - o a su orden, en la misma moneda, en <b>1</b> cuota de $U <b>#{importe_cuota}</b>, venciendo el dÌa <b>#{dia}</b> de <b>#{mesS}</b> del <b>#{anio}</b>, en el domicilio del acreedor sito en la calle Colonia 1637 de la ciudad de Montevideo, o donde indique el acreedor.";
   #     "<br><br>" + 
-  #       "La falta de pago a su vencimiento producir√° la mora de pleno derecho sin necesidad de interpelaci√≥n de clase alguna, deveng√°ndose por esa sola circunstancias, intereses moratorios del 40% (cuarenta por ciento) tasa efectiva anual (aprobada por BCU) y har√° exigible la totalidad del monto adeudado m√°s los intereses moratorios generados a partir del incumplimiento y hasta su efectiva y total cancelaci√≥n."
+  #       "La falta de pago a su vencimiento producir· la mora de pleno derecho sin necesidad de interpelaciÛn de clase alguna, deveng·ndose por esa sola circunstancias, intereses moratorios del 40% (cuarenta por ciento) tasa efectiva anual (aprobada por BCU) y har· exigible la totalidad del monto adeudado m·s los intereses moratorios generados a partir del incumplimiento y hasta su efectiva y total cancelaciÛn."
   #   else
   #     if inscripcion.especial==nil || inscripcion.especial==''
-  #       pago = "mensuales, iguales y consecutivas de $U <b>#{importe_cuota}</b> cada una, venciendo la primera el d√≠a <b>#{dia}</b> de <b>#{mesS}</b> del <b>#{anio}</b>"
+  #       pago = "mensuales, iguales y consecutivas de $U <b>#{importe_cuota}</b> cada una, venciendo la primera el dÌa <b>#{dia}</b> de <b>#{mesS}</b> del <b>#{anio}</b>"
   #     else
   #       pago = inscripcion.especial
   #     end
   #     texto =
-  #       "<b>VALE AMORTIZABLE</b> por la cantidad de pesos uruguayos <b>#{importe_letras}</b> que debo (debemos) y pagar√© (pagaremos) en forma indivisible y solidaria a la Sociedad Uruguaya de Ense√±anza, Colegio Nacional Jos√© Pedro Varela - o a su orden, en la misma moneda, en <b>#{cuotas}</b> cuotas #{pago}, en el domicilio del acreedor sito en la calle Colonia 1637 de la ciudad de Montevideo, o donde indique el acreedor.";
+  #       "<b>VALE AMORTIZABLE</b> por la cantidad de pesos uruguayos <b>#{importe_letras}</b> que debo (debemos) y pagarÈ (pagaremos) en forma indivisible y solidaria a la Sociedad Uruguaya de EnseÒanza, Colegio Nacional JosÈ Pedro Varela - o a su orden, en la misma moneda, en <b>#{cuotas}</b> cuotas #{pago}, en el domicilio del acreedor sito en la calle Colonia 1637 de la ciudad de Montevideo, o donde indique el acreedor.";
   #       "<br><br>" + 
-  #       "La falta de pago de dos o m√°s cuotas a su vencimiento producir√° la mora de pleno derecho sin necesidad de interpelaci√≥n de clase alguna, deveng√°ndose por esa sola circunstancias, intereses moratorios del 40% (cuarenta por ciento) tasa efectiva anual (aprobada por BCU) y har√° exigible la totalidad del monto adeudado m√°s los intereses moratorios generados a partir del incumplimiento y hasta su efectiva y total cancelaci√≥n."
+  #       "La falta de pago de dos o m·s cuotas a su vencimiento producir· la mora de pleno derecho sin necesidad de interpelaciÛn de clase alguna, deveng·ndose por esa sola circunstancias, intereses moratorios del 40% (cuarenta por ciento) tasa efectiva anual (aprobada por BCU) y har· exigible la totalidad del monto adeudado m·s los intereses moratorios generados a partir del incumplimiento y hasta su efectiva y total cancelaciÛn."
   #   end
   #   texto = texto +
   #     "<br><br>" + 
-  #     "En caso de incumplimiento total o parcial del presente t√≠tulo, el acreedor a su elecci√≥n, podr√° demandar la ejecuci√≥n de este t√≠tulo ante los Jueces del lugar de residencia del deudor o ante los del lugar del cumplimiento de la obligaci√≥n." +
+  #     "En caso de incumplimiento total o parcial del presente tÌtulo, el acreedor a su elecciÛn, podr· demandar la ejecuciÛn de este tÌtulo ante los Jueces del lugar de residencia del deudor o ante los del lugar del cumplimiento de la obligaciÛn." +
   #     "<br><br>" + 
-  #     "Para todos los efectos judiciales y/o extrajudiciales a que pudiera dar lugar √©ste documento, el deudor constituye como domicilio especial el abajo denunciado." +
+  #     "Para todos los efectos judiciales y/o extrajudiciales a que pudiera dar lugar Èste documento, el deudor constituye como domicilio especial el abajo denunciado." +
   #     "<br><br><br>" + 
   #     "NOMBRE COMPLETO: #{nombreT[0]}<br><br>" +
   #     "DOCUMENTO DE IDENTIDAD: #{Inscripcion.cedula_tos(documentoT[0])}<br><br>" +
@@ -737,7 +737,7 @@ class Inscripcion < ApplicationRecord
   #     "MAIL: #{emailT[0]}<br><br>" +
   #     "TEL/CEL: #{celularT[0]}<br><br>" +
   #     "FIRMA:<br><br>" +
-  #     "Aclaraci√≥n:<br><br>" +
+  #     "AclaraciÛn:<br><br>" +
   #     "<br><br>" +
   #     "NOMBRE COMPLETO: #{nombreT[1]}<br><br>" +
   #     "DOCUMENTO DE IDENTIDAD: #{Inscripcion.cedula_tos(documentoT[1])}<br><br>" +
@@ -745,7 +745,7 @@ class Inscripcion < ApplicationRecord
   #     "MAIL: #{emailT[1]}<br><br>" +
   #     "TEL/CEL: #{celularT[1]}<br><br>" +
   #     "FIRMA:<br><br>" +
-  #     "Aclaraci√≥n:<br><br>";
+  #     "AclaraciÛn:<br><br>";
 
 
   #   text_file = Tempfile.new("text.pdf")
@@ -870,22 +870,22 @@ class Inscripcion < ApplicationRecord
 #       reinscripcion =  "<b>REINSCRIPCION</b>"
 
 #       informacion = 
-#         "El alumno " + nombre + " cuya c√©dula es " + cedula +
-#         " ha comenzado el proceso de reinscripci√≥n para el a√±o lectivo 2019 en " + nivel + 
-#         " del Colegio Nacional Jos√© Pedro Varela."
+#         "El alumno " + nombre + " cuya cÈdula es " + cedula +
+#         " ha comenzado el proceso de reinscripciÛn para el aÒo lectivo 2019 en " + nivel + 
+#         " del Colegio Nacional JosÈ Pedro Varela."
 
 #       cabezal = 
 #         "$U <b>#{importe_total}</b>" + 
 #         "<br><br>" +
-#         "Lugar y fecha de emisi√≥n: <b>Montevideo, #{I18n.l(DateTime.now, format: '%-d de %B de %Y')}</b>";
+#         "Lugar y fecha de emisiÛn: <b>Montevideo, #{I18n.l(DateTime.now, format: '%-d de %B de %Y')}</b>";
 #       texto =
-#         "<b>VALE AMORTIZABLE</b> por la cantidad de pesos uruguayos <b>#{importe_letras}</b> que debo (debemos) y pagar√© (pagaremos) en forma indivisible y solidaria a la Sociedad Uruguaya de Ense√±anza, Colegio Nacional Jos√© Pedro Varela - o a su orden, en la misma moneda, en <b>#{cuotas}</b> cuotas mensuales, iguales y consecutivas de $U <b>#{importe_cuota}</b> cada una, venciendo la primera el d√≠a 10 de <b>#{mes}</b> del <b>#{anio}</b>, en el domicilio del acreedor sito en la calle Colonia 1637 de la ciudad de Montevideo, o donde indique el acreedor." +
+#         "<b>VALE AMORTIZABLE</b> por la cantidad de pesos uruguayos <b>#{importe_letras}</b> que debo (debemos) y pagarÈ (pagaremos) en forma indivisible y solidaria a la Sociedad Uruguaya de EnseÒanza, Colegio Nacional JosÈ Pedro Varela - o a su orden, en la misma moneda, en <b>#{cuotas}</b> cuotas mensuales, iguales y consecutivas de $U <b>#{importe_cuota}</b> cada una, venciendo la primera el dÌa 10 de <b>#{mes}</b> del <b>#{anio}</b>, en el domicilio del acreedor sito en la calle Colonia 1637 de la ciudad de Montevideo, o donde indique el acreedor." +
 #         "<br><br>" + 
-#         "La falta de pago de dos o m√°s cuotas a su vencimiento producir√° la mora de pleno derecho sin necesidad de interpelaci√≥n de clase alguna, deveng√°ndose por esa sola circunstancias, intereses moratorios del 40% (cuarenta por ciento) tasa efectiva anual (aprobada por BCU) y har√° exigible la totalidad del monto adeudado m√°s los intereses moratorios generados a partir del incumplimiento y hasta su efectiva y total cancelaci√≥n." +
+#         "La falta de pago de dos o m·s cuotas a su vencimiento producir· la mora de pleno derecho sin necesidad de interpelaciÛn de clase alguna, deveng·ndose por esa sola circunstancias, intereses moratorios del 40% (cuarenta por ciento) tasa efectiva anual (aprobada por BCU) y har· exigible la totalidad del monto adeudado m·s los intereses moratorios generados a partir del incumplimiento y hasta su efectiva y total cancelaciÛn." +
 #         "<br><br>" + 
-#         "En caso de incumplimiento total o parcial del presente t√≠tulo, el acreedor a su elecci√≥n, podr√° demandar la ejecuci√≥n de este t√≠tulo ante los Jueces del lugar de residencia del deudor o ante los del lugar del cumplimiento de la obligaci√≥n." +
+#         "En caso de incumplimiento total o parcial del presente tÌtulo, el acreedor a su elecciÛn, podr· demandar la ejecuciÛn de este tÌtulo ante los Jueces del lugar de residencia del deudor o ante los del lugar del cumplimiento de la obligaciÛn." +
 #         "<br><br>" + 
-#         "Para todos los efectos judiciales y/o extrajudiciales a que pudiera dar lugar √©ste documento, el deudor constituye como domicilio especial el abajo denunciado." +
+#         "Para todos los efectos judiciales y/o extrajudiciales a que pudiera dar lugar Èste documento, el deudor constituye como domicilio especial el abajo denunciado." +
 #         "<br><br><br>" + 
 #         "NOMBRE COMPLETO: #{inscripcionAlumno.nombre1}<br><br>" +
 #         "DOCUMENTO DE IDENTIDAD: #{Inscripcion.cedula_tos(inscripcionAlumno.documento1)}<br><br>" +
@@ -893,7 +893,7 @@ class Inscripcion < ApplicationRecord
 #         "MAIL: #{inscripcionAlumno.email1}<br><br>" +
 #         "TEL/CEL: #{inscripcionAlumno.celular1}<br><br>" +
 #         "FIRMA:<br><br>" +
-#         "Aclaraci√≥n:<br><br>" +
+#         "AclaraciÛn:<br><br>" +
 #         "<br><br>" +
 #         "NOMBRE COMPLETO: #{inscripcionAlumno.nombre2}<br><br>" +
 #         "DOCUMENTO DE IDENTIDAD: #{Inscripcion.cedula_tos(inscripcionAlumno.documento2)}<br><br>" +
@@ -901,7 +901,7 @@ class Inscripcion < ApplicationRecord
 #         "MAIL: #{inscripcionAlumno.email2}<br><br>" +
 #         "TEL/CEL: #{inscripcionAlumno.celular2}<br><br>" +
 #         "FIRMA:<br><br>" +
-#         "Aclaraci√≥n:<br><br>";
+#         "AclaraciÛn:<br><br>";
 
 
 #       text_file = Tempfile.new("text.pdf")
@@ -959,13 +959,13 @@ class Inscripcion < ApplicationRecord
 #         end
 
 
-# # La falta de pago de dos o m√°s cuotas a su vencimiento producir√° la mora de pleno derecho sin necesidad de interpelaci√≥n de
-# # clase alguna, deveng√°ndose por esa sola circunstancias, intereses moratorios del 40% (cuarenta por ciento) tasa efectiva anual
-# # (aprobada por BCU) y har√° exigible la totalidad del monto adeudado m√°s los intereses moratorios generados a partir del
-# # incumplimiento y hasta su efectiva y total cancelaci√≥n.
-# # En caso de incumplimiento total o parcial del presente t√≠tulo, el acreedor a su elecci√≥n, podr√° demandar la ejecuci√≥n de este
-# # t√≠tulo ante los Jueces del lugar de residencia del deudor o ante los del lugar del cumplimiento de la obligaci√≥n.
-# # Para todos los efectos judiciales y/o extrajudiciales a que pudiera dar lugar √©ste documento, el deudor constituye como
+# # La falta de pago de dos o m·s cuotas a su vencimiento producir· la mora de pleno derecho sin necesidad de interpelaciÛn de
+# # clase alguna, deveng·ndose por esa sola circunstancias, intereses moratorios del 40% (cuarenta por ciento) tasa efectiva anual
+# # (aprobada por BCU) y har· exigible la totalidad del monto adeudado m·s los intereses moratorios generados a partir del
+# # incumplimiento y hasta su efectiva y total cancelaciÛn.
+# # En caso de incumplimiento total o parcial del presente tÌtulo, el acreedor a su elecciÛn, podr· demandar la ejecuciÛn de este
+# # tÌtulo ante los Jueces del lugar de residencia del deudor o ante los del lugar del cumplimiento de la obligaciÛn.
+# # Para todos los efectos judiciales y/o extrajudiciales a que pudiera dar lugar Èste documento, el deudor constituye como
 # # domicilio especial el abajo denunciado.
 
 

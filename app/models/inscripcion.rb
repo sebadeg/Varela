@@ -238,56 +238,56 @@ class Inscripcion < ApplicationRecord
 
   def self.numero_cuota_letras(cuota)
     s = ""
-    case cuota
-    when 1
-      s = "primera"
-    when 2
-      s = "segunda"
-    when 3
-      s = "tercera"
-    when 4
-      s = "cuarta"
-    when 5
-      s = "quinta"
-    when 6
-      s = "sexta"
-    when 7
-      s = "septima"
-    when 8
-      s = "octava"
-    when 9
-      s = "novena"
-    when 10
-      s = "décima"
-    when 11
-      s = "undécima"
-    when 12
-      s = "duodécima"
-    when 13
-      s = "decimotercera"
-    when 14
-      s = "decimocuarta"
-    when 15
-      s = "decimoquinta"
-    when 16
-      s = "decimosexta"
-    when 17
-      s = "decimoseptima"
-    when 18
-      s = "decimoctava"
-    when 19
-      s = "decimonovena"
-    when 20
-      s = "vigésima"
-    when 21
-      s = "vigesimoprimera"
-    when 22
-      s = "vigesimosegunda"
-    when 23
-      s = "vigesimotercera"
-    when 24
-      s = "vigesimocuarta"
-    end
+    # case cuota
+    # when 1
+    #   s = "primera"
+    # when 2
+    #   s = "segunda"
+    # when 3
+    #   s = "tercera"
+    # when 4
+    #   s = "cuarta"
+    # when 5
+    #   s = "quinta"
+    # when 6
+    #   s = "sexta"
+    # when 7
+    #   s = "septima"
+    # when 8
+    #   s = "octava"
+    # when 9
+    #   s = "novena"
+    # when 10
+    #   s = "décima"
+    # when 11
+    #   s = "undécima"
+    # when 12
+    #   s = "duodécima"
+    # when 13
+    #   s = "decimotercera"
+    # when 14
+    #   s = "decimocuarta"
+    # when 15
+    #   s = "decimoquinta"
+    # when 16
+    #   s = "decimosexta"
+    # when 17
+    #   s = "decimoseptima"
+    # when 18
+    #   s = "decimoctava"
+    # when 19
+    #   s = "decimonovena"
+    # when 20
+    #   s = "vigésima"
+    # when 21
+    #   s = "vigesimoprimera"
+    # when 22
+    #   s = "vigesimosegunda"
+    # when 23
+    #   s = "vigesimotercera"
+    # when 24
+    #   s = "vigesimocuarta"
+    # end
     return s
   end
 
@@ -312,7 +312,7 @@ class Inscripcion < ApplicationRecord
         end
         cuota = cuota + c[0]
       end
-      mensaje "<b>#{cuota}</b> cuotas, a saber: " + mensaje
+      mensaje = "<b>#{cuota}</b> cuotas, a saber: " + mensaje
     end
   end
 
