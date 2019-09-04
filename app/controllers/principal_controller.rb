@@ -519,14 +519,14 @@ class PrincipalController < ApplicationController
     inscripcionAlumno.telefono_trabajo_madre = params[:inscripcionAlumno][:telefono_trabajo_madre]
     inscripcionAlumno.titular_madre = params[:inscripcionAlumno][:titular_madre]
 
-    inscripcionAlumno.documento1 = params[:inscripcionAlumno][:cedula1]
+    inscripcionAlumno.documento1 = params[:inscripcionAlumno][:documento1]
     inscripcionAlumno.nombre1 = params[:inscripcionAlumno][:nombre1]
     inscripcionAlumno.apellido1 = params[:inscripcionAlumno][:apellido1]
     inscripcionAlumno.domicilio1 = params[:inscripcionAlumno][:domicilio1]
     inscripcionAlumno.email1 = params[:inscripcionAlumno][:email1]
     inscripcionAlumno.celular1 = params[:inscripcionAlumno][:celular1]
 
-    inscripcionAlumno.documento2 = params[:inscripcionAlumno][:cedula2]
+    inscripcionAlumno.documento2 = params[:inscripcionAlumno][:documento2]
     inscripcionAlumno.nombre2 = params[:inscripcionAlumno][:nombre2]
     inscripcionAlumno.apellido2 = params[:inscripcionAlumno][:apellido2]
     inscripcionAlumno.domicilio2 = params[:inscripcionAlumno][:domicilio2]
