@@ -600,7 +600,7 @@ class Inscripcion < ApplicationRecord
     Prawn::Document.generate(text_file_path) do
 
       if reinsc
-        font "Helvetica", :size => 12
+        font "Times-Roman", :size => 12
 
         dash 5, space: 0, phase:0
         stroke_color "0000FF"
@@ -640,7 +640,7 @@ class Inscripcion < ApplicationRecord
       end
 
       if !reinsc
-        font "Helvetica", :size => 10
+        font "Times-Roman", :size => 10
         
         dash 5, space: 0, phase:0
         stroke_color "0000FF"
@@ -669,7 +669,7 @@ class Inscripcion < ApplicationRecord
         start_new_page
       end
 
-      font "Helvetica", :size => 10
+      font "Times-Roman", :size => 10
 
       dash 5, space: 0, phase:0
       stroke_color "0000FF"
