@@ -373,9 +373,9 @@ class Inscripcion < ApplicationRecord
           mensaje = mensaje + ", "
         end
         if c[0] == 1
-          mensaje = mensaje + "la #{numero_cuota_letras(cuota+1)} de $U <b>#{c[1]}</b> venciendo el d\xEDa #{I18n.l(c[2], format: '<b>%-d</b> de <b>%B</b> de <b>%Y</b>')}".force_encoding('iso-8859-1')
+          mensaje = mensaje + "la #{Inscripcion.numero_cuota_letras(cuota+1)} de $U <b>#{c[1]}</b> venciendo el d\xEDa #{I18n.l(c[2], format: '<b>%-d</b> de <b>%B</b> de <b>%Y</b>')}".force_encoding('iso-8859-1')
         else
-          mensaje = mensaje + "de la #{numero_cuota_letras(cuota+1)} a la #{Inscripcion.numero_cuota_letras(cuota+c[0])} de $U <b>#{c[1]}</b> venciendo el d\xEDa #{I18n.l(c[2], format: '<b>%-d</b> de <b>%B</b> de <b>%Y</b>')} y cada mes subsiguiente".force_encoding('iso-8859-1')
+          mensaje = mensaje + "de la #{Inscripcion.numero_cuota_letras(cuota+1)} a la #{Inscripcion.numero_cuota_letras(cuota+c[0])} de $U <b>#{c[1]}</b> venciendo el d\xEDa #{I18n.l(c[2], format: '<b>%-d</b> de <b>%B</b> de <b>%Y</b>')} y cada mes subsiguiente".force_encoding('iso-8859-1')
         end
         cuota = cuota + c[0]
       end
