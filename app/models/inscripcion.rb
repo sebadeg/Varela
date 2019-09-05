@@ -404,7 +404,7 @@ class Inscripcion < ApplicationRecord
     nombre_alumno = ""
     alumno = Alumno.find_by(cedula: cedula) rescue nil
     if alumno != nil 
-      nombre_alumno = alumno.nombre + " " + alumno.apellido
+      nombre_alumno = convertStr(alumno.nombre) + " " + convertStr(alumno.apellido)
     end
 
     nombre_grado = ""
@@ -428,7 +428,7 @@ class Inscripcion < ApplicationRecord
       end
       inscripcion_opcion = InscripcionOpcion.find(adicional_id) rescue nil
       if inscripcion_opcion != nil 
-        convenio_nombre = convenio_nombre + " + " + convertStr(inscripcion_opcion.nombre)
+        convenio_nombre = convertStr(convenio_nombre) + " + " + convertStr(inscripcion_opcion.nombre)
       end
 
       inscripcion_opcion = InscripcionOpcion.find(matricula_id) rescue nil
