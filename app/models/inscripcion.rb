@@ -300,7 +300,7 @@ class Inscripcion < ApplicationRecord
   end
 
   def self.numero_cuota_letras(cuota)
-    s = "".force_encoding(Encoding::UTF_8)
+    s = ""
     case cuota
     when 1
       s = "primera"
