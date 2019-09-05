@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 class Inscripcion < ApplicationRecord
   belongs_to :proximo_grado
 
@@ -302,7 +300,7 @@ class Inscripcion < ApplicationRecord
   end
 
   def self.numero_cuota_letras(cuota)
-    s = ""
+    s = "".force_encoding(Encoding::UTF_8)
     case cuota
     when 1
       s = "primera"
@@ -323,11 +321,11 @@ class Inscripcion < ApplicationRecord
     when 9
       s = "novena"
     when 10
-      s = "décima"
+      s = "décima".force_encoding(Encoding::UTF_8)
     when 11
-      s = "undécima"
+      s = "undécima".force_encoding(Encoding::UTF_8)
     when 12
-      s = "duodécima"
+      s = "duodécima".force_encoding(Encoding::UTF_8)
     when 13
       s = "decimotercera"
     when 14
@@ -343,7 +341,7 @@ class Inscripcion < ApplicationRecord
     when 19
       s = "decimonovena"
     when 20
-      s = "vigésima"
+      s = "vigésima".force_encoding(Encoding::UTF_8)
     when 21
       s = "vigesimoprimera"
     when 22
