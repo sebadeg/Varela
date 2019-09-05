@@ -380,16 +380,7 @@ class Inscripcion < ApplicationRecord
   end
 
   def convertStr(str)
-
-    str["#{160.chr}"] = "\xE1"
-    str["#{130.chr}"] = "\xE9"
-    str["#{161.chr}"] = "\xED"
-    str["#{162.chr}"] = "\xF3"
-    str["#{163.chr}"] = "\xFA"
-    str["#{164.chr}"] = "\xF1"
-    str["#{129.chr}"] = "\xFC"
-
-    return str
+    return str.encode("ISO-8859-1","UTF-8")
   end
 
   def vale(file_path)
