@@ -325,11 +325,11 @@ class Inscripcion < ApplicationRecord
     when 9
       s = "novena"
     when 10
-      s = "d\xE9cima".force_encoding('iso-8859-1')
+      s = "d\xE9cima"
     when 11
-      s = "und\xE9cima".force_encoding('iso-8859-1')
+      s = "und\xE9cima"
     when 12
-      s = "duod\xE9cima".force_encoding('iso-8859-1')
+      s = "duod\xE9cima"
     when 13
       s = "decimotercera"
     when 14
@@ -345,7 +345,7 @@ class Inscripcion < ApplicationRecord
     when 19
       s = "decimonovena"
     when 20
-      s = "vig\xE9sima".force_encoding('iso-8859-1')
+      s = "vig\xE9sima"
     when 21
       s = "vigesimoprimera"
     when 22
@@ -355,7 +355,7 @@ class Inscripcion < ApplicationRecord
     when 24
       s = "vigesimocuarta"
     end
-    return s
+    return s.force_encoding('iso-8859-1')
   end
 
   def cuotas_a_letras(cuotas)
@@ -373,9 +373,9 @@ class Inscripcion < ApplicationRecord
           mensaje = mensaje + ", ".force_encoding('iso-8859-1')
         end
         if c[0] == 1
-          mensaje = mensaje + "la #{Inscripcion.numero_cuota_letras(cuota+1)} de $U <b>#{c[1]}</b> venciendo el d\xEDa #{I18n.l(c[2], format: '<b>%-d</b> de <b>%B</b> de <b>%Y</b>')}".force_encoding('iso-8859-1')
+          mensaje = mensaje + "la ".force_encoding('iso-8859-1') + Inscripcion.numero_cuota_letras(cuota+1) + " de $U <b>#{c[1]}</b> venciendo el d\xEDa #{I18n.l(c[2], format: '<b>%-d</b> de <b>%B</b> de <b>%Y</b>')}".force_encoding('iso-8859-1')
         else
-          mensaje = mensaje + "de la #{Inscripcion.numero_cuota_letras(cuota+1)} a la #{Inscripcion.numero_cuota_letras(cuota+c[0])} de $U <b>#{c[1]}</b> venciendo el d\xEDa #{I18n.l(c[2], format: '<b>%-d</b> de <b>%B</b> de <b>%Y</b>')} y cada mes subsiguiente".force_encoding('iso-8859-1')
+          mensaje = mensaje + "de la ".force_encoding('iso-8859-1') + Inscripcion.numero_cuota_letras(cuota+1) + " a la ".force_encoding('iso-8859-1') + Inscripcion.numero_cuota_letras(cuota+c[0]) + " de $U <b>#{c[1]}</b> venciendo el d\xEDa #{I18n.l(c[2], format: '<b>%-d</b> de <b>%B</b> de <b>%Y</b>')} y cada mes subsiguiente".force_encoding('iso-8859-1')
         end
         cuota = cuota + c[0]
       end
