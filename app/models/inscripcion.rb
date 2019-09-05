@@ -321,11 +321,11 @@ class Inscripcion < ApplicationRecord
     when 9
       s = "novena"
     when 10
-      s = "d\xC9cima"
+      s = "d\xE9cima".force_encoding('iso-8859-1')
     when 11
-      s = "und\xC9cima"
+      s = "und\xE9cima".force_encoding('iso-8859-1')
     when 12
-      s = "duod\xC9cima"
+      s = "duod\xE9cima".force_encoding('iso-8859-1')
     when 13
       s = "decimotercera"
     when 14
@@ -341,7 +341,7 @@ class Inscripcion < ApplicationRecord
     when 19
       s = "decimonovena"
     when 20
-      s = "vig\xC9sima"
+      s = "vig\xE9sima".force_encoding('iso-8859-1')
     when 21
       s = "vigesimoprimera"
     when 22
@@ -681,7 +681,7 @@ class Inscripcion < ApplicationRecord
         text cabezal, align: :right, inline_format: true
       end
       bounding_box([20, 640], :width => 500, :height => 600) do
-        text texto.force_encoding('iso-8859-1'), align: :justify, inline_format: true
+        text texto, align: :justify, inline_format: true
       end
 
     end
