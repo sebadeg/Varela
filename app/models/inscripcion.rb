@@ -118,12 +118,15 @@ class Inscripcion < ApplicationRecord
     # else
       inscripcion_opcion_cuotas = InscripcionOpcion.find(cuotas_id) rescue nil 
       if inscripcion_opcion_cuotas != nil
-        if ( inscripcion_opcion_cuotas.valor == nil )
-          numero_cuotas = inscripcion_opcion_cuotas.valor_ent
-          fecha_cuota = inscripcion_opcion_cuotas.fecha
-        else            
-          cuotas.push([inscripcion_opcion_cuotas.valor_ent,inscripcion_opcion_cuotas.valor,inscripcion_opcion_cuotas.fecha])
+        InscripcionOpcionCuota.where("inscripcion_opcion_id=#{inscripcion_opcion_cuotas.id}").order(:fecha).each do |cuota|
+          cuotas.push([(importe_total*cuota.importe+0.5).to_i,cuota.cantidad,cuota.fecha])
         end
+        # if ( inscripcion_opcion_cuotas.valor == nil )
+        #   numero_cuotas = inscripcion_opcion_cuotas.valor_ent
+        #   fecha_cuota = inscripcion_opcion_cuotas.fecha
+        # else            
+        #   cuotas.push([inscripcion_opcion_cuotas.valor_ent,inscripcion_opcion_cuotas.valor,inscripcion_opcion_cuotas.fecha])
+        # end
       end
     #end    
 
