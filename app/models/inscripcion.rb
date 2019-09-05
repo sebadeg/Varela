@@ -321,11 +321,11 @@ class Inscripcion < ApplicationRecord
     when 9
       s = "novena"
     when 10
-      s = "decima"
+      s = "d#{130.chr}cima"
     when 11
-      s = "undecima"
+      s = "und#{130.chr}cima"
     when 12
-      s = "duodecima"
+      s = "duod#{130.chr}cima"
     when 13
       s = "decimotercera"
     when 14
@@ -341,7 +341,7 @@ class Inscripcion < ApplicationRecord
     when 19
       s = "decimonovena"
     when 20
-      s = "vigesima"
+      s = "vig#{130.chr}sima"
     when 21
       s = "vigesimoprimera"
     when 22
@@ -356,338 +356,338 @@ class Inscripcion < ApplicationRecord
 
   def cuotas_a_letras(cuotas)
     return ""
-    # if cuotas.count == 1
-    #   if cuotas[0][0] == 1        
-    #     return "<b>1</b> cuota de $U <b>#{cuotas[0][1]}</b>, venciendo el día #{I18n.l(cuotas[0][2], format: '<b>%-d</b> de <b>%B</b> de <b>%Y</b>')}"
-    #   else
-    #     return "<b>#{cuotas[0][0]}</b> cuotas mensuales, iguales y consecutivas de $U <b>#{cuotas[0][1]}</b> cada una, venciendo la primera el día #{I18n.l(cuotas[0][2], format: '<b>%-d</b> de <b>%B</b> de <b>%Y</b>')}"
-    #   end
-    # else
-    #   mensaje = ""
-    #   cuota = 0
-    #   cuotas.each do |c|
-    #     if mensaje != ""
-    #       mensaje = mensaje + ", "
-    #     end
-    #     if c[0] == 1
-    #       mensaje = mensaje + "la #{numero_cuota_letras(cuota+1)} de $U <b>#{c[1]}</b> venciendo el día #{I18n.l(c[2], format: '<b>%-d</b> de <b>%B</b> de <b>%Y</b>')}"
-    #     else
-    #       mensaje = mensaje + "de la #{numero_cuota_letras(cuota+1)} a la #{numero_cuota_letras(cuota+c[0])} de $U <b>#{c[1]}</b> venciendo el día #{I18n.l(c[2], format: '<b>%-d</b> de <b>%B</b> de <b>%Y</b>')} y cada mes subsiguiente"
-    #     end
-    #     cuota = cuota + c[0]
-    #   end
-    #   return "<b>#{cuota}</b> cuotas, a saber: " + mensaje
-    # end
+    if cuotas.count == 1
+      if cuotas[0][0] == 1        
+        return "<b>1</b> cuota de $U <b>#{cuotas[0][1]}</b>, venciendo el d#{161.chr}a #{I18n.l(cuotas[0][2], format: '<b>%-d</b> de <b>%B</b> de <b>%Y</b>')}"
+      else
+        return "<b>#{cuotas[0][0]}</b> cuotas mensuales, iguales y consecutivas de $U <b>#{cuotas[0][1]}</b> cada una, venciendo la primera el d#{161.chr}a #{I18n.l(cuotas[0][2], format: '<b>%-d</b> de <b>%B</b> de <b>%Y</b>')}"
+      end
+    else
+      mensaje = ""
+      cuota = 0
+      cuotas.each do |c|
+        if mensaje != ""
+          mensaje = mensaje + ", "
+        end
+        if c[0] == 1
+          mensaje = mensaje + "la #{numero_cuota_letras(cuota+1)} de $U <b>#{c[1]}</b> venciendo el d#{161.chr}a #{I18n.l(c[2], format: '<b>%-d</b> de <b>%B</b> de <b>%Y</b>')}"
+        else
+          mensaje = mensaje + "de la #{numero_cuota_letras(cuota+1)} a la #{numero_cuota_letras(cuota+c[0])} de $U <b>#{c[1]}</b> venciendo el d#{161.chr}a #{I18n.l(c[2], format: '<b>%-d</b> de <b>%B</b> de <b>%Y</b>')} y cada mes subsiguiente"
+        end
+        cuota = cuota + c[0]
+      end
+      return "<b>#{cuota}</b> cuotas, a saber: " + mensaje
+    end
   end
 
 
 
   def vale(file_path)
 
-    # cuotas = CalcularPrecio()
+    cuotas = CalcularPrecio()
 
-    # total = 0
-    # cuotas.each do |cuota|
-    #   total = total + cuota[0]*cuota[1]
-    # end
-
-
-    # total_letras = Inscripcion.numero_a_letras(total,true)
-
-    # cedula_alumno = Inscripcion.cedula_tos(cedula)
-
-    # nombre_alumno = ""
-    # alumno = Alumno.find_by(cedula: cedula) rescue nil
-    # if alumno != nil 
-    #   nombre_alumno = alumno.nombre + " " + alumno.apellido
-    # end
-
-    # nombre_grado = ""
-    # proximo_grado = ProximoGrado.find(proximo_grado_id) rescue nil
-    # if proximo_grado != nil
-    #   nombre_grado = proximo_grado.nombre
-    # end
-
-    # convenio_nombre = ""
-    # matricula_nombre = ""
-    # hermanos_nombre = ""
-    # if formulario_id != nil
-    #   formulario = Formulario.find(formulario_id) rescue nil
-    #   if formulario != nil 
-    #     convenio_nombre = formulario.nombre
-    #   end
-    # else
-    #   inscripcion_opcion = InscripcionOpcion.find(convenio_id) rescue nil
-    #   if inscripcion_opcion != nil 
-    #     convenio_nombre = inscripcion_opcion.nombre
-    #   end
-    #   inscripcion_opcion = InscripcionOpcion.find(adicional_id) rescue nil
-    #   if inscripcion_opcion != nil 
-    #     convenio_nombre = convenio_nombre + " + " + inscripcion_opcion.nombre
-    #   end
-
-    #   inscripcion_opcion = InscripcionOpcion.find(matricula_id) rescue nil
-    #   if inscripcion_opcion != nil 
-    #     matricula_nombre = inscripcion_opcion.nombre
-    #   end
-
-    #   inscripcion_opcion = InscripcionOpcion.find(hermanos_id) rescue nil
-    #   if inscripcion_opcion != nil 
-    #     hermanos_nombre = inscripcion_opcion.nombre
-    #   end
-    # end
-
-    # inscripcion = Inscripcion.FindInscripcion(alumno_id)
-
-    # idx=0
-    # nombreT = Array.new
-    # documentoT = Array.new
-    # domicilioT = Array.new
-    # emailT = Array.new
-    # celularT = Array.new
-
-    # if (inscripcion.titular_padre)
-    #   nombreT[idx] = inscripcion.nombre_padre + " " + inscripcion.apellido_padre
-    #   documentoT[idx] = inscripcion.cedula_padre
-    #   domicilioT[idx] = inscripcion.domicilio_padre
-    #   emailT[idx] = inscripcion.email_padre
-    #   celularT[idx] = inscripcion.celular_padre
-    #   idx = idx+1
-    # end
-
-    # if (inscripcion.titular_madre)
-    #   nombreT[idx] = inscripcion.nombre_madre + " " + inscripcion.apellido_madre
-    #   documentoT[idx] = inscripcion.cedula_madre
-    #   domicilioT[idx] = inscripcion.domicilio_madre
-    #   emailT[idx] = inscripcion.email_madre
-    #   celularT[idx] = inscripcion.celular_madre
-    #   idx = idx+1
-    # end
-
-    # if inscripcion.documento1 != nil
-    #   nombreT[idx] = "#{inscripcion.nombre1} #{inscripcion.apellido1}"
-    #   documentoT[idx] = inscripcion.documento1
-    #   domicilioT[idx] = inscripcion.domicilio1
-    #   emailT[idx] = inscripcion.email1
-    #   celularT[idx] = inscripcion.celular1
-    #   idx = idx+1
-    # end
-
-    # if inscripcion.documento2 != nil
-    #   nombreT[idx] = "#{inscripcion.nombre2} #{inscripcion.apellido2}"
-    #   documentoT[idx] = inscripcion.documento2
-    #   domicilioT[idx] = inscripcion.domicilio2
-    #   emailT[idx] = inscripcion.email2
-    #   celularT[idx] = inscripcion.celular2
-    #   idx = idx+1
-    # end
+    total = 0
+    cuotas.each do |cuota|
+      total = total + cuota[0]*cuota[1]
+    end
 
 
-    # if reinscripcion
-    #   titulo = "<b>REINSCRIPCION</b>"
-    # else
-    #   titulo = "<b>INSCRIPCION</b>"
-    # end
+    total_letras = Inscripcion.numero_a_letras(total,true)
 
-    # texto_inscripcion =
-    #   "#{titulo}<br>"+      
-    #   "Fecha: #{fecha_tos(inscripcion.created_at)}<br>" +
-    #   "Recibida por: #{inscripcion.recibida}<br>" +
-    #   "<br>" +
-    #   "<b>NIVEL</b><br>" +
-    #   "Grado: #{nombre_grado}<br>" +
-    #   "Descuento: #{convenio_nombre}<br>" +
-    #   "Matrícula: #{matricula_nombre}<br>" +
-    #   "Hermanos: #{hermanos_nombre}<br>" +
-    #   "<br>"+
-    #   "<b>ALUMNO</b><br>" +
-    #   "Nombre: #{inscripcion.nombre} #{inscripcion.apellido}<br>" +
-    #   "Documento de identidad: #{Inscripcion.cedula_tos(inscripcion.cedula)}<br>" +
-    #   "Lugar de nacimiento: #{inscripcion.lugar_nacimiento}<br>" +
-    #   "Fecha de nacimiento: #{fecha_tos(inscripcion.fecha_nacimiento)}<br>" +
-    #   "Domicilio: #{inscripcion.domicilio}<br>" + 
-    #   "Teléfono/Celular: #{inscripcion.celular}<br>" + 
-    #   "Mutualista: #{inscripcion.mutualista}<br>" + 
-    #   "Emergencia: #{inscripcion.emergencia}<br>" + 
-    #   "Procede de: #{inscripcion.procede}<br>"
+    cedula_alumno = Inscripcion.cedula_tos(cedula)
 
-    #   texto_padre =
-    #   "<b>PADRE</b><br>" +
-    #   "Nombre: #{inscripcion.nombre_padre} #{inscripcion.apellido_padre}<br>" +
-    #   "Documento de identidad: #{Inscripcion.cedula_tos(inscripcion.cedula_padre)}<br>" +
-    #   "Lugar de nacimiento: #{inscripcion.lugar_nacimiento_padre}<br>" +
-    #   "Fecha de nacimiento: #{fecha_tos(inscripcion.fecha_nacimiento_padre)}<br>" +
-    #   "Mail: #{inscripcion.email_padre}<br>" + 
-    #   "Domicilio: #{inscripcion.domicilio_padre}<br>" + 
-    #   "Teléfono/Celular: #{inscripcion.celular_padre}<br>" + 
-    #   "Profesión: #{inscripcion.profesion_padre}<br>" + 
-    #   "Lugar de trabajo: #{inscripcion.trabajo_padre}<br>" + 
-    #   "Teléfono de trabajo: #{inscripcion.telefono_trabajo_padre}<br>" 
+    nombre_alumno = ""
+    alumno = Alumno.find_by(cedula: cedula) rescue nil
+    if alumno != nil 
+      nombre_alumno = alumno.nombre + " " + alumno.apellido
+    end
 
-    #   texto_madre =
-    #   "<b>MADRE</b><br>" +
-    #   "Nombre: #{inscripcion.nombre_madre} #{inscripcion.apellido_madre}<br>" +
-    #   "Documento de identidad: #{Inscripcion.cedula_tos(inscripcion.cedula_madre)}<br>" +
-    #   "Lugar de nacimiento: #{inscripcion.lugar_nacimiento_madre}<br>" +
-    #   "Fecha de nacimiento: #{fecha_tos(inscripcion.fecha_nacimiento_madre)}<br>" +
-    #   "Mail: #{inscripcion.email_madre}<br>" + 
-    #   "Domicilio: #{inscripcion.domicilio_madre}<br>" + 
-    #   "Teléfono/Celular: #{inscripcion.celular_madre}<br>" + 
-    #   "Profesión: #{inscripcion.profesion_madre}<br>" + 
-    #   "Lugar de trabajo: #{inscripcion.trabajo_madre}<br>" + 
-    #   "Teléfono de trabajo: #{inscripcion.telefono_trabajo_madre}<br><br>"
+    nombre_grado = ""
+    proximo_grado = ProximoGrado.find(proximo_grado_id) rescue nil
+    if proximo_grado != nil
+      nombre_grado = proximo_grado.nombre
+    end
 
-    # texto_nota = "<b>NOTA: Para la inscripción deberá presentar: fotocopia de la C.I. del/los Titular/es de la cuenta y si corresponde Libre de Deuda o recibo del último pago realizado en la Institución de donde proviene.<br><br>" +
-    #        "LA AUTORIZACIÓN DEFINITIVA SERÁ DADA UNA VEZ REALIZADO EL CLEARING DE INFORMES<br><br>" +
-    #        "El que suscribe ______________________________ declara que los datos aportados son ciertos y actuales y los informa a los efectos de la contratación de los servicios educativos que el Colegio Nacional José Pedro Varela provee. La actualización de los datos proveídos es responsabilidad de la parte.</b>"
+    convenio_nombre = ""
+    matricula_nombre = ""
+    hermanos_nombre = ""
+    if formulario_id != nil
+      formulario = Formulario.find(formulario_id) rescue nil
+      if formulario != nil 
+        convenio_nombre = formulario.nombre
+      end
+    else
+      inscripcion_opcion = InscripcionOpcion.find(convenio_id) rescue nil
+      if inscripcion_opcion != nil 
+        convenio_nombre = inscripcion_opcion.nombre
+      end
+      inscripcion_opcion = InscripcionOpcion.find(adicional_id) rescue nil
+      if inscripcion_opcion != nil 
+        convenio_nombre = convenio_nombre + " + " + inscripcion_opcion.nombre
+      end
 
+      inscripcion_opcion = InscripcionOpcion.find(matricula_id) rescue nil
+      if inscripcion_opcion != nil 
+        matricula_nombre = inscripcion_opcion.nombre
+      end
 
+      inscripcion_opcion = InscripcionOpcion.find(hermanos_id) rescue nil
+      if inscripcion_opcion != nil 
+        hermanos_nombre = inscripcion_opcion.nombre
+      end
+    end
 
-    # informacion = 
-    #   "El alumno #{nombre_alumno} cuya cédula es #{cedula_alumno} ha comenzado el proceso de reinscripción para el año lectivo #{anio} en " + 
-    #   "#{nombre_grado} del Colegio Nacional José Pedro Varela."
+    inscripcion = Inscripcion.FindInscripcion(alumno_id)
 
-    # cabezal = 
-    #   "$U <b>#{total}</b>" + 
-    #   "<br><br>" +
-    #   "Lugar y fecha de emisión: <b>Montevideo, #{I18n.l(DateTime.now, format: '%-d de %B de %Y')}</b>";
+    idx=0
+    nombreT = Array.new
+    documentoT = Array.new
+    domicilioT = Array.new
+    emailT = Array.new
+    celularT = Array.new
 
-    # if cuotas.count==1 && cuotas[0][0] == 1
-    #   texto = "<b>VALE</b>"
-    # else
-    #   texto = "<b>VALE AMORTIZABLE</b>"
-    # end
+    if (inscripcion.titular_padre)
+      nombreT[idx] = inscripcion.nombre_padre + " " + inscripcion.apellido_padre
+      documentoT[idx] = inscripcion.cedula_padre
+      domicilioT[idx] = inscripcion.domicilio_padre
+      emailT[idx] = inscripcion.email_padre
+      celularT[idx] = inscripcion.celular_padre
+      idx = idx+1
+    end
 
-    # texto = texto + " por la cantidad de pesos uruguayos <b>#{total_letras}</b> que debo (debemos) y pagaré (pagaremos) en forma " +
-    #   "indivisible y solidaria a la Sociedad Uruguaya de Enseñanza, Colegio Nacional José Pedro Varela - o a su orden, en la misma moneda, en " +
-    #   "#{cuotas_a_letras(cuotas)}, en el domicilio del acreedor sito en la calle Colonia 1637 de la ciudad de Montevideo, o donde indique el acreedor." +
-    #   "<br><br>" + 
-    #   "La falta de pago de dos o más cuotas a su vencimiento producirá la mora de pleno derecho sin necesidad de interpelación de clase alguna, " +
-    #   "devengándose por esa sola circunstancias, intereses moratorios del 40% (cuarenta por ciento) tasa efectiva anual (aprobada por BCU) y hará " +
-    #   "exigible la totalidad del monto adeudado más los intereses moratorios generados a partir del incumplimiento y hasta su efectiva y total " + 
-    #   "cancelación." +
-    #   "<br><br>" + 
-    #   "En caso de incumplimiento total o parcial del presente título, el acreedor a su elección, podrá demandar la ejecución de este título ante " +
-    #   "los Jueces del lugar de residencia del deudor o ante los del lugar del cumplimiento de la obligación." +
-    #   "<br><br>" + 
-    #   "Para todos los efectos judiciales y/o extrajudiciales a que pudiera dar lugar éste documento, el deudor constituye como domicilio especial el " +
-    #   "abajo denunciado." +
-    #   "<br><br><br>" + 
-    #   "NOMBRE COMPLETO: #{nombreT[0]}<br><br>" +
-    #   "DOCUMENTO DE IDENTIDAD: #{Inscripcion.cedula_tos(documentoT[0])}<br><br>" +
-    #   "DOMICILIO: #{domicilioT[0]}<br><br>" +
-    #   "MAIL: #{emailT[0]}<br><br>" +
-    #   "TEL/CEL: #{celularT[0]}<br><br>" +
-    #   "FIRMA:<br><br>" +
-    #   "Aclaración:<br><br>" +
-    #   "<br><br>" +
-    #   "NOMBRE COMPLETO: #{nombreT[1]}<br><br>" +
-    #   "DOCUMENTO DE IDENTIDAD: #{Inscripcion.cedula_tos(documentoT[1])}<br><br>" +
-    #   "DOMICILIO: #{domicilioT[1]}<br><br>" +
-    #   "MAIL: #{emailT[1]}<br><br>" +
-    #   "TEL/CEL: #{celularT[1]}<br><br>" +
-    #   "FIRMA:<br><br>" +
-    #   "Aclaración:<br><br>";
+    if (inscripcion.titular_madre)
+      nombreT[idx] = inscripcion.nombre_madre + " " + inscripcion.apellido_madre
+      documentoT[idx] = inscripcion.cedula_madre
+      domicilioT[idx] = inscripcion.domicilio_madre
+      emailT[idx] = inscripcion.email_madre
+      celularT[idx] = inscripcion.celular_madre
+      idx = idx+1
+    end
 
-    # text_file = Tempfile.new("text.pdf")
-    # text_file_path = text_file.path
+    if inscripcion.documento1 != nil
+      nombreT[idx] = "#{inscripcion.nombre1} #{inscripcion.apellido1}"
+      documentoT[idx] = inscripcion.documento1
+      domicilioT[idx] = inscripcion.domicilio1
+      emailT[idx] = inscripcion.email1
+      celularT[idx] = inscripcion.celular1
+      idx = idx+1
+    end
 
-    # reinsc = reinscripcion
-
-    # Prawn::Document.generate(text_file_path) do
-
-    #   if reinsc
-    #     font "Helvetica", :size => 12
-
-    #     dash 5, space: 0, phase:0
-    #     stroke_color "0000FF"
-    #     stroke_rectangle [0, 720], 540, 520   
-    #     stroke_color "FF0000"
-    #     stroke_rectangle [2, 718], 536, 516
-
-    #     stroke_color "000000"
-    #     dash 5, space: 5, phase:0
-    #     stroke_horizontal_line -40, 580, at:100
+    if inscripcion.documento2 != nil
+      nombreT[idx] = "#{inscripcion.nombre2} #{inscripcion.apellido2}"
+      documentoT[idx] = inscripcion.documento2
+      domicilioT[idx] = inscripcion.domicilio2
+      emailT[idx] = inscripcion.email2
+      celularT[idx] = inscripcion.celular2
+      idx = idx+1
+    end
 
 
-    #     image Rails.root.join("data", "logo.png"), at: [203,655], scale: 0.5
+    if reinscripcion
+      titulo = "<b>REINSCRIPCION</b>"
+    else
+      titulo = "<b>INSCRIPCION</b>"
+    end
 
-    #     bounding_box([20, 455], :width => 500, :height => 60) do
-    #       text titulo, align: :center, inline_format: true
-    #     end
+    texto_inscripcion =
+      "#{titulo}<br>"+      
+      "Fecha: #{fecha_tos(inscripcion.created_at)}<br>" +
+      "Recibida por: #{inscripcion.recibida}<br>" +
+      "<br>" +
+      "<b>NIVEL</b><br>" +
+      "Grado: #{nombre_grado}<br>" +
+      "Descuento: #{convenio_nombre}<br>" +
+      "Matr#{161.chr}cula: #{matricula_nombre}<br>" +
+      "Hermanos: #{hermanos_nombre}<br>" +
+      "<br>"+
+      "<b>ALUMNO</b><br>" +
+      "Nombre: #{inscripcion.nombre} #{inscripcion.apellido}<br>" +
+      "Documento de identidad: #{Inscripcion.cedula_tos(inscripcion.cedula)}<br>" +
+      "Lugar de nacimiento: #{inscripcion.lugar_nacimiento}<br>" +
+      "Fecha de nacimiento: #{fecha_tos(inscripcion.fecha_nacimiento)}<br>" +
+      "Domicilio: #{inscripcion.domicilio}<br>" + 
+      "Tel#{130.chr}fono/Celular: #{inscripcion.celular}<br>" + 
+      "Mutualista: #{inscripcion.mutualista}<br>" + 
+      "Emergencia: #{inscripcion.emergencia}<br>" + 
+      "Procede de: #{inscripcion.procede}<br>"
 
-    #     bounding_box([60, 425], :width => 420, :height => 60) do
-    #       text informacion, align: :center, inline_format: true
-    #     end
+      texto_padre =
+      "<b>PADRE</b><br>" +
+      "Nombre: #{inscripcion.nombre_padre} #{inscripcion.apellido_padre}<br>" +
+      "Documento de identidad: #{Inscripcion.cedula_tos(inscripcion.cedula_padre)}<br>" +
+      "Lugar de nacimiento: #{inscripcion.lugar_nacimiento_padre}<br>" +
+      "Fecha de nacimiento: #{fecha_tos(inscripcion.fecha_nacimiento_padre)}<br>" +
+      "Mail: #{inscripcion.email_padre}<br>" + 
+      "Domicilio: #{inscripcion.domicilio_padre}<br>" + 
+      "Tel#{130.chr}fono/Celular: #{inscripcion.celular_padre}<br>" + 
+      "Profesi#{162.chr}n: #{inscripcion.profesion_padre}<br>" + 
+      "Lugar de trabajo: #{inscripcion.trabajo_padre}<br>" + 
+      "Tel#{130.chr}fono de trabajo: #{inscripcion.telefono_trabajo_padre}<br>" 
 
-    #     bounding_box([0, 180], :width => 500, :height => 60) do
-    #       text "Recibido por:", align: :left, inline_format: true
-    #     end
-    #     bounding_box([0, 160], :width => 500, :height => 60) do
-    #       text "Fecha:", align: :left, inline_format: true
-    #     end
-    #     bounding_box([0, 60], :width => 500, :height => 60) do
-    #       text "Recibido por:", align: :left, inline_format: true
-    #     end
-    #     bounding_box([0, 40], :width => 500, :height => 60) do
-    #       text "Fecha:", align: :left, inline_format: true
-    #     end
+      texto_madre =
+      "<b>MADRE</b><br>" +
+      "Nombre: #{inscripcion.nombre_madre} #{inscripcion.apellido_madre}<br>" +
+      "Documento de identidad: #{Inscripcion.cedula_tos(inscripcion.cedula_madre)}<br>" +
+      "Lugar de nacimiento: #{inscripcion.lugar_nacimiento_madre}<br>" +
+      "Fecha de nacimiento: #{fecha_tos(inscripcion.fecha_nacimiento_madre)}<br>" +
+      "Mail: #{inscripcion.email_madre}<br>" + 
+      "Domicilio: #{inscripcion.domicilio_madre}<br>" + 
+      "Tel#{130.chr}fono/Celular: #{inscripcion.celular_madre}<br>" + 
+      "Profesi#{162.chr}n: #{inscripcion.profesion_madre}<br>" + 
+      "Lugar de trabajo: #{inscripcion.trabajo_madre}<br>" + 
+      "Tel#{130.chr}fono de trabajo: #{inscripcion.telefono_trabajo_madre}<br><br>"
 
-    #     start_new_page
-    #   end
+    texto_nota = "<b>NOTA: Para la inscripci#{162.chr}n deber#{160.chr} presentar: fotocopia de la C.I. del/los Titular/es de la cuenta y si corresponde Libre de Deuda o recibo del #{163.chr}ltimo pago realizado en la Instituci#{162.chr}n de donde proviene.<br><br>" +
+           "LA AUTORIZACIÓN DEFINITIVA SERÁ DADA UNA VEZ REALIZADO EL CLEARING DE INFORMES<br><br>" +
+           "El que suscribe ______________________________ declara que los datos aportados son ciertos y actuales y los informa a los efectos de la contrataci#{162.chr}n de los servicios educativos que el Colegio Nacional Jos#{130.chr} Pedro Varela provee. La actualizaci#{162.chr}n de los datos prove#{161.chr}dos es responsabilidad de la parte.</b>"
 
-    #   if !reinsc
-    #     font "Helvetica", :size => 10
+
+
+    informacion = 
+      "El alumno #{nombre_alumno} cuya c#{130.chr}dula es #{cedula_alumno} ha comenzado el proceso de reinscripci#{162.chr}n para el año lectivo #{anio} en " + 
+      "#{nombre_grado} del Colegio Nacional Jos#{130.chr} Pedro Varela."
+
+    cabezal = 
+      "$U <b>#{total}</b>" + 
+      "<br><br>" +
+      "Lugar y fecha de emisi#{162.chr}n: <b>Montevideo, #{I18n.l(DateTime.now, format: '%-d de %B de %Y')}</b>";
+
+    if cuotas.count==1 && cuotas[0][0] == 1
+      texto = "<b>VALE</b>"
+    else
+      texto = "<b>VALE AMORTIZABLE</b>"
+    end
+
+    texto = texto + " por la cantidad de pesos uruguayos <b>#{total_letras}</b> que debo (debemos) y pagar#{130.chr} (pagaremos) en forma " +
+      "indivisible y solidaria a la Sociedad Uruguaya de Enseñanza, Colegio Nacional Jos#{130.chr} Pedro Varela - o a su orden, en la misma moneda, en " +
+      "#{cuotas_a_letras(cuotas)}, en el domicilio del acreedor sito en la calle Colonia 1637 de la ciudad de Montevideo, o donde indique el acreedor." +
+      "<br><br>" + 
+      "La falta de pago de dos o m#{160.chr}s cuotas a su vencimiento producir#{160.chr} la mora de pleno derecho sin necesidad de interpelaci#{162.chr}n de clase alguna, " +
+      "deveng#{160.chr}ndose por esa sola circunstancias, intereses moratorios del 40% (cuarenta por ciento) tasa efectiva anual (aprobada por BCU) y har#{160.chr} " +
+      "exigible la totalidad del monto adeudado m#{160.chr}s los intereses moratorios generados a partir del incumplimiento y hasta su efectiva y total " + 
+      "cancelaci#{162.chr}n." +
+      "<br><br>" + 
+      "En caso de incumplimiento total o parcial del presente t#{161.chr}tulo, el acreedor a su elecci#{162.chr}n, podr#{160.chr} demandar la ejecuci#{162.chr}n de este t#{161.chr}tulo ante " +
+      "los Jueces del lugar de residencia del deudor o ante los del lugar del cumplimiento de la obligaci#{162.chr}n." +
+      "<br><br>" + 
+      "Para todos los efectos judiciales y/o extrajudiciales a que pudiera dar lugar #{130.chr}ste documento, el deudor constituye como domicilio especial el " +
+      "abajo denunciado." +
+      "<br><br><br>" + 
+      "NOMBRE COMPLETO: #{nombreT[0]}<br><br>" +
+      "DOCUMENTO DE IDENTIDAD: #{Inscripcion.cedula_tos(documentoT[0])}<br><br>" +
+      "DOMICILIO: #{domicilioT[0]}<br><br>" +
+      "MAIL: #{emailT[0]}<br><br>" +
+      "TEL/CEL: #{celularT[0]}<br><br>" +
+      "FIRMA:<br><br>" +
+      "Aclaraci#{162.chr}n:<br><br>" +
+      "<br><br>" +
+      "NOMBRE COMPLETO: #{nombreT[1]}<br><br>" +
+      "DOCUMENTO DE IDENTIDAD: #{Inscripcion.cedula_tos(documentoT[1])}<br><br>" +
+      "DOMICILIO: #{domicilioT[1]}<br><br>" +
+      "MAIL: #{emailT[1]}<br><br>" +
+      "TEL/CEL: #{celularT[1]}<br><br>" +
+      "FIRMA:<br><br>" +
+      "Aclaraci#{162.chr}n:<br><br>";
+
+    text_file = Tempfile.new("text.pdf")
+    text_file_path = text_file.path
+
+    reinsc = reinscripcion
+
+    Prawn::Document.generate(text_file_path) do
+
+      if reinsc
+        font "Helvetica", :size => 12
+
+        dash 5, space: 0, phase:0
+        stroke_color "0000FF"
+        stroke_rectangle [0, 720], 540, 520   
+        stroke_color "FF0000"
+        stroke_rectangle [2, 718], 536, 516
+
+        stroke_color "000000"
+        dash 5, space: 5, phase:0
+        stroke_horizontal_line -40, 580, at:100
+
+
+        image Rails.root.join("data", "logo.png"), at: [203,655], scale: 0.5
+
+        bounding_box([20, 455], :width => 500, :height => 60) do
+          text titulo, align: :center, inline_format: true
+        end
+
+        bounding_box([60, 425], :width => 420, :height => 60) do
+          text informacion, align: :center, inline_format: true
+        end
+
+        bounding_box([0, 180], :width => 500, :height => 60) do
+          text "Recibido por:", align: :left, inline_format: true
+        end
+        bounding_box([0, 160], :width => 500, :height => 60) do
+          text "Fecha:", align: :left, inline_format: true
+        end
+        bounding_box([0, 60], :width => 500, :height => 60) do
+          text "Recibido por:", align: :left, inline_format: true
+        end
+        bounding_box([0, 40], :width => 500, :height => 60) do
+          text "Fecha:", align: :left, inline_format: true
+        end
+
+        start_new_page
+      end
+
+      if !reinsc
+        font "Helvetica", :size => 10
         
-    #     dash 5, space: 0, phase:0
-    #     stroke_color "0000FF"
-    #     stroke_rectangle [0, 720], 540, 720   
-    #     stroke_color "FF0000"
-    #     stroke_rectangle [2, 718], 536, 716
+        dash 5, space: 0, phase:0
+        stroke_color "0000FF"
+        stroke_rectangle [0, 720], 540, 720   
+        stroke_color "FF0000"
+        stroke_rectangle [2, 718], 536, 716
 
-    #     image Rails.root.join("data", "logo.png"), at: [203,700], scale: 0.5
+        image Rails.root.join("data", "logo.png"), at: [203,700], scale: 0.5
 
-    #     bounding_box([20, 570], :width => 500, :height => 300) do
-    #       text texto_inscripcion, align: :left, inline_format: true
-    #     end
+        bounding_box([20, 570], :width => 500, :height => 300) do
+          text texto_inscripcion, align: :left, inline_format: true
+        end
 
-    #     bounding_box([20, 280], :width => 250, :height => 150) do
-    #       text texto_padre, align: :left, inline_format: true
-    #     end
+        bounding_box([20, 280], :width => 250, :height => 150) do
+          text texto_padre, align: :left, inline_format: true
+        end
 
-    #     bounding_box([270, 280], :width => 250, :height => 150) do
-    #       text texto_madre, align: :left, inline_format: true
-    #     end
+        bounding_box([270, 280], :width => 250, :height => 150) do
+          text texto_madre, align: :left, inline_format: true
+        end
 
-    #     bounding_box([20, 120], :width => 500, :height => 120) do
-    #       text texto_nota, align: :justify, inline_format: true
-    #     end
+        bounding_box([20, 120], :width => 500, :height => 120) do
+          text texto_nota, align: :justify, inline_format: true
+        end
 
-    #     start_new_page
-    #   end
+        start_new_page
+      end
 
-    #   font "Helvetica", :size => 10
+      font "Helvetica", :size => 10
 
-    #   dash 5, space: 0, phase:0
-    #   stroke_color "0000FF"
-    #   stroke_rectangle [0, 720], 540, 720   
-    #   stroke_color "FF0000"
-    #   stroke_rectangle [2, 718], 536, 716
+      dash 5, space: 0, phase:0
+      stroke_color "0000FF"
+      stroke_rectangle [0, 720], 540, 720   
+      stroke_color "FF0000"
+      stroke_rectangle [2, 718], 536, 716
 
-    #   bounding_box([20, 700], :width => 500, :height => 60) do
-    #     text cabezal, align: :right, inline_format: true
-    #   end
-    #   bounding_box([20, 640], :width => 500, :height => 600) do
-    #     text texto, align: :justify, inline_format: true
-    #   end
+      bounding_box([20, 700], :width => 500, :height => 60) do
+        text cabezal, align: :right, inline_format: true
+      end
+      bounding_box([20, 640], :width => 500, :height => 600) do
+        text texto, align: :justify, inline_format: true
+      end
 
-    # end
+    end
 
-    # pdf = CombinePDF.new
-    # pdf << CombinePDF.load(text_file_path)
-    # pdf.save file_path
+    pdf = CombinePDF.new
+    pdf << CombinePDF.load(text_file_path)
+    pdf.save file_path
 
-    # text_file.unlink
+    text_file.unlink
 
   end
 
