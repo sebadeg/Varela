@@ -138,21 +138,21 @@ class Inscripcion < ApplicationRecord
 
     str = ""
 
-    # cuotas = CalcularPrecio()
+    cuotas = CalcularPrecio()
 
-    # total = 0
-    # cuotas.each do |cuota|
-    #   if str != ""
-    #     str = str + " + "        
-    #   end
-    #   if cuota[2] != nil
-    #     str = str + "(#{cuota[2].strftime("%d/%m/%Y")})"
-    #   end
-    #   str = str + " #{cuota[0]} x #{cuota[1]}"
+    total = 0
+    cuotas.each do |cuota|
+      if str != ""
+        str = str + " + "        
+      end
+      if cuota[2] != nil
+        str = str + "(#{cuota[2].strftime("%d/%m/%Y")})"
+      end
+      str = str + " #{cuota[0]} x #{cuota[1]}"
 
-    #   total = total + cuota[0]*cuota[1]
-    # end
-    # str = str + " = #{total}"
+      total = total + cuota[0]*cuota[1]
+    end
+    str = str + " = #{total}"
 
     return str
   end
