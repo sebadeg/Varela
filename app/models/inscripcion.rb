@@ -321,11 +321,11 @@ class Inscripcion < ApplicationRecord
     when 9
       s = "novena"
     when 10
-      s = "d#{130.chr}cima".force_encoding(Encoding::UTF_8)
+      s = "d\xC9cima"
     when 11
-      s = "und#{130.chr}cima".force_encoding(Encoding::UTF_8)
+      s = "und\xC9cima"
     when 12
-      s = "duod#{130.chr}cima".force_encoding(Encoding::UTF_8)
+      s = "duod\xC9cima"
     when 13
       s = "decimotercera"
     when 14
@@ -341,7 +341,7 @@ class Inscripcion < ApplicationRecord
     when 19
       s = "decimonovena"
     when 20
-      s = "vig#{130.chr}sima".force_encoding(Encoding::UTF_8)
+      s = "vig\xC9sima"
     when 21
       s = "vigesimoprimera"
     when 22
