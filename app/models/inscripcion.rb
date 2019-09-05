@@ -489,7 +489,7 @@ class Inscripcion < ApplicationRecord
       titulo = "<b>INSCRIPCION</b>"
     end
 
-    texto_inscripcion = Inscripcion.numero_cuota_letras(10)
+    texto_inscripcion = ""
     #   "#{titulo}<br>"+      
     #   "Fecha: #{fecha_tos(inscripcion.created_at)}<br>" +
     #   "Recibida por: #{inscripcion.recibida}<br>" +
@@ -558,6 +558,8 @@ class Inscripcion < ApplicationRecord
     else
       texto = "<b>VALE AMORTIZABLE</b>"
     end
+
+    texto = Inscripcion.numero_cuota_letras(10)
 
     # texto = texto + " por la cantidad de pesos uruguayos <b>#{total_letras}</b> que debo (debemos) y pagaré (pagaremos) en forma " +
     #   "indivisible y solidaria a la Sociedad Uruguaya de Enseñanza, Colegio Nacional José Pedro Varela - o a su orden, en la misma moneda, en " +
