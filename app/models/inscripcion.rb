@@ -489,26 +489,26 @@ class Inscripcion < ApplicationRecord
     end
 
     texto_inscripcion =
-      "#{titulo}<br>"+      
-      "Fecha: #{fecha_tos(inscripcion.created_at)}<br>" +
-      "Recibida por: #{inscripcion.recibida}<br>" +
-      "<br>" +
-      "<b>NIVEL</b><br>" +
-      "Grado: #{nombre_grado}<br>" +
-      "Descuento: #{convenio_nombre}<br>" +
+      "#{titulo}<br>".force_encoding('iso-8859-1') +      
+      "Fecha: #{fecha_tos(inscripcion.created_at)}<br>".force_encoding('iso-8859-1') +
+      "Recibida por: #{inscripcion.recibida}<br>".force_encoding('iso-8859-1') +
+      "<br>".force_encoding('iso-8859-1') +
+      "<b>NIVEL</b><br>".force_encoding('iso-8859-1') +
+      "Grado: #{nombre_grado}<br>".force_encoding('iso-8859-1') +
+      "Descuento: #{convenio_nombre}<br>".force_encoding('iso-8859-1') +
       "Matr\xEDcula: #{matricula_nombre}<br>".force_encoding('iso-8859-1') +
-      "Hermanos: #{hermanos_nombre}<br>" +
-      "<br>"+
-      "<b>ALUMNO</b><br>" +
-      "Nombre: #{inscripcion.nombre} #{inscripcion.apellido}<br>" +
-      "Documento de identidad: #{Inscripcion.cedula_tos(inscripcion.cedula)}<br>" +
-      "Lugar de nacimiento: #{inscripcion.lugar_nacimiento}<br>" +
-      "Fecha de nacimiento: #{fecha_tos(inscripcion.fecha_nacimiento)}<br>" +
-      "Domicilio: #{inscripcion.domicilio}<br>" + 
+      "Hermanos: #{hermanos_nombre}<br>".force_encoding('iso-8859-1') +
+      "<br>".force_encoding('iso-8859-1') +
+      "<b>ALUMNO</b><br>".force_encoding('iso-8859-1') +
+      "Nombre: #{inscripcion.nombre} #{inscripcion.apellido}<br>".force_encoding('iso-8859-1') +
+      "Documento de identidad: #{Inscripcion.cedula_tos(inscripcion.cedula)}<br>".force_encoding('iso-8859-1') +
+      "Lugar de nacimiento: #{inscripcion.lugar_nacimiento}<br>".force_encoding('iso-8859-1') +
+      "Fecha de nacimiento: #{fecha_tos(inscripcion.fecha_nacimiento)}<br>".force_encoding('iso-8859-1') +
+      "Domicilio: #{inscripcion.domicilio}<br>".force_encoding('iso-8859-1') + 
       "Tel\xE9fono/Celular: #{inscripcion.celular}<br>".force_encoding('iso-8859-1') + 
-      "Mutualista: #{inscripcion.mutualista}<br>" + 
-      "Emergencia: #{inscripcion.emergencia}<br>" + 
-      "Procede de: #{inscripcion.procede}<br>"
+      "Mutualista: #{inscripcion.mutualista}<br>".force_encoding('iso-8859-1') + 
+      "Emergencia: #{inscripcion.emergencia}<br>".force_encoding('iso-8859-1') + 
+      "Procede de: #{inscripcion.procede}<br>".force_encoding('iso-8859-1')
 
     texto_padre =
       "<b>PADRE</b><br>" +
