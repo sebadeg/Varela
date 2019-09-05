@@ -497,7 +497,7 @@ class Inscripcion < ApplicationRecord
       "<b>NIVEL</b><br>" +
       "Grado: #{nombre_grado}<br>" +
       "Descuento: #{convenio_nombre}<br>" +
-      "Matr#{161.chr}cula: #{matricula_nombre}<br>" +
+      "Matrícula: #{matricula_nombre}<br>".force_encoding("UTF-8") +
       "Hermanos: #{hermanos_nombre}<br>" +
       "<br>"+
       "<b>ALUMNO</b><br>" +
