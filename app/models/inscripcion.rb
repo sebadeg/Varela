@@ -355,29 +355,28 @@ class Inscripcion < ApplicationRecord
   end
 
   def cuotas_a_letras(cuotas)
-    return ""
-    # if cuotas.count == 1
-    #   if cuotas[0][0] == 1        
-    #     return "<b>1</b> cuota de $U <b>#{cuotas[0][1]}</b>, venciendo el día #{I18n.l(cuotas[0][2], format: '<b>%-d</b> de <b>%B</b> de <b>%Y</b>')}"
-    #   else
-    #     return "<b>#{cuotas[0][0]}</b> cuotas mensuales, iguales y consecutivas de $U <b>#{cuotas[0][1]}</b> cada una, venciendo la primera el día #{I18n.l(cuotas[0][2], format: '<b>%-d</b> de <b>%B</b> de <b>%Y</b>')}"
-    #   end
-    # else
-    #   mensaje = ""
-    #   cuota = 0
-    #   cuotas.each do |c|
-    #     if mensaje != ""
-    #       mensaje = mensaje + ", "
-    #     end
-    #     if c[0] == 1
-    #       mensaje = mensaje + "la #{numero_cuota_letras(cuota+1)} de $U <b>#{c[1]}</b> venciendo el día #{I18n.l(c[2], format: '<b>%-d</b> de <b>%B</b> de <b>%Y</b>')}"
-    #     else
-    #       mensaje = mensaje + "de la #{numero_cuota_letras(cuota+1)} a la #{numero_cuota_letras(cuota+c[0])} de $U <b>#{c[1]}</b> venciendo el día #{I18n.l(c[2], format: '<b>%-d</b> de <b>%B</b> de <b>%Y</b>')} y cada mes subsiguiente"
-    #     end
-    #     cuota = cuota + c[0]
-    #   end
-    #   return "<b>#{cuota}</b> cuotas, a saber: " + mensaje
-    # end
+    if cuotas.count == 1
+      if cuotas[0][0] == 1        
+        return "<b>1</b> cuota de $U <b>#{cuotas[0][1]}</b>, venciendo el d\xEDa #{I18n.l(cuotas[0][2], format: '<b>%-d</b> de <b>%B</b> de <b>%Y</b>')}".force_encoding('iso-8859-1')
+      else
+        return "<b>#{cuotas[0][0]}</b> cuotas mensuales, iguales y consecutivas de $U <b>#{cuotas[0][1]}</b> cada una, venciendo la primera el d\xEDa #{I18n.l(cuotas[0][2], format: '<b>%-d</b> de <b>%B</b> de <b>%Y</b>')}".force_encoding('iso-8859-1')
+      end
+    else
+      mensaje = ""
+      cuota = 0
+      cuotas.each do |c|
+        if mensaje != ""
+          mensaje = mensaje + ", "
+        end
+        if c[0] == 1
+          mensaje = mensaje + "la #{numero_cuota_letras(cuota+1)} de $U <b>#{c[1]}</b> venciendo el d\xEDa #{I18n.l(c[2], format: '<b>%-d</b> de <b>%B</b> de <b>%Y</b>')}".force_encoding('iso-8859-1')
+        else
+          mensaje = mensaje + "de la #{numero_cuota_letras(cuota+1)} a la #{numero_cuota_letras(cuota+c[0])} de $U <b>#{c[1]}</b> venciendo el d\xEDa #{I18n.l(c[2], format: '<b>%-d</b> de <b>%B</b> de <b>%Y</b>')} y cada mes subsiguiente".force_encoding('iso-8859-1')
+        end
+        cuota = cuota + c[0]
+      end
+      return "<b>#{cuota}</b> cuotas, a saber: " + mensaje
+    end
   end
 
 
@@ -489,69 +488,69 @@ class Inscripcion < ApplicationRecord
       titulo = "<b>INSCRIPCION</b>"
     end
 
-    texto_inscripcion = ""
-    #   "#{titulo}<br>"+      
-    #   "Fecha: #{fecha_tos(inscripcion.created_at)}<br>" +
-    #   "Recibida por: #{inscripcion.recibida}<br>" +
-    #   "<br>" +
-    #   "<b>NIVEL</b><br>" +
-    #   "Grado: #{nombre_grado}<br>" +
-    #   "Descuento: #{convenio_nombre}<br>" +
-    #   "Matrícula: #{matricula_nombre}<br>" +
-    #   "Hermanos: #{hermanos_nombre}<br>" +
-    #   "<br>"+
-    #   "<b>ALUMNO</b><br>" +
-    #   "Nombre: #{inscripcion.nombre} #{inscripcion.apellido}<br>" +
-    #   "Documento de identidad: #{Inscripcion.cedula_tos(inscripcion.cedula)}<br>" +
-    #   "Lugar de nacimiento: #{inscripcion.lugar_nacimiento}<br>" +
-    #   "Fecha de nacimiento: #{fecha_tos(inscripcion.fecha_nacimiento)}<br>" +
-    #   "Domicilio: #{inscripcion.domicilio}<br>" + 
-    #   "Teléfono/Celular: #{inscripcion.celular}<br>" + 
-    #   "Mutualista: #{inscripcion.mutualista}<br>" + 
-    #   "Emergencia: #{inscripcion.emergencia}<br>" + 
-    #   "Procede de: #{inscripcion.procede}<br>"
+    texto_inscripcion =
+      "#{titulo}<br>"+      
+      "Fecha: #{fecha_tos(inscripcion.created_at)}<br>" +
+      "Recibida por: #{inscripcion.recibida}<br>" +
+      "<br>" +
+      "<b>NIVEL</b><br>" +
+      "Grado: #{nombre_grado}<br>" +
+      "Descuento: #{convenio_nombre}<br>" +
+      "Matr\xEDcula: #{matricula_nombre}<br>".force_encoding('iso-8859-1') +
+      "Hermanos: #{hermanos_nombre}<br>" +
+      "<br>"+
+      "<b>ALUMNO</b><br>" +
+      "Nombre: #{inscripcion.nombre} #{inscripcion.apellido}<br>" +
+      "Documento de identidad: #{Inscripcion.cedula_tos(inscripcion.cedula)}<br>" +
+      "Lugar de nacimiento: #{inscripcion.lugar_nacimiento}<br>" +
+      "Fecha de nacimiento: #{fecha_tos(inscripcion.fecha_nacimiento)}<br>" +
+      "Domicilio: #{inscripcion.domicilio}<br>" + 
+      "Teléfono/Celular: #{inscripcion.celular}<br>" + 
+      "Mutualista: #{inscripcion.mutualista}<br>" + 
+      "Emergencia: #{inscripcion.emergencia}<br>" + 
+      "Procede de: #{inscripcion.procede}<br>"
 
-    texto_padre = ""
-    #   "<b>PADRE</b><br>" +
-    #   "Nombre: #{inscripcion.nombre_padre} #{inscripcion.apellido_padre}<br>" +
-    #   "Documento de identidad: #{Inscripcion.cedula_tos(inscripcion.cedula_padre)}<br>" +
-    #   "Lugar de nacimiento: #{inscripcion.lugar_nacimiento_padre}<br>" +
-    #   "Fecha de nacimiento: #{fecha_tos(inscripcion.fecha_nacimiento_padre)}<br>" +
-    #   "Mail: #{inscripcion.email_padre}<br>" + 
-    #   "Domicilio: #{inscripcion.domicilio_padre}<br>" + 
-    #   "Teléfono/Celular: #{inscripcion.celular_padre}<br>" + 
-    #   "Profesión: #{inscripcion.profesion_padre}<br>" + 
-    #   "Lugar de trabajo: #{inscripcion.trabajo_padre}<br>" + 
-    #   "Teléfono de trabajo: #{inscripcion.telefono_trabajo_padre}<br>" 
+    texto_padre =
+      "<b>PADRE</b><br>" +
+      "Nombre: #{inscripcion.nombre_padre} #{inscripcion.apellido_padre}<br>" +
+      "Documento de identidad: #{Inscripcion.cedula_tos(inscripcion.cedula_padre)}<br>" +
+      "Lugar de nacimiento: #{inscripcion.lugar_nacimiento_padre}<br>" +
+      "Fecha de nacimiento: #{fecha_tos(inscripcion.fecha_nacimiento_padre)}<br>" +
+      "Mail: #{inscripcion.email_padre}<br>" + 
+      "Domicilio: #{inscripcion.domicilio_padre}<br>" + 
+      "Teléfono/Celular: #{inscripcion.celular_padre}<br>" + 
+      "Profesi\xF3n: #{inscripcion.profesion_padre}<br>".force_encoding('iso-8859-1') + 
+      "Lugar de trabajo: #{inscripcion.trabajo_padre}<br>" + 
+      "Teléfono de trabajo: #{inscripcion.telefono_trabajo_padre}<br>" 
 
-    texto_madre = ""
-    #   "<b>MADRE</b><br>" +
-    #   "Nombre: #{inscripcion.nombre_madre} #{inscripcion.apellido_madre}<br>" +
-    #   "Documento de identidad: #{Inscripcion.cedula_tos(inscripcion.cedula_madre)}<br>" +
-    #   "Lugar de nacimiento: #{inscripcion.lugar_nacimiento_madre}<br>" +
-    #   "Fecha de nacimiento: #{fecha_tos(inscripcion.fecha_nacimiento_madre)}<br>" +
-    #   "Mail: #{inscripcion.email_madre}<br>" + 
-    #   "Domicilio: #{inscripcion.domicilio_madre}<br>" + 
-    #   "Teléfono/Celular: #{inscripcion.celular_madre}<br>" + 
-    #   "Profesión: #{inscripcion.profesion_madre}<br>" + 
-    #   "Lugar de trabajo: #{inscripcion.trabajo_madre}<br>" + 
-    #   "Teléfono de trabajo: #{inscripcion.telefono_trabajo_madre}<br><br>"
+    texto_madre =
+      "<b>MADRE</b><br>" +
+      "Nombre: #{inscripcion.nombre_madre} #{inscripcion.apellido_madre}<br>" +
+      "Documento de identidad: #{Inscripcion.cedula_tos(inscripcion.cedula_madre)}<br>" +
+      "Lugar de nacimiento: #{inscripcion.lugar_nacimiento_madre}<br>" +
+      "Fecha de nacimiento: #{fecha_tos(inscripcion.fecha_nacimiento_madre)}<br>" +
+      "Mail: #{inscripcion.email_madre}<br>" + 
+      "Domicilio: #{inscripcion.domicilio_madre}<br>" + 
+      "Teléfono/Celular: #{inscripcion.celular_madre}<br>" + 
+      "Profesi\xF3n: #{inscripcion.profesion_madre}<br>".force_encoding('iso-8859-1') + 
+      "Lugar de trabajo: #{inscripcion.trabajo_madre}<br>" + 
+      "Teléfono de trabajo: #{inscripcion.telefono_trabajo_madre}<br><br>"
 
-    texto_nota = ""
-    # "<b>NOTA: Para la inscripción deberá presentar: fotocopia de la C.I. del/los Titular/es de la cuenta y si corresponde Libre de Deuda o recibo del último pago realizado en la Institución de donde proviene.<br><br>" +
-    #        "LA AUTORIZACIÓN DEFINITIVA SERÁ DADA UNA VEZ REALIZADO EL CLEARING DE INFORMES<br><br>" +
-    #        "El que suscribe ______________________________ declara que los datos aportados son ciertos y actuales y los informa a los efectos de la contratación de los servicios educativos que el Colegio Nacional José Pedro Varela provee. La actualización de los datos proveídos es responsabilidad de la parte.</b>"
+    texto_nota = 
+    "<b>NOTA: Para la inscripci\xF3n deber\xE1 presentar: fotocopia de la C.I. del/los Titular/es de la cuenta y si corresponde Libre de Deuda o recibo del \xFAltimo pago realizado en la Instituci\xF3n de donde proviene.<br><br>".force_encoding('iso-8859-1') +
+           "LA AUTORIZACION DEFINITIVA SERA DADA UNA VEZ REALIZADO EL CLEARING DE INFORMES<br><br>" +
+           "El que suscribe ______________________________ declara que los datos aportados son ciertos y actuales y los informa a los efectos de la contrataci\xF3n de los servicios educativos que el Colegio Nacional Jos\xE9 Pedro Varela provee. La actualizaci\xF3n de los datos prove\xEDdos es responsabilidad de la parte.</b>".force_encoding('iso-8859-1')
 
 
 
-    informacion = ""
-    #   "El alumno #{nombre_alumno} cuya cédula es #{cedula_alumno} ha comenzado el proceso de reinscripción para el año lectivo #{anio} en " + 
-    #   "#{nombre_grado} del Colegio Nacional José Pedro Varela."
+    informacion = 
+      "El alumno #{nombre_alumno} cuya c\xE9dula es #{cedula_alumno} ha comenzado el proceso de reinscripci\xF3n para el a\xF1o lectivo #{anio} en ".force_encoding('iso-8859-1') + 
+      "#{nombre_grado} del Colegio Nacional Jos\xE9 Pedro Varela.".force_encoding('iso-8859-1')
 
-    cabezal = ""
-    #   "$U <b>#{total}</b>" + 
-    #   "<br><br>" +
-    #   "Lugar y fecha de emisión: <b>Montevideo, #{I18n.l(DateTime.now, format: '%-d de %B de %Y')}</b>";
+    cabezal = 
+      "$U <b>#{total}</b>" + 
+      "<br><br>" +
+      "Lugar y fecha de emisi\xF3n: <b>Montevideo, #{I18n.l(DateTime.now, format: '%-d de %B de %Y')}</b>".force_encoding('iso-8859-1');
 
     if cuotas.count==1 && cuotas[0][0] == 1
       texto = "<b>VALE</b>"
@@ -559,38 +558,36 @@ class Inscripcion < ApplicationRecord
       texto = "<b>VALE AMORTIZABLE</b>"
     end
 
-    texto = Inscripcion.numero_cuota_letras(10)
-
-    # texto = texto + " por la cantidad de pesos uruguayos <b>#{total_letras}</b> que debo (debemos) y pagaré (pagaremos) en forma " +
-    #   "indivisible y solidaria a la Sociedad Uruguaya de Enseñanza, Colegio Nacional José Pedro Varela - o a su orden, en la misma moneda, en " +
-    #   "#{cuotas_a_letras(cuotas)}, en el domicilio del acreedor sito en la calle Colonia 1637 de la ciudad de Montevideo, o donde indique el acreedor." +
-    #   "<br><br>" + 
-    #   "La falta de pago de dos o más cuotas a su vencimiento producirá la mora de pleno derecho sin necesidad de interpelación de clase alguna, " +
-    #   "devengándose por esa sola circunstancias, intereses moratorios del 40% (cuarenta por ciento) tasa efectiva anual (aprobada por BCU) y hará " +
-    #   "exigible la totalidad del monto adeudado más los intereses moratorios generados a partir del incumplimiento y hasta su efectiva y total " + 
-    #   "cancelación." +
-    #   "<br><br>" + 
-    #   "En caso de incumplimiento total o parcial del presente título, el acreedor a su elección, podrá demandar la ejecución de este título ante " +
-    #   "los Jueces del lugar de residencia del deudor o ante los del lugar del cumplimiento de la obligación." +
-    #   "<br><br>" + 
-    #   "Para todos los efectos judiciales y/o extrajudiciales a que pudiera dar lugar éste documento, el deudor constituye como domicilio especial el " +
-    #   "abajo denunciado." +
-    #   "<br><br><br>" + 
-    #   "NOMBRE COMPLETO: #{nombreT[0]}<br><br>" +
-    #   "DOCUMENTO DE IDENTIDAD: #{Inscripcion.cedula_tos(documentoT[0])}<br><br>" +
-    #   "DOMICILIO: #{domicilioT[0]}<br><br>" +
-    #   "MAIL: #{emailT[0]}<br><br>" +
-    #   "TEL/CEL: #{celularT[0]}<br><br>" +
-    #   "FIRMA:<br><br>" +
-    #   "Aclaración:<br><br>" +
-    #   "<br><br>" +
-    #   "NOMBRE COMPLETO: #{nombreT[1]}<br><br>" +
-    #   "DOCUMENTO DE IDENTIDAD: #{Inscripcion.cedula_tos(documentoT[1])}<br><br>" +
-    #   "DOMICILIO: #{domicilioT[1]}<br><br>" +
-    #   "MAIL: #{emailT[1]}<br><br>" +
-    #   "TEL/CEL: #{celularT[1]}<br><br>" +
-    #   "FIRMA:<br><br>" +
-    #   "Aclaración:<br><br>";
+    texto = texto + " por la cantidad de pesos uruguayos <b>#{total_letras}</b> que debo (debemos) y pagar\xE9 (pagaremos) en forma ".force_encoding('iso-8859-1') +
+      "indivisible y solidaria a la Sociedad Uruguaya de Ense\xF1anza, Colegio Nacional Jos\xE9 Pedro Varela - o a su orden, en la misma moneda, en ".force_encoding('iso-8859-1') +
+      "#{cuotas_a_letras(cuotas)}, en el domicilio del acreedor sito en la calle Colonia 1637 de la ciudad de Montevideo, o donde indique el acreedor." +
+      "<br><br>" + 
+      "La falta de pago de dos o m\xE1s cuotas a su vencimiento producir\xE1 la mora de pleno derecho sin necesidad de interpelaci\xF3n de clase alguna, ".force_encoding('iso-8859-1') +
+      "deveng\xE1ndose por esa sola circunstancias, intereses moratorios del 40% (cuarenta por ciento) tasa efectiva anual (aprobada por BCU) y har\xE1 ".force_encoding('iso-8859-1') +
+      "exigible la totalidad del monto adeudado m\xE1s los intereses moratorios generados a partir del incumplimiento y hasta su efectiva y total ".force_encoding('iso-8859-1') + 
+      "cancelaci\xF3n.".force_encoding('iso-8859-1') +
+      "<br><br>" + 
+      "En caso de incumplimiento total o parcial del presente t\xEDtulo, el acreedor a su elecci\xF3n, podr\xE1 demandar la ejecuci\xF3n de este t\xEDtulo ante ".force_encoding('iso-8859-1') +
+      "los Jueces del lugar de residencia del deudor o ante los del lugar del cumplimiento de la obligaci\xF3n.".force_encoding('iso-8859-1') +
+      "<br><br>" + 
+      "Para todos los efectos judiciales y/o extrajudiciales a que pudiera dar lugar \xE9ste documento, el deudor constituye como domicilio especial el ".force_encoding('iso-8859-1') +
+      "abajo denunciado." +
+      "<br><br><br>" + 
+      "NOMBRE COMPLETO: #{nombreT[0]}<br><br>" +
+      "DOCUMENTO DE IDENTIDAD: #{Inscripcion.cedula_tos(documentoT[0])}<br><br>" +
+      "DOMICILIO: #{domicilioT[0]}<br><br>" +
+      "MAIL: #{emailT[0]}<br><br>" +
+      "TEL/CEL: #{celularT[0]}<br><br>" +
+      "FIRMA:<br><br>" +
+      "Aclaraci\xF3n:<br><br>".force_encoding('iso-8859-1') +
+      "<br><br>" +
+      "NOMBRE COMPLETO: #{nombreT[1]}<br><br>" +
+      "DOCUMENTO DE IDENTIDAD: #{Inscripcion.cedula_tos(documentoT[1])}<br><br>" +
+      "DOMICILIO: #{domicilioT[1]}<br><br>" +
+      "MAIL: #{emailT[1]}<br><br>" +
+      "TEL/CEL: #{celularT[1]}<br><br>" +
+      "FIRMA:<br><br>" +
+      "Aclaraci\xF3n:<br><br>".force_encoding('iso-8859-1');
 
     text_file = Tempfile.new("text.pdf")
     text_file_path = text_file.path
