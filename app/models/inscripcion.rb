@@ -538,7 +538,7 @@ class Inscripcion < ApplicationRecord
       "Tel#{130.chr}fono de trabajo: #{inscripcion.telefono_trabajo_madre}<br><br>"
 
     texto_nota = "<b>NOTA: Para la inscripci#{162.chr}n deber#{160.chr} presentar: fotocopia de la C.I. del/los Titular/es de la cuenta y si corresponde Libre de Deuda o recibo del #{163.chr}ltimo pago realizado en la Instituci#{162.chr}n de donde proviene.<br><br>" +
-           "LA AUTORIZACIÓN DEFINITIVA SERÁ DADA UNA VEZ REALIZADO EL CLEARING DE INFORMES<br><br>" +
+           "LA AUTORIZACI#{224.chr}N DEFINITIVA SER#{181.chr} DADA UNA VEZ REALIZADO EL CLEARING DE INFORMES<br><br>" +
            "El que suscribe ______________________________ declara que los datos aportados son ciertos y actuales y los informa a los efectos de la contrataci#{162.chr}n de los servicios educativos que el Colegio Nacional Jos#{130.chr} Pedro Varela provee. La actualizaci#{162.chr}n de los datos prove#{161.chr}dos es responsabilidad de la parte.</b>"
 
 
