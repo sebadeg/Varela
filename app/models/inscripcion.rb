@@ -550,7 +550,9 @@ class Inscripcion < ApplicationRecord
 
 
     informacion = 
-      "El alumno #{nombre_alumno} cuya c\xE9dula es #{cedula_alumno} ha comenzado el proceso de reinscripci\xF3n para el a\xF1o lectivo #{anio} en ".force_encoding('iso-8859-1') + 
+      "El alumno "
+      nombre_alumno.force_encoding('iso-8859-1') + 
+      " cuya c\xE9dula es #{cedula_alumno} ha comenzado el proceso de reinscripci\xF3n para el a\xF1o lectivo #{anio} en ".force_encoding('iso-8859-1') + 
       nombre_grado.force_encoding('iso-8859-1') +
       " del Colegio Nacional Jos\xE9 Pedro Varela.".force_encoding('iso-8859-1')
 
