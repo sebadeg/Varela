@@ -650,26 +650,36 @@ class Inscripcion < ApplicationRecord
         
         dash 5, space: 0, phase:0
         stroke_color "0000FF"
-        stroke_rectangle [0, 720], 540, 720   
+        stroke_rectangle [0, 520], 540, 520   
         stroke_color "FF0000"
-        stroke_rectangle [2, 718], 536, 716
+        stroke_rectangle [2, 518], 536, 516
 
-        image Rails.root.join("data", "logo.png"), at: [203,700], scale: 0.5
+        stroke_color "000000"
+        dash 5, space: 5, phase:0
+        stroke_horizontal_line -40, 580, at: 620
 
-        bounding_box([20, 570], :width => 500, :height => 300) do
-          text texto_inscripcion, align: :left, inline_format: true
+
+        image Rails.root.join("data", "logo.png"), at: [203,455], scale: 0.5
+
+        bounding_box([20, 255], :width => 500, :height => 60) do
+          text titulo, align: :center, inline_format: true
         end
 
-        bounding_box([20, 280], :width => 250, :height => 150) do
-          text texto_padre, align: :left, inline_format: true
+        bounding_box([60, 225], :width => 420, :height => 60) do
+          text informacion, align: :center, inline_format: true
         end
 
-        bounding_box([270, 280], :width => 250, :height => 150) do
-          text texto_madre, align: :left, inline_format: true
+        bounding_box([0, 560], :width => 500, :height => 60) do
+          text "Recibido por:", align: :left, inline_format: true
         end
-
-        bounding_box([20, 120], :width => 500, :height => 120) do
-          text texto_nota, align: :justify, inline_format: true
+        bounding_box([0, 540], :width => 500, :height => 60) do
+          text "Fecha:", align: :left, inline_format: true
+        end
+        bounding_box([0, 680], :width => 500, :height => 60) do
+          text "Recibido por:", align: :left, inline_format: true
+        end
+        bounding_box([0, 660], :width => 500, :height => 60) do
+          text "Fecha:", align: :left, inline_format: true
         end
 
         start_new_page
