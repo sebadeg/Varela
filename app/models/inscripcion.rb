@@ -544,7 +544,7 @@ class Inscripcion < ApplicationRecord
 
 
     informacion = 
-      "El alumno #{nombre_alumno} cuya c#{130.chr}dula es #{cedula_alumno} ha comenzado el proceso de reinscripci#{162.chr}n para el año lectivo #{anio} en " + 
+      "El alumno #{nombre_alumno} cuya c#{130.chr}dula es #{cedula_alumno} ha comenzado el proceso de reinscripci#{162.chr}n para el a#{164.chr}o lectivo #{anio} en " + 
       "#{nombre_grado} del Colegio Nacional Jos#{130.chr} Pedro Varela."
 
     cabezal = 
@@ -559,7 +559,7 @@ class Inscripcion < ApplicationRecord
     end
 
     texto = texto + " por la cantidad de pesos uruguayos <b>#{total_letras}</b> que debo (debemos) y pagar#{130.chr} (pagaremos) en forma " +
-      "indivisible y solidaria a la Sociedad Uruguaya de Enseñanza, Colegio Nacional Jos#{130.chr} Pedro Varela - o a su orden, en la misma moneda, en " +
+      "indivisible y solidaria a la Sociedad Uruguaya de Ense#{164.chr}anza, Colegio Nacional Jos#{130.chr} Pedro Varela - o a su orden, en la misma moneda, en " +
       "#{cuotas_a_letras(cuotas)}, en el domicilio del acreedor sito en la calle Colonia 1637 de la ciudad de Montevideo, o donde indique el acreedor." +
       "<br><br>" + 
       "La falta de pago de dos o m#{160.chr}s cuotas a su vencimiento producir#{160.chr} la mora de pleno derecho sin necesidad de interpelaci#{162.chr}n de clase alguna, " +
