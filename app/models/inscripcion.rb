@@ -511,34 +511,34 @@ class Inscripcion < ApplicationRecord
       "Procede de: #{inscripcion.procede}<br>".force_encoding('iso-8859-1')
 
     texto_padre =
-      "<b>PADRE</b><br>" +
-      "Nombre: #{inscripcion.nombre_padre} #{inscripcion.apellido_padre}<br>" +
-      "Documento de identidad: #{Inscripcion.cedula_tos(inscripcion.cedula_padre)}<br>" +
-      "Lugar de nacimiento: #{inscripcion.lugar_nacimiento_padre}<br>" +
-      "Fecha de nacimiento: #{fecha_tos(inscripcion.fecha_nacimiento_padre)}<br>" +
-      "Mail: #{inscripcion.email_padre}<br>" + 
-      "Domicilio: #{inscripcion.domicilio_padre}<br>" + 
+      "<b>PADRE</b><br>".force_encoding('iso-8859-1') +
+      "Nombre: #{inscripcion.nombre_padre} #{inscripcion.apellido_padre}<br>".force_encoding('iso-8859-1') +
+      "Documento de identidad: #{Inscripcion.cedula_tos(inscripcion.cedula_padre)}<br>".force_encoding('iso-8859-1') +
+      "Lugar de nacimiento: #{inscripcion.lugar_nacimiento_padre}<br>".force_encoding('iso-8859-1') +
+      "Fecha de nacimiento: #{fecha_tos(inscripcion.fecha_nacimiento_padre)}<br>".force_encoding('iso-8859-1') +
+      "Mail: #{inscripcion.email_padre}<br>".force_encoding('iso-8859-1') + 
+      "Domicilio: #{inscripcion.domicilio_padre}<br>".force_encoding('iso-8859-1') + 
       "Tel\xE9fono/Celular: #{inscripcion.celular_padre}<br>".force_encoding('iso-8859-1') + 
       "Profesi\xF3n: #{inscripcion.profesion_padre}<br>".force_encoding('iso-8859-1') + 
-      "Lugar de trabajo: #{inscripcion.trabajo_padre}<br>" + 
+      "Lugar de trabajo: #{inscripcion.trabajo_padre}<br>".force_encoding('iso-8859-1') + 
       "Tel\xE9fono de trabajo: #{inscripcion.telefono_trabajo_padre}<br>".force_encoding('iso-8859-1') 
 
     texto_madre =
-      "<b>MADRE</b><br>" +
-      "Nombre: #{inscripcion.nombre_madre} #{inscripcion.apellido_madre}<br>" +
-      "Documento de identidad: #{Inscripcion.cedula_tos(inscripcion.cedula_madre)}<br>" +
-      "Lugar de nacimiento: #{inscripcion.lugar_nacimiento_madre}<br>" +
-      "Fecha de nacimiento: #{fecha_tos(inscripcion.fecha_nacimiento_madre)}<br>" +
-      "Mail: #{inscripcion.email_madre}<br>" + 
-      "Domicilio: #{inscripcion.domicilio_madre}<br>" + 
+      "<b>MADRE</b><br>".force_encoding('iso-8859-1') +
+      "Nombre: #{inscripcion.nombre_madre} #{inscripcion.apellido_madre}<br>".force_encoding('iso-8859-1') +
+      "Documento de identidad: #{Inscripcion.cedula_tos(inscripcion.cedula_madre)}<br>".force_encoding('iso-8859-1') +
+      "Lugar de nacimiento: #{inscripcion.lugar_nacimiento_madre}<br>".force_encoding('iso-8859-1') +
+      "Fecha de nacimiento: #{fecha_tos(inscripcion.fecha_nacimiento_madre)}<br>".force_encoding('iso-8859-1') +
+      "Mail: #{inscripcion.email_madre}<br>".force_encoding('iso-8859-1') + 
+      "Domicilio: #{inscripcion.domicilio_madre}<br>".force_encoding('iso-8859-1') + 
       "Tel\xE9fono/Celular: #{inscripcion.celular_madre}<br>".force_encoding('iso-8859-1') + 
       "Profesi\xF3n: #{inscripcion.profesion_madre}<br>".force_encoding('iso-8859-1') + 
-      "Lugar de trabajo: #{inscripcion.trabajo_madre}<br>" + 
+      "Lugar de trabajo: #{inscripcion.trabajo_madre}<br>".force_encoding('iso-8859-1') + 
       "Tel\xE9fono de trabajo: #{inscripcion.telefono_trabajo_madre}<br><br>".force_encoding('iso-8859-1')
 
     texto_nota = 
     "<b>NOTA: Para la inscripci\xF3n deber\xE1 presentar: fotocopia de la C.I. del/los Titular/es de la cuenta y si corresponde Libre de Deuda o recibo del \xFAltimo pago realizado en la Instituci\xF3n de donde proviene.<br><br>".force_encoding('iso-8859-1') +
-           "LA AUTORIZACION DEFINITIVA SERA DADA UNA VEZ REALIZADO EL CLEARING DE INFORMES<br><br>" +
+           "LA AUTORIZACION DEFINITIVA SERA DADA UNA VEZ REALIZADO EL CLEARING DE INFORMES<br><br>".force_encoding('iso-8859-1') +
            "El que suscribe ______________________________ declara que los datos aportados son ciertos y actuales y los informa a los efectos de la contrataci\xF3n de los servicios educativos que el Colegio Nacional Jos\xE9 Pedro Varela provee. La actualizaci\xF3n de los datos prove\xEDdos es responsabilidad de la parte.</b>".force_encoding('iso-8859-1')
 
 
@@ -548,9 +548,9 @@ class Inscripcion < ApplicationRecord
       "#{nombre_grado} del Colegio Nacional Jos\xE9 Pedro Varela.".force_encoding('iso-8859-1')
 
     cabezal = 
-      "$U <b>#{total}</b>" + 
-      "<br><br>" +
-      "Lugar y fecha de emisi\xF3n: <b>Montevideo, #{I18n.l(DateTime.now, format: '%-d de %B de %Y')}</b>".force_encoding('iso-8859-1');
+      "$U <b>#{total}</b>".force_encoding('iso-8859-1') + 
+      "<br><br>".force_encoding('iso-8859-1') +
+      "Lugar y fecha de emisi\xF3n: <b>Montevideo, #{I18n.l(DateTime.now, format: '%-d de %B de %Y')}</b>".force_encoding('iso-8859-1')
 
     if cuotas.count==1 && cuotas[0][0] == 1
       texto = "<b>VALE</b>"
@@ -560,34 +560,34 @@ class Inscripcion < ApplicationRecord
 
     texto = texto + " por la cantidad de pesos uruguayos <b>#{total_letras}</b> que debo (debemos) y pagar\xE9 (pagaremos) en forma ".force_encoding('iso-8859-1') +
       "indivisible y solidaria a la Sociedad Uruguaya de Ense\xF1anza, Colegio Nacional Jos\xE9 Pedro Varela - o a su orden, en la misma moneda, en ".force_encoding('iso-8859-1') +
-      "#{cuotas_a_letras(cuotas)}, en el domicilio del acreedor sito en la calle Colonia 1637 de la ciudad de Montevideo, o donde indique el acreedor." +
-      "<br><br>" + 
+      "#{cuotas_a_letras(cuotas)}, en el domicilio del acreedor sito en la calle Colonia 1637 de la ciudad de Montevideo, o donde indique el acreedor.".force_encoding('iso-8859-1') +
+      "<br><br>".force_encoding('iso-8859-1') + 
       "La falta de pago de dos o m\xE1s cuotas a su vencimiento producir\xE1 la mora de pleno derecho sin necesidad de interpelaci\xF3n de clase alguna, ".force_encoding('iso-8859-1') +
       "deveng\xE1ndose por esa sola circunstancias, intereses moratorios del 40% (cuarenta por ciento) tasa efectiva anual (aprobada por BCU) y har\xE1 ".force_encoding('iso-8859-1') +
       "exigible la totalidad del monto adeudado m\xE1s los intereses moratorios generados a partir del incumplimiento y hasta su efectiva y total ".force_encoding('iso-8859-1') + 
       "cancelaci\xF3n.".force_encoding('iso-8859-1') +
-      "<br><br>" + 
+      "<br><br>".force_encoding('iso-8859-1') + 
       "En caso de incumplimiento total o parcial del presente t\xEDtulo, el acreedor a su elecci\xF3n, podr\xE1 demandar la ejecuci\xF3n de este t\xEDtulo ante ".force_encoding('iso-8859-1') +
       "los Jueces del lugar de residencia del deudor o ante los del lugar del cumplimiento de la obligaci\xF3n.".force_encoding('iso-8859-1') +
-      "<br><br>" + 
+      "<br><br>".force_encoding('iso-8859-1') + 
       "Para todos los efectos judiciales y/o extrajudiciales a que pudiera dar lugar \xE9ste documento, el deudor constituye como domicilio especial el ".force_encoding('iso-8859-1') +
-      "abajo denunciado." +
-      "<br><br><br>" + 
-      "NOMBRE COMPLETO: #{nombreT[0]}<br><br>" +
-      "DOCUMENTO DE IDENTIDAD: #{Inscripcion.cedula_tos(documentoT[0])}<br><br>" +
-      "DOMICILIO: #{domicilioT[0]}<br><br>" +
-      "MAIL: #{emailT[0]}<br><br>" +
-      "TEL/CEL: #{celularT[0]}<br><br>" +
-      "FIRMA:<br><br>" +
+      "abajo denunciado.".force_encoding('iso-8859-1') +
+      "<br><br><br>".force_encoding('iso-8859-1') + 
+      "NOMBRE COMPLETO: #{nombreT[0]}<br><br>".force_encoding('iso-8859-1') +
+      "DOCUMENTO DE IDENTIDAD: #{Inscripcion.cedula_tos(documentoT[0])}<br><br>".force_encoding('iso-8859-1') +
+      "DOMICILIO: #{domicilioT[0]}<br><br>".force_encoding('iso-8859-1') +
+      "MAIL: #{emailT[0]}<br><br>".force_encoding('iso-8859-1') +
+      "TEL/CEL: #{celularT[0]}<br><br>".force_encoding('iso-8859-1') +
+      "FIRMA:<br><br>".force_encoding('iso-8859-1') +
       "Aclaraci\xF3n:<br><br>".force_encoding('iso-8859-1') +
-      "<br><br>" +
-      "NOMBRE COMPLETO: #{nombreT[1]}<br><br>" +
-      "DOCUMENTO DE IDENTIDAD: #{Inscripcion.cedula_tos(documentoT[1])}<br><br>" +
-      "DOMICILIO: #{domicilioT[1]}<br><br>" +
-      "MAIL: #{emailT[1]}<br><br>" +
-      "TEL/CEL: #{celularT[1]}<br><br>" +
-      "FIRMA:<br><br>" +
-      "Aclaraci\xF3n:<br><br>".force_encoding('iso-8859-1');
+      "<br><br>".force_encoding('iso-8859-1') +
+      "NOMBRE COMPLETO: #{nombreT[1]}<br><br>".force_encoding('iso-8859-1') +
+      "DOCUMENTO DE IDENTIDAD: #{Inscripcion.cedula_tos(documentoT[1])}<br><br>".force_encoding('iso-8859-1') +
+      "DOMICILIO: #{domicilioT[1]}<br><br>".force_encoding('iso-8859-1') +
+      "MAIL: #{emailT[1]}<br><br>".force_encoding('iso-8859-1') +
+      "TEL/CEL: #{celularT[1]}<br><br>".force_encoding('iso-8859-1') +
+      "FIRMA:<br><br>".force_encoding('iso-8859-1') +
+      "Aclaraci\xF3n:<br><br>".force_encoding('iso-8859-1')
 
     text_file = Tempfile.new("text.pdf")
     text_file_path = text_file.path
