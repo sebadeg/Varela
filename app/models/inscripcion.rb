@@ -321,11 +321,11 @@ class Inscripcion < ApplicationRecord
     when 9
       s = "novena"
     when 10
-      s = "décima"
+      s = "decima"
     when 11
-      s = "undécima"
+      s = "undecima"
     when 12
-      s = "duodécima"
+      s = "duodecima"
     when 13
       s = "decimotercera"
     when 14
@@ -341,7 +341,7 @@ class Inscripcion < ApplicationRecord
     when 19
       s = "decimonovena"
     when 20
-      s = "vigésima"
+      s = "vigesima"
     when 21
       s = "vigesimoprimera"
     when 22
