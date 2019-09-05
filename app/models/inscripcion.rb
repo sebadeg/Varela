@@ -505,7 +505,7 @@ class Inscripcion < ApplicationRecord
       "Lugar de nacimiento: #{inscripcion.lugar_nacimiento}<br>" +
       "Fecha de nacimiento: #{fecha_tos(inscripcion.fecha_nacimiento)}<br>" +
       "Domicilio: #{inscripcion.domicilio}<br>" + 
-      "Teléfono/Celular: #{inscripcion.celular}<br>" + 
+      "Tel\xE9fono/Celular: #{inscripcion.celular}<br>".force_encoding('iso-8859-1') + 
       "Mutualista: #{inscripcion.mutualista}<br>" + 
       "Emergencia: #{inscripcion.emergencia}<br>" + 
       "Procede de: #{inscripcion.procede}<br>"
@@ -518,10 +518,10 @@ class Inscripcion < ApplicationRecord
       "Fecha de nacimiento: #{fecha_tos(inscripcion.fecha_nacimiento_padre)}<br>" +
       "Mail: #{inscripcion.email_padre}<br>" + 
       "Domicilio: #{inscripcion.domicilio_padre}<br>" + 
-      "Teléfono/Celular: #{inscripcion.celular_padre}<br>" + 
+      "Tel\xE9fono/Celular: #{inscripcion.celular_padre}<br>".force_encoding('iso-8859-1') + 
       "Profesi\xF3n: #{inscripcion.profesion_padre}<br>".force_encoding('iso-8859-1') + 
       "Lugar de trabajo: #{inscripcion.trabajo_padre}<br>" + 
-      "Teléfono de trabajo: #{inscripcion.telefono_trabajo_padre}<br>" 
+      "Tel\xE9fono de trabajo: #{inscripcion.telefono_trabajo_padre}<br>".force_encoding('iso-8859-1') 
 
     texto_madre =
       "<b>MADRE</b><br>" +
@@ -531,10 +531,10 @@ class Inscripcion < ApplicationRecord
       "Fecha de nacimiento: #{fecha_tos(inscripcion.fecha_nacimiento_madre)}<br>" +
       "Mail: #{inscripcion.email_madre}<br>" + 
       "Domicilio: #{inscripcion.domicilio_madre}<br>" + 
-      "Teléfono/Celular: #{inscripcion.celular_madre}<br>" + 
+      "Tel\xE9fono/Celular: #{inscripcion.celular_madre}<br>".force_encoding('iso-8859-1') + 
       "Profesi\xF3n: #{inscripcion.profesion_madre}<br>".force_encoding('iso-8859-1') + 
       "Lugar de trabajo: #{inscripcion.trabajo_madre}<br>" + 
-      "Teléfono de trabajo: #{inscripcion.telefono_trabajo_madre}<br><br>"
+      "Tel\xE9fono de trabajo: #{inscripcion.telefono_trabajo_madre}<br><br>".force_encoding('iso-8859-1')
 
     texto_nota = 
     "<b>NOTA: Para la inscripci\xF3n deber\xE1 presentar: fotocopia de la C.I. del/los Titular/es de la cuenta y si corresponde Libre de Deuda o recibo del \xFAltimo pago realizado en la Instituci\xF3n de donde proviene.<br><br>".force_encoding('iso-8859-1') +
