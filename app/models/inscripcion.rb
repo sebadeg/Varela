@@ -629,16 +629,16 @@ class Inscripcion < ApplicationRecord
           text informacion, align: :center, inline_format: true
         end
 
-        bounding_box([0, 560], :width => 500, :height => 60) do
+        bounding_box([0, 580], :width => 500, :height => 60) do
           text "Recibido por:", align: :left, inline_format: true
         end
-        bounding_box([0, 540], :width => 500, :height => 60) do
+        bounding_box([0, 560], :width => 500, :height => 60) do
           text "Fecha:", align: :left, inline_format: true
         end
-        bounding_box([0, 680], :width => 500, :height => 60) do
+        bounding_box([0, 700], :width => 500, :height => 60) do
           text "Recibido por:", align: :left, inline_format: true
         end
-        bounding_box([0, 660], :width => 500, :height => 60) do
+        bounding_box([0, 680], :width => 500, :height => 60) do
           text "Fecha:", align: :left, inline_format: true
         end
 
