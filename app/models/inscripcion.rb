@@ -379,7 +379,18 @@ class Inscripcion < ApplicationRecord
     end
   end
 
+  def convertStr(str)
 
+    str["#{160.chr}"] = "\xE1"
+    str["#{130.chr}"] = "\xE9"
+    str["#{161.chr}"] = "\xED"
+    str["#{162.chr}"] = "\xF3"
+    str["#{163.chr}"] = "\xFA"
+    str["#{164.chr}"] = "\xF1"
+    str["#{129.chr}"] = "\xFC"
+
+    return str
+  end
 
   def vale(file_path)
 
@@ -404,10 +415,8 @@ class Inscripcion < ApplicationRecord
     nombre_grado = ""
     proximo_grado = ProximoGrado.find(proximo_grado_id) rescue nil
     if proximo_grado != nil
-      nombre_grado = proximo_grado.nombre
+      nombre_grado = convertStr(proximo_grado.nombre)
     end
-    nombre_grado = nombre_grado.encode("UTF-8").force_encoding('iso-8859-1')
-
 
     convenio_nombre = ""
     matricula_nombre = ""
@@ -420,21 +429,21 @@ class Inscripcion < ApplicationRecord
     else
       inscripcion_opcion = InscripcionOpcion.find(convenio_id) rescue nil
       if inscripcion_opcion != nil 
-        convenio_nombre = inscripcion_opcion.nombre
+        convenio_nombre = convertStr(inscripcion_opcion.nombre)
       end
       inscripcion_opcion = InscripcionOpcion.find(adicional_id) rescue nil
       if inscripcion_opcion != nil 
-        convenio_nombre = convenio_nombre + " + " + inscripcion_opcion.nombre
+        convenio_nombre = convenio_nombre + " + " + convertStr(inscripcion_opcion.nombre)
       end
 
       inscripcion_opcion = InscripcionOpcion.find(matricula_id) rescue nil
       if inscripcion_opcion != nil 
-        matricula_nombre = inscripcion_opcion.nombre
+        matricula_nombre = convertStr(inscripcion_opcion.nombre)
       end
 
       inscripcion_opcion = InscripcionOpcion.find(hermanos_id) rescue nil
       if inscripcion_opcion != nil 
-        hermanos_nombre = inscripcion_opcion.nombre
+        hermanos_nombre = convertStr(inscripcion_opcion.nombre)
       end
     end
 
@@ -448,36 +457,36 @@ class Inscripcion < ApplicationRecord
     celularT = Array.new
 
     if (inscripcion.titular_padre)
-      nombreT[idx] = inscripcion.nombre_padre + " " + inscripcion.apellido_padre
+      nombreT[idx] = convertStr(inscripcion.nombre_padre) + " " + convertStr)inscripcion.apellido_padre)
       documentoT[idx] = inscripcion.cedula_padre
-      domicilioT[idx] = inscripcion.domicilio_padre
+      domicilioT[idx] = convertStr(inscripcion.domicilio_padre)
       emailT[idx] = inscripcion.email_padre
       celularT[idx] = inscripcion.celular_padre
       idx = idx+1
     end
 
     if (inscripcion.titular_madre)
-      nombreT[idx] = inscripcion.nombre_madre + " " + inscripcion.apellido_madre
+      nombreT[idx] = convertStr(inscripcion.nombre_madre) + " " + convertStr(inscripcion.apellido_madre)
       documentoT[idx] = inscripcion.cedula_madre
-      domicilioT[idx] = inscripcion.domicilio_madre
+      domicilioT[idx] = convertStr(inscripcion.domicilio_madre)
       emailT[idx] = inscripcion.email_madre
       celularT[idx] = inscripcion.celular_madre
       idx = idx+1
     end
 
     if inscripcion.documento1 != nil
-      nombreT[idx] = "#{inscripcion.nombre1} #{inscripcion.apellido1}"
+      nombreT[idx] = "#{convertStr(inscripcion.nombre1)} #{convertStr(inscripcion.apellido1)}"
       documentoT[idx] = inscripcion.documento1
-      domicilioT[idx] = inscripcion.domicilio1
+      domicilioT[idx] = convertStr(inscripcion.domicilio1)
       emailT[idx] = inscripcion.email1
       celularT[idx] = inscripcion.celular1
       idx = idx+1
     end
 
     if inscripcion.documento2 != nil
-      nombreT[idx] = "#{inscripcion.nombre2} #{inscripcion.apellido2}"
+      nombreT[idx] = "#{convertStr(inscripcion.nombre2)} #{convertStr(inscripcion.apellido2)}"
       documentoT[idx] = inscripcion.documento2
-      domicilioT[idx] = inscripcion.domicilio2
+      domicilioT[idx] = convertStr(inscripcion.domicilio2)
       emailT[idx] = inscripcion.email2
       celularT[idx] = inscripcion.celular2
       idx = idx+1
