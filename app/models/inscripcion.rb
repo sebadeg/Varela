@@ -457,7 +457,7 @@ class Inscripcion < ApplicationRecord
     celularT = Array.new
 
     if (inscripcion.titular_padre)
-      nombreT[idx] = convertStr(inscripcion.nombre_padre) + " " + convertStr)inscripcion.apellido_padre)
+      nombreT[idx] = "#{convertStr(inscripcion.nombre_padre)} #{convertStr(inscripcion.apellido_padre)}"
       documentoT[idx] = inscripcion.cedula_padre
       domicilioT[idx] = convertStr(inscripcion.domicilio_padre)
       emailT[idx] = inscripcion.email_padre
@@ -466,7 +466,7 @@ class Inscripcion < ApplicationRecord
     end
 
     if (inscripcion.titular_madre)
-      nombreT[idx] = convertStr(inscripcion.nombre_madre) + " " + convertStr(inscripcion.apellido_madre)
+      nombreT[idx] = "#{convertStr(inscripcion.nombre_madre)} #{convertStr(inscripcion.apellido_madre)}"
       documentoT[idx] = inscripcion.cedula_madre
       domicilioT[idx] = convertStr(inscripcion.domicilio_madre)
       emailT[idx] = inscripcion.email_madre
