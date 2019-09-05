@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Inscripcion < ApplicationRecord
   belongs_to :proximo_grado
 
