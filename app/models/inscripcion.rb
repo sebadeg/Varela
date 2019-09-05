@@ -380,7 +380,7 @@ class Inscripcion < ApplicationRecord
   end
 
   def convertStr(str)
-    return str.encode("ISO-8859-1","UTF-8").force_encoding('iso-8859-1')
+    return str.encode!(Encoding::ISO_8859_1)
   end
 
   def vale(file_path)
