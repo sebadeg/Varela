@@ -406,6 +406,8 @@ class Inscripcion < ApplicationRecord
     if proximo_grado != nil
       nombre_grado = proximo_grado.nombre
     end
+    nombre_grado = nombre_grado.encode("UTF-8").force_encoding('iso-8859-1')
+
 
     convenio_nombre = ""
     matricula_nombre = ""
