@@ -489,7 +489,7 @@ class Inscripcion < ApplicationRecord
       titulo = "<b>INSCRIPCION</b>"
     end
 
-    texto_inscripcion = numero_cuota_letras(10)
+    texto_inscripcion = Inscripcion.numero_cuota_letras(10)
     #   "#{titulo}<br>"+      
     #   "Fecha: #{fecha_tos(inscripcion.created_at)}<br>" +
     #   "Recibida por: #{inscripcion.recibida}<br>" +
