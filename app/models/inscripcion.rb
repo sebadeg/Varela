@@ -614,30 +614,31 @@ class Inscripcion < ApplicationRecord
       if reinsc
         font "Helvetica", :size => 12
 
-        stroke_color "000000"
-        dash 5, space: 5, phase:0
-        stroke_horizontal_line -40, 580, at: 360
-
         dash 5, space: 0, phase:0
         stroke_color "0000FF"
-        stroke_rectangle [0, 340], 540, 340   
+        stroke_rectangle [0, 520], 540, 520   
         stroke_color "FF0000"
-        stroke_rectangle [2, 338], 536, 336
+        stroke_rectangle [2, 518], 536, 516
 
-        image Rails.root.join("data", "logo.png"), at: [203,320], scale: 0.5
+        stroke_color "000000"
+        dash 5, space: 5, phase:0
+        stroke_horizontal_line -40, 580, at: 620
 
-        bounding_box([20, 280], :width => 500, :height => 60) do
+
+        image Rails.root.join("data", "logo.png"), at: [203,455], scale: 0.5
+
+        bounding_box([20, 255], :width => 500, :height => 60) do
           text titulo, align: :center, inline_format: true
         end
 
-        bounding_box([60, 250], :width => 420, :height => 60) do
+        bounding_box([60, 225], :width => 420, :height => 60) do
           text informacion, align: :center, inline_format: true
         end
 
-        bounding_box([0, 340], :width => 500, :height => 60) do
+        bounding_box([0, 580], :width => 500, :height => 60) do
           text "Recibido por:", align: :left, inline_format: true
         end
-        bounding_box([0, 320], :width => 500, :height => 60) do
+        bounding_box([0, 560], :width => 500, :height => 60) do
           text "Fecha:", align: :left, inline_format: true
         end
         bounding_box([0, 700], :width => 500, :height => 60) do
