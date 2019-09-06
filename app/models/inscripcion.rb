@@ -614,11 +614,26 @@ class Inscripcion < ApplicationRecord
       if reinsc
         font "Helvetica", :size => 12
 
+        dash 5, space: 0, phase:0
+        stroke_color "0000FF"
+        stroke_rectangle [0, 330], 540, 280
+        stroke_color "FF0000"
+        stroke_rectangle [2, 328], 536, 276
 
-        bounding_box([0, 400], :width => 500, :height => 60) do
+        image Rails.root.join("data", "logo.png"), at: [203,710], scale: 0.5
+
+        bounding_box([20, 560], :width => 500, :height => 60) do
+          text titulo, align: :center, inline_format: true
+        end
+
+        bounding_box([60, 540], :width => 420, :height => 60) do
+          text informacion, align: :center, inline_format: true
+        end
+
+        bounding_box([0, 420], :width => 500, :height => 60) do
           text "Recibido por:", align: :left, inline_format: true
         end
-        bounding_box([0, 380], :width => 500, :height => 60) do
+        bounding_box([0, 400], :width => 500, :height => 60) do
           text "Fecha:", align: :left, inline_format: true
         end
 
