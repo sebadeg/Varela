@@ -624,22 +624,23 @@ class Inscripcion < ApplicationRecord
         stroke_color "FF0000"
         stroke_rectangle [2, 338], 536, 236
 
-        image Rails.root.join("data", "logo.png"), at: [203,320], scale: 0.5
+        image Rails.root.join("data", "logo.png"), at: [203,330], scale: 0.5
 
-        bounding_box([20, 280], :width => 500, :height => 60) do
+        bounding_box([20, 210], :width => 500, :height => 60) do
           text titulo, align: :center, inline_format: true
         end
 
-        bounding_box([60, 250], :width => 420, :height => 60) do
+        bounding_box([60, 200], :width => 420, :height => 60) do
           text informacion, align: :center, inline_format: true
         end
 
-        bounding_box([0, 80], :width => 500, :height => 60) do
+        bounding_box([0, 20], :width => 500, :height => 60) do
           text "Recibido por:", align: :left, inline_format: true
         end
-        bounding_box([0, 60], :width => 500, :height => 60) do
+        bounding_box([0, 0], :width => 500, :height => 60) do
           text "Fecha:", align: :left, inline_format: true
         end
+
         # bounding_box([0, 700], :width => 500, :height => 60) do
         #   text "Recibido por:", align: :left, inline_format: true
         # end
