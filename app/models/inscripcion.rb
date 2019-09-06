@@ -88,8 +88,14 @@ class Inscripcion < ApplicationRecord
     descuentos.each do |inscripcion_opcion_id|
       inscripcion_opcion = InscripcionOpcion.find(inscripcion_opcion_id) rescue nil
       if inscripcion_opcion != nil 
-        p inscripcion_opcion.valor
-        importe_total = importe_total * ( 100.0 - inscripcion_opcion.valor ) / 100.0
+        if inscripcion_opcion.valor == nil
+          importe_total = 0
+          InscripcionOpcionCuota.where("inscripcion_opcion_id=#{inscripcion_opcion.id}").order(:fecha).each do |cuota|
+            importe_total = importe_total + cuota.cantidad*cuota.importe
+          end
+        else
+          importe_total = importe_total * ( 100.0 - inscripcion_opcion.valor ) / 100.0
+        end
       end
     end
 
