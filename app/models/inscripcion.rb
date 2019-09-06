@@ -626,11 +626,11 @@ class Inscripcion < ApplicationRecord
 
         image Rails.root.join("data", "logo.png"), at: [203,330], scale: 0.5
 
-        bounding_box([20, 210], :width => 500, :height => 60) do
+        bounding_box([20, 170], :width => 500, :height => 60) do
           text titulo, align: :center, inline_format: true
         end
 
-        bounding_box([60, 200], :width => 420, :height => 60) do
+        bounding_box([60, 150], :width => 420, :height => 60) do
           text informacion, align: :center, inline_format: true
         end
 
