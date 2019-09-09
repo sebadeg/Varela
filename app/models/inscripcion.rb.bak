@@ -51,13 +51,7 @@ class Inscripcion < ApplicationRecord
 
   def CalcularPrecio()
 
-    cuotas = Array.new
-
     proximo_grado = ProximoGrado.find(proximo_grado_id) rescue nil
-    if proximo_grado == nil
-      return cuotas
-    end
-
     importe_total = proximo_grado.precio
 
     descuentos = Array.new
@@ -110,6 +104,8 @@ class Inscripcion < ApplicationRecord
     p "------------------------------"
     p "------------------------------"
 
+    cuotas = Array.new
+    
     #numero_cuotas = 0
     #fecha_cuota = nil
     # if formulario_id != nil
@@ -130,7 +126,7 @@ class Inscripcion < ApplicationRecord
       inscripcion_opcion_cuotas = InscripcionOpcion.find(cuotas_id) rescue nil 
       if inscripcion_opcion_cuotas != nil
         InscripcionOpcionCuota.where("inscripcion_opcion_id=#{inscripcion_opcion_cuotas.id}").order(:fecha).each do |cuota|
-          cuotas.push([cuota.cantidad,(importe_total*cuota.importe+0.5).to_i,cuota.fecha + 9.days])
+          cuotas.push([cuota.cantidad,(importe_total*cuota.importe+0.5).to_i,cuota.fecha_cuota + 9.days])
         end
         # if ( inscripcion_opcion_cuotas.valor == nil )
         #   numero_cuotas = inscripcion_opcion_cuotas.valor_ent
@@ -139,7 +135,7 @@ class Inscripcion < ApplicationRecord
         #   cuotas.push([inscripcion_opcion_cuotas.valor_ent,inscripcion_opcion_cuotas.valor,inscripcion_opcion_cuotas.fecha])
         # end
       end
-    #end     
+    #end    
 
     # if cuotas.count == 0 && numero_cuotas != 0 
     #   cuotas.push([numero_cuotas,(importe_total/numero_cuotas+0.5).to_i,fecha_cuota])
