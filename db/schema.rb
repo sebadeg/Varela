@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_09_210643) do
+ActiveRecord::Schema.define(version: 2019_09_09_221310) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -624,11 +624,11 @@ ActiveRecord::Schema.define(version: 2019_09_09_210643) do
     t.string "apellido2"
     t.decimal "precio_anterior"
     t.boolean "hay_vale"
-    t.date "fecha_registrado"
-    t.date "fecha_vale"
-    t.date "fecha_descargado"
-    t.date "fecha_entregado"
-    t.date "fecha_inscripto"
+    t.datetime "fecha_registrado"
+    t.datetime "fecha_vale"
+    t.datetime "fecha_descargado"
+    t.datetime "fecha_entregado"
+    t.datetime "fecha_inscripto"
     t.index ["convenio_id"], name: "index_inscripciones_on_convenio_id"
     t.index ["grado_id"], name: "index_inscripciones_on_grado_id"
     t.index ["proximo_grado_id"], name: "index_inscripciones_on_proximo_grado_id"
