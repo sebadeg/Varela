@@ -624,6 +624,10 @@ class PrincipalController < ApplicationController
       inscripcionAlumno.registrado = false
     end
 
+    if inscripcionAlumno.registrado
+      inscripcionAlumno.fecha_registrado = DateTime.now
+    end
+
     inscripcionAlumno.save!
 
     if !inscripcionAlumno.registrado
@@ -658,6 +662,10 @@ class PrincipalController < ApplicationController
 
     alumno_id = params[:inscripcionAlumno][:alumno_id]
     inscripcionAlumno = Inscripcion.FindInscripcion(alumno_id)
+
+    inscripcionAlumno.fecha_descargado = DateTime.now
+    inscripcionAlumno.save!
+
 
     file_name = "reinscripcion_#{inscripcionAlumno.alumno_id}.pdf"
     file = Tempfile.new(file_name)
