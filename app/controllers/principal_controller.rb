@@ -408,7 +408,9 @@ class PrincipalController < ApplicationController
 
     cuenta_id = params[:cuenta][:id]
 
-    factura = Factura.where("cuenta_id=#{cuenta_id} AND fecha<'2019-11-01'").order(fecha: :desc).first rescue nil
+    config = Config.find(1)
+
+    factura = Factura.where("cuenta_id=#{cuenta_id} AND fecha<='#{config.fecha_descarga}'").order(fecha: :desc).first rescue nil
     if factura != nil
 
       file = Tempfile.new("factura.pdf")
