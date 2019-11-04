@@ -11,8 +11,8 @@ class ApplicationController < ActionController::Base
     contrasena = Contrasena.find_by(mail: mail) rescue nil
     passwd = contrasena != nil ? contrasena.password : ""
 
-    ActionMailer::Base.default_url_options[:user_name] = mail
-    ActionMailer::Base.default_url_options[:password] = passwd
+    ActionMailer::Base.smtp_settings[:user_name] = mail
+    ActionMailer::Base.smtp_settings[:password] = passwd
   end
 
   $bienvenida = false
