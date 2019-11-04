@@ -3,8 +3,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_usuario!, except: [:eventos,:eventos_registrar,:eventos_registrado]
   before_action :configure_permitted_parameters, if: :devise_controller? 
   #before_filter :set_locale
-
-  before_filter :set_mailer
+  before_action :set_mailer
 
   def set_mailer
     mail = "soporte@varela.edu.uy"
