@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_09_221310) do
+ActiveRecord::Schema.define(version: 2019_10_05_000259) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -93,6 +93,8 @@ ActiveRecord::Schema.define(version: 2019_09_09_221310) do
     t.bigint "sector_id"
     t.boolean "mail"
     t.string "creada"
+    t.bigint "rubro_id"
+    t.index ["rubro_id"], name: "index_actividades_on_rubro_id"
     t.index ["sector_id"], name: "index_actividades_on_sector_id"
   end
 
@@ -169,6 +171,8 @@ ActiveRecord::Schema.define(version: 2019_09_09_221310) do
     t.integer "anio_inscripciones"
     t.date "fecha_facturacion"
     t.string "mail_inscripcion"
+    t.date "fecha_pagos"
+    t.date "fecha_descarga"
   end
 
   create_table "contrasenas", force: :cascade do |t|
@@ -682,12 +686,21 @@ ActiveRecord::Schema.define(version: 2019_09_09_221310) do
     t.index ["cuenta_id"], name: "index_lote_recibos_on_cuenta_id"
   end
 
+  create_table "matricula_opciones", force: :cascade do |t|
+    t.integer "matricula_id"
+    t.integer "cuotas"
+    t.date "fecha"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "matriculas", force: :cascade do |t|
     t.string "nombre"
     t.integer "codigo"
     t.integer "anio"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "importe"
   end
 
   create_table "movimiento2018s", force: :cascade do |t|
@@ -726,12 +739,16 @@ ActiveRecord::Schema.define(version: 2019_09_09_221310) do
     t.bigint "tipo_movimiento_id"
     t.bigint "rubro_id"
     t.datetime "fecha_exportado"
+    t.integer "ejercicio"
+    t.bigint "inscripcion_id"
+    t.boolean "generado"
     t.index ["actividad_alumno_id"], name: "index_movimientos_on_actividad_alumno_id"
     t.index ["concepto_id"], name: "index_movimientos_on_concepto_id"
     t.index ["contrato_id"], name: "index_movimientos_on_contrato_id"
     t.index ["cuenta_id", "fecha"], name: "index_movimientos_on_cuenta_id_and_fecha"
     t.index ["cuenta_id"], name: "index_movimientos_on_cuenta_id"
     t.index ["especial_id"], name: "index_movimientos_on_especial_id"
+    t.index ["inscripcion_id"], name: "index_movimientos_on_inscripcion_id"
     t.index ["pago_cuenta_id"], name: "index_movimientos_on_pago_cuenta_id"
     t.index ["pendiente"], name: "index_movimientos_on_pendiente"
     t.index ["recibo_id"], name: "index_movimientos_on_recibo_id"
@@ -919,6 +936,8 @@ ActiveRecord::Schema.define(version: 2019_09_09_221310) do
     t.string "descripcion"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "tipo_rubro_id"
+    t.index ["tipo_rubro_id"], name: "index_rubros_on_tipo_rubro_id"
   end
 
   create_table "sector_alumnos", force: :cascade do |t|
@@ -1042,6 +1061,13 @@ ActiveRecord::Schema.define(version: 2019_09_09_221310) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "tipo_rubros", force: :cascade do |t|
+    t.string "nombre"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "total"
+  end
+
   create_table "titular_cuentas", id: :serial, force: :cascade do |t|
     t.integer "usuario_id"
     t.integer "cuenta_id"
@@ -1107,6 +1133,7 @@ ActiveRecord::Schema.define(version: 2019_09_09_221310) do
   add_foreign_key "actividad_listas", "listas"
   add_foreign_key "actividad_opciones", "actividades"
   add_foreign_key "actividad_opciones", "opcion_conceptos"
+  add_foreign_key "actividades", "rubros"
   add_foreign_key "actividades", "sectores"
   add_foreign_key "alumnos", "personas", column: "cedula_madre_id"
   add_foreign_key "alumnos", "personas", column: "cedula_padre_id"
@@ -1156,6 +1183,7 @@ ActiveRecord::Schema.define(version: 2019_09_09_221310) do
   add_foreign_key "movimientos", "contratos"
   add_foreign_key "movimientos", "cuentas"
   add_foreign_key "movimientos", "especiales"
+  add_foreign_key "movimientos", "inscripciones"
   add_foreign_key "movimientos", "pago_cuentas"
   add_foreign_key "movimientos", "recibos"
   add_foreign_key "movimientos", "rubros"
@@ -1173,6 +1201,7 @@ ActiveRecord::Schema.define(version: 2019_09_09_221310) do
   add_foreign_key "recibos", "lote_recibos"
   add_foreign_key "refinanciacion_cuotas", "refinanciaciones"
   add_foreign_key "refinanciaciones", "cuentas"
+  add_foreign_key "rubros", "tipo_rubros"
   add_foreign_key "sector_alumnos", "alumnos"
   add_foreign_key "sector_alumnos", "sectores"
   add_foreign_key "seguimientos", "alumnos"

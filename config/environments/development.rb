@@ -32,8 +32,8 @@ Rails.application.configure do
    :address              => "smtp.varela.edu.uy",
    :port                 => 587,
    :domain               => "varela.edu.uy", 
-   :user_name            => "soporte@varela.edu.uy",
-   :password             => "vdegrandi@r",
+   :user_name            => "",
+   :password             => "",
    :authentication       => "plain",
    :enable_starttls_auto => true,
    :openssl_verify_mode  => 'none'

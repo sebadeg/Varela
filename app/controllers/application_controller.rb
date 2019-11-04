@@ -4,6 +4,17 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller? 
   #before_filter :set_locale
 
+  before_filter :set_mailer
+
+  def set_mailer
+    mail = "soporte@varela.edu.uy"
+    contrasena = Contrasena.find_by(mail: mail) rescue nil
+    passwd = contrasena != nil ? contrasena.password : ""
+
+    ActionMailer::Base.default_url_options[:user_name] = mail
+    ActionMailer::Base.default_url_options[:password] = passwd
+  end
+
   $bienvenida = false
 
   def set_locale
