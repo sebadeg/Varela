@@ -394,6 +394,9 @@ class Inscripcion < ApplicationRecord
   end
 
   def convertStr(str)
+    if str == nil
+      return ""
+    end
     return str.encode!(Encoding::ISO_8859_1)
   end
 
