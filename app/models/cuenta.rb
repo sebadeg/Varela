@@ -1,11 +1,19 @@
 class Cuenta < ApplicationRecord
 
-	def movimientos
-		#sql= "SELECT * FROM movimientos WHERE NOT pendiente AND cuenta_id = #{id} ORDER BY fecha, tipo";
+	def movimientos()
+		
+		fecha_inicio = DateTime.new(2019,12,01)
 
-      	return Movimiento.where(["fecha<=? AND cuenta_id=?",DateTime.now,id]).order(:fecha,:tipo)
-      	#return ActiveRecord::Base.connection.execute(sql)
+		movs = Array.new
 
+		Movimiento.where(["fecha<fecha_inicio AND cuenta_id=?",fecha_inicio,id]).sum('debe-haber') do |m|
+			movs.push( Movimiento.new(fecha:fecha_inicio, descripcion:'SALDO ANTERIOR', debe: m>0? m: 0, haber: m<0? 0: -m ))
+		end
+   	Movimiento.where(["fecha>=? AND fecha<=? AND cuenta_id=?",fecha_inicio,DateTime.now,id]).order(:fecha,:tipo) do |m|
+ 		  movs.push( m )
+		end
+
+		return movs
 	end
 
 
