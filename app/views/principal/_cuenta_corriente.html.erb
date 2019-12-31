@@ -11,15 +11,21 @@
 	</tr>
 
 	<% if anteriores %>
-  	<% movimientos = cuenta.movimientos_anteriores(DateTime.new(2019,12,01)) %>
+		<% movimientosAnt = Array.new %>
+		<% movimientos = cuenta.movimientos_anteriores(DateTime.new(2019,12,01)) %>
 	<% elsif pendientes %>
+		<% movimientosAnt = Array.new %>
 		<% movimientos = cuenta.movimientos_pendientes() %>
 	<% else %>
+		<% movimientosAnt = cuenta.movimientos_anteriores(DateTime.new(2019,12,01)) %>
 		<% movimientos = cuenta.movimientos(DateTime.new(2019,12,01)) %>
 	<% end %>
 
 	<% primero = true %>
 	<% suma = 0 %>
+	<% movimientosAnt.each do |m| %>
+		<% suma = suma + m['debe'].to_f - m['haber'].to_f %>
+	<% end %>
 	<% movimientos.each do |m| %>
 		<% suma = suma + m['debe'].to_f - m['haber'].to_f %>
 		<tr><td><%= m['fecha'].to_date.strftime('%d/%m/%Y') %></td>
