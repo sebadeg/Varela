@@ -6,7 +6,7 @@ class Cuenta < ApplicationRecord
 	end
 
 	def movimientos(fecha_inicio)
-   	return Movimiento.where(["fecha>=? AND fecha<=? AND cuenta_id=?",fecha_inicio,DateTime.now,id]).order(:fecha,:tipo) do |m|
+   	return Movimiento.where(["fecha>=? AND fecha<=? AND cuenta_id=?",fecha_inicio,DateTime.now,id]).order(:fecha,:tipo)
   end
 
 
