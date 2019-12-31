@@ -9,10 +9,12 @@
 	<th><%= "Haber" %></td>
 	</tr>
 
-	<% if pendientes %>
+	<% if anteriores %>
+  	<% movimientos = cuenta.movimientos_anteriores(DateTime.new(2019,12,01)) %>
+	<% elsif pendientes %>
 		<% movimientos = cuenta.movimientos_pendientes() %>
 	<% else %>
-		<% movimientos = cuenta.movimientos() %>
+		<% movimientos = cuenta.movimientos(DateTime.new(2019,12,01)) %>
 	<% end %>
 
 	<% primero = true %>

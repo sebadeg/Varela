@@ -43,12 +43,30 @@
 				 					<div class="panel panel-default">
 										<div class="panel-heading">
 											<h4 class="panel-title">
+												<%= link_to "Cuenta: " + t.id.to_s + " (Vencimientos anteriores)", "#collapse" + locals[:form] + t.id.to_s + "anteriores", "data-toggle" => "collapse" %>
+											</h4>
+										</div>										
+										<%= content_tag :div, id: "collapse" + locals[:form] + t.id.to_s + "anteriores", class: ["panel-collapse", "collapse", "collapse"] do %>
+											<div class="col-md-12 col-sm-12 col-xs-12 content-table">
+												<%= render locals[:form], locals: { form: locals[:form] + "_" + t.id.to_s, cuenta: t, anteriores: true, pendientes: false }  %>
+											</div>
+										<% end %>
+										<div class="clearfix"></div>
+									</div>
+								</div>
+							</div>
+							
+							<div class="col-md-12 col-sm-12 col-xs-12 content-table">
+								<div class="panel-group sub-grupo">
+				 					<div class="panel panel-default">
+										<div class="panel-heading">
+											<h4 class="panel-title">
 												<%= link_to "Cuenta: " + t.id.to_s, "#collapse" + locals[:form] + t.id.to_s, "data-toggle" => "collapse" %>
 											</h4>
 										</div>										
 										<%= content_tag :div, id: "collapse" + locals[:form] + t.id.to_s, class: ["panel-collapse", "collapse", "collapse", "in"] do %>
 											<div class="col-md-12 col-sm-12 col-xs-12 content-table">
-												<%= render locals[:form], locals: { form: locals[:form] + "_" + t.id.to_s, cuenta: t, pendientes: false }  %>
+												<%= render locals[:form], locals: { form: locals[:form] + "_" + t.id.to_s, cuenta: t, anteriores: false, pendientes: false }  %>
 											</div>
 										<% end %>
 										<div class="clearfix"></div>
@@ -68,7 +86,7 @@
 										</div>										
 										<%= content_tag :div, id: "collapse" + locals[:form] + t.id.to_s + "pendientes", class: ["panel-collapse", "collapse", "collapse"] do %>
 											<div class="col-md-12 col-sm-12 col-xs-12 content-table">
-												<%= render locals[:form], locals: { form: locals[:form] + "_" + t.id.to_s, cuenta: t, pendientes: true }  %>
+												<%= render locals[:form], locals: { form: locals[:form] + "_" + t.id.to_s, cuenta: t, anteriores: false, pendientes: true }  %>
 											</div>
 										<% end %>
 										<div class="clearfix"></div>

@@ -1,20 +1,13 @@
 class Cuenta < ApplicationRecord
 
-	def movimientos()
-		
-		fecha_inicio = DateTime.new(2019,12,01)
 
-		movs = Array.new
-
-		Movimiento.where(["fecha<fecha_inicio AND cuenta_id=?",fecha_inicio,id]).sum('debe-haber') do |m|
-			movs.push( Movimiento.new(fecha:fecha_inicio, descripcion:'SALDO ANTERIOR', debe: m>0? m: 0, haber: m<0? 0: -m ))
-		end
-   	Movimiento.where(["fecha>=? AND fecha<=? AND cuenta_id=?",fecha_inicio,DateTime.now,id]).order(:fecha,:tipo) do |m|
- 		  movs.push( m )
-		end
-
-		return movs
+	def movimientos_anteriores(fecha_inicio)
+   	return Movimiento.where(["fecha<? AND cuenta_id=?",fecha_inicio,id]).order(:fecha,:tipo)
 	end
+
+	def movimientos(fecha_inicio)
+   	return Movimiento.where(["fecha>=? AND fecha<=? AND cuenta_id=?",fecha_inicio,DateTime.now,id]).order(:fecha,:tipo) do |m|
+  end
 
 
     def movimientos_pendientes
