@@ -56,7 +56,7 @@
 	<% end %>
 
 
-	<% if !pendientes %>
+	<% if !anteriores && !pendientes %>
 	<tr>
 	<td>
 		<%= form_for(@cuenta, as: :cuenta, url: principal_download_factura_path(:cuenta), :html => {:id=>'form_download_' + cuenta.id.to_s}) do |f| %>
