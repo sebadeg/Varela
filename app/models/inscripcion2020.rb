@@ -15,7 +15,7 @@ class Inscripcion2020 < ApplicationRecord
 
 
   def self.FindInscripcion(a)
-    return Inscripcion.where("alumno_id=#{a} AND reinscripcion AND anio=2021").first rescue nil
+    return Inscripcion2020.where("alumno_id=#{a} AND reinscripcion AND anio=2021").first rescue nil
   end
 
   def PuedeInscribir()
