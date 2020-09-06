@@ -61,7 +61,7 @@
           </div>
 
           <div class="form-group">
-            <% opciones = Inscripcion2020.OpcionesConvenio(inscripcionAlumno) %>
+            <% opciones = Array.new  %>
             <%= f.label "Convenio: " %>
             <%= f.select :convenio2020_id, options_for_select(opciones, inscripcionAlumno.convenio2020_id), {}, {class: 'form-control'}  %>
           </div>
