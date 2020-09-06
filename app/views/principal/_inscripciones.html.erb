@@ -67,7 +67,7 @@
           </div>
 
           <% afinidad = Inscripcion2020.OpcionesAfinidad(inscripcionAlumno) %>
-          <% if afinidad != nil %>
+          <% if afinidad != nil && afinidad.descuento != nil %>
             <div class="form-group">
               <%= f.label "Afinidad: " %><br>
               <%= p "#{afinidad.descuento}%" %>
@@ -75,7 +75,7 @@
           <% end %>
 
           <% inscripcion = Inscripcion2020.OpcionesAdicional(inscripcionAlumno) %>
-          <% if inscripcion != nil %>
+          <% if inscripcion != nil && inscripcion.adicional != nil %>
             <div class="form-group">
               <%= f.label "Adicional: " %><br>
               <%= p "#{inscripcion.adicional}%" %>
