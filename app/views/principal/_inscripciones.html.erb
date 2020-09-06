@@ -75,7 +75,7 @@
           <div class="form-group">
             <% opciones = Inscripcion2020.OpcionesCuotas(inscripcionAlumno) %>
             <%= f.label "Cuotas: " %>
-            <%= f.select :cuotas2020_id, options_for_select(opciones, inscripcionAlumno.cuotas2020_id), {}, {class: 'form-control'}  %>
+            <%= f.select :cuota2020_id, options_for_select(opciones, inscripcionAlumno.cuota2020_id), {}, {class: 'form-control'}  %>
           </div>
 
           <%= f.submit "Inscribir", class: 'btn btn-primary', data: { confirm: "A partir de este momento los datos no pueden ser modificados. Está seguro de continuar?" } %>
