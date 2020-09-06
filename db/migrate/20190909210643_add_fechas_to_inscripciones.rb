@@ -1,11 +1,9 @@
 class AddFechasToInscripciones < ActiveRecord::Migration[5.2]
   def change
-    add_column :inscripciones, :fecha_registrado, :date
-    add_column :inscripciones, :fecha_vale, :date
-    add_column :inscripciones, :fecha_descargado, :date
-    add_column :inscripciones, :fecha_entregado, :date
-    add_column :inscripciones, :fecha_inscripto, :date
-    remove_column :inscripciones, :inscripcion_estado_id
-    drop_table :inscripcion_estados
+    add_column :inscripciones, :fecha_registrado, :datetime
+    add_column :inscripciones, :fecha_vale, :datetime
+    add_column :inscripciones, :fecha_descargado, :datetime
+    add_column :inscripciones, :fecha_entregado, :datetime
+    add_column :inscripciones, :fecha_inscripto, :datetime
   end
 end

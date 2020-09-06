@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_05_000259) do
+ActiveRecord::Schema.define(version: 2020_09_06_131107) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -98,6 +98,16 @@ ActiveRecord::Schema.define(version: 2019_10_05_000259) do
     t.index ["sector_id"], name: "index_actividades_on_sector_id"
   end
 
+  create_table "adicional2020s", force: :cascade do |t|
+    t.string "nombre"
+    t.boolean "formulario"
+    t.decimal "descuento"
+    t.date "fecha_comienzo"
+    t.date "fecha_fin"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "admin_usuarios", id: :serial, force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -121,6 +131,16 @@ ActiveRecord::Schema.define(version: 2019_10_05_000259) do
     t.boolean "sue"
     t.index ["email"], name: "index_admin_usuarios_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admin_usuarios_on_reset_password_token", unique: true
+  end
+
+  create_table "afinidad2020s", force: :cascade do |t|
+    t.string "nombre"
+    t.boolean "formulario"
+    t.decimal "descuento"
+    t.date "fecha_comienzo"
+    t.date "fecha_fin"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "alumnos", id: :serial, force: :cascade do |t|
@@ -211,6 +231,15 @@ ActiveRecord::Schema.define(version: 2019_10_05_000259) do
     t.index ["cuenta_id"], name: "index_contratos_on_cuenta_id"
   end
 
+  create_table "convenio2020s", force: :cascade do |t|
+    t.string "nombre"
+    t.decimal "descuento"
+    t.date "fecha_comienzo"
+    t.date "fecha_fin"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "convenio_alumnos", id: :serial, force: :cascade do |t|
     t.integer "convenio_id"
     t.integer "alumno_id"
@@ -281,6 +310,15 @@ ActiveRecord::Schema.define(version: 2019_10_05_000259) do
     t.boolean "visa"
     t.boolean "oca"
     t.index ["nombre"], name: "index_cuentas_on_nombre"
+  end
+
+  create_table "cuota2020s", force: :cascade do |t|
+    t.string "nombre"
+    t.boolean "formulario"
+    t.date "fecha_comienzo"
+    t.date "fecha_fin"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "cuota_socios", force: :cascade do |t|
@@ -428,6 +466,14 @@ ActiveRecord::Schema.define(version: 2019_10_05_000259) do
     t.index ["mail"], name: "index_facturas_on_mail"
   end
 
+  create_table "formulario2020s", force: :cascade do |t|
+    t.string "nombre"
+    t.date "fecha_comienzo"
+    t.date "fecha_fin"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "formulario_alumnos", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -477,6 +523,60 @@ ActiveRecord::Schema.define(version: 2019_10_05_000259) do
     t.integer "proximo_grado"
   end
 
+  create_table "hermanos2020s", force: :cascade do |t|
+    t.string "nombre"
+    t.decimal "descuento"
+    t.date "fecha_comienzo"
+    t.date "fecha_fin"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "inscripcion2020s", force: :cascade do |t|
+    t.bigint "alumno_id"
+    t.bigint "padre_id"
+    t.bigint "madre_id"
+    t.bigint "titular1_id"
+    t.bigint "titular2_id"
+    t.bigint "grado_id"
+    t.bigint "proximo_grado_id"
+    t.boolean "reinscripcion"
+    t.boolean "inhabilitado"
+    t.date "fecha_comienzo"
+    t.date "fecha_fin"
+    t.bigint "convenio2020_id"
+    t.bigint "matricula2020_id"
+    t.bigint "hermanos2020_id"
+    t.bigint "cuota2020_id"
+    t.date "fecha_registrado"
+    t.date "fecha_vale"
+    t.date "fecha_descargado"
+    t.date "fecha_entregado"
+    t.date "fecha_inscripto"
+    t.date "fecha_pase"
+    t.string "destino_pase"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "afinidad2020_id"
+    t.decimal "adicional"
+    t.bigint "formulario2020_id"
+    t.boolean "padre_titular"
+    t.boolean "madre_titular"
+    t.index ["afinidad2020_id"], name: "index_inscripcion2020s_on_afinidad2020_id"
+    t.index ["alumno_id"], name: "index_inscripcion2020s_on_alumno_id"
+    t.index ["convenio2020_id"], name: "index_inscripcion2020s_on_convenio2020_id"
+    t.index ["cuota2020_id"], name: "index_inscripcion2020s_on_cuota2020_id"
+    t.index ["formulario2020_id"], name: "index_inscripcion2020s_on_formulario2020_id"
+    t.index ["grado_id"], name: "index_inscripcion2020s_on_grado_id"
+    t.index ["hermanos2020_id"], name: "index_inscripcion2020s_on_hermanos2020_id"
+    t.index ["madre_id"], name: "index_inscripcion2020s_on_madre_id_id"
+    t.index ["matricula2020_id"], name: "index_inscripcion2020s_on_matricula2020_id"
+    t.index ["padre_id"], name: "index_inscripcion2020s_on_padre_id_id"
+    t.index ["proximo_grado_id"], name: "index_inscripcion2020s_on_proximo_grado_id"
+    t.index ["titular1_id"], name: "index_inscripcion2020s_on_titular1_id_id"
+    t.index ["titular2_id"], name: "index_inscripcion2020s_on_titular2_id_id"
+  end
+
   create_table "inscripcion_alumnos", id: :serial, force: :cascade do |t|
     t.integer "alumno_id"
     t.integer "grado_id"
@@ -509,6 +609,21 @@ ActiveRecord::Schema.define(version: 2019_10_05_000259) do
     t.index ["alumno_id"], name: "index_inscripcion_alumnos_on_alumno_id"
     t.index ["convenio_id"], name: "index_inscripcion_alumnos_on_convenio_id"
     t.index ["grado_id"], name: "index_inscripcion_alumnos_on_grado_id"
+  end
+
+  create_table "inscripcion_cuotas", force: :cascade do |t|
+    t.bigint "inscripcion_id"
+    t.date "fecha"
+    t.string "descripcion_cuota"
+    t.string "descripcion_descuento"
+    t.integer "cuota"
+    t.integer "total_cuotas"
+    t.decimal "importe"
+    t.decimal "descuento"
+    t.decimal "total_importe"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["inscripcion_id"], name: "index_inscripcion_cuotas_on_inscripcion_id"
   end
 
   create_table "inscripcion_opcion_alumnos", force: :cascade do |t|
@@ -638,6 +753,17 @@ ActiveRecord::Schema.define(version: 2019_10_05_000259) do
     t.index ["proximo_grado_id"], name: "index_inscripciones_on_proximo_grado_id"
   end
 
+  create_table "linea_cuota2020s", force: :cascade do |t|
+    t.date "fecha"
+    t.integer "cantidad"
+    t.integer "numerador"
+    t.integer "denominador"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "cuota2020_id"
+    t.index ["cuota2020_id"], name: "index_linea_cuota2020s_on_cuota2020_id"
+  end
+
   create_table "linea_facturas", id: :serial, force: :cascade do |t|
     t.integer "factura_id"
     t.integer "alumno_id"
@@ -653,6 +779,17 @@ ActiveRecord::Schema.define(version: 2019_10_05_000259) do
     t.index ["alumno_id"], name: "index_linea_facturas_on_alumno_id"
     t.index ["factura_id", "indice"], name: "index_linea_facturas_on_factura_id_and_indice", unique: true
     t.index ["factura_id"], name: "index_linea_facturas_on_factura_id"
+  end
+
+  create_table "linea_matricula2020s", force: :cascade do |t|
+    t.bigint "matricula2020_id"
+    t.date "fecha"
+    t.integer "cantidad"
+    t.integer "numerador"
+    t.integer "denominador"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["matricula2020_id"], name: "index_linea_matricula2020s_on_matricula2020_id"
   end
 
   create_table "lista_alumnos", id: :serial, force: :cascade do |t|
@@ -683,7 +820,19 @@ ActiveRecord::Schema.define(version: 2019_10_05_000259) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "nota_credito", default: false
+    t.bigint "rubro_id"
     t.index ["cuenta_id"], name: "index_lote_recibos_on_cuenta_id"
+    t.index ["rubro_id"], name: "index_lote_recibos_on_rubro_id"
+  end
+
+  create_table "matricula2020s", force: :cascade do |t|
+    t.string "nombre"
+    t.boolean "formulario"
+    t.decimal "precio"
+    t.date "fecha_comienzo"
+    t.date "fecha_fin"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "matricula_opciones", force: :cascade do |t|
@@ -701,6 +850,8 @@ ActiveRecord::Schema.define(version: 2019_10_05_000259) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.decimal "importe"
+    t.integer "cuotas"
+    t.date "fecha"
   end
 
   create_table "movimiento2018s", force: :cascade do |t|
@@ -875,6 +1026,24 @@ ActiveRecord::Schema.define(version: 2019_10_05_000259) do
     t.index ["alumno_id"], name: "index_proximo_grado_alumnos_on_alumno_id"
   end
 
+  create_table "proximo_grado_matricula2020s", force: :cascade do |t|
+    t.bigint "proximo_grado_id"
+    t.bigint "matricula2020_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["matricula2020_id"], name: "index_proximo_grado_matricula2020s_on_matricula2020_id"
+    t.index ["proximo_grado_id"], name: "index_proximo_grado_matricula2020s_on_proximo_grado_id"
+  end
+
+  create_table "proximo_grado_matriculas", force: :cascade do |t|
+    t.bigint "proximo_grado_id"
+    t.bigint "matricula_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["matricula_id"], name: "index_proximo_grado_matriculas_on_matricula_id"
+    t.index ["proximo_grado_id"], name: "index_proximo_grado_matriculas_on_proximo_grado_id"
+  end
+
   create_table "proximo_grados", id: :serial, force: :cascade do |t|
     t.string "nombre"
     t.decimal "precio"
@@ -887,6 +1056,9 @@ ActiveRecord::Schema.define(version: 2019_10_05_000259) do
     t.integer "grado_id"
     t.bigint "sector_id"
     t.integer "anio"
+    t.bigint "rubro_id"
+    t.integer "matricula_rubro"
+    t.index ["rubro_id"], name: "index_proximo_grados_on_rubro_id"
     t.index ["sector_id"], name: "index_proximo_grados_on_sector_id"
   end
 
@@ -1122,7 +1294,7 @@ ActiveRecord::Schema.define(version: 2019_10_05_000259) do
     t.string "trabajo"
     t.string "telefono_trabajo"
     t.index ["cedula"], name: "index_usuarios_on_cedula", unique: true
-    t.index ["email"], name: "index_usuarios_on_email", unique: true
+    t.index ["email"], name: "index_usuarios_on_email"
     t.index ["reset_password_token"], name: "index_usuarios_on_reset_password_token", unique: true
   end
 
@@ -1163,20 +1335,25 @@ ActiveRecord::Schema.define(version: 2019_10_05_000259) do
   add_foreign_key "formularios", "proximo_grados"
   add_foreign_key "grado_alumnos", "alumnos"
   add_foreign_key "grado_alumnos", "grados"
+  add_foreign_key "inscripcion2020s", "afinidad2020s"
+  add_foreign_key "inscripcion2020s", "formulario2020s"
   add_foreign_key "inscripcion_alumnos", "alumnos"
   add_foreign_key "inscripcion_alumnos", "convenios"
   add_foreign_key "inscripcion_alumnos", "grados"
+  add_foreign_key "inscripcion_cuotas", "inscripciones"
   add_foreign_key "inscripcion_opcion_alumnos", "inscripcion_opciones"
   add_foreign_key "inscripcion_opcion_cuotas", "inscripcion_opciones"
   add_foreign_key "inscripcion_opciones", "inscripcion_opcion_tipos"
   add_foreign_key "inscripciones", "grados"
   add_foreign_key "inscripciones", "proximo_grados"
+  add_foreign_key "linea_cuota2020s", "cuota2020s"
   add_foreign_key "linea_facturas", "alumnos"
   add_foreign_key "linea_facturas", "facturas"
   add_foreign_key "lista_alumnos", "alumnos"
   add_foreign_key "lista_alumnos", "listas"
   add_foreign_key "listas", "sectores"
   add_foreign_key "lote_recibos", "cuentas"
+  add_foreign_key "lote_recibos", "rubros"
   add_foreign_key "movimiento2018s", "cuentas"
   add_foreign_key "movimientos", "actividad_alumnos"
   add_foreign_key "movimientos", "conceptos"
@@ -1196,6 +1373,9 @@ ActiveRecord::Schema.define(version: 2019_10_05_000259) do
   add_foreign_key "pagos", "tipo_pagos"
   add_foreign_key "pases", "alumnos"
   add_foreign_key "proximo_grado_alumnos", "alumnos"
+  add_foreign_key "proximo_grado_matriculas", "matriculas"
+  add_foreign_key "proximo_grado_matriculas", "proximo_grados"
+  add_foreign_key "proximo_grados", "rubros"
   add_foreign_key "proximo_grados", "sectores"
   add_foreign_key "recargos", "cuentas"
   add_foreign_key "recibos", "lote_recibos"
