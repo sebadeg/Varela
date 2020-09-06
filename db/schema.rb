@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_06_131107) do
+ActiveRecord::Schema.define(version: 2020_09_06_215309) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -312,9 +312,18 @@ ActiveRecord::Schema.define(version: 2020_09_06_131107) do
     t.index ["nombre"], name: "index_cuentas_on_nombre"
   end
 
+  create_table "cuota2020_alumnos", force: :cascade do |t|
+    t.bigint "cuota2020_id"
+    t.bigint "alumno_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["alumno_id"], name: "index_cuota2020_alumnos_on_alumno_id"
+    t.index ["cuota2020_id"], name: "index_cuota2020_alumnos_on_cuota2020_id"
+  end
+
   create_table "cuota2020s", force: :cascade do |t|
     t.string "nombre"
-    t.boolean "formulario"
+    t.boolean "general"
     t.date "fecha_comienzo"
     t.date "fecha_fin"
     t.datetime "created_at", null: false
@@ -893,12 +902,14 @@ ActiveRecord::Schema.define(version: 2020_09_06_131107) do
     t.integer "ejercicio"
     t.bigint "inscripcion_id"
     t.boolean "generado"
+    t.bigint "inscripcion2020_id"
     t.index ["actividad_alumno_id"], name: "index_movimientos_on_actividad_alumno_id"
     t.index ["concepto_id"], name: "index_movimientos_on_concepto_id"
     t.index ["contrato_id"], name: "index_movimientos_on_contrato_id"
     t.index ["cuenta_id", "fecha"], name: "index_movimientos_on_cuenta_id_and_fecha"
     t.index ["cuenta_id"], name: "index_movimientos_on_cuenta_id"
     t.index ["especial_id"], name: "index_movimientos_on_especial_id"
+    t.index ["inscripcion2020_id"], name: "index_movimientos_on_inscripcion2020_id"
     t.index ["inscripcion_id"], name: "index_movimientos_on_inscripcion_id"
     t.index ["pago_cuenta_id"], name: "index_movimientos_on_pago_cuenta_id"
     t.index ["pendiente"], name: "index_movimientos_on_pendiente"
@@ -1360,6 +1371,7 @@ ActiveRecord::Schema.define(version: 2020_09_06_131107) do
   add_foreign_key "movimientos", "contratos"
   add_foreign_key "movimientos", "cuentas"
   add_foreign_key "movimientos", "especiales"
+  add_foreign_key "movimientos", "inscripcion2020s"
   add_foreign_key "movimientos", "inscripciones"
   add_foreign_key "movimientos", "pago_cuentas"
   add_foreign_key "movimientos", "recibos"

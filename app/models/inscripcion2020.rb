@@ -58,11 +58,13 @@ class Inscripcion2020 < ApplicationRecord
   end
 
   def self.OpcionesAfinidad(inscripcionAlumno)
-    return "5%"
+    afinidad = Afinidad2020.where("id IN (SELECT afinidad2020_id FROM inscripcion2020s WHERE alumno_id=#{inscripcionAlumno.alumno_id} AND #{ConsultaFecha()})")
+    return afinidad
   end
 
   def self.OpcionesAdicional(inscripcionAlumno)
-    return "5%"
+    inscripcion = Inscripcion2020.where("alumno_id=#{inscripcionAlumno.alumno_id} AND #{ConsultaFecha()}")
+    return inscripcion
   end
 
   def self.OpcionesHermanos(inscripcionAlumno)
