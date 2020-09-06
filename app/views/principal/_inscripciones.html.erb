@@ -66,6 +66,20 @@
             <%= f.select :convenio2020_id, options_for_select(opciones, inscripcionAlumno.convenio2020_id), {}, {class: 'form-control'}  %>
           </div>
 
+          <% opciones = Inscripcion2020.OpcionesAfinidad(inscripcionAlumno) %>
+          <% if opciones != nil %>
+            <div class="form-group">
+              <%= f.label "Afinidad: " %><%= p opciones %>
+            </div>
+          <% end %>
+
+          <% opciones = Inscripcion2020.OpcionesAdicional(inscripcionAlumno) %>
+          <% if opciones != nil %>
+            <div class="form-group">
+              <%= f.label "Adicional: " %><%= p opciones %>
+            </div>
+          <% end %>
+
           <div class="form-group">
             <% opciones = Inscripcion2020.OpcionesHermanos(inscripcionAlumno) %>
             <%= f.label "Hermanos: " %>

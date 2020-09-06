@@ -58,13 +58,11 @@ class Inscripcion2020 < ApplicationRecord
   end
 
   def self.OpcionesAfinidad(inscripcionAlumno)
-    opciones = Array.new
-    return opciones
+    return "5%"
   end
 
   def self.OpcionesAdicional(inscripcionAlumno)
-    opciones = Array.new
-    return opciones
+    return "5%"
   end
 
   def self.OpcionesHermanos(inscripcionAlumno)
