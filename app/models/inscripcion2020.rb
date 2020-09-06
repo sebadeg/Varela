@@ -41,9 +41,11 @@ class Inscripcion2020 < ApplicationRecord
 
   def self.OpcionesGrados(inscripcionAlumno)
     opciones = Array.new
-    tipo = ProximoGrado.where("grado_id=#{inscripcionAlumno.grado_id} AND #{ConsultaFecha()}").order(:nombre).each do |opcion|
-      opciones.push( [opcion.nombre,opcion.id] )
-    end 
+    #ProximoGrado.where("grado_id=#{inscripcionAlumno.grado_id} AND #{ConsultaFecha()}").order(:nombre).each do |opcion|
+    #  opciones.push( [opcion.nombre,opcion.id] )
+    #end 
+    opciones.push( ["nombre 1",1] )
+    opciones.push( ["nombre 2",2] )
     return opciones
   end
 

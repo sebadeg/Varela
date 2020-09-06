@@ -55,7 +55,7 @@
           <%= f.hidden_field :alumno_id, value: inscripcionAlumno.alumno_id %>
           <div class="form-group">
 
-            <% opciones = Array.new %>
+            <% opciones = Inscripcion2020.OpcionesGrados(inscripcionAlumno) %>
             <%= f.label "Nivel" %>
             <%= f.select :proximo_grado_id, options_for_select(opciones, inscripcionAlumno.proximo_grado_id), {}, {class: 'form-control'}  %>
           </div>
