@@ -14,8 +14,12 @@ class Inscripcion2020 < ApplicationRecord
   belongs_to :cuota2020
 
 
+  def self.ConsultaFecha()
+    return "fecha_comienzo<='#{DateTime.now.strftime("%Y-%m-%d")}' AND (fecha_fin IS NULL OR fecha_fin>='#{DateTime.now.strftime("%Y-%m-%d")}')"
+  end
+
   def self.FindInscripcion(a)
-    return Inscripcion2020.where("alumno_id=#{a} AND reinscripcion AND fecha_comienzo<='#{DateTime.now.strftime("%Y-%m-%d")}' AND (fecha_fin IS NULL OR fecha_fin>='#{DateTime.now.strftime("%Y-%m-%d")}')").first rescue nil
+    return Inscripcion2020.where("alumno_id=#{a} AND reinscripcion AND #{ConsultaFecha()}").first rescue nil
   end
 
   def PuedeInscribir()
@@ -33,4 +37,48 @@ class Inscripcion2020 < ApplicationRecord
   def EstaRegistrado()
     return fecha_registrado != nil
   end
+
+
+  def self.OpcionesGrados(inscripcionAlumno)
+    opciones = Array.new
+    tipo = ProximoGrado.where("grado_id=#{inscripcionAlumno.grado_id} AND #{ConsultaFecha()}").order(:nombre).each do |opcion|
+      opciones.push( [opcion.nombre,opcion.id] )
+    end 
+    return opciones
+  end
+
+
+  def self.OpcionesConvenio(inscripcionAlumno)
+    opciones = Array.new
+    return opciones
+  end
+
+  def self.OpcionesAfinidad(inscripcionAlumno)
+    opciones = Array.new
+    return opciones
+  end
+
+  def self.OpcionesAdicional(inscripcionAlumno)
+    opciones = Array.new
+    return opciones
+  end
+
+  def self.OpcionesHermanos(inscripcionAlumno)
+    opciones = Array.new
+    tipo = Hermanos2020.where(ConsultaFecha()).order(:nombre).each do |opcion|
+      opciones.push( [opcion.nombre,opcion.id] )
+    end 
+    return opciones
+  end
+
+  def self.OpcionesCuotas(inscripcionAlumno)
+    opciones = Array.new
+    return opciones
+  end
+
+  def self.OpcionesMatricula(inscripcionAlumno)
+    opciones = Array.new
+    return opciones
+  end
+
 end

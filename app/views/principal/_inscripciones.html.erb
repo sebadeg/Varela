@@ -49,18 +49,17 @@
     </div>
     <div class="clearfix"></div>
   <% else %>
-    <%= form_for(inscripcionAlumno, as: :inscripcionAlumno, url: principal_download_ayuda_path(:inscripcionAlumno), :html => {:id=>'form_download_ayuda_' + inscripcionAlumno.alumno_id.to_s}) do |f| %>
+    <!--<%= form_for(inscripcionAlumno, as: :inscripcionAlumno, url: principal_download_ayuda_path(:inscripcionAlumno), :html => {:id=>'form_download_ayuda_' + inscripcionAlumno.alumno_id.to_s}) do |f| %>
       <%= f.hidden_field :alumno_id, value: inscripcionAlumno.alumno_id %>
       <div id="textoRegistrarse">
         <b><%= link_to "Leer antes de llenar el formulario", "", :onclick => "$('#form_download_ayuda_" + inscripcionAlumno.alumno_id.to_s + "').submit()" %></b>
       </div>
-    <% end %>
+    <% end %>-->
     <%= form_for(inscripcionAlumno, as: :inscripcionAlumno, url: principal_inscribir_path(:inscripcionAlumno)) do |f| %>
       <div class="col-md-12 col-sm-12 col-xs-12 content-table">
         <div class="panel-body">
           <%= f.hidden_field :alumno_id, value: inscripcionAlumno.alumno_id %>
-          <%= f.hidden_field :cedula, value: inscripcionAlumno.cedula %>
-      
+          <!--<%= f.hidden_field :cedula, value: inscripcionAlumno.cedula %>
           <div class="form-group">
             <%= f.label "Cédula del alumno" %><%= p " - (la cédula 1.234.567-2 se ingresa 12345672)" %>
             <%= f.text_field :cedula, autofocus: true, class: 'form-control', disabled: true %>
@@ -88,56 +87,62 @@
           <div class="form-group">
             <%= f.label "Emergencia" %>
             <%= f.text_field :emergencia, autofocus: true, class: 'form-control' %>
-          </div>
+          </div>-->
 
           <div class="form-group">
-            <% opciones = ProximoGrado.OpcionesGrados(inscripcionAlumno) %>
+            <% opciones = Inscripcion2020.OpcionesGrados(inscripcionAlumno) %>
             <%= f.label "Nivel" %>
             <%= f.select :proximo_grado_id, options_for_select(opciones, inscripcionAlumno.proximo_grado_id), {}, {class: 'form-control'}  %>
           </div>
 
       
-          <% opciones = Formulario.OpcionesFormulario(inscripcionAlumno) %>
+          <!--<% opciones = Formulario.OpcionesFormulario(inscripcionAlumno) %>
           <% if opciones != nil && opciones.count > 0 %>
             <div class="form-group">
               <%= f.label "Formulario: " %>
               <%= f.select :formulario_id, options_for_select(opciones, inscripcionAlumno.formulario_id), {}, {class: 'form-control'}  %>
             </div>
-          <% else %>
+          <% else %>-->
             <%= f.hidden_field :formulario_id, value: nil %>
-          <% end %>
+          <!--<% end %>-->
 
           <div class="form-group">
-            <% opciones = Formulario.OpcionesConvenio(inscripcionAlumno) %>
+            <% opciones = Inscripcion2020.OpcionesConvenio(inscripcionAlumno) %>
             <%= f.label "Convenio: " %>
             <%= f.select :convenio_id, options_for_select(opciones, inscripcionAlumno.convenio_id), {}, {class: 'form-control'}  %>
           </div>
 
           <div class="form-group">
-            <% opciones = Formulario.OpcionesAdicional(inscripcionAlumno) %>
+            <% opciones = Inscripcion2020.OpcionesAfinidad(inscripcionAlumno) %>
             <%= f.label "Adicional: " %>
             <%= f.select :adicional_id, options_for_select(opciones, inscripcionAlumno.adicional_id), {}, {class: 'form-control'}  %>
           </div>
 
           <div class="form-group">
-            <% opciones = Formulario.OpcionesHermanos(inscripcionAlumno) %>
+            <% opciones = Inscripcion2020.OpcionesAdicional(inscripcionAlumno) %>
+            <%= f.label "Adicional: " %>
+            <%= f.select :adicional_id, options_for_select(opciones, inscripcionAlumno.adicional_id), {}, {class: 'form-control'}  %>
+          </div>
+
+          <div class="form-group">
+            <% opciones = Inscripcion2020.OpcionesHermanos(inscripcionAlumno) %>
             <%= f.label "Hermanos: " %>
             <%= f.select :hermanos_id, options_for_select(opciones, inscripcionAlumno.hermanos_id), {}, {class: 'form-control'}  %>
           </div>
 
           <div class="form-group">
-            <% opciones = Formulario.OpcionesCuotas(inscripcionAlumno) %>
+            <% opciones = Inscripcion2020.OpcionesCuotas(inscripcionAlumno) %>
             <%= f.label "Cuotas: " %>
             <%= f.select :cuotas_id, options_for_select(opciones, inscripcionAlumno.cuotas_id), {}, {class: 'form-control'}  %>
           </div>
 
           <div class="form-group">
-            <% opciones = Formulario.OpcionesMatricula(inscripcionAlumno) %>
+            <% opciones = Inscripcion2020.OpcionesMatricula(inscripcionAlumno) %>
             <%= f.label "Matrícula: " %>
             <%= f.select :matricula_id, options_for_select(opciones, inscripcionAlumno.matricula_id), {}, {class: 'form-control'}  %>
           </div>
 
-          <div class="panel-group sub-grupo">
+          <!--<div class="panel-group sub-grupo">
             <div class="panel panel-default">
               <div class="panel-heading">
                 <h4 class="panel-title">
@@ -362,7 +367,7 @@
               <% end %>
               <div class="clearfix"></div>
             </div>
-          </div>
+          </div>-->
           <%= f.submit "Inscribir", class: 'btn btn-primary', data: { confirm: "A partir de este momento los datos no pueden ser modificados. Está seguro de continuar?" } %>
         </div>
       </div>
