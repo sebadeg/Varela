@@ -70,7 +70,7 @@
           <% if afinidad != nil %>
             <div class="form-group">
               <%= f.label "Afinidad: " %><br>
-              <%= p "#{afinidad.first.descuento}%" %>
+              <%= p "#{afinidad.descuento}%" %>
             </div>
           <% end %>
 
@@ -78,7 +78,7 @@
           <% if inscripcion != nil %>
             <div class="form-group">
               <%= f.label "Adicional: " %><br>
-              <%= p "#{inscripcion.first.adicional}%" %>
+              <%= p "#{inscripcion.adicional}%" %>
             </div>
           <% end %>
 
