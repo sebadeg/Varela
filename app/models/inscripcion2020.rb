@@ -50,6 +50,7 @@ class Inscripcion2020 < ApplicationRecord
 
   def self.OpcionesConvenio(inscripcionAlumno)
     opciones = Array.new
+    opciones.push( ["",nil] )
     Convenio2020.where(ConsultaFecha()).order(:nombre).each do |opcion|
       opciones.push( [opcion.nombre,opcion.id] )
     end 
@@ -68,6 +69,7 @@ class Inscripcion2020 < ApplicationRecord
 
   def self.OpcionesHermanos(inscripcionAlumno)
     opciones = Array.new
+    opciones.push( ["",nil] )
     Hermanos2020.where(ConsultaFecha()).order(:nombre).each do |opcion|
       opciones.push( [opcion.nombre,opcion.id] )
     end 
