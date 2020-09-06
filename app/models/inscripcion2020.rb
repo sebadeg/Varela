@@ -87,6 +87,10 @@ class Inscripcion2020 < ApplicationRecord
 
   def self.OpcionesMatricula(inscripcionAlumno)
     opciones = Array.new
+    opciones.push( ["",nil] )
+    Matricula2020.where(ConsultaFecha()).order(:nombre).each do |opcion|
+      opciones.push( [opcion.nombre,opcion.id] )
+    end 
     return opciones
   end
 
