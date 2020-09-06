@@ -8,7 +8,7 @@
   </table>
 <% else %>
   <% alu = locals[:alumno] %>
-  <% inscripcionAlumno = Inscripcion.FindInscripcion(alu.id) %>
+  <% inscripcionAlumno = Inscripcion2020.FindInscripcion(alu.id) %>
   <% if inscripcionAlumno == nil || !inscripcionAlumno.PuedeInscribir() %>
     <table>
       <tr height='30px'></tr>
