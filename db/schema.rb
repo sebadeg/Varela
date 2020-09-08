@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_06_215309) do
+ActiveRecord::Schema.define(version: 2020_09_07_191330) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -133,6 +133,15 @@ ActiveRecord::Schema.define(version: 2020_09_06_215309) do
     t.index ["reset_password_token"], name: "index_admin_usuarios_on_reset_password_token", unique: true
   end
 
+  create_table "afinidad2020_alumnos", force: :cascade do |t|
+    t.bigint "afinidad2020_id"
+    t.bigint "alumno_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["afinidad2020_id"], name: "index_afinidad2020_alumnos_on_cuota2020_id"
+    t.index ["alumno_id"], name: "index_afinidad2020_alumnos_on_alumno_id"
+  end
+
   create_table "afinidad2020s", force: :cascade do |t|
     t.string "nombre"
     t.boolean "formulario"
@@ -141,6 +150,7 @@ ActiveRecord::Schema.define(version: 2020_09_06_215309) do
     t.date "fecha_fin"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "general"
   end
 
   create_table "alumnos", id: :serial, force: :cascade do |t|
@@ -571,6 +581,7 @@ ActiveRecord::Schema.define(version: 2020_09_06_215309) do
     t.bigint "formulario2020_id"
     t.boolean "padre_titular"
     t.boolean "madre_titular"
+    t.decimal "congelado"
     t.index ["afinidad2020_id"], name: "index_inscripcion2020s_on_afinidad2020_id"
     t.index ["alumno_id"], name: "index_inscripcion2020s_on_alumno_id"
     t.index ["convenio2020_id"], name: "index_inscripcion2020s_on_convenio2020_id"
@@ -834,9 +845,28 @@ ActiveRecord::Schema.define(version: 2020_09_06_215309) do
     t.index ["rubro_id"], name: "index_lote_recibos_on_rubro_id"
   end
 
+  create_table "matricula2020_alumnos", force: :cascade do |t|
+    t.bigint "matricula2020_id"
+    t.bigint "alumno_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["alumno_id"], name: "index_matricula2020_alumnos_on_alumno_id"
+    t.index ["matricula2020_id"], name: "index_matricula2020_alumnos_on_matricula2020_id"
+  end
+
+  create_table "matricula2020_proximo_grados", force: :cascade do |t|
+    t.bigint "matricula2020_id"
+    t.bigint "proximo_grado_id"
+    t.decimal "precio"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["matricula2020_id"], name: "index_matricula2020_proximo_grados_on_matricula2020_id"
+    t.index ["proximo_grado_id"], name: "index_matricula2020_proximo_grados_on_proximo_grado_id"
+  end
+
   create_table "matricula2020s", force: :cascade do |t|
     t.string "nombre"
-    t.boolean "formulario"
+    t.boolean "general"
     t.decimal "precio"
     t.date "fecha_comienzo"
     t.date "fecha_fin"
