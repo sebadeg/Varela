@@ -472,13 +472,18 @@ class PrincipalController < ApplicationController
       return
     end
 
-    inscripcionAlumno.update!( 
-      fecha_registrado: DateTime.now,
-      proximo_grado_id: params[:inscripcionAlumno][:proximo_grado_id],
-      convenio2020_id: params[:inscripcionAlumno][:convenio2020_id],
-      hermanos2020_id: params[:inscripcionAlumno][:hermanos2020_id],
-      cuota2020_id: params[:inscripcionAlumno][:cuota2020_id],
-      matricula2020_id: params[:inscripcionAlumno][:matricula2020_id] )
+    sql =  
+      "UPDATE inscripcion2020s SET " +
+      "fecha_registrado = now()," +
+      "proximo_grado_id = #{params[:inscripcionAlumno][:proximo_grado_id]}," +
+      "convenio2020_id = #{params[:inscripcionAlumno][:convenio2020_id]}," +
+      "hermanos2020_id = #{params[:inscripcionAlumno][:hermanos2020_id]}," +
+      "cuota2020_id = #{params[:inscripcionAlumno][:cuota2020_id]}," +
+      "matricula2020_id = #{params[:inscripcionAlumno][:matricula2020_id]} " +
+      "WHERE id=#{inscripcionAlumno.id}"
+    p sql 
+
+    ActiveRecord::Base.connection.execute(sql);
 
     UserMailer.nueva_reinscripcion(inscripcionAlumno).deliver_now
 
