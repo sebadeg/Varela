@@ -469,8 +469,6 @@ class PrincipalController < ApplicationController
 
     p inscripcionAlumno
 
-    redirect_to principal_index_path, alert: "El alumno se puede reinscribir"
-
     # inscripcionAlumno.fecha_registrado = DateTime.now
     # inscripcionAlumno.proximo_grado_id = params[:inscripcionAlumno][:proximo_grado_id]
     # inscripcionAlumno.convenio2020_id = params[:inscripcionAlumno][:convenio2020_id]
@@ -479,9 +477,9 @@ class PrincipalController < ApplicationController
     # inscripcionAlumno.matricula2020_id = params[:inscripcionAlumno][:matricula2020_id]
     # inscripcionAlumno.save!
 
-    # UserMailer.nueva_reinscripcion(inscripcionAlumno).deliver_now
+    UserMailer.nueva_reinscripcion(inscripcionAlumno).deliver_now
 
-    # redirect_to principal_index_path
+    redirect_to principal_index_path, alert: "Se está procesando la información"
 
 
 
