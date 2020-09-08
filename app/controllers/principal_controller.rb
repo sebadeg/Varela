@@ -467,17 +467,24 @@ class PrincipalController < ApplicationController
       return
     end
 
-    inscripcionAlumno.fecha_registrado = DateTime.now
-    inscripcionAlumno.proximo_grado_id = params[:inscripcionAlumno][:proximo_grado_id]
-    inscripcionAlumno.convenio2020_id = params[:inscripcionAlumno][:convenio2020_id]
-    inscripcionAlumno.hermanos2020_id = params[:inscripcionAlumno][:hermanos2020_id]
-    inscripcionAlumno.cuota2020_id = params[:inscripcionAlumno][:cuota2020_id]
-    inscripcionAlumno.matricula2020_id = params[:inscripcionAlumno][:matricula2020_id]
-    inscripcionAlumno.save!
+    p inscripcionAlumno
 
-    UserMailer.nueva_reinscripcion(inscripcionAlumno).deliver_now
+    redirect_to principal_index_path, alert: "El alumno se puede reinscribir"
 
-    redirect_to principal_index_path
+    # inscripcionAlumno.fecha_registrado = DateTime.now
+    # inscripcionAlumno.proximo_grado_id = params[:inscripcionAlumno][:proximo_grado_id]
+    # inscripcionAlumno.convenio2020_id = params[:inscripcionAlumno][:convenio2020_id]
+    # inscripcionAlumno.hermanos2020_id = params[:inscripcionAlumno][:hermanos2020_id]
+    # inscripcionAlumno.cuota2020_id = params[:inscripcionAlumno][:cuota2020_id]
+    # inscripcionAlumno.matricula2020_id = params[:inscripcionAlumno][:matricula2020_id]
+    # inscripcionAlumno.save!
+
+    # UserMailer.nueva_reinscripcion(inscripcionAlumno).deliver_now
+
+    # redirect_to principal_index_path
+
+
+
 
 
     # if calc_cedula_digit(params[:inscripcionAlumno][:cedula])
