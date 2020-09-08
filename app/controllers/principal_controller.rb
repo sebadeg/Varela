@@ -479,7 +479,7 @@ class PrincipalController < ApplicationController
       "convenio2020_id = #{params[:inscripcionAlumno][:convenio2020_id] == "" ? "NULL" : params[:inscripcionAlumno][:convenio2020_id]}," +
       "hermanos2020_id = #{params[:inscripcionAlumno][:hermanos2020_id] == "" ? "NULL" : params[:inscripcionAlumno][:hermanos2020_id]}," +
       "cuota2020_id = #{params[:inscripcionAlumno][:cuota2020_id] == "" ? "NULL" : params[:inscripcionAlumno][:cuota2020_id]}," +
-      "matricula2020_id = #{params[:inscripcionAlumno][:matricula2020_id] == "" ? "NULL" : params[:inscripcionAlumno][:matricula2020_id]}," +
+      "matricula2020_id = #{params[:inscripcionAlumno][:matricula2020_id] == "" ? "NULL" : params[:inscripcionAlumno][:matricula2020_id]} " +
       "WHERE id=#{inscripcionAlumno.id}"
     p sql 
 
