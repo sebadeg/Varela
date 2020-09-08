@@ -462,12 +462,12 @@ class PrincipalController < ApplicationController
     alumno_id = params[:inscripcionAlumno][:alumno_id]
     inscripcionAlumno = Inscripcion2020.FindInscripcion(alumno_id)
 
-    if inscripcionAlumno.registrado 
+    if inscripcionAlumno.fecha_registrado != nil
       redirect_to principal_index_path, alert: "El alumno ya está reinscripto"
       return
     end
 
-    inscripcionAlumno.registrado = true
+    inscripcionAlumno.fecha_registrado = DateTime.now
     inscripcionAlumno.proximo_grado_id = params[:inscripcionAlumno][:proximo_grado_id]
     inscripcionAlumno.convenio2020_id = params[:inscripcionAlumno][:convenio2020_id]
     inscripcionAlumno.hermanos2020_id = params[:inscripcionAlumno][:hermanos2020_id]

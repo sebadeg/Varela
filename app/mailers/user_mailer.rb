@@ -33,7 +33,7 @@ class UserMailer < ApplicationMailer
 	    openssl_verify_mode: 'none'
 	  }
 
-	  @inscripcionAlumno = inscripcionAlumno
+	  @inscripcionAlumno = Alumno.find_by(id: inscripcionAlumno.alumno_id) rescue nil
 
       mail_to = Config.find(1).mail_inscripcion
 
