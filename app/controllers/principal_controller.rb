@@ -469,10 +469,10 @@ class PrincipalController < ApplicationController
 
     inscripcionAlumno.registrado = true
     inscripcionAlumno.proximo_grado_id = params[:inscripcionAlumno][:proximo_grado_id]
-    inscripcionAlumno.convenio_id = params[:inscripcionAlumno][:convenio_id]
-    inscripcionAlumno.hermanos_id = params[:inscripcionAlumno][:hermanos_id]
-    inscripcionAlumno.cuotas_id = params[:inscripcionAlumno][:cuotas_id]
-    inscripcionAlumno.matricula_id = params[:inscripcionAlumno][:matricula_id]
+    inscripcionAlumno.convenio2020_id = params[:inscripcionAlumno][:convenio2020_id]
+    inscripcionAlumno.hermanos2020_id = params[:inscripcionAlumno][:hermanos2020_id]
+    inscripcionAlumno.cuota2020_id = params[:inscripcionAlumno][:cuota2020_id]
+    inscripcionAlumno.matricula2020_id = params[:inscripcionAlumno][:matricula2020_id]
     inscripcionAlumno.save!
 
     UserMailer.nueva_reinscripcion(inscripcionAlumno).deliver_now
