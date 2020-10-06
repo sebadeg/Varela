@@ -673,36 +673,36 @@ class Inscripcion2020 < ApplicationRecord
     end
 
     if padre_titular != nil && padre_titular
-      nombreT[idx] = "#{padre.nombre} #{padre.apellido}"
+      nombreT[idx] = convertStr("#{padre.nombre} #{padre.apellido}")
       documentoT[idx] = padre.cedula
-      domicilioT[idx] = padre.direccion
+      domicilioT[idx] = convertStr(padre.direccion)
       emailT[idx] = padre.email
       celularT[idx] = padre.celular
       idx = idx+1
     end
 
     if madre != nil && madre_titular != nil && madre_titular
-      nombreT[idx] = "#{madre.nombre} #{madre.apellido}"
+      nombreT[idx] = convertStr("#{madre.nombre} #{madre.apellido}")
       documentoT[idx] = madre.cedula
-      domicilioT[idx] = madre.direccion
+      domicilioT[idx] = convertStr(madre.direccion)
       emailT[idx] = madre.email
       celularT[idx] = madre.celular
       idx = idx+1
     end
 
     if titular1 != nil
-      nombreT[idx] = "#{titular1.nombre} #{titular1.apellido}"
+      nombreT[idx] = convertStr("#{titular1.nombre} #{titular1.apellido}")
       documentoT[idx] = titular1.cedula
-      domicilioT[idx] = titular1.direccion
+      domicilioT[idx] = convertStr(titular1.direccion)
       emailT[idx] = titular1.email
       celularT[idx] = titular1.celular
       idx = idx+1
     end
 
     if titular2 != nil
-      nombreT[idx] = "#{titular2.nombre} #{titular2.apellido}"
+      nombreT[idx] = convertStr("#{titular2.nombre} #{titular2.apellido}")
       documentoT[idx] = titular2.cedula
-      domicilioT[idx] = titular2.direccion
+      domicilioT[idx] = convertStr(titular2.direccion)
       emailT[idx] = titular2.email
       celularT[idx] = titular2.celular
       idx = idx+1
