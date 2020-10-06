@@ -589,7 +589,12 @@ class Inscripcion2020 < ApplicationRecord
     end
   end
 
-
+  def convertStr(str)
+    if str == nil
+      return ""
+    end
+    return str.encode!(Encoding::ISO_8859_1)
+  end
 
   def vale(file_path)
 
@@ -610,47 +615,47 @@ class Inscripcion2020 < ApplicationRecord
     cedula_alumno = Inscripcion2020.cedula_tos(alumno.cedula)
     nombre_alumno = ""
     if alumno != nil 
-      nombre_alumno = alumno.nombre + " " + alumno.apellido
+      nombre_alumno = convertStr(alumno.nombre + " " + alumno.apellido)
     end
 
     nombre_grado = ""
     proximo_grado = ProximoGrado.find(proximo_grado_id) rescue nil
     if proximo_grado != nil
-      nombre_grado = proximo_grado.nombre
+      nombre_grado = convertStr(proximo_grado.nombre)
     end
 
     convenio_nombre = ""
     convenio = Convenio2020.find(convenio2020_id) rescue nil
     if convenio != nil
-      convenio_nombre = "#{convenio.nombre} (#{convenio.descuento}%)"
+      convenio_nombre = convertStr("#{convenio.nombre} (#{convenio.descuento}%)")
     end
 
     afinidad_nombre = ""
     afinidad = Afinidad2020.find(afinidad2020_id) rescue nil
     if afinidad != nil
-      afinidad_nombre = "#{afinidad.nombre} (#{afinidad.descuento}%)"
+      afinidad_nombre = convertStr("#{afinidad.nombre} (#{afinidad.descuento}%)")
     end
 
     adicional_nombre = ""
     if adicional != nil
-      adicional_nombre = "Adicional (#{adicional}%)"
+      adicional_nombre = convertStr("Adicional (#{adicional}%)")
     end
     
     congelado_nombre = ""
     if congelado != nil
-      congelado_nombre = "Congelado (#{congelado}%)"
+      congelado_nombre = convertStr("Congelado (#{congelado}%)")
     end
 
     matricula_nombre = ""
     matricula = Matricula2020.find(matricula2020_id) rescue nil
     if matricula != nil
-      matricula_nombre = matricula.nombre
+      matricula_nombre = convertStr(matricula.nombre)
     end
 
     hermanos_nombre = ""
     hermanos = Hermanos2020.find(hermanos2020_id) rescue nil
     if hermanos != nil
-      hermanos_nombre = hermanos.nombre
+      hermanos_nombre = convertStr(hermanos.nombre)
     end
 
     idx=0
