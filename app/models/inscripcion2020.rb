@@ -716,7 +716,7 @@ class Inscripcion2020 < ApplicationRecord
       "Lugar de nacimiento: #{padre.lugar_nacimiento}<br>".force_encoding('iso-8859-1') +
       "Fecha de nacimiento: #{fecha_tos(padre.fecha_nacimiento)}<br>".force_encoding('iso-8859-1') +
       "Mail: #{padre.email}<br>".force_encoding('iso-8859-1') + 
-      "Domicilio: #{padre.domicilio}<br>".force_encoding('iso-8859-1') + 
+      "Domicilio: #{padre.direccion}<br>".force_encoding('iso-8859-1') + 
       "Tel\xE9fono/Celular: #{padre.celular}<br>".force_encoding('iso-8859-1') + 
       "Profesi\xF3n: #{padre.profesion}<br>".force_encoding('iso-8859-1') + 
       "Lugar de trabajo: #{padre.trabajo}<br>".force_encoding('iso-8859-1') + 
@@ -729,7 +729,7 @@ class Inscripcion2020 < ApplicationRecord
       "Lugar de nacimiento: #{madre.lugar_nacimiento}<br>".force_encoding('iso-8859-1') +
       "Fecha de nacimiento: #{fecha_tos(madre.fecha_nacimiento)}<br>".force_encoding('iso-8859-1') +
       "Mail: #{madre.email}<br>".force_encoding('iso-8859-1') + 
-      "Domicilio: #{madre.domicilio}<br>".force_encoding('iso-8859-1') + 
+      "Domicilio: #{madre.direccion}<br>".force_encoding('iso-8859-1') + 
       "Tel\xE9fono/Celular: #{madre.celular}<br>".force_encoding('iso-8859-1') + 
       "Profesi\xF3n: #{madre.profesion}<br>".force_encoding('iso-8859-1') + 
       "Lugar de trabajo: #{madre.trabajo}<br>".force_encoding('iso-8859-1') + 
