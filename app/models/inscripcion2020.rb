@@ -32,561 +32,561 @@ class Inscripcion2020 < ApplicationRecord
 
 
 
-  # def self.OpcionesGrados(inscripcionAlumno)
-  #   opciones = Array.new
-  #   ProximoGrado.where("grado_id=#{inscripcionAlumno.grado_id} AND anio=2021").order(:nombre).each do |opcion|
-  #     opciones.push( ["#{opcion.nombre} - $#{opcion.precio.to_i.to_s}",opcion.id] )
-  #   end 
-  #   return opciones
-  # end
+  def self.OpcionesGrados(inscripcionAlumno)
+    opciones = Array.new
+    ProximoGrado.where("grado_id=#{inscripcionAlumno.grado_id} AND anio=2021").order(:nombre).each do |opcion|
+      opciones.push( ["#{opcion.nombre} - $#{opcion.precio.to_i.to_s}",opcion.id] )
+    end 
+    return opciones
+  end
 
 
-  # def self.OpcionesConvenio(inscripcionAlumno)
-  #   opciones = Array.new
-  #   opciones.push( ["",nil] )
-  #   Convenio2020.where(ConsultaFecha()).order(:nombre).each do |opcion|
-  #     opciones.push( [opcion.nombre,opcion.id] )
-  #   end 
-  #   return opciones
-  # end
+  def self.OpcionesConvenio(inscripcionAlumno)
+    opciones = Array.new
+    opciones.push( ["",nil] )
+    Convenio2020.where(ConsultaFecha()).order(:nombre).each do |opcion|
+      opciones.push( [opcion.nombre,opcion.id] )
+    end 
+    return opciones
+  end
 
-  # def self.OpcionesAfinidad(inscripcionAlumno)
-  #   afinidad = Afinidad2020.where("id IN (SELECT afinidad2020_id FROM inscripcion2020s WHERE alumno_id=#{inscripcionAlumno.alumno_id} AND #{ConsultaFecha()})").first
-  #   return afinidad
-  # end
+  def self.OpcionesAfinidad(inscripcionAlumno)
+    afinidad = Afinidad2020.where("id IN (SELECT afinidad2020_id FROM inscripcion2020s WHERE alumno_id=#{inscripcionAlumno.alumno_id} AND #{ConsultaFecha()})").first
+    return afinidad
+  end
 
-  # def self.OpcionesAdicional(inscripcionAlumno)
-  #   inscripcion = Inscripcion2020.where("alumno_id=#{inscripcionAlumno.alumno_id} AND #{ConsultaFecha()}").first
-  #   return inscripcion
-  # end
+  def self.OpcionesAdicional(inscripcionAlumno)
+    inscripcion = Inscripcion2020.where("alumno_id=#{inscripcionAlumno.alumno_id} AND #{ConsultaFecha()}").first
+    return inscripcion
+  end
 
-  # def self.OpcionesHermanos(inscripcionAlumno)
-  #   opciones = Array.new
-  #   opciones.push( ["",nil] )
-  #   Hermanos2020.where(ConsultaFecha()).order(:nombre).each do |opcion|
-  #     opciones.push( [opcion.nombre,opcion.id] )
-  #   end 
-  #   return opciones
-  # end
+  def self.OpcionesHermanos(inscripcionAlumno)
+    opciones = Array.new
+    opciones.push( ["",nil] )
+    Hermanos2020.where(ConsultaFecha()).order(:nombre).each do |opcion|
+      opciones.push( [opcion.nombre,opcion.id] )
+    end 
+    return opciones
+  end
 
-  # def self.OpcionesCuotas(inscripcionAlumno)
-  #   opciones = Array.new
-  #   opciones.push( ["",nil] )
-  #   Cuota2020.where(Consulta(inscripcionAlumno.alumno_id,"cuota2020_id","cuota2020_alumnos")).order(:nombre).each do |opcion|
-  #     opciones.push( [opcion.nombre,opcion.id] )
-  #   end 
-  #   return opciones
-  # end
+  def self.OpcionesCuotas(inscripcionAlumno)
+    opciones = Array.new
+    opciones.push( ["",nil] )
+    Cuota2020.where(Consulta(inscripcionAlumno.alumno_id,"cuota2020_id","cuota2020_alumnos")).order(:nombre).each do |opcion|
+      opciones.push( [opcion.nombre,opcion.id] )
+    end 
+    return opciones
+  end
 
-  # def self.OpcionesMatricula(inscripcionAlumno)
-  #   opciones = Array.new
-  #   opciones.push( ["",nil] )
-  #   Matricula2020.where(Consulta(inscripcionAlumno.alumno_id,"matricula2020_id","matricula2020_alumnos")).order(:nombre).each do |opcion|
-  #     opciones.push( [opcion.nombre,opcion.id] )
-  #   end 
-  #   return opciones
-  # end
+  def self.OpcionesMatricula(inscripcionAlumno)
+    opciones = Array.new
+    opciones.push( ["",nil] )
+    Matricula2020.where(Consulta(inscripcionAlumno.alumno_id,"matricula2020_id","matricula2020_alumnos")).order(:nombre).each do |opcion|
+      opciones.push( [opcion.nombre,opcion.id] )
+    end 
+    return opciones
+  end
 
-  # def CalcularMovimientos()
+  def CalcularMovimientos()
 
-  #   movimientos = Array.new
+    movimientos = Array.new
 
-  #   proximo_grado = ProximoGrado.find(proximo_grado_id) rescue nil
-  #   if proximo_grado == nil || cuota2020_id == nil
-  #     return movimientos
-  #   end
+    proximo_grado = ProximoGrado.find(proximo_grado_id) rescue nil
+    if proximo_grado == nil || cuota2020_id == nil
+      return movimientos
+    end
 
-  #   importe_total = proximo_grado.precio
+    importe_total = proximo_grado.precio
 
-  #   descuentos = Array.new
-  #   if fija != nil
-  #       descuentos.push(["FIJO",false,fija])
-  #   else
-  #     c = Convenio2020.find(convenio2020_id) rescue nil
-  #     if c != nil
-  #       descuentos.push([c.toString(),true,c.descuento])
-  #     end
-  #   end
+    descuentos = Array.new
+    if fija != nil
+        descuentos.push(["FIJO",false,fija])
+    else
+      c = Convenio2020.find(convenio2020_id) rescue nil
+      if c != nil
+        descuentos.push([c.toString(),true,c.descuento])
+      end
+    end
 
-  #   c = Afinidad2020.find(afinidad2020_id) rescue nil
-  #   if c != nil
-  #     descuentos.push([c.toString(),true,c.descuento])
-  #   end
-  #   if adicional != nil
-  #     descuentos.push(["Adicional #{Common.decimal_to_string(adicional,2)}%",true,adicional])
-  #   end
-  #   if congelado != nil
-  #     descuentos.push(["Congelado #{Common.decimal_to_string(congelado,2)}%",true,congelado])
-  #   end
-  #   c = Hermanos2020.find(hermanos2020_id) rescue nil
-  #   if c != nil
-  #     descuentos.push([c.toString(),true,c.descuento])
-  #   end
+    c = Afinidad2020.find(afinidad2020_id) rescue nil
+    if c != nil
+      descuentos.push([c.toString(),true,c.descuento])
+    end
+    if adicional != nil
+      descuentos.push(["Adicional #{Common.decimal_to_string(adicional,2)}%",true,adicional])
+    end
+    if congelado != nil
+      descuentos.push(["Congelado #{Common.decimal_to_string(congelado,2)}%",true,congelado])
+    end
+    c = Hermanos2020.find(hermanos2020_id) rescue nil
+    if c != nil
+      descuentos.push([c.toString(),true,c.descuento])
+    end
 
-  #   cuotas = Array.new
-  #   LineaCuota2020.where("cuota2020_id=#{cuota2020_id}").order(:fecha).each do |cuota|
-  #     cuotas.push([cuota.cantidad,cuota.fecha,cuota.numerador,cuota.denominador])
-  #   end
+    cuotas = Array.new
+    LineaCuota2020.where("cuota2020_id=#{cuota2020_id}").order(:fecha).each do |cuota|
+      cuotas.push([cuota.cantidad,cuota.fecha,cuota.numerador,cuota.denominador])
+    end
 
-  #   total_cuotas = 0
-  #   cuotas.each do |cuota|
-  #     total_cuotas = total_cuotas + cuota[0]
-  #   end
+    total_cuotas = 0
+    cuotas.each do |cuota|
+      total_cuotas = total_cuotas + cuota[0]
+    end
 
-  #   devolucion = 0
+    devolucion = 0
 
-  #   num_cuota = 1
-  #   cuotas.each do |cuota|      
-  #     (1..cuota[0]).each do |x|
-  #       importe = importe_total*cuota[2]/cuota[3]
+    num_cuota = 1
+    cuotas.each do |cuota|      
+      (1..cuota[0]).each do |x|
+        importe = importe_total*cuota[2]/cuota[3]
 
-  #       fecha = cuota[1] + (x-1).month
+        fecha = cuota[1] + (x-1).month
 
-  #       mov = [fecha,"CUOTA #{anio} #{num_cuota}/#{total_cuotas}",(importe+0.5).to_i,proximo_grado.rubro_id]
+        mov = [fecha,"CUOTA #{anio} #{num_cuota}/#{total_cuotas}",(importe+0.5).to_i,proximo_grado.rubro_id]
 
-  #       if (fecha_comienzo == nil || fecha >= fecha_comienzo) && (fecha_ultima == nil || fecha < fecha_ultima)
-  #         if fecha_fin != nil && fecha >= fecha_fin
-  #           devolucion = devolucion + mov[2]
-  #         end
-  #         if fecha_primera != nil && fecha < fecha_primera
-  #           mov[0] = fecha_primera
-  #         end
-  #         movimientos.push(mov)
-  #       end
+        if (fecha_comienzo == nil || fecha >= fecha_comienzo) && (fecha_ultima == nil || fecha < fecha_ultima)
+          if fecha_fin != nil && fecha >= fecha_fin
+            devolucion = devolucion + mov[2]
+          end
+          if fecha_primera != nil && fecha < fecha_primera
+            mov[0] = fecha_primera
+          end
+          movimientos.push(mov)
+        end
 
-  #       descuentos.each do |descuento| 
-  #         if descuento[1]
-  #           desc = importe*descuento[2]/100
-  #           importe = importe - desc
+        descuentos.each do |descuento| 
+          if descuento[1]
+            desc = importe*descuento[2]/100
+            importe = importe - desc
 
-  #           mov = [fecha,"DESCUENTO #{descuento[0]} #{anio} #{num_cuota}/#{total_cuotas}",(-desc+0.5).to_i,proximo_grado.rubro_id]
+            mov = [fecha,"DESCUENTO #{descuento[0]} #{anio} #{num_cuota}/#{total_cuotas}",(-desc+0.5).to_i,proximo_grado.rubro_id]
 
-  #           if (fecha_comienzo == nil || fecha >= fecha_comienzo) && (fecha_ultima == nil || fecha < fecha_ultima)
-  #             if fecha_fin != nil && fecha >= fecha_fin
-  #               devolucion = devolucion + mov[2]
-  #             end
-  #             if fecha_primera != nil && fecha < fecha_primera
-  #               mov[0] = fecha_primera
-  #             end
-  #             movimientos.push(mov)
-  #           end
+            if (fecha_comienzo == nil || fecha >= fecha_comienzo) && (fecha_ultima == nil || fecha < fecha_ultima)
+              if fecha_fin != nil && fecha >= fecha_fin
+                devolucion = devolucion + mov[2]
+              end
+              if fecha_primera != nil && fecha < fecha_primera
+                mov[0] = fecha_primera
+              end
+              movimientos.push(mov)
+            end
 
-  #         else
-  #           desc = importe-descuento[2]*cuota[2]/cuota[3]
-  #           importe = importe - desc
+          else
+            desc = importe-descuento[2]*cuota[2]/cuota[3]
+            importe = importe - desc
 
-  #           mov = [fecha,"DESCUENTO #{descuento[0]} #{anio} #{num_cuota}/#{total_cuotas}",(-desc+0.5).to_i,proximo_grado.rubro_id]
+            mov = [fecha,"DESCUENTO #{descuento[0]} #{anio} #{num_cuota}/#{total_cuotas}",(-desc+0.5).to_i,proximo_grado.rubro_id]
 
-  #           if (fecha_comienzo == nil || fecha >= fecha_comienzo) && (fecha_ultima == nil || fecha < fecha_ultima)
-  #             if fecha_fin != nil && fecha >= fecha_fin
-  #               devolucion = devolucion + mov[2]
-  #             end
-  #             if fecha_primera != nil && fecha < fecha_primera
-  #               mov[0] = fecha_primera
-  #             end
-  #             movimientos.push(mov)
-  #           end
+            if (fecha_comienzo == nil || fecha >= fecha_comienzo) && (fecha_ultima == nil || fecha < fecha_ultima)
+              if fecha_fin != nil && fecha >= fecha_fin
+                devolucion = devolucion + mov[2]
+              end
+              if fecha_primera != nil && fecha < fecha_primera
+                mov[0] = fecha_primera
+              end
+              movimientos.push(mov)
+            end
 
-  #         end          
-  #       end
-  #       num_cuota = num_cuota+1
-  #     end
-  #   end
+          end          
+        end
+        num_cuota = num_cuota+1
+      end
+    end
 
-  #   if devolucion > 0 
-  #     mov = [fecha_ultima,"DEVOLUCIÓN CUOTAS",-devolucion,proximo_grado.rubro_id]
-  #     movimientos.push(mov)
-  #   end
+    if devolucion > 0 
+      mov = [fecha_ultima,"DEVOLUCIÓN CUOTAS",-devolucion,proximo_grado.rubro_id]
+      movimientos.push(mov)
+    end
 
-  #   matricula = Matricula2020.find(matricula2020_id) rescue nil
-  #   matricula2020ProximoGrado = Matricula2020ProximoGrado.where("matricula2020_id=#{matricula2020_id} AND proximo_grado_id=#{proximo_grado_id}").first rescue nil
-  #   if matricula != nil && matricula2020ProximoGrado != nil
+    matricula = Matricula2020.find(matricula2020_id) rescue nil
+    matricula2020ProximoGrado = Matricula2020ProximoGrado.where("matricula2020_id=#{matricula2020_id} AND proximo_grado_id=#{proximo_grado_id}").first rescue nil
+    if matricula != nil && matricula2020ProximoGrado != nil
       
-  #     importe_total = matricula2020ProximoGrado.precio
+      importe_total = matricula2020ProximoGrado.precio
 
-  #     cuotas = Array.new
-  #     lineas = LineaMatricula2020.where("matricula2020_id=#{matricula2020_id}").order(:fecha) 
-  #     lineas.each do |cuota|
-  #       cuotas.push([cuota.cantidad,cuota.fecha,cuota.numerador,cuota.denominador])
-  #     end
+      cuotas = Array.new
+      lineas = LineaMatricula2020.where("matricula2020_id=#{matricula2020_id}").order(:fecha) 
+      lineas.each do |cuota|
+        cuotas.push([cuota.cantidad,cuota.fecha,cuota.numerador,cuota.denominador])
+      end
 
-  #     total_cuotas = 0
-  #     cuotas.each do |cuota|
-  #       total_cuotas = total_cuotas + cuota[0]
-  #     end
+      total_cuotas = 0
+      cuotas.each do |cuota|
+        total_cuotas = total_cuotas + cuota[0]
+      end
 
-  #     num_cuota = 1
-  #     cuotas.each do |cuota|     
-  #       (1..cuota[0]).each do |x|
+      num_cuota = 1
+      cuotas.each do |cuota|     
+        (1..cuota[0]).each do |x|
           
-  #         fecha = cuota[1] + (x-1).month
-  #         importe = importe_total*cuota[2]/cuota[3]
+          fecha = cuota[1] + (x-1).month
+          importe = importe_total*cuota[2]/cuota[3]
 
-  #         mov = [fecha,"Matrícula #{anio} #{num_cuota}/#{total_cuotas}",(importe+0.5).to_i,proximo_grado.matricula_rubro]
-  #         movimientos.push(mov)
+          mov = [fecha,"Matrícula #{anio} #{num_cuota}/#{total_cuotas}",(importe+0.5).to_i,proximo_grado.matricula_rubro]
+          movimientos.push(mov)
 
-  #         num_cuota = num_cuota+1
-  #       end
-  #     end
-  #   end
+          num_cuota = num_cuota+1
+        end
+      end
+    end
 
-  #   return movimientos
+    return movimientos
 
-  # end
+  end
 
-  # def CalcularMovimientosToStr()
+  def CalcularMovimientosToStr()
 
-  #   movimientos = CalcularMovimientos()
+    movimientos = CalcularMovimientos()
 
-  #   i = 0
-  #   str = ""
-  #   movimientos.each do |mov|
+    i = 0
+    str = ""
+    movimientos.each do |mov|
 
-  #     if fecha_vale != nil
-  #       m = Movimiento.where(inscripcion2020_id: id, inscripcion2020_indice: i).first
-  #       m ||= Movimiento.new
-  #       m.inscripcion2020_id = id
-  #       m.inscripcion2020_indice = i    
-  #       m.cuenta_id = cuenta_id
-  #       m.alumno = alumno_id
-  #       m.fecha = mov[0]
-  #       m.descripcion = mov[1].upcase
-  #       m.debe = (mov[2]+0.5).to_i
-  #       m.ejercicio = anio
-  #       m.rubro_id = mov[3]
-  #       m.haber = 0
-  #       m.save!
-  #     end
-  #     str = str + "#{I18n.l(mov[0], format: "%d-%m-%Y")} = #{mov[1].upcase} = #{mov[2]} ====="
+      if fecha_vale != nil
+        m = Movimiento.where(inscripcion2020_id: id, inscripcion2020_indice: i).first
+        m ||= Movimiento.new
+        m.inscripcion2020_id = id
+        m.inscripcion2020_indice = i    
+        m.cuenta_id = cuenta_id
+        m.alumno = alumno_id
+        m.fecha = mov[0]
+        m.descripcion = mov[1].upcase
+        m.debe = (mov[2]+0.5).to_i
+        m.ejercicio = anio
+        m.rubro_id = mov[3]
+        m.haber = 0
+        m.save!
+      end
+      str = str + "#{I18n.l(mov[0], format: "%d-%m-%Y")} = #{mov[1].upcase} = #{mov[2]} ====="
 
-  #     i = i+1
-  #   end
+      i = i+1
+    end
 
-  #   if fecha_vale != nil
-  #     Movimiento.where("inscripcion2020_id=#{id} AND inscripcion2020_indice>=#{i}").delete_all
-  #   end
+    if fecha_vale != nil
+      Movimiento.where("inscripcion2020_id=#{id} AND inscripcion2020_indice>=#{i}").delete_all
+    end
     
-  #   return str
+    return str
 
-  # end
-
-
-  # def CalcularPrecio()
-
-  #   movimientos = Array.new
-
-  #   proximo_grado = ProximoGrado.find(proximo_grado_id) rescue nil
-  #   if proximo_grado == nil || cuota2020_id == nil
-  #     return movimientos
-  #   end
-
-  #   importe_total = proximo_grado.precio
-
-  #   descuentos = Array.new
-  #   if fija != nil
-  #       descuentos.push(["FIJO",false,fija])
-  #   else
-  #     c = Convenio2020.find(convenio2020_id) rescue nil
-  #     if c != nil
-  #       descuentos.push([c.toString(),true,c.descuento])
-  #     end
-  #   end
-
-  #   c = Afinidad2020.find(afinidad2020_id) rescue nil
-  #   if c != nil
-  #     descuentos.push([c.toString(),true,c.descuento])
-  #   end
-  #   if adicional != nil
-  #     descuentos.push(["Adicional #{Common.decimal_to_string(adicional,2)}%",true,adicional])
-  #   end
-  #   if congelado != nil
-  #     descuentos.push(["Congelado #{Common.decimal_to_string(congelado,2)}%",true,congelado])
-  #   end
-  #   c = Hermanos2020.find(hermanos2020_id) rescue nil
-  #   if c != nil
-  #     descuentos.push([c.toString(),true,c.descuento])
-  #   end
-
-  #   cuotas = Array.new
-  #   LineaCuota2020.where("cuota2020_id=#{cuota2020_id}").order(:fecha).each do |cuota|
-  #     cuotas.push([cuota.cantidad,cuota.fecha,cuota.numerador,cuota.denominador])
-  #   end
-
-  #   total_cuotas = 0
-  #   cuotas.each do |cuota|
-  #     total_cuotas = total_cuotas + cuota[0]
-  #   end
-
-  #   devolucion = 0
-
-  #   num_cuota = 1
-  #   cuotas.each do |cuota|      
-  #     importe = importe_total*cuota[2]/cuota[3]
-  #     fecha = cuota[1] 
-  #     mov = [cuota[0],(importe+0.5).to_i,fecha + 9.days]
-  #     descuentos.each do |descuento| 
-  #       if descuento[1]
-  #         desc = importe*descuento[2]/100
-  #         importe = importe - desc
-  #         mov[1] = mov[1]+(-desc+0.5).to_i
-  #       else
-  #         desc = importe-descuento[2]*cuota[2]/cuota[3]
-  #         importe = importe - desc
-  #         mov[1] = mov[1]+(-desc+0.5).to_i
-  #       end          
-  #     end
-  #     movimientos.push(mov)
-  #   end
-
-  #   return movimientos
-
-  # end
-
-  # def CalcularPrecioToStr()
-
-  #   str = ""
-
-  #   cuotas = CalcularPrecio()
-
-  #   total = 0
-  #   cuotas.each do |cuota|
-  #     if str != ""
-  #       str = str + " + "        
-  #     end
-  #     if cuota[2] != nil
-  #       str = str + "(#{cuota[2].strftime("%d/%m/%Y")})"
-  #     end
-  #     str = str + " #{cuota[0]} x #{cuota[1]}"
-
-  #     total = total + cuota[0]*cuota[1]
-  #   end
-  #   str = str + " = #{total}"
-
-  #   return str
-  # end
+  end
 
 
+  def CalcularPrecio()
 
-  # def self.numero_a_letras(n, uno)
-  #   s = ""
-  #   if (n/1000>0)
-  #     s = numero_a_letras((n/1000).to_i,false) + " mil ";
-  #   end
-  #   n = (n%1000).to_i;
-  #   case (n/100).to_i
-  #   when 1
-  #     if n%100 != 0
-  #       s = s + "ciento"
-  #     else
-  #       s = s + "cien"
-  #     end
-  #   when 2
-  #     s = s + "doscientos"
-  #   when 3
-  #     s = s + "trescientos"
-  #   when 4
-  #     s = s + "cuatrocientos"
-  #   when 5
-  #     s = s + "quinientos"
-  #   when 6
-  #     s = s + "siescientos"
-  #   when 7
-  #     s = s + "setecientos"
-  #   when 8
-  #     s = s + "ochocientos"
-  #   when 9
-  #     s = s + "novecientos"
-  #   end
-  #   n = (n%100).to_i
-  #   if n > 0
-  #     s = s + " "
-  #   end
-  #   case (n/10).to_i
-  #   when 3
-  #     s = s + "treinta"
-  #   when 4
-  #     s = s + "cuarenta"
-  #   when 5
-  #     s = s + "cincuenta"
-  #   when 6
-  #     s = s + "sesenta"
-  #   when 7
-  #     s = s + "setenta"
-  #   when 8
-  #     s = s + "ochenta"
-  #   when 9
-  #     s = s + "noventa"
-  #   end
-  #   if ( n >= 30 )
-  #     if (n%10).to_i != 0
-  #       s = s + " y "
-  #     end
-  #     n = (n%10).to_i
-  #   end
-  #   case n          
-  #   when 1
-  #     if ( uno )
-  #       s = s + "uno"
-  #     else
-  #       s = s + "un"
-  #     end
-  #   when 2
-  #     s = s + "dos"
-  #   when 3
-  #     s = s + "tres"
-  #   when 4
-  #     s = s + "cuatro"
-  #   when 5
-  #     s = s + "cinco"
-  #   when 6
-  #     s = s + "seis"
-  #   when 7
-  #     s = s + "siete"
-  #   when 8
-  #     s = s + "ocho"
-  #   when 9
-  #     s = s + "nueve"
-  #   when 10
-  #     s = s + "diez"
-  #   when 11
-  #     s = s + "once"
-  #   when 12
-  #     s = s + "doce"
-  #   when 13
-  #     s = s + "trece"
-  #   when 14
-  #     s = s + "catorce"
-  #   when 15
-  #     s = s + "quince"
-  #   when 16
-  #     s = s + "dieciseis"
-  #   when 17
-  #     s = s + "diecisiete"
-  #   when 18
-  #     s = s + "dieciocho"
-  #   when 19
-  #     s = s + "diecinueve"
-  #   when 20
-  #     s = s + "veinte"
-  #   when 21
-  #     if uno
-  #       s = s + "veintiuno"
-  #     else
-  #       s = s + "veintiun"
-  #     end
-  #   when 22
-  #     s = s + "veintidos"
-  #   when 23
-  #     s = s + "veintitres"
-  #   when 24
-  #     s = s + "veinticuatro"
-  #   when 25
-  #     s = s + "veinticinco"
-  #   when 26
-  #     s = s + "veintiseis"
-  #   when 27
-  #     s = s + "veintisiete"
-  #   when 28
-  #     s = s + "veintiocho"
-  #   when 29
-  #     s = s + "veintinueve"
-  #   end
-  #   return s
-  # end
+    movimientos = Array.new
 
-  # def self.cedula_tos(cedula)
-  #   if ( cedula == nil )
-  #     return ""
-  #   end
-  #   return (cedula/10).to_s + "-" + (cedula%10).to_s
-  # end
+    proximo_grado = ProximoGrado.find(proximo_grado_id) rescue nil
+    if proximo_grado == nil || cuota2020_id == nil
+      return movimientos
+    end
 
-  # def fecha_tos(fecha)
-  #   if ( fecha == nil )
-  #     return ""
-  #   end
-  #   return I18n.l(fecha, format: '%-d de %B de %Y')
-  # end
+    importe_total = proximo_grado.precio
 
-  # def self.numero_cuota_letras(cuota)
-  #   s = ""
-  #   case cuota
-  #   when 1
-  #     s = "primera"
-  #   when 2
-  #     s = "segunda"
-  #   when 3
-  #     s = "tercera"
-  #   when 4
-  #     s = "cuarta"
-  #   when 5
-  #     s = "quinta"
-  #   when 6
-  #     s = "sexta"
-  #   when 7
-  #     s = "septima"
-  #   when 8
-  #     s = "octava"
-  #   when 9
-  #     s = "novena"
-  #   when 10
-  #     s = "décima"
-  #   when 11
-  #     s = "undécima"
-  #   when 12
-  #     s = "duodécima"
-  #   when 13
-  #     s = "decimotercera"
-  #   when 14
-  #     s = "decimocuarta"
-  #   when 15
-  #     s = "decimoquinta"
-  #   when 16
-  #     s = "decimosexta"
-  #   when 17
-  #     s = "decimoseptima"
-  #   when 18
-  #     s = "decimoctava"
-  #   when 19
-  #     s = "decimonovena"
-  #   when 20
-  #     s = "vigésima"
-  #   when 21
-  #     s = "vigesimoprimera"
-  #   when 22
-  #     s = "vigesimosegunda"
-  #   when 23
-  #     s = "vigesimotercera"
-  #   when 24
-  #     s = "vigesimocuarta"
-  #   end
-  #   return s
-  # end
+    descuentos = Array.new
+    if fija != nil
+        descuentos.push(["FIJO",false,fija])
+    else
+      c = Convenio2020.find(convenio2020_id) rescue nil
+      if c != nil
+        descuentos.push([c.toString(),true,c.descuento])
+      end
+    end
 
-  # def cuotas_a_letras(cuotas)
-  #   if cuotas.count == 1
-  #     if cuotas[0][0] == 1        
-  #       return "<b>1</b> cuota de $U <b>#{cuotas[0][1]}</b>, venciendo el día #{I18n.l(cuotas[0][2], format: '<b>%-d</b> de <b>%B</b> de <b>%Y</b>')}"
-  #     else
-  #       return "<b>#{cuotas[0][0]}</b> cuotas mensuales, iguales y consecutivas de $U <b>#{cuotas[0][1]}</b> cada una, venciendo la primera el día #{I18n.l(cuotas[0][2], format: '<b>%-d</b> de <b>%B</b> de <b>%Y</b>')}"
-  #     end
-  #   else
-  #     mensaje = ""
-  #     cuota = 0
-  #     cuotas.each do |c|
-  #       if mensaje != ""
-  #         mensaje = mensaje + ", "
-  #       end
-  #       if c[0] == 1
-  #         mensaje = mensaje + "la #{Inscripcion.numero_cuota_letras(cuota+1)} de $U <b>#{c[1]}</b> venciendo el día #{I18n.l(c[2], format: '<b>%-d</b> de <b>%B</b> de <b>%Y</b>')}"
-  #       else
-  #         mensaje = mensaje + "de la #{Inscripcion.numero_cuota_letras(cuota+1)} a la #{Inscripcion.numero_cuota_letras(cuota+c[0])} de $U <b>#{c[1]}</b> venciendo el día #{I18n.l(c[2], format: '<b>%-d</b> de <b>%B</b> de <b>%Y</b>')} y cada mes subsiguiente"
-  #       end
-  #       cuota = cuota + c[0]
-  #     end
-  #     return "<b>#{cuota}</b> cuotas, a saber: " + mensaje
-  #   end
-  # end
+    c = Afinidad2020.find(afinidad2020_id) rescue nil
+    if c != nil
+      descuentos.push([c.toString(),true,c.descuento])
+    end
+    if adicional != nil
+      descuentos.push(["Adicional #{Common.decimal_to_string(adicional,2)}%",true,adicional])
+    end
+    if congelado != nil
+      descuentos.push(["Congelado #{Common.decimal_to_string(congelado,2)}%",true,congelado])
+    end
+    c = Hermanos2020.find(hermanos2020_id) rescue nil
+    if c != nil
+      descuentos.push([c.toString(),true,c.descuento])
+    end
+
+    cuotas = Array.new
+    LineaCuota2020.where("cuota2020_id=#{cuota2020_id}").order(:fecha).each do |cuota|
+      cuotas.push([cuota.cantidad,cuota.fecha,cuota.numerador,cuota.denominador])
+    end
+
+    total_cuotas = 0
+    cuotas.each do |cuota|
+      total_cuotas = total_cuotas + cuota[0]
+    end
+
+    devolucion = 0
+
+    num_cuota = 1
+    cuotas.each do |cuota|      
+      importe = importe_total*cuota[2]/cuota[3]
+      fecha = cuota[1] 
+      mov = [cuota[0],(importe+0.5).to_i,fecha + 9.days]
+      descuentos.each do |descuento| 
+        if descuento[1]
+          desc = importe*descuento[2]/100
+          importe = importe - desc
+          mov[1] = mov[1]+(-desc+0.5).to_i
+        else
+          desc = importe-descuento[2]*cuota[2]/cuota[3]
+          importe = importe - desc
+          mov[1] = mov[1]+(-desc+0.5).to_i
+        end          
+      end
+      movimientos.push(mov)
+    end
+
+    return movimientos
+
+  end
+
+  def CalcularPrecioToStr()
+
+    str = ""
+
+    cuotas = CalcularPrecio()
+
+    total = 0
+    cuotas.each do |cuota|
+      if str != ""
+        str = str + " + "        
+      end
+      if cuota[2] != nil
+        str = str + "(#{cuota[2].strftime("%d/%m/%Y")})"
+      end
+      str = str + " #{cuota[0]} x #{cuota[1]}"
+
+      total = total + cuota[0]*cuota[1]
+    end
+    str = str + " = #{total}"
+
+    return str
+  end
+
+
+
+  def self.numero_a_letras(n, uno)
+    s = ""
+    if (n/1000>0)
+      s = numero_a_letras((n/1000).to_i,false) + " mil ";
+    end
+    n = (n%1000).to_i;
+    case (n/100).to_i
+    when 1
+      if n%100 != 0
+        s = s + "ciento"
+      else
+        s = s + "cien"
+      end
+    when 2
+      s = s + "doscientos"
+    when 3
+      s = s + "trescientos"
+    when 4
+      s = s + "cuatrocientos"
+    when 5
+      s = s + "quinientos"
+    when 6
+      s = s + "siescientos"
+    when 7
+      s = s + "setecientos"
+    when 8
+      s = s + "ochocientos"
+    when 9
+      s = s + "novecientos"
+    end
+    n = (n%100).to_i
+    if n > 0
+      s = s + " "
+    end
+    case (n/10).to_i
+    when 3
+      s = s + "treinta"
+    when 4
+      s = s + "cuarenta"
+    when 5
+      s = s + "cincuenta"
+    when 6
+      s = s + "sesenta"
+    when 7
+      s = s + "setenta"
+    when 8
+      s = s + "ochenta"
+    when 9
+      s = s + "noventa"
+    end
+    if ( n >= 30 )
+      if (n%10).to_i != 0
+        s = s + " y "
+      end
+      n = (n%10).to_i
+    end
+    case n          
+    when 1
+      if ( uno )
+        s = s + "uno"
+      else
+        s = s + "un"
+      end
+    when 2
+      s = s + "dos"
+    when 3
+      s = s + "tres"
+    when 4
+      s = s + "cuatro"
+    when 5
+      s = s + "cinco"
+    when 6
+      s = s + "seis"
+    when 7
+      s = s + "siete"
+    when 8
+      s = s + "ocho"
+    when 9
+      s = s + "nueve"
+    when 10
+      s = s + "diez"
+    when 11
+      s = s + "once"
+    when 12
+      s = s + "doce"
+    when 13
+      s = s + "trece"
+    when 14
+      s = s + "catorce"
+    when 15
+      s = s + "quince"
+    when 16
+      s = s + "dieciseis"
+    when 17
+      s = s + "diecisiete"
+    when 18
+      s = s + "dieciocho"
+    when 19
+      s = s + "diecinueve"
+    when 20
+      s = s + "veinte"
+    when 21
+      if uno
+        s = s + "veintiuno"
+      else
+        s = s + "veintiun"
+      end
+    when 22
+      s = s + "veintidos"
+    when 23
+      s = s + "veintitres"
+    when 24
+      s = s + "veinticuatro"
+    when 25
+      s = s + "veinticinco"
+    when 26
+      s = s + "veintiseis"
+    when 27
+      s = s + "veintisiete"
+    when 28
+      s = s + "veintiocho"
+    when 29
+      s = s + "veintinueve"
+    end
+    return s
+  end
+
+  def self.cedula_tos(cedula)
+    if ( cedula == nil )
+      return ""
+    end
+    return (cedula/10).to_s + "-" + (cedula%10).to_s
+  end
+
+  def fecha_tos(fecha)
+    if ( fecha == nil )
+      return ""
+    end
+    return I18n.l(fecha, format: '%-d de %B de %Y')
+  end
+
+  def self.numero_cuota_letras(cuota)
+    s = ""
+    case cuota
+    when 1
+      s = "primera"
+    when 2
+      s = "segunda"
+    when 3
+      s = "tercera"
+    when 4
+      s = "cuarta"
+    when 5
+      s = "quinta"
+    when 6
+      s = "sexta"
+    when 7
+      s = "septima"
+    when 8
+      s = "octava"
+    when 9
+      s = "novena"
+    when 10
+      s = "décima"
+    when 11
+      s = "undécima"
+    when 12
+      s = "duodécima"
+    when 13
+      s = "decimotercera"
+    when 14
+      s = "decimocuarta"
+    when 15
+      s = "decimoquinta"
+    when 16
+      s = "decimosexta"
+    when 17
+      s = "decimoseptima"
+    when 18
+      s = "decimoctava"
+    when 19
+      s = "decimonovena"
+    when 20
+      s = "vigésima"
+    when 21
+      s = "vigesimoprimera"
+    when 22
+      s = "vigesimosegunda"
+    when 23
+      s = "vigesimotercera"
+    when 24
+      s = "vigesimocuarta"
+    end
+    return s
+  end
+
+  def cuotas_a_letras(cuotas)
+    if cuotas.count == 1
+      if cuotas[0][0] == 1        
+        return "<b>1</b> cuota de $U <b>#{cuotas[0][1]}</b>, venciendo el día #{I18n.l(cuotas[0][2], format: '<b>%-d</b> de <b>%B</b> de <b>%Y</b>')}"
+      else
+        return "<b>#{cuotas[0][0]}</b> cuotas mensuales, iguales y consecutivas de $U <b>#{cuotas[0][1]}</b> cada una, venciendo la primera el día #{I18n.l(cuotas[0][2], format: '<b>%-d</b> de <b>%B</b> de <b>%Y</b>')}"
+      end
+    else
+      mensaje = ""
+      cuota = 0
+      cuotas.each do |c|
+        if mensaje != ""
+          mensaje = mensaje + ", "
+        end
+        if c[0] == 1
+          mensaje = mensaje + "la #{Inscripcion.numero_cuota_letras(cuota+1)} de $U <b>#{c[1]}</b> venciendo el día #{I18n.l(c[2], format: '<b>%-d</b> de <b>%B</b> de <b>%Y</b>')}"
+        else
+          mensaje = mensaje + "de la #{Inscripcion.numero_cuota_letras(cuota+1)} a la #{Inscripcion.numero_cuota_letras(cuota+c[0])} de $U <b>#{c[1]}</b> venciendo el día #{I18n.l(c[2], format: '<b>%-d</b> de <b>%B</b> de <b>%Y</b>')} y cada mes subsiguiente"
+        end
+        cuota = cuota + c[0]
+      end
+      return "<b>#{cuota}</b> cuotas, a saber: " + mensaje
+    end
+  end
 
 
 
@@ -808,8 +808,8 @@ class Inscripcion2020 < ApplicationRecord
     #   "FIRMA:<br><br>" +
     #   "Aclaración:";
 
-    # text_file = Tempfile.new("text.pdf")
-    # text_file_path = text_file.path
+    text_file = Tempfile.new("text.pdf")
+    text_file_path = text_file.path
 
     #reinsc = reinscripcion
 
