@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_07_191330) do
+ActiveRecord::Schema.define(version: 2020_09_12_113145) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -582,9 +582,17 @@ ActiveRecord::Schema.define(version: 2020_09_07_191330) do
     t.boolean "padre_titular"
     t.boolean "madre_titular"
     t.decimal "congelado"
+    t.bigint "cuenta_id"
+    t.integer "nuevo_alumno_id"
+    t.integer "anio"
+    t.string "recibida"
+    t.decimal "fija"
+    t.date "fecha_ultima"
+    t.date "fecha_primera"
     t.index ["afinidad2020_id"], name: "index_inscripcion2020s_on_afinidad2020_id"
     t.index ["alumno_id"], name: "index_inscripcion2020s_on_alumno_id"
     t.index ["convenio2020_id"], name: "index_inscripcion2020s_on_convenio2020_id"
+    t.index ["cuenta_id"], name: "index_inscripcion2020s_on_cuenta_id"
     t.index ["cuota2020_id"], name: "index_inscripcion2020s_on_cuota2020_id"
     t.index ["formulario2020_id"], name: "index_inscripcion2020s_on_formulario2020_id"
     t.index ["grado_id"], name: "index_inscripcion2020s_on_grado_id"
@@ -933,6 +941,7 @@ ActiveRecord::Schema.define(version: 2020_09_07_191330) do
     t.bigint "inscripcion_id"
     t.boolean "generado"
     t.bigint "inscripcion2020_id"
+    t.integer "inscripcion2020_indice"
     t.index ["actividad_alumno_id"], name: "index_movimientos_on_actividad_alumno_id"
     t.index ["concepto_id"], name: "index_movimientos_on_concepto_id"
     t.index ["contrato_id"], name: "index_movimientos_on_contrato_id"
@@ -1377,6 +1386,7 @@ ActiveRecord::Schema.define(version: 2020_09_07_191330) do
   add_foreign_key "grado_alumnos", "alumnos"
   add_foreign_key "grado_alumnos", "grados"
   add_foreign_key "inscripcion2020s", "afinidad2020s"
+  add_foreign_key "inscripcion2020s", "cuentas"
   add_foreign_key "inscripcion2020s", "formulario2020s"
   add_foreign_key "inscripcion_alumnos", "alumnos"
   add_foreign_key "inscripcion_alumnos", "convenios"
