@@ -709,53 +709,31 @@ class Inscripcion2020 < ApplicationRecord
       titulo = "<b>INSCRIPCION</b>"
     end
 
-    texto_inscripcion =
-      "#{titulo}<br>".force_encoding('iso-8859-1') +      
-      "Fecha: #{fecha_tos(inscripcion.created_at)}<br>".force_encoding('iso-8859-1') +
-      "Recibida por: #{inscripcion.recibida}<br>".force_encoding('iso-8859-1') +
-      "<br>".force_encoding('iso-8859-1') +
-      "<b>NIVEL</b><br>".force_encoding('iso-8859-1') +
-      "Grado: #{nombre_grado}<br>".force_encoding('iso-8859-1') +
-      "Descuento: #{convenio_nombre}<br>".force_encoding('iso-8859-1') +
-      "Matr\xEDcula: #{matricula_nombre}<br>".force_encoding('iso-8859-1') +
-      "Hermanos: #{hermanos_nombre}<br>".force_encoding('iso-8859-1') +
-      "<br>".force_encoding('iso-8859-1') +
-      "<b>ALUMNO</b><br>".force_encoding('iso-8859-1') +
-      "Nombre: #{inscripcion.nombre} #{inscripcion.apellido}<br>".force_encoding('iso-8859-1') +
-      "Documento de identidad: #{Inscripcion.cedula_tos(inscripcion.cedula)}<br>".force_encoding('iso-8859-1') +
-      "Lugar de nacimiento: #{inscripcion.lugar_nacimiento}<br>".force_encoding('iso-8859-1') +
-      "Fecha de nacimiento: #{fecha_tos(inscripcion.fecha_nacimiento)}<br>".force_encoding('iso-8859-1') +
-      "Domicilio: #{inscripcion.domicilio}<br>".force_encoding('iso-8859-1') + 
-      "Tel\xE9fono/Celular: #{inscripcion.celular}<br>".force_encoding('iso-8859-1') + 
-      "Mutualista: #{inscripcion.mutualista}<br>".force_encoding('iso-8859-1') + 
-      "Emergencia: #{inscripcion.emergencia}<br>".force_encoding('iso-8859-1') + 
-      "Procede de: #{inscripcion.procede}<br>".force_encoding('iso-8859-1')
-
     texto_padre =
       "<b>PADRE</b><br>".force_encoding('iso-8859-1') +
-      "Nombre: #{inscripcion.nombre_padre} #{inscripcion.apellido_padre}<br>".force_encoding('iso-8859-1') +
-      "Documento de identidad: #{Inscripcion.cedula_tos(inscripcion.cedula_padre)}<br>".force_encoding('iso-8859-1') +
-      "Lugar de nacimiento: #{inscripcion.lugar_nacimiento_padre}<br>".force_encoding('iso-8859-1') +
-      "Fecha de nacimiento: #{fecha_tos(inscripcion.fecha_nacimiento_padre)}<br>".force_encoding('iso-8859-1') +
-      "Mail: #{inscripcion.email_padre}<br>".force_encoding('iso-8859-1') + 
-      "Domicilio: #{inscripcion.domicilio_padre}<br>".force_encoding('iso-8859-1') + 
-      "Tel\xE9fono/Celular: #{inscripcion.celular_padre}<br>".force_encoding('iso-8859-1') + 
-      "Profesi\xF3n: #{inscripcion.profesion_padre}<br>".force_encoding('iso-8859-1') + 
-      "Lugar de trabajo: #{inscripcion.trabajo_padre}<br>".force_encoding('iso-8859-1') + 
-      "Tel\xE9fono de trabajo: #{inscripcion.telefono_trabajo_padre}<br>".force_encoding('iso-8859-1') 
+      "Nombre: #{padre.nombre} #{padre.apellido}<br>".force_encoding('iso-8859-1') +
+      "Documento de identidad: #{Inscripcion2020.cedula_tos(padre.cedula)}<br>".force_encoding('iso-8859-1') +
+      "Lugar de nacimiento: #{padre.lugar_nacimiento}<br>".force_encoding('iso-8859-1') +
+      "Fecha de nacimiento: #{fecha_tos(padre.fecha_nacimiento)}<br>".force_encoding('iso-8859-1') +
+      "Mail: #{padre.email}<br>".force_encoding('iso-8859-1') + 
+      "Domicilio: #{padre.domicilio}<br>".force_encoding('iso-8859-1') + 
+      "Tel\xE9fono/Celular: #{padre.celular}<br>".force_encoding('iso-8859-1') + 
+      "Profesi\xF3n: #{padre.profesion}<br>".force_encoding('iso-8859-1') + 
+      "Lugar de trabajo: #{padre.trabajo}<br>".force_encoding('iso-8859-1') + 
+      "Tel\xE9fono de trabajo: #{padre.telefono_trabajo}<br>".force_encoding('iso-8859-1') 
 
     texto_madre =
       "<b>MADRE</b><br>".force_encoding('iso-8859-1') +
-      "Nombre: #{inscripcion.nombre_madre} #{inscripcion.apellido_madre}<br>".force_encoding('iso-8859-1') +
-      "Documento de identidad: #{Inscripcion.cedula_tos(inscripcion.cedula_madre)}<br>".force_encoding('iso-8859-1') +
-      "Lugar de nacimiento: #{inscripcion.lugar_nacimiento_madre}<br>".force_encoding('iso-8859-1') +
-      "Fecha de nacimiento: #{fecha_tos(inscripcion.fecha_nacimiento_madre)}<br>".force_encoding('iso-8859-1') +
-      "Mail: #{inscripcion.email_madre}<br>".force_encoding('iso-8859-1') + 
-      "Domicilio: #{inscripcion.domicilio_madre}<br>".force_encoding('iso-8859-1') + 
-      "Tel\xE9fono/Celular: #{inscripcion.celular_madre}<br>".force_encoding('iso-8859-1') + 
-      "Profesi\xF3n: #{inscripcion.profesion_madre}<br>".force_encoding('iso-8859-1') + 
-      "Lugar de trabajo: #{inscripcion.trabajo_madre}<br>".force_encoding('iso-8859-1') + 
-      "Tel\xE9fono de trabajo: #{inscripcion.telefono_trabajo_madre}<br><br>".force_encoding('iso-8859-1')
+      "Nombre: #{madre.nombre} #{madre.apellido}<br>".force_encoding('iso-8859-1') +
+      "Documento de identidad: #{Inscripcion2020.cedula_tos(madre.cedula)}<br>".force_encoding('iso-8859-1') +
+      "Lugar de nacimiento: #{madre.lugar_nacimiento}<br>".force_encoding('iso-8859-1') +
+      "Fecha de nacimiento: #{fecha_tos(madre.fecha_nacimiento)}<br>".force_encoding('iso-8859-1') +
+      "Mail: #{madre.email}<br>".force_encoding('iso-8859-1') + 
+      "Domicilio: #{madre.domicilio}<br>".force_encoding('iso-8859-1') + 
+      "Tel\xE9fono/Celular: #{madre.celular}<br>".force_encoding('iso-8859-1') + 
+      "Profesi\xF3n: #{madre.profesion}<br>".force_encoding('iso-8859-1') + 
+      "Lugar de trabajo: #{madre.trabajo}<br>".force_encoding('iso-8859-1') + 
+      "Tel\xE9fono de trabajo: #{madre.telefono_trabajo}<br><br>".force_encoding('iso-8859-1')
 
     texto_nota = 
     "<b>NOTA: Para la inscripci\xF3n deber\xE1 presentar: fotocopia de la C.I. del/los Titular/es de la cuenta y si corresponde Libre de Deuda o recibo del \xFAltimo pago realizado en la Instituci\xF3n de donde proviene.<br><br>".force_encoding('iso-8859-1') +
@@ -798,7 +776,7 @@ class Inscripcion2020 < ApplicationRecord
       "abajo denunciado.".force_encoding('iso-8859-1') +
       "<br><br><br>".force_encoding('iso-8859-1') + 
       "NOMBRE COMPLETO: #{nombreT[0]}<br><br>".force_encoding('iso-8859-1') +
-      "DOCUMENTO DE IDENTIDAD: #{Inscripcion.cedula_tos(documentoT[0])}<br><br>".force_encoding('iso-8859-1') +
+      "DOCUMENTO DE IDENTIDAD: #{Inscripcion2020.cedula_tos(documentoT[0])}<br><br>".force_encoding('iso-8859-1') +
       "DOMICILIO: #{domicilioT[0]}<br><br>".force_encoding('iso-8859-1') +
       "MAIL: #{emailT[0]}<br><br>".force_encoding('iso-8859-1') +
       "TEL/CEL: #{celularT[0]}<br><br>".force_encoding('iso-8859-1') +
@@ -806,7 +784,7 @@ class Inscripcion2020 < ApplicationRecord
       "Aclaraci\xF3n:<br><br>".force_encoding('iso-8859-1') +
       "<br><br>".force_encoding('iso-8859-1') +
       "NOMBRE COMPLETO: #{nombreT[1]}<br><br>".force_encoding('iso-8859-1') +
-      "DOCUMENTO DE IDENTIDAD: #{Inscripcion.cedula_tos(documentoT[1])}<br><br>".force_encoding('iso-8859-1') +
+      "DOCUMENTO DE IDENTIDAD: #{Inscripcion2020.cedula_tos(documentoT[1])}<br><br>".force_encoding('iso-8859-1') +
       "DOMICILIO: #{domicilioT[1]}<br><br>".force_encoding('iso-8859-1') +
       "MAIL: #{emailT[1]}<br><br>".force_encoding('iso-8859-1') +
       "TEL/CEL: #{celularT[1]}<br><br>".force_encoding('iso-8859-1') +
@@ -820,101 +798,59 @@ class Inscripcion2020 < ApplicationRecord
 
     Prawn::Document.generate(text_file_path) do
 
-      if reinsc
-        font "Helvetica", :size => 12
+      font "Helvetica", :size => 12
 
-        dash 5, space: 0, phase:0
-        stroke_color "0000FF"
-        stroke_rectangle [0, 720], 540, 280
-        stroke_color "FF0000"
-        stroke_rectangle [2, 718], 536, 276
+      dash 5, space: 0, phase:0
+      stroke_color "0000FF"
+      stroke_rectangle [0, 720], 540, 280
+      stroke_color "FF0000"
+      stroke_rectangle [2, 718], 536, 276
 
-        image Rails.root.join("data", "logo.png"), at: [203,700], scale: 0.5
+      image Rails.root.join("data", "logo.png"), at: [203,700], scale: 0.5
 
-        bounding_box([20, 550], :width => 500, :height => 60) do
-          text titulo, align: :center, inline_format: true
-        end
-
-        bounding_box([60, 530], :width => 420, :height => 60) do
-          text informacion, align: :center, inline_format: true
-        end
-
-        bounding_box([0, 410], :width => 500, :height => 60) do
-          text "Recibido por:", align: :left, inline_format: true
-        end
-        bounding_box([0, 390], :width => 500, :height => 60) do
-          text "Fecha:", align: :left, inline_format: true
-        end
-
-        stroke_color "000000"
-        dash 5, space: 5, phase:0
-        stroke_horizontal_line -40, 580, at: 360
-
-        dash 5, space: 0, phase:0
-        stroke_color "0000FF"
-        stroke_rectangle [0, 330], 540, 280
-        stroke_color "FF0000"
-        stroke_rectangle [2, 328], 536, 276
-
-        image Rails.root.join("data", "logo.png"), at: [203,310], scale: 0.5
-
-        bounding_box([20, 160], :width => 500, :height => 60) do
-          text titulo, align: :center, inline_format: true
-        end
-
-        bounding_box([60, 140], :width => 420, :height => 60) do
-          text informacion, align: :center, inline_format: true
-        end
-
-        bounding_box([0, 20], :width => 500, :height => 60) do
-          text "Recibido por:", align: :left, inline_format: true
-        end
-        bounding_box([0, 0], :width => 500, :height => 60) do
-          text "Fecha:", align: :left, inline_format: true
-        end
-
-
-
-
-        # bounding_box([0, 700], :width => 500, :height => 60) do
-        #   text "Recibido por:", align: :left, inline_format: true
-        # end
-        # bounding_box([0, 680], :width => 500, :height => 60) do
-        #   text "Fecha:", align: :left, inline_format: true
-        # end
-
-        start_new_page
+      bounding_box([20, 550], :width => 500, :height => 60) do
+        text titulo, align: :center, inline_format: true
       end
 
-      if !reinsc
-        font "Helvetica", :size => 10
-        
-        dash 5, space: 0, phase:0
-        stroke_color "0000FF"
-        stroke_rectangle [0, 720], 540, 720   
-        stroke_color "FF0000"
-        stroke_rectangle [2, 718], 536, 716
-
-        image Rails.root.join("data", "logo.png"), at: [203,700], scale: 0.5
-
-        bounding_box([20, 570], :width => 500, :height => 300) do
-          text texto_inscripcion, align: :left, inline_format: true
-        end
-
-        bounding_box([20, 280], :width => 250, :height => 150) do
-          text texto_padre, align: :left, inline_format: true
-        end
-
-        bounding_box([270, 280], :width => 250, :height => 150) do
-          text texto_madre, align: :left, inline_format: true
-        end
-
-        bounding_box([20, 120], :width => 500, :height => 120) do
-          text texto_nota, align: :justify, inline_format: true
-        end
-
-        start_new_page
+      bounding_box([60, 530], :width => 420, :height => 60) do
+        text informacion, align: :center, inline_format: true
       end
+
+      bounding_box([0, 410], :width => 500, :height => 60) do
+        text "Recibido por:", align: :left, inline_format: true
+      end
+      bounding_box([0, 390], :width => 500, :height => 60) do
+        text "Fecha:", align: :left, inline_format: true
+      end
+
+      stroke_color "000000"
+      dash 5, space: 5, phase:0
+      stroke_horizontal_line -40, 580, at: 360
+
+      dash 5, space: 0, phase:0
+      stroke_color "0000FF"
+      stroke_rectangle [0, 330], 540, 280
+      stroke_color "FF0000"
+      stroke_rectangle [2, 328], 536, 276
+
+      image Rails.root.join("data", "logo.png"), at: [203,310], scale: 0.5
+
+      bounding_box([20, 160], :width => 500, :height => 60) do
+        text titulo, align: :center, inline_format: true
+      end
+
+      bounding_box([60, 140], :width => 420, :height => 60) do
+        text informacion, align: :center, inline_format: true
+      end
+
+      bounding_box([0, 20], :width => 500, :height => 60) do
+        text "Recibido por:", align: :left, inline_format: true
+      end
+      bounding_box([0, 0], :width => 500, :height => 60) do
+        text "Fecha:", align: :left, inline_format: true
+      end
+
+      start_new_page
 
       font "Helvetica", :size => 10
 
