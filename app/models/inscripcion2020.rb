@@ -567,25 +567,25 @@ class Inscripcion2020 < ApplicationRecord
   def cuotas_a_letras(cuotas)
     if cuotas.count == 1
       if cuotas[0][0] == 1        
-        return "<b>1</b> cuota de $U <b>#{cuotas[0][1]}</b>, venciendo el día #{I18n.l(cuotas[0][2], format: '<b>%-d</b> de <b>%B</b> de <b>%Y</b>')}"
+        return "<b>1</b> cuota de $U <b>#{cuotas[0][1]}</b>, venciendo el d\xEDa #{I18n.l(cuotas[0][2], format: '<b>%-d</b> de <b>%B</b> de <b>%Y</b>')}".force_encoding('iso-8859-1')
       else
-        return "<b>#{cuotas[0][0]}</b> cuotas mensuales, iguales y consecutivas de $U <b>#{cuotas[0][1]}</b> cada una, venciendo la primera el día #{I18n.l(cuotas[0][2], format: '<b>%-d</b> de <b>%B</b> de <b>%Y</b>')}"
+        return "<b>#{cuotas[0][0]}</b> cuotas mensuales, iguales y consecutivas de $U <b>#{cuotas[0][1]}</b> cada una, venciendo la primera el d\xEDa #{I18n.l(cuotas[0][2], format: '<b>%-d</b> de <b>%B</b> de <b>%Y</b>')}".force_encoding('iso-8859-1')
       end
     else
-      mensaje = ""
+      mensaje = "".force_encoding('iso-8859-1')
       cuota = 0
       cuotas.each do |c|
-        if mensaje != ""
-          mensaje = mensaje + ", "
+        if mensaje != "".force_encoding('iso-8859-1')
+          mensaje = mensaje + ", ".force_encoding('iso-8859-1')
         end
         if c[0] == 1
-          mensaje = mensaje + "la #{Inscripcion2020.numero_cuota_letras(cuota+1)} de $U <b>#{c[1]}</b> venciendo el día #{I18n.l(c[2], format: '<b>%-d</b> de <b>%B</b> de <b>%Y</b>')}"
+          mensaje = mensaje + "la ".force_encoding('iso-8859-1') + Inscripcion2020.numero_cuota_letras(cuota+1) + " de $U <b>#{c[1]}</b> venciendo el d\xEDa #{I18n.l(c[2], format: '<b>%-d</b> de <b>%B</b> de <b>%Y</b>')}".force_encoding('iso-8859-1')
         else
-          mensaje = mensaje + "de la #{Inscripcion2020.numero_cuota_letras(cuota+1)} a la #{Inscripcion2020.numero_cuota_letras(cuota+c[0])} de $U <b>#{c[1]}</b> venciendo el día #{I18n.l(c[2], format: '<b>%-d</b> de <b>%B</b> de <b>%Y</b>')} y cada mes subsiguiente"
+          mensaje = mensaje + "de la ".force_encoding('iso-8859-1') + Inscripcion2020.numero_cuota_letras(cuota+1) + " a la ".force_encoding('iso-8859-1') + Inscripcion.numero_cuota_letras(cuota+c[0]) + " de $U <b>#{c[1]}</b> venciendo el d\xEDa #{I18n.l(c[2], format: '<b>%-d</b> de <b>%B</b> de <b>%Y</b>')} y cada mes subsiguiente".force_encoding('iso-8859-1')
         end
         cuota = cuota + c[0]
       end
-      return "<b>#{cuota}</b> cuotas, a saber: " + mensaje
+      return "<b>#{cuota}</b> cuotas, a saber: ".force_encoding('iso-8859-1') + mensaje
     end
   end
 
@@ -938,7 +938,7 @@ class Inscripcion2020 < ApplicationRecord
     pdf.save file_path
 
     text_file.unlink
-    
+
   end
 
 end
