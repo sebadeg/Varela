@@ -563,30 +563,30 @@ class Inscripcion2020 < ApplicationRecord
     return s
   end
 
-  def cuotas_a_letras(cuotas)
-    if cuotas.count == 1
-      if cuotas[0][0] == 1        
-        return "<b>1</b> cuota de $U <b>#{cuotas[0][1]}</b>, venciendo el día #{I18n.l(cuotas[0][2], format: '<b>%-d</b> de <b>%B</b> de <b>%Y</b>')}"
-      else
-        return "<b>#{cuotas[0][0]}</b> cuotas mensuales, iguales y consecutivas de $U <b>#{cuotas[0][1]}</b> cada una, venciendo la primera el día #{I18n.l(cuotas[0][2], format: '<b>%-d</b> de <b>%B</b> de <b>%Y</b>')}"
-      end
-    else
-      mensaje = ""
-      cuota = 0
-      cuotas.each do |c|
-        if mensaje != ""
-          mensaje = mensaje + ", "
-        end
-        if c[0] == 1
-          mensaje = mensaje + "la #{Inscripcion2020.numero_cuota_letras(cuota+1)} de $U <b>#{c[1]}</b> venciendo el día #{I18n.l(c[2], format: '<b>%-d</b> de <b>%B</b> de <b>%Y</b>')}"
-        else
-          mensaje = mensaje + "de la #{Inscripcion2020.numero_cuota_letras(cuota+1)} a la #{Inscripcion2020.numero_cuota_letras(cuota+c[0])} de $U <b>#{c[1]}</b> venciendo el día #{I18n.l(c[2], format: '<b>%-d</b> de <b>%B</b> de <b>%Y</b>')} y cada mes subsiguiente"
-        end
-        cuota = cuota + c[0]
-      end
-      return "<b>#{cuota}</b> cuotas, a saber: " + mensaje
-    end
-  end
+  # def cuotas_a_letras(cuotas)
+  #   if cuotas.count == 1
+  #     if cuotas[0][0] == 1        
+  #       return "<b>1</b> cuota de $U <b>#{cuotas[0][1]}</b>, venciendo el día #{I18n.l(cuotas[0][2], format: '<b>%-d</b> de <b>%B</b> de <b>%Y</b>')}"
+  #     else
+  #       return "<b>#{cuotas[0][0]}</b> cuotas mensuales, iguales y consecutivas de $U <b>#{cuotas[0][1]}</b> cada una, venciendo la primera el día #{I18n.l(cuotas[0][2], format: '<b>%-d</b> de <b>%B</b> de <b>%Y</b>')}"
+  #     end
+  #   else
+  #     mensaje = ""
+  #     cuota = 0
+  #     cuotas.each do |c|
+  #       if mensaje != ""
+  #         mensaje = mensaje + ", "
+  #       end
+  #       if c[0] == 1
+  #         mensaje = mensaje + "la #{Inscripcion2020.numero_cuota_letras(cuota+1)} de $U <b>#{c[1]}</b> venciendo el día #{I18n.l(c[2], format: '<b>%-d</b> de <b>%B</b> de <b>%Y</b>')}"
+  #       else
+  #         mensaje = mensaje + "de la #{Inscripcion2020.numero_cuota_letras(cuota+1)} a la #{Inscripcion2020.numero_cuota_letras(cuota+c[0])} de $U <b>#{c[1]}</b> venciendo el día #{I18n.l(c[2], format: '<b>%-d</b> de <b>%B</b> de <b>%Y</b>')} y cada mes subsiguiente"
+  #       end
+  #       cuota = cuota + c[0]
+  #     end
+  #     return "<b>#{cuota}</b> cuotas, a saber: " + mensaje
+  #   end
+  # end
 
 
 
