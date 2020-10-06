@@ -695,7 +695,7 @@ class PrincipalController < ApplicationController
   def download_inscripcion
 
     alumno_id = params[:inscripcionAlumno][:alumno_id]
-    inscripcionAlumno = Inscripcion.FindInscripcion(alumno_id)
+    inscripcionAlumno = Inscripcion2020.FindInscripcion(alumno_id)
 
     inscripcionAlumno.fecha_descargado = DateTime.now
     inscripcionAlumno.save!
