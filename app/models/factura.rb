@@ -48,58 +48,72 @@ class Factura < ApplicationRecord
  	    barcode_file = Tempfile.new("barcode.png")
         File.open(barcode_file.path, 'wb') do |f|
 		    f.write barcode.to_png(:height => 15, :margin => 0)
-	    end
+      end
+      
+      paginas = (lineas.length*1.0/15).ceil()
 
       Prawn::Document.generate(text_file_path) do
 
-        text_box "Titular", :at => [190, 710]
-        text_box "Cuenta", :at => [190, 710-renglon]
-        text_box "Factura", :at => [190, 710-2*renglon]
-        text_box "Vencimiento", :at => [190, 710-3*renglon]
+        font "Helvetica", :size => 8
 
-        bounding_box([280, 710], :width => 240, :height => renglon) do
-          text_box cuenta.nombre, align: :left
-          transparent(0) { stroke_bounds }
-        end
-        text_box cuenta_id.to_s, :at => [280, 710-renglon]
-        text_box factura.id.to_s, :at => [280, 710-2*renglon]
-        text_box factura.fecha_vencimiento.strftime('%d/%m/%Y'), :at => [280, 710-3*renglon]
+        (1..paginas).each do |pagina|
 
-        text_box "Alumno", :at => [10, 606]
-        text_box "Grado", :at => [190, 606]
-        text_box "Concepto", :at => [280, 606]
-        text_box "Importe", :at => [450, 606]
-
-        # Generate whatever you want here.
-        indice = 1
-        lineas.each do |linea|
-
-          bounding_box([10, i-indice*renglon], :width => 160, :height => renglon) do
-            text_box linea.nombre_alumno, align: :left
+          text_box "Titular", :at => [190, 710]
+          text_box "Cuenta", :at => [190, 710-renglon]
+          text_box "Factura", :at => [190, 710-2*renglon]
+          text_box "Vencimiento", :at => [190, 710-3*renglon]
+  
+          bounding_box([280, 710], :width => 240, :height => renglon) do
+            text_box cuenta.nombre, align: :left
             transparent(0) { stroke_bounds }
           end
+          text_box cuenta_id.to_s, :at => [280, 710-renglon]
+          text_box factura.id.to_s, :at => [280, 710-2*renglon]
+          text_box factura.fecha_vencimiento.strftime('%d/%m/%Y'), :at => [280, 710-3*renglon]
+  
+          text_box "Alumno", :at => [10, 606]
+          text_box "Grado", :at => [190, 606]
+          text_box "Concepto", :at => [280, 606]
+          text_box "Importe", :at => [450, 606]
+  
+          # Generate whatever you want here.
+          indice = 1
+          lineas.each do |linea|
 
-          text_box "", :at => [190, i-indice*renglon]
+            if (indice >= (pagina*15-14)) && (indice <= (pagina*15))
 
-          #text_box linea.descripcion, :at => [280, i-indice*renglon]
-          bounding_box([280, i-indice*renglon], :width => 160, :height => renglon) do
-            text_box linea.descripcion, align: :left
-            transparent(0) { stroke_bounds }
-          end
+              ind = indice - ((pagina-1)*15)
 
-
-
-          bounding_box([450, i-indice*renglon], :width => 70, :height => renglon) do
-           if dolar == nil
-              text_box linea.importe.to_s, align: :right
-            else
-              text_box "US$", align: :left
-              text_box (linea.importe/dolar).round(1).to_s, align: :right
+              bounding_box([10, i-ind*renglon], :width => 160, :height => renglon) do
+                text_box linea.nombre_alumno, align: :left
+                transparent(0) { stroke_bounds }
+              end
+    
+              text_box "", :at => [190, i-ind*renglon]
+    
+              #text_box linea.descripcion, :at => [280, i-ind*renglon]
+              bounding_box([280, i-ind*renglon], :width => 160, :height => renglon) do
+                text_box linea.descripcion, align: :left
+                transparent(0) { stroke_bounds }
+              end 
+    
+              bounding_box([450, i-ind*renglon], :width => 70, :height => renglon) do
+              if dolar == nil
+                  text_box linea.importe.to_s, align: :right
+                else
+                  text_box "US$", align: :left
+                  text_box (linea.importe/dolar).round(1).to_s, align: :right
+                end
+              transparent(0) { stroke_bounds }
+              end
             end
-           transparent(0) { stroke_bounds }
+  
+            indice = indice+1          
           end
 
-          indice = indice+1          
+          if (pagina != paginas)
+            start_new_page
+          end
         end
 
         text_box "Total", :at => [200, 145]
@@ -143,8 +157,15 @@ class Factura < ApplicationRecord
       end
 
       pdf = CombinePDF.new
-      pdf << CombinePDF.load(template_file) # one way to combine, very fast.
-      pdf.pages.each {|page| page <<  CombinePDF.load(text_file_path).pages[0]}
+      (1..paginas).each do |pagina|
+        pdf >> CombinePDF.load(template_file) # one way to combine, very fast.
+      end
+
+      indice = 0
+      pdf.pages.each do |page|
+        page <<  CombinePDF.load(text_file_path).pages[indice]
+        indice = indice + 1
+      end
       pdf.save file_path
 
 	    text_file.unlink
