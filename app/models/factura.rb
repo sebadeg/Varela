@@ -112,6 +112,7 @@ class Factura < ApplicationRecord
           end
 
           if (pagina != paginas)
+            text_box "Hoja #{pagina}/#{paginas}", :at => [200, 145]
             start_new_page
           end
         end
