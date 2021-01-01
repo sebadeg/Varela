@@ -12,13 +12,13 @@
 
 	<% if anteriores %>
 		<% movimientosAnt = Array.new %>
-		<% movimientos = cuenta.movimientos_anteriores(DateTime.new(2019,12,01)) %>
+		<% movimientos = cuenta.movimientos_anteriores(DateTime.new(2020,12,01)) %>
 	<% elsif pendientes %>
 		<% movimientosAnt = Array.new %>
 		<% movimientos = cuenta.movimientos_pendientes() %>
 	<% else %>
-		<% movimientosAnt = cuenta.movimientos_anteriores(DateTime.new(2019,12,01)) %>
-		<% movimientos = cuenta.movimientos(DateTime.new(2019,12,01)) %>
+		<% movimientosAnt = cuenta.movimientos_anteriores(DateTime.new(2020,12,01)) %>
+		<% movimientos = cuenta.movimientos(DateTime.new(2020,12,01)) %>
 	<% end %>
 
 	<% primero = true %>
